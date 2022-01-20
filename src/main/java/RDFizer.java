@@ -12,6 +12,8 @@ import org.apache.commons.io.FileUtils;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.Random;
 
 /**
  *
@@ -19,29 +21,43 @@ import java.nio.charset.StandardCharsets;
  * */
 public class RDFizer {
 
-  static final String DEFAULT_MAPPING_TEMPLATE = "mappings/mapping.template.ttl";
-  static final String TMP_MAPPING_FILENAME = "tmp/mapping.tmp.ttl";
   static final String WORKING_DIR = "datasets";
+  static final String DEFAULT_MAPPING_TEMPLATE = "mappings/mapping.template.ttl";
+  static final File TMP_DIR = new File("tmp");
+//  static final File TMP_DIR = FileUtils.getTempDirectory();
+
+  static Random random = new Random();
 
   /**
    *
+   * @param datasetFilename
+   * @param outputFile
+   * @param format
+   * @throws Exception
    * */
-  public static void parse(String datasetFilename, String outputFilename, String format)
+  public static void parse(String datasetFilename, File outputFile, String format)
       throws Exception //, IOException
   {
-    parse(datasetFilename, outputFilename, format, DEFAULT_MAPPING_TEMPLATE);
+    parse(datasetFilename, outputFile, format, DEFAULT_MAPPING_TEMPLATE);
   }
 
   /**
    *
+   * @param datasetFilename
+   * @param outputFile
+   * @param format
+   * @param mappingTemplate
+   * @throws Exception
    * */
-  public static void parse(String datasetFilename, String outputFilename, String format, String mappingFilename)
+  public static void parse(String datasetFilename, File outputFile, String format, String mappingTemplate)
       throws Exception //, IOException
   {
-    InputStream mappingStream = generateMappingFile(datasetFilename, DEFAULT_MAPPING_TEMPLATE);
+    // Generate mapping file based on given dataset
+    String tempMappingFilename = getMappingFileTempName();
+    File tempMappingFile = new File(TMP_DIR, tempMappingFilename);
+    InputStream mappingStream = generateMappingStream(datasetFilename, mappingTemplate, tempMappingFile);
 
     // Set up the basepath for the records factory, i.e., the basepath for the (local file) data sources
-    File mappingFile = new File(TMP_MAPPING_FILENAME);
     RecordsFactory factory = new RecordsFactory(WORKING_DIR);
 
     // Load the mapping in a QuadStore
@@ -57,26 +73,38 @@ public class RDFizer {
     QuadStore result = executor.executeV5(null).get(new NamedNode("rmlmapper://default.store"));
 
     // Output the result
-    File outputFile = new File(outputFilename); // @todo finire
-//    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
     FileWriter out = new FileWriter(outputFile);
     result.write(out, format);
     out.close();
+
+    // Remove temporary files
+    FileUtils.delete(tempMappingFile);
   }
 
-  private static InputStream generateMappingFile(String datasetFilename, String mappingFilename)
+  /*
+   *
+   * */
+  private static String getMappingFileTempName() {
+    int rand = random.nextInt();
+    long timestamp = Instant.now().toEpochMilli();
+    return "mapping-"+timestamp+"-"+rand+".ttl";
+  }
+
+  /*
+   *
+   * */
+  private static InputStream generateMappingStream(String datasetFilename, String mappingTemplate, File mappingFile)
       throws IOException
   {
-    // Read template
-    URL mappingUrl = Resources.getResource(mappingFilename);
-    File templateFile = FileUtils.toFile(mappingUrl);
+    // Read mapping template file
+    URL mappingTemplateUrl = Resources.getResource(mappingTemplate);
+    File templateFile = FileUtils.toFile(mappingTemplateUrl);
     String template = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
 
     // Customize mapping file with given data source
     String mappingContent = template.replace("__RML_SRC__", datasetFilename);
 
-    // Save temporary custom mapping
-    File mappingFile = new File(TMP_MAPPING_FILENAME);
+    // Save temporary custom mapping file
     FileUtils.writeStringToFile(mappingFile, mappingContent, StandardCharsets.UTF_8);
     InputStream mappingStream = FileUtils.openInputStream(mappingFile);
     return mappingStream;
