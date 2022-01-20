@@ -2,17 +2,9 @@ import java.io.File;
 import java.time.Instant;
 
 /**
- *
+ * This demo shows how to use the RDFizer class.
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * */
-
-// Formats accepted:
-// - turtle
-// - ntriples
-// - nquads
-// - jsonld
-// - trig
-// - trix
 
 public class Main {
 
@@ -27,14 +19,7 @@ public class Main {
     File outputFile = new File(RDFizer.TMP_DIR, outputFilename);
 
     // Output format needed
-    // Formats accepted:
-    // - turtle
-    // - ntriples
-    // - nquads
-    // - jsonld
-    // - trig
-    // - trix
-    String format = "ntriples";
+    String format = "ntriples"; // or "turtle"
 
     try {
       RDFizer.parse(dataset, outputFile, format);

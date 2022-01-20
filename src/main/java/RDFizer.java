@@ -16,7 +16,7 @@ import java.time.Instant;
 import java.util.Random;
 
 /**
- *
+ * This class helps the integration of the <a href="https://github.com/RMLio/rmlmapper-java">RML Mapper</a> library.
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * */
 public class RDFizer {
@@ -29,33 +29,37 @@ public class RDFizer {
   static Random random = new Random();
 
   /**
-   *
-   * @param datasetFilename
-   * @param outputFile
-   * @param format
-   * @throws Exception
+   * Parse a dataset using the default mapping rules.
+   * @param dataset path of a dataset to parse
+   * @param output file where save the results
+   * @param format format of the output
+   *   <ul><li>turtle</li>
+   *       <li>ntriples</li>
+   *       <li>nquads</li>
+   *       <li>jsonld</li>
+   *       <li>trig</li>
+   *       <li>trix</li><ul>
    * */
-  public static void parse(String datasetFilename, File outputFile, String format)
+  public static void parse(String dataset, File output, String format)
       throws Exception //, IOException
   {
-    parse(datasetFilename, outputFile, format, DEFAULT_MAPPING_TEMPLATE);
+    parse(dataset, output, format, DEFAULT_MAPPING_TEMPLATE);
   }
 
   /**
-   *
-   * @param datasetFilename
-   * @param outputFile
-   * @param format
-   * @param mappingTemplate
-   * @throws Exception
+   * Parse a dataset using specific mapping rules given.
+   * @param dataset path of a dataset to parse
+   * @param output file where save the results
+   * @param format format of the output
+   * @param mappingTemplate mapping rules template path
    * */
-  public static void parse(String datasetFilename, File outputFile, String format, String mappingTemplate)
+  public static void parse(String dataset, File output, String format, String mappingTemplate)
       throws Exception //, IOException
   {
     // Generate mapping file based on given dataset
     String tempMappingFilename = getMappingFileTempName();
     File tempMappingFile = new File(TMP_DIR, tempMappingFilename);
-    InputStream mappingStream = generateMappingStream(datasetFilename, mappingTemplate, tempMappingFile);
+    InputStream mappingStream = generateMappingStream(dataset, mappingTemplate, tempMappingFile);
 
     // Set up the basepath for the records factory, i.e., the basepath for the (local file) data sources
     RecordsFactory factory = new RecordsFactory(WORKING_DIR);
@@ -73,7 +77,7 @@ public class RDFizer {
     QuadStore result = executor.executeV5(null).get(new NamedNode("rmlmapper://default.store"));
 
     // Output the result
-    FileWriter out = new FileWriter(outputFile);
+    FileWriter out = new FileWriter(output);
     result.write(out, format);
     out.close();
 
@@ -82,7 +86,7 @@ public class RDFizer {
   }
 
   /*
-   *
+   * Generate a random mapping file name.
    * */
   private static String getMappingFileTempName() {
     int rand = random.nextInt();
@@ -91,9 +95,13 @@ public class RDFizer {
   }
 
   /*
-   *
+   * Generates a new mapping file to a specific dataset (described by datasetPath) starting from a mapping template
+   * @param datasetPath path of the dataset to replace in the template
+   * @param mappingTemplate template containing the mapping rules
+   * @param mappingFile map
+   * @return a new FileInputStream for the specified mapping file
    * */
-  private static InputStream generateMappingStream(String datasetFilename, String mappingTemplate, File mappingFile)
+  private static InputStream generateMappingStream(String datasetPath, String mappingTemplate, File mappingFile)
       throws IOException
   {
     // Read mapping template file
@@ -102,7 +110,7 @@ public class RDFizer {
     String template = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
 
     // Customize mapping file with given data source
-    String mappingContent = template.replace("__RML_SRC__", datasetFilename);
+    String mappingContent = template.replace("__RML_SRC__", datasetPath);
 
     // Save temporary custom mapping file
     FileUtils.writeStringToFile(mappingFile, mappingContent, StandardCharsets.UTF_8);
