@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-package rdf.strategies;
-=======
 package org.ou.gatekeeper.rdf.strategies;
->>>>>>> Stashed changes
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;

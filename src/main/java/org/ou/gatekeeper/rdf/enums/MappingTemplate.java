@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-package rdf.enums;
-=======
 package org.ou.gatekeeper.rdf.enums;
->>>>>>> Stashed changes
 
 public enum MappingTemplate {
 

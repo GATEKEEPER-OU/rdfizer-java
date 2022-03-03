@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-package rdf;
-=======
 package org.ou.gatekeeper.rdf;
->>>>>>> Stashed changes
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
@@ -14,16 +10,11 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Iterator;
 
-import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
-import static org.junit.jupiter.api.Assertions.*;
-
-<<<<<<< Updated upstream
-import rdf.enums.MappingTemplate;
-import rdf.enums.OutputFormat;
-=======
 import org.ou.gatekeeper.rdf.enums.MappingTemplate;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
->>>>>>> Stashed changes
+
+import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -54,13 +45,8 @@ class RDFizerTest {
     );
 
     String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
-<<<<<<< Updated upstream
-    assertEquals(outputDigest, "e6060a0cff4a5a765380d812b1bce73fa940e2a4abb1218c2bf72312");
-    System.out.println("----> output file hdigest " + outputDigest); // DEBUG
-=======
 //    System.out.println("----> output file hdigest " + outputDigest); // DEBUG
     assertEquals(outputDigest, "2f8be1fa483710a63b2cf63a0bb8eba9ff2dc1a358b784ff2a189752ace2fcc9");
->>>>>>> Stashed changes
 
     // Clean test residues
     outputFile.delete();
