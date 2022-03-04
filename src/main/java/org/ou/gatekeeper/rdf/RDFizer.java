@@ -8,7 +8,6 @@ import be.ugent.rml.store.QuadStoreFactory;
 import be.ugent.rml.store.RDF4JStore;
 import be.ugent.rml.term.NamedNode;
 
-import com.google.common.io.Resources;
 import org.apache.commons.io.FileUtils;
 import org.ou.gatekeeper.rdf.enums.MappingTemplate;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
@@ -17,7 +16,6 @@ import org.ou.gatekeeper.rdf.strategies.FileSaver;
 import org.ou.gatekeeper.rdf.strategies.OutputSaver;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Iterator;
@@ -187,9 +185,10 @@ public class RDFizer {
       throws IOException
   {
     // Read mapping template file
-    URL mappingTemplateUrl = Resources.getResource(mappingTemplate.toString());
-    File templateFile = FileUtils.toFile(mappingTemplateUrl);
-    String template = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
+    InputStream mappingTemplateStream = RDFizer.class
+        .getClassLoader()
+        .getResourceAsStream(mappingTemplate.toString());
+    String template = new String(mappingTemplateStream.readAllBytes(), StandardCharsets.UTF_8);
 
     // Customize mapping file with given data source
     String mappingContent = template.replace("__RML_SRC__", dataset.getAbsolutePath());
