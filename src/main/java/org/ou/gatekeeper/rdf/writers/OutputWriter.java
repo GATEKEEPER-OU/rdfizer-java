@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.rdf.strategies;
+package org.ou.gatekeeper.rdf.writers;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  *
  * */
-public interface OutputSaver {
+public interface OutputWriter {
 
   /**
    *

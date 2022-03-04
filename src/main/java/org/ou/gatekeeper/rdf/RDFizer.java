@@ -11,9 +11,9 @@ import be.ugent.rml.term.NamedNode;
 import org.apache.commons.io.FileUtils;
 import org.ou.gatekeeper.rdf.enums.MappingTemplate;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
-import org.ou.gatekeeper.rdf.strategies.BlazegraphSaver;
-import org.ou.gatekeeper.rdf.strategies.FileSaver;
-import org.ou.gatekeeper.rdf.strategies.OutputSaver;
+import org.ou.gatekeeper.rdf.writers.BlazegraphWriter;
+import org.ou.gatekeeper.rdf.writers.FileWriter;
+import org.ou.gatekeeper.rdf.writers.OutputWriter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -41,8 +41,8 @@ public class RDFizer {
   )
       throws IOException
   {
-    OutputSaver saver = new FileSaver(output);
-    store(dataset, template, format, saver);
+    OutputWriter writer = new FileWriter(output);
+    store(dataset, template, format, writer);
   }
 
   /**
@@ -73,9 +73,9 @@ public class RDFizer {
   )
       throws IOException
   {
-    OutputSaver saver = new BlazegraphSaver(endpoint);
-    store(dataset, template, format, saver);
-    saver.close();
+    OutputWriter writer = new BlazegraphWriter(endpoint);
+    store(dataset, template, format, writer);
+    writer.close();
   }
 
   /**
@@ -85,7 +85,7 @@ public class RDFizer {
       File dataset,
       MappingTemplate mappingTemplate,
       OutputFormat format,
-      OutputSaver output
+      OutputWriter output
   )
       throws IOException
   {
@@ -103,7 +103,7 @@ public class RDFizer {
 
     // Output the result
     try {
-      FileWriter out = new FileWriter(tempOutputFile);
+      java.io.FileWriter out = new java.io.FileWriter(tempOutputFile);
       result.write(out, format.toString());
       out.close();
 

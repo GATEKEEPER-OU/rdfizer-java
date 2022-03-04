@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.rdf.strategies;
+package org.ou.gatekeeper.rdf.writers;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -14,13 +14,13 @@ import java.io.IOException;
 /**
  *
  * */
-public class BlazegraphSaver implements OutputSaver {
+public class BlazegraphWriter implements OutputWriter {
 
   /**
    *
    * @param endpoint
    * */
-  public BlazegraphSaver(String endpoint) {
+  public BlazegraphWriter(String endpoint) {
     httpClient = HttpClients.createDefault();
     postUrl = "http://" +endpoint+ "/blazegraph/sparql";
   }

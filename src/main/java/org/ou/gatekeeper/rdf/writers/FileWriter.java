@@ -1,10 +1,10 @@
-package org.ou.gatekeeper.rdf.strategies;
+package org.ou.gatekeeper.rdf.writers;
 
 import java.io.File;
 
-public class FileSaver implements OutputSaver {
+public class FileWriter implements OutputWriter {
 
-  public FileSaver(File output) {
+  public FileWriter(File output) {
     this.output = output;
   }
 
