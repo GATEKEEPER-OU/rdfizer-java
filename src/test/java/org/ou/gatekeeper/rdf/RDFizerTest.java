@@ -33,7 +33,7 @@ class RDFizerTest {
 
     // Output file where save parsed data
     long timestamp = Instant.now().toEpochMilli();
-    String outputFilename = "output-"+timestamp+".n3";
+    String outputFilename = "output-"+timestamp+".nt";
 //    System.out.println("-----> outputFilename " + RDFizer.TMP_DIR +"/"+ outputFilename); // DEBUG
     File outputFile = new File(RDFizer.TMP_DIR, outputFilename);
 
@@ -61,8 +61,8 @@ class RDFizerTest {
 //    System.out.println("-----> datasetPathname " + datasetPathname); // DEBUG
     File datasetFile = new File(datasetPathname);
 
+    // Endpoint host where store the output
     String endpointHost = "localhost:9999";
-
 
     RDFizer.storeOnBlazegraph(
         datasetFile,
@@ -74,7 +74,7 @@ class RDFizerTest {
 
   @Test
   @Disabled("Only for live test")
-  void storeOnBlazegraphBatch() throws IOException {
+  void storeOnBlazegraphWithBatch() throws IOException {
     // Retrives resources
     String poolRelativePath = "pool";
     String poolPath = classLoader.getResource(poolRelativePath).getFile();
@@ -84,6 +84,7 @@ class RDFizerTest {
     String[] exts = { "json" };
     Iterator<File> datasets = FileUtils.iterateFiles(workingDir, exts, false);
 
+    // Endpoint host where store the output
     String endpointHost = "localhost:9999";
 
     RDFizer.storeOnBlazegraph(
