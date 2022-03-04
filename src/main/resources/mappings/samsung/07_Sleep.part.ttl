@@ -1,0 +1,41 @@
+# ############################################################################ #
+#                                  Sleep
+# ############################################################################ #
+
+# 93832-4 Sleep duration
+<#Sleep> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:FWE43SleepingActivity;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#TimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+# /Sleep

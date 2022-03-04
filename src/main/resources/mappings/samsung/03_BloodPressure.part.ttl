@@ -1,0 +1,155 @@
+# ############################################################################ #
+#                               BloodPressure
+# ############################################################################ #
+
+# 85354-9 Vital Signs
+<#BloodPressureAss> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '85354-9')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:FW157BloodPressureAss;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P141Assigned;
+    rr:objectMap [
+      rr:parentTriplesMap <#BloodPressureMeas>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#TimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+# 85354-9 Vital Signs
+<#BloodPressureMeas> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '85354-9')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:FWE197BloodPressureMeas;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#SystolicPressureDim>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#DiastolicPressureDim>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#TimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+# 8480-6 Systolic blood pressure
+<#SystolicPressureDim> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == '8480-6')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
+    rr:class ho:FWE12SystolicPressureDim;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# 8462-4 Diastolic blood pressure
+<#DiastolicPressureDim> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == '8462-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
+    rr:class ho:FWE12DiastolicPressureDim;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# /BloodPressure

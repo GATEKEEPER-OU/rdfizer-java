@@ -1,0 +1,18 @@
+# ############################################################################ #
+#                                  Patient
+# ############################################################################ #
+
+<#Patient> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Patient')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/id/{resource.identifier[0].value}";
+    rr:class ho:E21Person;
+  ];
+.
+
+# /Patient
