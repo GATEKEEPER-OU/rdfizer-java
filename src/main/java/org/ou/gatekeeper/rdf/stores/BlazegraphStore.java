@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.rdf.writers;
+package org.ou.gatekeeper.rdf.stores;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -12,57 +12,55 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- *
- * */
-public class BlazegraphWriter implements OutputWriter {
-
-  /**
-   *
-   * @param endpoint
-   * */
-  public BlazegraphWriter(String endpoint) {
-    httpClient = HttpClients.createDefault();
-    postUrl = "http://" +endpoint+ "/blazegraph/sparql";
-  }
-
-  /**
-   *
-   * @param content
-   * @throws IOException
-   * */
-  @Override
-  public void save(File content) throws IOException {
-    try {
-      makePost(postUrl, content);
-    } finally {
-      content.delete();
-    }
-  }
-
-  /**
-   *
-   * @throws IOException
-   * */
-  @Override
-  public void close() throws IOException {
-    httpClient.close();
-  }
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ * @todo description
+ */
+public class BlazegraphStore implements OutputStore {
 
   private String postUrl;
   private CloseableHttpClient httpClient;
 
   /**
-   *
+   * @param endpoint
+   */
+  public static OutputStore create(String endpoint) {
+    return new BlazegraphStore(endpoint);
+  }
+
+  /**
+   * @param endpoint
+   */
+  protected BlazegraphStore(String endpoint) {
+    httpClient = HttpClients.createDefault();
+    postUrl = "http://" + endpoint + "/blazegraph/sparql";
+  }
+
+  /**
+   * @param content
+   * @throws IOException
+   */
+  public void save(File content) throws IOException {
+    makePost(postUrl, content);
+  }
+
+  /**
+   * @throws IOException
+   */
+  public void close() throws IOException {
+    httpClient.close();
+  }
+
+  /**
    * @param postUrl
    * @param content
    * @throws IOException
-   * */
+   */
   private void makePost(String postUrl, File content) throws IOException {
     // Set request headers
     InputStreamEntity reqEntity = new InputStreamEntity(
-        new FileInputStream(content),
-        -1,
-        ContentType.TEXT_PLAIN
+      new FileInputStream(content),
+      -1,
+      ContentType.TEXT_PLAIN
     );
     reqEntity.setChunked(true);
 

@@ -1,5 +1,8 @@
 package org.ou.gatekeeper.rdf.enums;
 
+/**
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ */
 public enum OutputFormat {
 
   TURTLE("turtle"),
@@ -9,6 +12,8 @@ public enum OutputFormat {
   TRIG("trig"),
   TRIX("trix");
 
+  private String value;
+
   OutputFormat(String s) {
     value = s;
   }
@@ -17,7 +22,5 @@ public enum OutputFormat {
   public String toString() {
     return value;
   }
-
-  private String value;
 
 }
