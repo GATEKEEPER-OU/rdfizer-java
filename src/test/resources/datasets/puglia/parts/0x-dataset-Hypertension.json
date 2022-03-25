@@ -1,0 +1,12 @@
+{
+  "clinical_examinations": [
+    {
+      "patient": {
+        "patient_id": "001"
+      },
+      "patient_age": 29,
+      "date": "2021-03-30",
+      "hypertension": false
+    }
+  ]
+}

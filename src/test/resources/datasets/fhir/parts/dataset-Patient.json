@@ -1,0 +1,24 @@
+{
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:043b270a-ca2a-11eb-ad3d-f8e4e357d914",
+      "request": {
+        "ifNoneExist": "identifier=http://hl7.eu/fhir/ig/gk/identifier/saxony/patient|user1@saxony.gatekeeper.com",
+        "method": "POST",
+        "url": "Patient"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "identifier=http://hl7.eu/fhir/ig/gk/identifier/saxony/patient",
+            "value": "user1@saxony.gatekeeper.com"
+          }
+        ],
+        "resourceType": "Patient"
+      }
+    }
+  ],
+  "timestamp": "2021-02-01T17:34:40+00:00",
+  "type": "transaction",
+  "resourceType": "Bundle"
+}

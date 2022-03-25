@@ -1,0 +1,70 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "urn:uuid:9e47b2a4-6572-4bbb-8a7a-29b17cb788e3",
+            "resource": {
+                "resourceType": "Patient",
+                "identifier": [
+                    {
+                        "system": "https://www.gatekeeper-project.eu/sid/puglia/patient",
+                        "value": "001"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient",
+                "ifNoneExist": "identifier=https://www.gatekeeper-project.eu/sid/puglia/patient|001"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:5be85cac-e9af-4afd-b639-0d92a90e7338",
+            "resource": {
+                "resourceType": "Observation",
+                "extension": [
+                    {
+                        "url": "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
+                        "valueInteger": 29
+                    }
+                ],
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                "code": "vital-signs",
+                                "display": "Vital Signs"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org/",
+                            "code": "29463-7",
+                            "display": "Body weight"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:9e47b2a4-6572-4bbb-8a7a-29b17cb788e3"
+                },
+                "effectiveDateTime": "2021-03-30",
+                "valueQuantity": {
+                    "value": 2,
+                    "unit": "kilogram",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "Kg"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}
