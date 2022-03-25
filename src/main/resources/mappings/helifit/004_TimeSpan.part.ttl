@@ -8,7 +8,6 @@
 #  8302-2 Body height
 # 20564-1 Oxygen saturation in Blood
 # 93832-4 Sleep duration
-# IGNORED
 # LP412113-5 Light sleep duration
 # 93830-8 Light sleep duration
 # 93831-6 Deep sleep duration
@@ -16,7 +15,8 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && (@.resource.code.coding[0].code == '85354-9' || @.resource.code.coding[0].code == '73985-4' || @.resource.code.coding[0].code == '8867-4' || @.resource.code.coding[0].code == '8302-2' || @.resource.code.coding[0].code == '20564-1' || @.resource.code.coding[0].code == '93832-4'))]"
+    #rml:iterator "$.entry[?(@.resource.resourceType == 'Observation')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && (@.resource.code.coding[0].code == '85354-9' || @.resource.code.coding[0].code == '73985-4' || @.resource.code.coding[0].code == '8867-4' || @.resource.code.coding[0].code == '8302-2' || @.resource.code.coding[0].code == '20564-1' || @.resource.code.coding[0].code == '93832-4' || @.resource.code.coding[0].code == 'LP412113-5' || @.resource.code.coding[0].code == '93830-8' || @.resource.code.coding[0].code == '93831-6'))]"
   ];
 
   rr:subjectMap [

@@ -1,20 +1,23 @@
 # ############################################################################ #
-#                                 BodyHeight
+#                               Cardiovascular
 # ############################################################################ #
 
-# 8302-2 Body height
-<#BodyHeightAss> a rr:TriplesMap;
+# 8867-4 Heart rate
+<#CardiovascularAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
   ];
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE153HeightAss;
+    rr:class ho:FWE160CardiovascularAssignment;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
@@ -27,17 +30,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
-    rr:objectMap [
-      rr:parentTriplesMap <#BodyHeightMeas>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#TimeSpan>;
@@ -47,27 +39,44 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P141Assigned;
+    rr:objectMap [
+      rr:parentTriplesMap <#CardiovascularMeasurement>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 .
 
-# 8302-2 Body height
-<#BodyHeightMeas> a rr:TriplesMap;
+# 8867-4 Heart rate
+<#CardiovascularMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
   ];
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE173HeightMeas;
+    rr:class ho:FWE168CardiovascularMeasurement;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#BodyHeightDim>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "fullUrl";
+        rr:child "resource.subject.reference";
         rr:parent "fullUrl";
       ];
     ];
@@ -83,21 +92,38 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateReservesDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 .
 
-# 8302-2 Body height
-<#BodyHeightDim> a rr:TriplesMap;
+# 8867-4 Heart rate
+<#HeartRateReservesDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
   ];
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE19HeightDim;
+    rr:class ho:FWE18HeartRateReservesDimension;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
@@ -113,4 +139,4 @@
   ];
 .
 
-# /BodyHeight
+# /Cardiovascular

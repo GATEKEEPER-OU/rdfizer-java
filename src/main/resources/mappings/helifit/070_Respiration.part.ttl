@@ -3,7 +3,7 @@
 # ############################################################################ #
 
 # 20564-1 Oxygen saturation in Blood
-<#RespirationAss> a rr:TriplesMap;
+<#RespirationAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -12,9 +12,12 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE166RespirationAss;
+    rr:class ho:FWE166RespirationAssignment;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
@@ -27,17 +30,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
-    rr:objectMap [
-      rr:parentTriplesMap <#RespirationMeas>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#TimeSpan>;
@@ -47,10 +39,24 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P141Assigned;
+    rr:objectMap [
+      rr:parentTriplesMap <#RespirationMeasurement>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 .
 
 # 20564-1 Oxygen saturation in Blood
-<#RespirationMeas> a rr:TriplesMap;
+<#RespirationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -59,15 +65,18 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE179RespirationMeas;
+    rr:class ho:FWE179RespirationMeasurement;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#OxygenSaturationDim>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "fullUrl";
+        rr:child "resource.subject.reference";
         rr:parent "fullUrl";
       ];
     ];
@@ -83,10 +92,24 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#OxygenSaturationDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 .
 
 # 20564-1 Oxygen saturation in Blood
-<#OxygenSaturationDim> a rr:TriplesMap;
+<#OxygenSaturationDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -98,6 +121,9 @@
     rr:class ho:FWE27SpO2Dim;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [

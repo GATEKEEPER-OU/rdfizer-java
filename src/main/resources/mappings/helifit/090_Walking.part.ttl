@@ -4,7 +4,7 @@
 
 #   73985-4 Exercise activity
 # LA11834-1 Walking
-<#Walking> a rr:TriplesMap;
+<#WalkingActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -16,6 +16,9 @@
     rr:class ho:FWE101Walking;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
@@ -28,28 +31,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P117OccursDuring;
-    rr:objectMap [
-      rr:parentTriplesMap <#DurationMeas>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "subject.reference";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P117OccursDuring;
-    rr:objectMap [
-      rr:parentTriplesMap <#EnergyMeas>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "subject.reference";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#TimeSpan>;
@@ -59,10 +40,35 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117OccursDuring;
+    rr:objectMap [
+      rr:parentTriplesMap <#DurationMeasurement>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P117OccursDuring;
+    rr:objectMap [
+      rr:parentTriplesMap <#EnergyMeasurement>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
 .
 
 # 55411-3 Exercise duration
-<#DurationMeas> a rr:TriplesMap;
+<#DurationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -71,16 +77,19 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE188DurationMeas;
+    rr:class ho:FWE188DurationMeasurement;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#DurationDim>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "subject.reference";
-        rr:parent "subject.reference";
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
       ];
     ];
   ];
@@ -95,10 +104,24 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#DurationDimension>;
+      rr:joinCondition [
+        rr:child "subject.reference";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
 .
 
 # 55411-3 Exercise duration
-<#DurationDim> a rr:TriplesMap;
+<#DurationDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -107,9 +130,12 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE4DurationDim;
+    rr:class ho:FWE4DurationDimension;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
@@ -126,7 +152,7 @@
 .
 
 # 41981-2 Calories burned
-<#EnergyMeas> a rr:TriplesMap;
+<#EnergyMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -135,16 +161,19 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE171EnergyMeas;
+    rr:class ho:FWE171EnergyMeasurement;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#EnergyExpenditureDim>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "subject.reference";
-        rr:parent "subject.reference";
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
       ];
     ];
   ];
@@ -159,10 +188,24 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#EnergyExpenditureDimension>;
+      rr:joinCondition [
+        rr:child "subject.reference";
+        rr:parent "subject.reference";
+      ];
+    ];
+  ];
 .
 
 # 41981-2 Calories burned
-<#EnergyExpenditureDim> a rr:TriplesMap;
+<#EnergyExpenditureDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -171,9 +214,12 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE15EnergyExpenditureDim;
+    rr:class ho:FWE15EnergyExpenditureDimension;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
@@ -189,4 +235,4 @@
   ];
 .
 
-# /Walking
+# /WalkingActivity

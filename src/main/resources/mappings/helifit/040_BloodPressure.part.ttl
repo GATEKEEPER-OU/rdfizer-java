@@ -3,7 +3,7 @@
 # ############################################################################ #
 
 # 85354-9 Vital Signs
-<#BloodPressureAss> a rr:TriplesMap;
+<#BloodPressureAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -12,9 +12,12 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FW157BloodPressureAss;
+    rr:class ho:FW157BloodPressureAssignment;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
@@ -27,9 +30,9 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
+    rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#BloodPressureMeas>;
+      rr:parentTriplesMap <#TimeSpan>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -37,10 +40,13 @@
     ];
   ];
 
+  #
+  # Link(s)
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P141Assigned;
     rr:objectMap [
-      rr:parentTriplesMap <#TimeSpan>;
+      rr:parentTriplesMap <#BloodPressureMeasurement>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -50,7 +56,7 @@
 .
 
 # 85354-9 Vital Signs
-<#BloodPressureMeas> a rr:TriplesMap;
+<#BloodPressureMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -59,27 +65,19 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE197BloodPressureMeas;
+    rr:class ho:FWE197BloodPressureMeasurement;
   ];
 
+  #
+  # Metadata
+  #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P140AssignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#SystolicPressureDim>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "subject.reference";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#DiastolicPressureDim>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "subject.reference";
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
       ];
     ];
   ];
@@ -94,10 +92,35 @@
       ];
     ];
   ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#SystolicPressureDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "resource.resourceId";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40ObservedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#DiastolicPressureDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "resource.resourceId";
+      ];
+    ];
+  ];
 .
 
 # 8480-6 Systolic blood pressure
-<#SystolicPressureDim> a rr:TriplesMap;
+<#SystolicPressureDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -105,10 +128,13 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE12SystolicPressureDim;
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}"; # @todo change subject.reference with something custom
+    rr:class ho:FWE12SystolicPressureDimension;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
@@ -125,7 +151,7 @@
 .
 
 # 8462-4 Diastolic blood pressure
-<#DiastolicPressureDim> a rr:TriplesMap;
+<#DiastolicPressureDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -133,10 +159,13 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}";
-    rr:class ho:FWE12DiastolicPressureDim;
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}"; # @todo change subject.reference with something custom
+    rr:class ho:FWE12DiastolicPressureDimension;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
