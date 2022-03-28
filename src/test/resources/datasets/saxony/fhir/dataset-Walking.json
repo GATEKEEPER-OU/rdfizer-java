@@ -1,0 +1,100 @@
+{
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:043b270a-ca2a-11eb-ad3d-f8e4e357d914",
+      "request": {
+        "ifNoneExist": "identifier=http://hl7.eu/fhir/ig/gk/identifier/saxony/patient|user1@saxony.gatekeeper.com",
+        "method": "POST",
+        "url": "Patient"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "identifier=http://hl7.eu/fhir/ig/gk/identifier/saxony/patient",
+            "value": "user1@saxony.gatekeeper.com"
+          }
+        ],
+        "resourceType": "Patient"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:043dbd49-ca2a-11eb-859c-f8e4e357d914",
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "code": {
+          "coding": [
+            {
+              "code": "73985-4",
+              "display": "Exercise activity",
+              "system": "https://loinc.org/"
+            },
+            {
+              "code": "LA11834-1",
+              "display": "Walking",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "55411-3",
+                  "display": "Exercise duration",
+                  "system": "http://loinc.org"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "code": "s",
+              "system": "http://unitsofmeasure.org",
+              "unit": "s",
+              "value": 2808858.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41981-2",
+                  "display": "Calories burned",
+                  "system": "http://loinc.org"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "code": "kcal",
+              "system": "http://unitsofmeasure.org",
+              "unit": "kcal",
+              "value": 274.0
+            }
+          }
+        ],
+        "device": {
+          "display": "EpZ9iAJxmy saxony",
+          "identifier": {
+            "system": "http://www.gatekeeper-project.eu/identifier/saxony/samsung/device",
+            "value": "EpZ9iAJxmy"
+          }
+        },
+        "valuePeriod": {
+          "start": "2020-10-01T00:00:00+00:00",
+          "end": "2021-03-30T23:59:00+00:00"
+        },
+        "status": "preliminary",
+        "subject": {
+          "display": "user1@saxony.gatekeeper.com",
+          "reference": "urn:uuid:043b270a-ca2a-11eb-ad3d-f8e4e357d914"
+        },
+        "resourceType": "Observation"
+      }
+    }
+  ],
+  "timestamp": "2021-04-01T17:34:40+00:00",
+  "type": "transaction",
+  "resourceType": "Bundle"
+}
