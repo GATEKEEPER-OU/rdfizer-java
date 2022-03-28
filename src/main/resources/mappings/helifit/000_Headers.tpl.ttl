@@ -3,4 +3,5 @@
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix ho: <http://www.samsung.com/health/ontology#> .
+@prefix doid: <http://purl.obolibrary.org/obo/> .
 @base <http://www.samsung.com/health> .

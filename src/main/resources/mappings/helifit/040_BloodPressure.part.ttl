@@ -102,7 +102,7 @@
       rr:parentTriplesMap <#SystolicPressureDimension>;
       rr:joinCondition [
         rr:child "fullUrl";
-        rr:parent "resource.resourceId";
+        rr:parent "resourceId";
       ];
     ];
   ];
@@ -113,7 +113,7 @@
       rr:parentTriplesMap <#DiastolicPressureDimension>;
       rr:joinCondition [
         rr:child "fullUrl";
-        rr:parent "resource.resourceId";
+        rr:parent "resourceId";
       ];
     ];
   ];
@@ -128,7 +128,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}"; # @todo change subject.reference with something custom
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:FWE12SystolicPressureDimension;
   ];
 
@@ -159,7 +159,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{subject.reference}"; # @todo change subject.reference with something custom
+    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:FWE12DiastolicPressureDimension;
   ];
 
