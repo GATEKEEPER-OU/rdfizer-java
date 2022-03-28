@@ -1,31 +1,69 @@
 package org.ou.gatekeeper.fhir.adapters;
 
-import com.ibm.fhir.model.generator.exception.FHIRGeneratorException;
-import org.junit.jupiter.api.Test;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
 
+import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ */
 class FHIRAdapterTest {
 
-  private static ClassLoader classLoader = TestUtils.class.getClassLoader();
+  @ParameterizedTest
+  @CsvSource({
+    // Patient
+//    "ec7e2ebf7b2b3a27521e410e215e8623e8736c109388d92a2a2d7ae04658d582, datasets/puglia/json/dataset-Patient.json",
+//    "xxx, datasets/puglia/json/dataset-BodyHeight.json",
+//    "xxx, datasets/puglia/json/dataset-BodyWeight.json",
 
-  @Test
-  void transformPugliaToFHIR() throws IOException, FHIRGeneratorException {
-    String datasetFilename = "datasets/puglia/dataset-1.json";
-    File datasetFile = TestUtils.loadResource(datasetFilename);
+    // Observations
+//    "9ba90282ea2fb8eaf011499267d5719599058df7dc7f0a7613c39c53803fab3a, datasets/puglia/json/dataset-GlycosilatedEmoglobin.json",
+//    "23e5f03321134105d7065a681c4f5190a20a7719c7109efbbc86c33e0b978822, datasets/puglia/json/dataset-TotalCholesterol.json",
+//    "xxx, datasets/puglia/json/dataset-HighDensityLipoprotein.json",
+//    "xxx, datasets/puglia/json/dataset-LowDensityLipoprotein.json",
+//    "xxx, datasets/puglia/json/dataset-Triglycerides.json",
+//    "xxx, datasets/puglia/json/dataset-SerumCreatinine.json",
+//    "xxx, datasets/puglia/json/dataset-AlbuminuriaCreatininuriaRatio.json",
+//    "xxx, datasets/puglia/json/dataset-AlkalinePhosphatase.json",
+//    "xxx, datasets/puglia/json/dataset-UricAcid.json",
+//    "xxx, datasets/puglia/json/dataset-EstimatedGlomerularFiltrationRate.json",
+//    "xxx, datasets/puglia/json/dataset-Nitrites.json",
+//    "7de1e7a0994a5c5eb9ff3dd39a96ca6859dd686d085af68b6eef45ff2b33af1d, datasets/puglia/json/dataset-BloodPressure.json",
+
+    // Conditions
+//    "a49f1b8b4734f1039edd62b0b80b57a8379d8e42aff8a99df1df1dc4dafd2902, datasets/puglia/json/dataset-HepaticSteatosis.json",
+//    "xxx, datasets/puglia/json/dataset-Hypertension.json",
+//    "xxx, datasets/puglia/json/dataset-HeartFailure.json",
+//    "xxx, datasets/puglia/json/dataset-BPCO.json",
+//    "xxx, datasets/puglia/json/dataset-ChronicKidneyDisease.json",
+//    "xxx, datasets/puglia/json/dataset-IschemicHeartDisease.json",
+
+//    "xxx, datasets/puglia/json/00-dataset-complete.json"
+  })
+  void test_transform_JSONtoFHIR(String expectedDigest, String dataset) {
+    File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "json");
 
     FHIRAdapter converter = new FHIRPugliaAdapter();
     converter.transform(datasetFile, outputFile);
 
-//    String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
-//    System.out.println("----> testParsingCode().hdigest: " + outputDigest); // DEBUG
-//    assertEquals(outputDigest, "032b2fdb9ddab43600fb47908926eec15897d295099ece7bcbf1a0d76cd4efa5");
-
-    // Clean test residues
-//    outputFile.delete();
+    try {
+      TestUtils.removeAllLinesFromFile(outputFile, "fullUrl");
+      TestUtils.removeAllLinesFromFile(outputFile, "reference");
+      TestUtils.removeAllLinesFromFile(outputFile, "valueString");
+      String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
+      assertEquals(expectedDigest, outputDigest);
+    } catch (IOException e) {
+    } finally {
+  //      ResourceUtils.clean(outputFile);
+    }
   }
 
 }
