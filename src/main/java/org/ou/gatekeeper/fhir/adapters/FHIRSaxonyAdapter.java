@@ -8,7 +8,7 @@ import java.io.File;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRDefaultAdapter implements FHIRAdapter {
+public class FHIRSaxonyAdapter implements FHIRAdapter {
 
   /**
    * @todo description

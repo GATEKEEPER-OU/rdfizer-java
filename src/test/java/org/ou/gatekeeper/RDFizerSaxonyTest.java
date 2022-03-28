@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.FHIRDefaultAdapter;
+import org.ou.gatekeeper.fhir.adapters.FHIRSaxonyAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.ontologies.HelifitOntology;
 import org.ou.gatekeeper.rdf.ontologies.Ontology;
@@ -39,7 +39,7 @@ class RDFizerSaxonyTest {
     File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = new FHIRDefaultAdapter();
+    FHIRAdapter converter = new FHIRSaxonyAdapter();
     String[] partsToInclude = modules.split(",");
     Ontology mapping = HelifitOntology.create(
       OutputFormat.NTRIPLES,
