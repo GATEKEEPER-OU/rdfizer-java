@@ -79,7 +79,6 @@ public class RDFizer {
     converter.transform(dataset, tempFhirFile, true);
     mapping.setLocalSource(tempFhirFile.getAbsolutePath());
     RDFMapper.map(mapping, store);
-
     ResourceUtils.clean(tempFhirFile);
   }
 
