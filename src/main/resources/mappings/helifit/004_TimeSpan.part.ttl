@@ -24,14 +24,13 @@
     rr:class ho:E52TimeSpan;
   ];
 
-  ## @todo resource.effectiveDateTime
-  # rr:predicateObjectMap [
-  #   rr:predicate ho:E61TimePrimitive; # @todo change only THIS
-  #   rr:objectMap [
-  #     rml:reference "resource.effectiveDateTime";
-  #     rr:datatype xsd:dataTime
-  #   ]
-  # ];
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFPP04effectivedatatime;
+    rr:objectMap [
+      rml:reference "resource.effectiveDateTime";
+      rr:datatype xsd:dataTime
+    ]
+  ];
 
   rr:predicateObjectMap [
     rr:predicate ho:FWP02Starts;
