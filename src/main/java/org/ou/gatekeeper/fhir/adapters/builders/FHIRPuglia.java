@@ -821,6 +821,11 @@ public class FHIRPuglia extends FHIRBase {
       return buildCondition(
         examination.getString("date"),
         buildCodeableConcept(
+          buildCoding(
+            "http://snomed.info/sct",
+            "38341003",
+            "Hypertensive disorder, systemic arterial (disorder)"
+          ),
           String.valueOf(examination.getBoolean("hypertension"))
         ),
         patientEntry
@@ -839,6 +844,11 @@ public class FHIRPuglia extends FHIRBase {
       return buildCondition(
         examination.getString("date"),
         buildCodeableConcept(
+          buildCoding(
+            "http://snomed.info/sct",
+            "84114007",
+            "Heart failure (disorder)"
+          ),
           String.valueOf(examination.getBoolean("heart_failure"))
         ),
         patientEntry
@@ -857,6 +867,11 @@ public class FHIRPuglia extends FHIRBase {
       return buildCondition(
         examination.getString("date"),
         buildCodeableConcept(
+          buildCoding(
+            "http://snomed.info/sct",
+            "13645005",
+            "Chronic obstructive lung disease (disorder)"
+          ),
           String.valueOf(examination.getBoolean("bpco"))
         ),
         patientEntry
@@ -875,6 +890,11 @@ public class FHIRPuglia extends FHIRBase {
       return buildCondition(
         examination.getString("date"),
         buildCodeableConcept(
+          buildCoding(
+            "http://snomed.info/sct",
+            "709044004",
+            "Chronic kidney disease (disorder)"
+          ),
           String.valueOf(examination.getBoolean("chronic_kidney_disease"))
         ),
         patientEntry
@@ -895,8 +915,8 @@ public class FHIRPuglia extends FHIRBase {
         buildCodeableConcept(
           buildCoding(
             "http://snomed.info/sct",
-            "Ischemic heart disease (disorder)", // @todo ask is it an error?
-            "Hospital admission ischemic heart disease diagnosis"
+            "414545008",
+            "Ischemic heart disease (disorder)"
           ),
           String.valueOf(examination.getBoolean("ischemic_heart_disease"))
         ),
