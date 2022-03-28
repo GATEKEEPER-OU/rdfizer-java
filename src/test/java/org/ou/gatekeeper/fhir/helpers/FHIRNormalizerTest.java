@@ -12,6 +12,9 @@ import java.io.IOException;
 import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ */
 class FHIRNormalizerTest {
 
   @ParameterizedTest

@@ -16,6 +16,9 @@ import java.util.Iterator;
 
 import static org.ou.gatekeeper.tlib.helpers.TestUtils.loadResource;
 
+/**
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ */
 class RDFizerDemo {
 
   @Test
