@@ -1,7 +1,8 @@
 package org.ou.gatekeeper.fhir.helpers;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
 
@@ -13,18 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FHIRNormalizerTest {
 
-  @Test
-  void testNormalizeFHIR() {
-    String datasetFilename = "datasets/fhir/dataset-1.json";
-    File datasetFile = TestUtils.loadResource(datasetFilename);
+  @ParameterizedTest
+  @CsvSource({
+    "7f3e11e4b2d1a852e49b3814ebfdd98f89cc7c543d1d7b531efde27945a8d71f, datasets/saxony/fhir/01-dataset-complete.json",
+    "a23ea70bec8b24211101d65f88a275be5d5a839f5128c97b7aa066c6be999795, datasets/saxony/fhir/04-dataset-complete.json"
+  })
+  void testNormalizeFHIR(String expectedDigest, String dataset) {
+    File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "nomalized.fhir.json");
 
     FHIRNormalizer.normalize(datasetFile, outputFile);
 
     try {
       String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
-      System.out.println(" -> testNormalizeFHIR().hdigest: " + outputDigest); // DEBUG
-      assertEquals("6591c5580c6a14ba8654836952be10784c5d796e50f0b199ed6854409c72548f", outputDigest);
+      assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
       outputFile.delete();
