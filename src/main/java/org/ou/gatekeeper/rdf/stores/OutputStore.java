@@ -12,6 +12,6 @@ public interface OutputStore extends Closeable {
   /**
    * @param content
    */
-  public void save(File content) throws IOException;
+  public boolean save(File content) throws IOException;
 
 }

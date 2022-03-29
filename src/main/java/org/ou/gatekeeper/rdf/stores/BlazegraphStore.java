@@ -39,8 +39,9 @@ public class BlazegraphStore implements OutputStore {
    * @param content
    * @throws IOException
    */
-  public void save(File content) throws IOException {
+  public boolean save(File content) throws IOException {
     makePost(postUrl, content);
+    return true; // @todo improve this
   }
 
   /**

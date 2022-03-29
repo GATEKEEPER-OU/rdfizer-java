@@ -8,8 +8,6 @@ import java.io.File;
  */
 public class FileStore implements OutputStore {
 
-  private final File output;
-
   /**
    * @todo description
    */
@@ -20,25 +18,28 @@ public class FileStore implements OutputStore {
   /**
    * @todo description
    */
-  @Deprecated
-  public FileStore(File output) {
-    this.output = output;
+  public boolean save(File content) {
+    return content.renameTo(output);
   }
 
   /**
    * @todo description
    */
-  @Override
-  public void save(File content) {
-    content.renameTo(output);
-  }
-
-  /**
-   * @todo description
-   */
-  @Override
   public void close() {
     // DO NOTHING
+  }
+
+  //--------------------------------------------------------------------------//
+  // Class definition
+  //--------------------------------------------------------------------------//
+
+  private final File output;
+
+  /**
+   * @todo description
+   */
+  protected FileStore(File output) {
+    this.output = output;
   }
 
 }
