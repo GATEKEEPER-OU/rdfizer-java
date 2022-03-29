@@ -2,7 +2,59 @@
 #                                 HighDensityLipoprotein
 # ############################################################################ #
 
+# 2085-9 High Density Lipoprotein
 # @todo Assignment
+<#HighDensityLipoproteinAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2085-9')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF502HighDensityLipoproteinAss;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#TimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P141Assigned;
+    rr:objectMap [
+      rr:parentTriplesMap <#HighDensityLipoproteinMeasurement>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
 
 # 2085-9 High Density Lipoprotein
 <#HighDensityLipoproteinMeasurement> a rr:TriplesMap;
