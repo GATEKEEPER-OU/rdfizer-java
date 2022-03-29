@@ -1,9 +1,6 @@
 package org.ou.gatekeeper.tlib.helpers;
 
 import org.apache.commons.io.FileUtils;
-import org.ou.gatekeeper.rdf.enums.OutputFormat;
-import org.ou.gatekeeper.rdf.ontologies.Ontology;
-import org.ou.gatekeeper.rdf.ontologies.HelifitOntology;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,17 +23,6 @@ public class TestUtils {
     String pathname = classLoader.getResource(filename).getFile();
 //    System.out.println("-----> loadResource().pathname: " + pathname); // DEBUG
     return new File(pathname);
-  }
-
-  /**
-   * @todo description
-   */
-  public static Ontology createSamsungMapping(String filename) {
-    File datasetFile = loadResource(filename);
-    return HelifitOntology.create(
-      OutputFormat.NTRIPLES,
-      datasetFile.getAbsolutePath()
-    );
   }
 
   /**
