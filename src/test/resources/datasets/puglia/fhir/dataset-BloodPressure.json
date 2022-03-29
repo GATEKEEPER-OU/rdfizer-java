@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:2d0b004f-78ce-4813-a263-1486acd659dc",
+            "fullUrl": "urn:uuid:66221f58-842d-4aa9-974d-472ae24b8c7b",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -45,8 +45,8 @@
                     "coding": [
                         {
                             "system": "http://loinc.org/",
-                            "code": "29463-7",
-                            "display": "Body weight"
+                            "code": "85354-9",
+                            "display": "Blood pressure panel with all children optional"
                         }
                     ]
                 },
@@ -54,12 +54,42 @@
                     "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
                 },
                 "effectiveDateTime": "2021-03-30",
-                "valueQuantity": {
-                    "value": 2,
-                    "unit": "kilogram",
-                    "system": "http://unitsofmeasure.org",
-                    "code": "Kg"
-                }
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://loinc.org/",
+                                    "code": "8480-6",
+                                    "display": "Systolic blood pressure"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 2,
+                            "unit": "millimeter of mercury",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "mmHg"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://loinc.org/",
+                                    "code": "8462-4",
+                                    "display": "Diastolic blood pressure"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 4,
+                            "unit": "millimeter of mercury",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "mmHg"
+                        }
+                    }
+                ]
             },
             "request": {
                 "method": "POST",

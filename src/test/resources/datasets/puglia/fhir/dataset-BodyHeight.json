@@ -3,7 +3,7 @@
     "type": "transaction",
     "entry": [
         {
-            "fullUrl": "urn:uuid:9e47b2a4-6572-4bbb-8a7a-29b17cb788e3",
+            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
             "resource": {
                 "resourceType": "Patient",
                 "identifier": [
@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:39da33fe-94bf-46eb-9277-91c1661e7b20",
+            "fullUrl": "urn:uuid:e471dcd4-fbbf-48a9-82f2-ef3dcd031510",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -51,7 +51,7 @@
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:9e47b2a4-6572-4bbb-8a7a-29b17cb788e3"
+                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {

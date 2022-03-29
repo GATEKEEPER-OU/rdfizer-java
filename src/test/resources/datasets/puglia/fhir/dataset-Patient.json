@@ -1,0 +1,23 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
+            "resource": {
+                "resourceType": "Patient",
+                "identifier": [
+                    {
+                        "system": "https://www.gatekeeper-project.eu/sid/puglia/patient",
+                        "value": "001"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient",
+                "ifNoneExist": "identifier=https://www.gatekeeper-project.eu/sid/puglia/patient|001"
+            }
+        }
+    ]
+}

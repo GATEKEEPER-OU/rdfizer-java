@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:2d0b004f-78ce-4813-a263-1486acd659dc",
+            "fullUrl": "urn:uuid:0c22ff28-19d4-4eba-aeaf-7e5ae30441a8",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -35,8 +35,8 @@
                         "coding": [
                             {
                                 "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "vital-signs",
-                                "display": "Vital Signs"
+                                "code": "laboratory",
+                                "display": "Laboratory"
                             }
                         ]
                     }
@@ -45,8 +45,8 @@
                     "coding": [
                         {
                             "system": "http://loinc.org/",
-                            "code": "29463-7",
-                            "display": "Body weight"
+                            "code": "59261-8",
+                            "display": "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
                         }
                     ]
                 },
@@ -55,10 +55,10 @@
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
-                    "value": 2,
-                    "unit": "kilogram",
+                    "value": 0.15090734,
+                    "unit": "millimole per mole",
                     "system": "http://unitsofmeasure.org",
-                    "code": "Kg"
+                    "code": "mmol/mol"
                 }
             },
             "request": {

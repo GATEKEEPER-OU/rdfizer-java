@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:2d0b004f-78ce-4813-a263-1486acd659dc",
+            "fullUrl": "urn:uuid:b4f87c8f-ccc3-445a-825d-71d4c8ccc7db",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -35,8 +35,8 @@
                         "coding": [
                             {
                                 "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-                                "code": "vital-signs",
-                                "display": "Vital Signs"
+                                "code": "laboratory",
+                                "display": "Laboratory"
                             }
                         ]
                     }
@@ -45,8 +45,8 @@
                     "coding": [
                         {
                             "system": "http://loinc.org/",
-                            "code": "29463-7",
-                            "display": "Body weight"
+                            "code": "2093-3",
+                            "display": "Cholesterol [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
@@ -55,10 +55,10 @@
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
-                    "value": 2,
-                    "unit": "kilogram",
+                    "value": 0.07885128,
+                    "unit": "millimole per mole",
                     "system": "http://unitsofmeasure.org",
-                    "code": "Kg"
+                    "code": "mg/dl"
                 }
             },
             "request": {
