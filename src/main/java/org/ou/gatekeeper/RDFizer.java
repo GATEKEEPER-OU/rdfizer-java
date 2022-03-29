@@ -21,7 +21,7 @@ import static org.ou.gatekeeper.utils.ResourceUtils.generateUniqueFilename;
 public class RDFizer {
 
   /**
-   * Write on file
+   * Reads dataset from file and writes the result on a file.
    * @todo javadoc
    * */
   public static void trasform(
@@ -35,7 +35,26 @@ public class RDFizer {
   }
 
   /**
-   * Write on Blazegraph
+   * Reads datasets from a folder and writes the result in there.
+   * @todo javadoc
+   * */
+  public static void trasform(
+    Iterator<File> datasets,
+    FHIRAdapter converter,
+    Ontology mapping,
+    File outputFolder
+  ) {
+    while (datasets.hasNext()) {
+      File dataset = datasets.next();
+      String outputFilename = "output-" + dataset.getName();
+      File output = new File(outputFolder, outputFilename);
+      OutputStore store = FileStore.create(output);
+      trasform(dataset, converter, mapping, store);
+    }
+  }
+
+  /**
+   * Reads dataset from file and writes on Blazegraph endpoint.
    * @todo javadoc
    * */
   public static void trasform(
@@ -49,7 +68,7 @@ public class RDFizer {
   }
 
   /**
-   * Write a batch on Blazegraph
+   * Reads datasets from a folder and writes on Blazegraph endpoint.
    * @todo javadoc
    * */
   public static void trasform(
