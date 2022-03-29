@@ -20,6 +20,22 @@ import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
  */
 public class FHIRPuglia extends FHIRBase {
 
+  public static final String LOINC_SYSTEM = "http://loinc.org";
+  public static final String DOID_SYSTEM = "http://purl.obolibrary.org/obo/";
+  public static final String UNITSOFM_SYSTEM = "http://unitsofmeasure.org";
+  public static final String HL7_SYSTEM = "http://terminology.hl7.org/CodeSystem/observation-category";
+  public static final String HL7_PATIENT_AGE = "http://hl7.org/fhir/StructureDefinition/observation-patientAge";
+
+  public static final String LAB_CODE = "laboratory";
+  public static final String LAB_DISPLAY = "Laboratory";
+
+  public static final String VS_CODE = "vital-signs";
+  public static final String VS_DISPLAY = "Vital Signs";
+
+  public static final String MG_PER_DL_UNIT = "milligram per deciliter";
+
+  public static final String PATIENT_AGE_KEY = "patient_age";
+
   /**
    * @todo description
    */
@@ -49,28 +65,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "59261-8",
             "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("glycosilated_emoglobin")),
-          "millimole per mole", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "millimole per mole",
+          UNITSOFM_SYSTEM,
           examination.getString("glycosilated_emoglobin_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -88,28 +104,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2093-3",
             "Cholesterol [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("total_cholesterol")),
-          "millimole per mole", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "millimole per mole",
+          UNITSOFM_SYSTEM,
           examination.getString("total_cholesterol_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -127,28 +143,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2085-9",
             "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("HDL")),
-          "milligram per deciliter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          MG_PER_DL_UNIT,
+          UNITSOFM_SYSTEM,
           examination.getString("HDL_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -166,28 +182,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2089-1",
             "Cholesterol in LDL [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("LDL")),
-          "milligram per deciliter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          MG_PER_DL_UNIT,
+          LOINC_SYSTEM,
           examination.getString("LDL_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -205,28 +221,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2571-8",
             "Triglyceride [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("triglycerides")),
-          "milligram per deciliter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          MG_PER_DL_UNIT,
+          LOINC_SYSTEM,
           examination.getString("triglycerides_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -235,7 +251,7 @@ public class FHIRPuglia extends FHIRBase {
     }
   }
 
-  // @todo TC_HDL ask
+  // @note TC-HDL missing
 
   /**
    * @todo description
@@ -246,28 +262,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2160-0",
             "Creatinine [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("serum_creatinine")),
-          "milligram per deciliter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          MG_PER_DL_UNIT,
+          LOINC_SYSTEM,
           examination.getString("serum_creatinine_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -285,28 +301,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "14959-1",
             "Microalbumin/Creatinine [Mass Ratio] in Urine"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("albuminuria_creatininuria_ratio")),
-          "milligram per gram", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "milligram per gram",
+          LOINC_SYSTEM,
           examination.getString("albuminuria_creatininuria_ratio_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -324,28 +340,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "1742-6",
             "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("GPT_ALT")),
-          "enzyme unit per liter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "enzyme unit per liter",
+          LOINC_SYSTEM,
           examination.getString("GPT_ALT_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -363,28 +379,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "1920-8",
             "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("GOT_AST")),
-          "enzyme unit per liter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "enzyme unit per liter",
+          LOINC_SYSTEM,
           examination.getString("GOT_AST_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -402,28 +418,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "2324-2",
             "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("gammaGT")),
-          "international unit per liter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "international unit per liter",
+          LOINC_SYSTEM,
           examination.getString("gammaGT_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -441,28 +457,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "6768-6",
             "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("alkaline_phosphatase")),
-          "international unit per liter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "international unit per liter",
+          LOINC_SYSTEM,
           examination.getString("alkaline_phosphatase_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -480,28 +496,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "3084-1",
             "Urate [Mass/volume] in Serum or Plasma"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("uric_acid")),
-          "milligram per deciliter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          MG_PER_DL_UNIT,
+          LOINC_SYSTEM,
           examination.getString("uric_acid_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -519,14 +535,14 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "48642-3",
             "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
           )
@@ -534,13 +550,13 @@ public class FHIRPuglia extends FHIRBase {
         buildQuantity(
           Decimal.of(examination.getBigDecimal("eGFR")),
           examination.getString("eGFR_unit"),
-          "http://unitsofmeasure.org",
+          LOINC_SYSTEM,
           examination.getString("eGFR_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -558,14 +574,14 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "laboratory",
-            "Laboratory"
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "5802-4",
             "Nitrite [Presence] in Urine by Test strip"
           )
@@ -573,8 +589,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getBoolean("nitrites"),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -592,22 +608,22 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "vital-signs",
-            "Vital Signs"
+            HL7_SYSTEM,
+            VS_CODE,
+            VS_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "85354-9",
             "Blood pressure panel with all children optional"
           )
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
 
@@ -638,7 +654,7 @@ public class FHIRPuglia extends FHIRBase {
     return buildObservationComponent(
       buildCodeableConcept(
         buildCoding(
-          "http://loinc.org/",
+          LOINC_SYSTEM,
           "8480-6",
           "Systolic blood pressure"
         )
@@ -646,7 +662,7 @@ public class FHIRPuglia extends FHIRBase {
       buildQuantity(
         Decimal.of(examination.getInt("systolic_pressure")),
         "millimeter of mercury",
-        "http://unitsofmeasure.org",
+        LOINC_SYSTEM,
         examination.getString("systolic_pressure_unit")
       )
     );
@@ -659,7 +675,7 @@ public class FHIRPuglia extends FHIRBase {
     return buildObservationComponent(
       buildCodeableConcept(
         buildCoding(
-          "http://loinc.org/",
+          LOINC_SYSTEM,
           "8462-4",
           "Diastolic blood pressure"
         )
@@ -667,7 +683,7 @@ public class FHIRPuglia extends FHIRBase {
       buildQuantity(
         Decimal.of(examination.getInt("diastolic_pressure")),
         "millimeter of mercury",
-        "http://unitsofmeasure.org",
+        LOINC_SYSTEM,
         examination.getString("diastolic_pressure_unit")
       )
     );
@@ -682,28 +698,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "vital-signs",
-            "Vital Signs"
+            HL7_SYSTEM,
+            VS_CODE,
+            VS_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "29463-7",
             "Body weight"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getInt("weight")),
-          "kilogram", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "kilogram",
+          LOINC_SYSTEM,
           examination.getString("weight_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -721,28 +737,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "vital-signs",
-            "Vital Signs"
+            HL7_SYSTEM,
+            VS_CODE,
+            VS_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            LOINC_SYSTEM,
             "8302-2",
             "Body height"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("height")),
-          "meter", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "meter",
+          LOINC_SYSTEM,
           examination.getString("height_unit")
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -760,28 +776,28 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            "vital-signs",
-            "Vital Signs"
+            HL7_SYSTEM,
+            VS_CODE,
+            VS_DISPLAY
           )
         ),
         buildCodeableConcept(
           buildCoding(
-            "http://loinc.org/",
+            "https://www.phenxtoolkit.org/",
             "PX070801190200",
             "PX070801 Diabetes Mellitus Year"
           )
         ),
         buildQuantity(
           Decimal.of(examination.getInt("years_with_diabetes")),
-          "year", // @note missing, so hard coded
-          "http://unitsofmeasure.org",
+          "year",
+          LOINC_SYSTEM,
           "a" // @todo ask if error or just to hardcode
         ),
         patientEntry,
         buildPatientAgeExtention(
-          "http://hl7.org/fhir/StructureDefinition/observation-patientAge",
-          examination.getInt("patient_age")
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
         )
       );
     } catch (JSONException e) {
@@ -799,8 +815,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "197321007",
+            DOID_SYSTEM,
+            "DOID_9452",
             "Steatosis of liver (disorder)"
           ),
           String.valueOf(examination.getBoolean("hepatic_steatosis"))
@@ -822,8 +838,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "38341003",
+            DOID_SYSTEM,
+            "DOID_10825",
             "Hypertensive disorder, systemic arterial (disorder)"
           ),
           String.valueOf(examination.getBoolean("hypertension"))
@@ -845,8 +861,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "84114007",
+            DOID_SYSTEM,
+            "DOID_6000",
             "Heart failure (disorder)"
           ),
           String.valueOf(examination.getBoolean("heart_failure"))
@@ -868,8 +884,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "13645005",
+            DOID_SYSTEM,
+            "DOID_3083",
             "Chronic obstructive lung disease (disorder)"
           ),
           String.valueOf(examination.getBoolean("bpco"))
@@ -891,8 +907,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "709044004",
+            DOID_SYSTEM,
+            "DOID_784",
             "Chronic kidney disease (disorder)"
           ),
           String.valueOf(examination.getBoolean("chronic_kidney_disease"))
@@ -914,8 +930,8 @@ public class FHIRPuglia extends FHIRBase {
         examination.getString("date"),
         buildCodeableConcept(
           buildCoding(
-            "http://snomed.info/sct",
-            "414545008",
+            DOID_SYSTEM,
+            "DOID_3393",
             "Ischemic heart disease (disorder)"
           ),
           String.valueOf(examination.getBoolean("ischemic_heart_disease"))
