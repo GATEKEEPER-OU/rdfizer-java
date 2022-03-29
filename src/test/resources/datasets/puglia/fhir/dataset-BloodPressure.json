@@ -3,7 +3,7 @@
     "type": "transaction",
     "entry": [
         {
-            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
+            "fullUrl": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae",
             "resource": {
                 "resourceType": "Patient",
                 "identifier": [
@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:66221f58-842d-4aa9-974d-472ae24b8c7b",
+            "fullUrl": "urn:uuid:5ce8f77b-9d47-4510-abec-52a8090bce81",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -44,14 +44,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "85354-9",
                             "display": "Blood pressure panel with all children optional"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "component": [
@@ -59,7 +59,7 @@
                         "code": {
                             "coding": [
                                 {
-                                    "system": "http://loinc.org/",
+                                    "system": "http://loinc.org",
                                     "code": "8480-6",
                                     "display": "Systolic blood pressure"
                                 }
@@ -68,7 +68,7 @@
                         "valueQuantity": {
                             "value": 2,
                             "unit": "millimeter of mercury",
-                            "system": "http://unitsofmeasure.org",
+                            "system": "http://loinc.org",
                             "code": "mmHg"
                         }
                     },
@@ -76,7 +76,7 @@
                         "code": {
                             "coding": [
                                 {
-                                    "system": "http://loinc.org/",
+                                    "system": "http://loinc.org",
                                     "code": "8462-4",
                                     "display": "Diastolic blood pressure"
                                 }
@@ -85,7 +85,7 @@
                         "valueQuantity": {
                             "value": 4,
                             "unit": "millimeter of mercury",
-                            "system": "http://unitsofmeasure.org",
+                            "system": "http://loinc.org",
                             "code": "mmHg"
                         }
                     }

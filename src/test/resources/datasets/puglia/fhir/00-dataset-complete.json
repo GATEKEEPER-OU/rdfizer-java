@@ -3,7 +3,7 @@
     "type": "transaction",
     "entry": [
         {
-            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
+            "fullUrl": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae",
             "resource": {
                 "resourceType": "Patient",
                 "identifier": [
@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:0c22ff28-19d4-4eba-aeaf-7e5ae30441a8",
+            "fullUrl": "urn:uuid:8e8fb23e-eaf3-423c-b6d1-77ed5542733c",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -44,14 +44,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "59261-8",
                             "display": "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
@@ -67,7 +67,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:b4f87c8f-ccc3-445a-825d-71d4c8ccc7db",
+            "fullUrl": "urn:uuid:a2097b48-ed39-4aa6-a57f-3da2efdee291",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -91,14 +91,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2093-3",
                             "display": "Cholesterol [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
@@ -114,7 +114,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:75e4b19b-dd55-4c66-8f7b-9e6e1760433e",
+            "fullUrl": "urn:uuid:46ac9cf7-e854-4f05-9132-493d3175d3f5",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -138,14 +138,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2085-9",
                             "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
@@ -161,7 +161,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:08089a07-8c4f-4614-ae74-3ec1a0430a78",
+            "fullUrl": "urn:uuid:6cf65006-e34f-463c-8d36-61ad2b1132f9",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -185,20 +185,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2089-1",
                             "display": "Cholesterol in LDL [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.7160075,
                     "unit": "milligram per deciliter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "mg/dl"
                 }
             },
@@ -208,7 +208,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:0510242e-7f7f-4823-9966-3dc5aa2d374c",
+            "fullUrl": "urn:uuid:061bc86e-6abd-4b9d-9892-04266c4d5b2c",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -232,20 +232,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2571-8",
                             "display": "Triglyceride [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.20872825,
                     "unit": "milligram per deciliter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "mg/dl"
                 }
             },
@@ -255,7 +255,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:7cbdba4f-717e-45f3-b309-e3528ed1f7c7",
+            "fullUrl": "urn:uuid:02c09c3d-131c-4ad6-9f6d-0f02dac368df",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -279,20 +279,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2160-0",
                             "display": "Creatinine [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.16005236,
                     "unit": "milligram per deciliter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "mg/dl"
                 }
             },
@@ -302,7 +302,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:4a525b39-2876-4bca-a080-2f3f408e5f3c",
+            "fullUrl": "urn:uuid:a3a11cd4-bfdd-47f8-8ab5-1feffcfd01b7",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -326,20 +326,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "14959-1",
                             "display": "Microalbumin/Creatinine [Mass Ratio] in Urine"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.70763606,
                     "unit": "milligram per gram",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "mg/dl"
                 }
             },
@@ -349,7 +349,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:951643db-b589-47a3-8c39-4a0afcd50faa",
+            "fullUrl": "urn:uuid:93429648-3b42-4ba9-af39-48b2182fbb9d",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -373,20 +373,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "1742-6",
                             "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.44163555,
                     "unit": "enzyme unit per liter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "U/l"
                 }
             },
@@ -396,7 +396,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:0655d86e-a3a2-4446-900b-21ce44f2161a",
+            "fullUrl": "urn:uuid:34901071-5e32-4c7e-808c-370e5d5f0a4b",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -420,20 +420,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "1920-8",
                             "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.27704322,
                     "unit": "enzyme unit per liter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "U/l"
                 }
             },
@@ -443,7 +443,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:13e4db7a-8c50-4b27-b35b-f2354895f8aa",
+            "fullUrl": "urn:uuid:834eae20-ec3f-4940-b568-962e655d1799",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -467,20 +467,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2324-2",
                             "display": "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.70618796,
                     "unit": "international unit per liter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "UI/l"
                 }
             },
@@ -490,7 +490,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:c5f7895f-9aab-4b76-90ad-a8e8871d840f",
+            "fullUrl": "urn:uuid:7da8417b-6a90-4542-8ee3-c5a1169783a1",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -514,20 +514,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "6768-6",
                             "display": "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.63709736,
                     "unit": "international unit per liter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "UI/l"
                 }
             },
@@ -537,7 +537,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:e36ceef8-af7c-4dea-ba80-88c2692f115c",
+            "fullUrl": "urn:uuid:d8cfc93d-26c3-43fd-a530-7f491c248508",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -561,20 +561,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "3084-1",
                             "display": "Urate [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.9438333,
                     "unit": "milligram per deciliter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "mg/dL"
                 }
             },
@@ -584,7 +584,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:3a7440de-7b59-4c49-ab61-a3ab7a6b417b",
+            "fullUrl": "urn:uuid:6507efa7-f0c1-4684-bea0-6c33ff181793",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -608,20 +608,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "48642-3",
                             "display": "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.32634985,
                     "unit": "ml/min/1.73m2",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "ml/min/1.73m2"
                 }
             },
@@ -631,7 +631,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:e1f46874-c16f-4932-bb8a-fa6f4eb04d1d",
+            "fullUrl": "urn:uuid:37e2b33b-571c-4420-88b1-5ae0db2adc6a",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -655,14 +655,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "5802-4",
                             "display": "Nitrite [Presence] in Urine by Test strip"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueBoolean": true
@@ -673,7 +673,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:66221f58-842d-4aa9-974d-472ae24b8c7b",
+            "fullUrl": "urn:uuid:5ce8f77b-9d47-4510-abec-52a8090bce81",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -697,14 +697,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "85354-9",
                             "display": "Blood pressure panel with all children optional"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "component": [
@@ -712,7 +712,7 @@
                         "code": {
                             "coding": [
                                 {
-                                    "system": "http://loinc.org/",
+                                    "system": "http://loinc.org",
                                     "code": "8480-6",
                                     "display": "Systolic blood pressure"
                                 }
@@ -721,7 +721,7 @@
                         "valueQuantity": {
                             "value": 2,
                             "unit": "millimeter of mercury",
-                            "system": "http://unitsofmeasure.org",
+                            "system": "http://loinc.org",
                             "code": "mmHg"
                         }
                     },
@@ -729,7 +729,7 @@
                         "code": {
                             "coding": [
                                 {
-                                    "system": "http://loinc.org/",
+                                    "system": "http://loinc.org",
                                     "code": "8462-4",
                                     "display": "Diastolic blood pressure"
                                 }
@@ -738,7 +738,7 @@
                         "valueQuantity": {
                             "value": 4,
                             "unit": "millimeter of mercury",
-                            "system": "http://unitsofmeasure.org",
+                            "system": "http://loinc.org",
                             "code": "mmHg"
                         }
                     }
@@ -750,7 +750,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:2d0b004f-78ce-4813-a263-1486acd659dc",
+            "fullUrl": "urn:uuid:ec1e894b-8e63-45c0-8d87-5627de1bed4d",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -774,20 +774,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "29463-7",
                             "display": "Body weight"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 2,
                     "unit": "kilogram",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "Kg"
                 }
             },
@@ -797,7 +797,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:e471dcd4-fbbf-48a9-82f2-ef3dcd031510",
+            "fullUrl": "urn:uuid:49884e63-d1da-4566-bd86-164f997e5cb0",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -821,20 +821,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "8302-2",
                             "display": "Body height"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 0.15267706,
                     "unit": "meter",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "m"
                 }
             },
@@ -844,7 +844,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:7e1ad146-057a-42e9-8e1c-a32d52b4acb7",
+            "fullUrl": "urn:uuid:3d7ed57b-2143-400b-9750-46ae434f35f4",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -868,20 +868,20 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "https://www.phenxtoolkit.org/",
                             "code": "PX070801190200",
                             "display": "PX070801 Diabetes Mellitus Year"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {
                     "value": 41,
                     "unit": "year",
-                    "system": "http://unitsofmeasure.org",
+                    "system": "http://loinc.org",
                     "code": "a"
                 }
             },
@@ -891,21 +891,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:56bf6403-510b-45e8-8c9a-c46c88c8d777",
+            "fullUrl": "urn:uuid:dde6c142-88fa-45f3-a6ef-0a035bb273a4",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "197321007",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_9452",
                             "display": "Steatosis of liver (disorder)"
                         }
                     ],
                     "text": "true"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },
@@ -915,21 +915,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:fe388a2b-6fcb-41f8-9174-62673e7d7545",
+            "fullUrl": "urn:uuid:62d6e656-9834-4d11-9d32-56e16f821d43",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "38341003",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_10825",
                             "display": "Hypertensive disorder, systemic arterial (disorder)"
                         }
                     ],
                     "text": "false"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },
@@ -939,21 +939,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:4573d4ac-c6d4-477f-937e-91f3592a7925",
+            "fullUrl": "urn:uuid:6da2d701-2dea-41b5-93bb-353c1dd5a5d3",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "84114007",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_6000",
                             "display": "Heart failure (disorder)"
                         }
                     ],
                     "text": "false"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },
@@ -963,21 +963,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:00b091f5-e3f7-4ee1-9b17-43f7e7bac996",
+            "fullUrl": "urn:uuid:6cddc3ca-0ad8-4f4b-a2c1-681f774af9f3",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "13645005",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_3083",
                             "display": "Chronic obstructive lung disease (disorder)"
                         }
                     ],
                     "text": "true"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },
@@ -987,21 +987,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:72ad7274-c37c-42a5-af34-e8cc5d1f928d",
+            "fullUrl": "urn:uuid:2585f102-0f5c-4906-a073-359c3b584ed1",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "709044004",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_784",
                             "display": "Chronic kidney disease (disorder)"
                         }
                     ],
                     "text": "false"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },
@@ -1011,21 +1011,21 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:1eff3083-f797-4e7e-8006-838d68f43412",
+            "fullUrl": "urn:uuid:6260b3b2-ed3b-4fcc-bbcb-cd51687563c4",
             "resource": {
                 "resourceType": "Condition",
                 "code": {
                     "coding": [
                         {
-                            "system": "http://snomed.info/sct",
-                            "code": "414545008",
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_3393",
                             "display": "Ischemic heart disease (disorder)"
                         }
                     ],
                     "text": "true"
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "recordedDate": "2021-03-30"
             },

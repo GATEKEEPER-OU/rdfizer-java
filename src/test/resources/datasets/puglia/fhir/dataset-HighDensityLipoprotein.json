@@ -3,7 +3,7 @@
     "type": "transaction",
     "entry": [
         {
-            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
+            "fullUrl": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae",
             "resource": {
                 "resourceType": "Patient",
                 "identifier": [
@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:75e4b19b-dd55-4c66-8f7b-9e6e1760433e",
+            "fullUrl": "urn:uuid:46ac9cf7-e854-4f05-9132-493d3175d3f5",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -44,14 +44,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "2085-9",
                             "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {

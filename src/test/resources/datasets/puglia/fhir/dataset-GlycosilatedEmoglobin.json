@@ -3,7 +3,7 @@
     "type": "transaction",
     "entry": [
         {
-            "fullUrl": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09",
+            "fullUrl": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae",
             "resource": {
                 "resourceType": "Patient",
                 "identifier": [
@@ -20,7 +20,7 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:0c22ff28-19d4-4eba-aeaf-7e5ae30441a8",
+            "fullUrl": "urn:uuid:8e8fb23e-eaf3-423c-b6d1-77ed5542733c",
             "resource": {
                 "resourceType": "Observation",
                 "extension": [
@@ -44,14 +44,14 @@
                 "code": {
                     "coding": [
                         {
-                            "system": "http://loinc.org/",
+                            "system": "http://loinc.org",
                             "code": "59261-8",
                             "display": "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
                         }
                     ]
                 },
                 "subject": {
-                    "reference": "urn:uuid:6f34b4c2-6c2e-4329-81c1-f23482613b09"
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
                 },
                 "effectiveDateTime": "2021-03-30",
                 "valueQuantity": {

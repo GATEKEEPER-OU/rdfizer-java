@@ -1,0 +1,47 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae",
+            "resource": {
+                "resourceType": "Patient",
+                "identifier": [
+                    {
+                        "system": "https://www.gatekeeper-project.eu/sid/puglia/patient",
+                        "value": "001"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient",
+                "ifNoneExist": "identifier=https://www.gatekeeper-project.eu/sid/puglia/patient|001"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:6260b3b2-ed3b-4fcc-bbcb-cd51687563c4",
+            "resource": {
+                "resourceType": "Condition",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://purl.obolibrary.org/obo/",
+                            "code": "DOID_3393",
+                            "display": "Ischemic heart disease (disorder)"
+                        }
+                    ],
+                    "text": "true"
+                },
+                "subject": {
+                    "reference": "urn:uuid:781fa89d-9423-447f-9b6b-fb3526a8baae"
+                },
+                "recordedDate": "2021-03-30"
+            },
+            "request": {
+                "method": "POST",
+                "url": "Condition"
+            }
+        }
+    ]
+}
