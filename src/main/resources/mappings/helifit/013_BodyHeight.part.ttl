@@ -32,7 +32,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#TimeSpan>;
+      rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -85,7 +85,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4HasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#TimeSpan>;
+      rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";

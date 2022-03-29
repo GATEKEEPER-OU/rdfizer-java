@@ -2,6 +2,135 @@
 #                                ChronicKidneyDisease
 # ############################################################################ #
 
-# @todo
+# DOID_784 Chronic kidney disease
+<#ChronicKidneyDiseaseAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Condition' && @.resource.code.coding[0].code == 'DOID_784')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/DeseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF600DiseaseAss;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ConditionTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    #rr:predicate ho:P141Assigned;
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#ChronicKidneyDiseaseCourse>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+# DOID_784 Chronic kidney disease
+<#ChronicKidneyDiseaseCourse> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Condition' && @.resource.code.coding[0].code == 'DOID_784')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/health/data/type/DeseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF50DiseaseCourse;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P140AssignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4HasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ConditionTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HP5realizes;
+    rr:objectMap [
+      rr:parentTriplesMap <#ChronicKidneyChronicKidneyDisease>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+# DOID_784 Chronic kidney disease
+<#ChronicKidneyChronicKidneyDisease> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Condition' && @.resource.code.coding[0].code == 'DOID_784')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
+    rr:class doid:DOID_784;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
+  ];
+.
 
 # /ChronicKidneyDisease
