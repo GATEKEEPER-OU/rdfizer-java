@@ -8,7 +8,14 @@ import java.io.File;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRSaxonyAdapter implements FHIRAdapter {
+public class FHIRSamsungHealthAdapter implements FHIRAdapter {
+
+  /**
+   * @todo description
+   */
+  public static FHIRAdapter create() {
+    return new FHIRSamsungHealthAdapter();
+  }
 
   /**
    * @todo description
@@ -25,5 +32,14 @@ public class FHIRSaxonyAdapter implements FHIRAdapter {
       FHIRNormalizer.normalize(dataset, output);
     }
   }
+
+  //--------------------------------------------------------------------------//
+  // Class definition
+  //--------------------------------------------------------------------------//
+
+  /**
+   * @todo description
+   */
+  protected FHIRSamsungHealthAdapter() {}
 
 }

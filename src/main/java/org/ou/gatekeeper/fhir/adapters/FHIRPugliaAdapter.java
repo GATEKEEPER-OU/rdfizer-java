@@ -31,6 +31,13 @@ public class FHIRPugliaAdapter implements FHIRAdapter {
   /**
    * @todo description
    */
+  public static FHIRAdapter create() {
+    return new FHIRPugliaAdapter();
+  }
+
+  /**
+   * @todo description
+   */
   public void transform(
     File dataset,
     File output
@@ -90,6 +97,11 @@ public class FHIRPugliaAdapter implements FHIRAdapter {
   //--------------------------------------------------------------------------//
 
   private static final File TMP_DIR = FileUtils.getTempDirectory();
+
+  /**
+   * @todo description
+   */
+  protected FHIRPugliaAdapter() {}
 
   /**
    * @todo description
