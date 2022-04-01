@@ -1,14 +1,15 @@
-package org.ou.gatekeeper.utils;
+package org.commons;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -30,22 +31,37 @@ public class ResourceUtils {
   }
 
   /**
+   * @todo description
+   */
+  public static String readFileToString(File file) {
+    try {
+      return Files.readString(file.toPath());
+
+    } catch (IOException e) {
+      // @todo Message: resource not found
+      e.printStackTrace();
+    }
+
+    return null;
+  }
+
+  /**
    * @param path
    * @param exts
    * @return
    * @todo description
    */
-  public static Iterator<File> getResourceFiles(String path, String[] exts) {
-    try {
-      URL resourceUrl = ResourceUtils.class.getClassLoader().getResource(path);
-      File resourceDir = new File(resourceUrl.toURI());
-      return FileUtils.iterateFiles(resourceDir, exts, false);
+  public static Collection<File> getResourceFiles(Path path, String[] exts) {
+    URL resourceUrl = classLoader.getResource(path.toString());
+    File resourceDir = new File(resourceUrl.getFile());
+    return FileUtils.listFiles(resourceDir, exts, false);
+  }
 
-    } catch (URISyntaxException e) {
-      // @todo message resource in the path not found ?
-      e.printStackTrace();
-    }
-    return null;
+  /**
+   * @todo description
+   */
+  public static InputStream getResourceAsStream(Path path) {
+    return classLoader.getResourceAsStream(path.toString());
   }
 
   /**
@@ -68,6 +84,7 @@ public class ResourceUtils {
   //--------------------------------------------------------------------------//
 
   private static Random random = new Random();
+  private static ClassLoader classLoader = ResourceUtils.class.getClassLoader();
 
   /**
    * @todo description

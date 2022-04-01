@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.rdf.ontologies;
+package org.ou.gatekeeper.rdf.mappings;
 
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 
@@ -6,7 +6,7 @@ import org.ou.gatekeeper.rdf.enums.OutputFormat;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public interface Ontology {
+public interface RMLMapping {
 
   /**
    * @todo description

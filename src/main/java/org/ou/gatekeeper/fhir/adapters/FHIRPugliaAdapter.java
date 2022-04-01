@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer;
-import org.ou.gatekeeper.utils.ResourceUtils;
+import org.commons.ResourceUtils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
 import static org.ou.gatekeeper.fhir.adapters.builders.FHIRPuglia.*;
-import static org.ou.gatekeeper.utils.ResourceUtils.generateUniqueFilename;
+import static org.commons.ResourceUtils.generateUniqueFilename;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)

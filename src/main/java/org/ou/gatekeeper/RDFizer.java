@@ -3,16 +3,16 @@ package org.ou.gatekeeper;
 import org.apache.commons.io.FileUtils;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
 import org.ou.gatekeeper.rdf.RDFMapper;
-import org.ou.gatekeeper.rdf.ontologies.Ontology;
+import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.rdf.stores.BlazegraphStore;
 import org.ou.gatekeeper.rdf.stores.FileStore;
 import org.ou.gatekeeper.rdf.stores.OutputStore;
-import org.ou.gatekeeper.utils.ResourceUtils;
+import org.commons.ResourceUtils;
 
 import java.io.File;
 import java.util.Iterator;
 
-import static org.ou.gatekeeper.utils.ResourceUtils.generateUniqueFilename;
+import static org.commons.ResourceUtils.generateUniqueFilename;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -27,7 +27,7 @@ public class RDFizer {
   public static void trasform(
     File dataset,
     FHIRAdapter converter,
-    Ontology mapping,
+    RMLMapping mapping,
     File output
   ) {
     OutputStore store = FileStore.create(output);
@@ -41,7 +41,7 @@ public class RDFizer {
   public static void trasform(
     Iterator<File> datasets,
     FHIRAdapter converter,
-    Ontology mapping,
+    RMLMapping mapping,
     File outputFolder
   ) {
     while (datasets.hasNext()) {
@@ -60,7 +60,7 @@ public class RDFizer {
   public static void trasform(
     File dataset,
     FHIRAdapter converter,
-    Ontology mapping,
+    RMLMapping mapping,
     String blazeAddr
   ) {
     OutputStore store = BlazegraphStore.create(blazeAddr);
@@ -74,7 +74,7 @@ public class RDFizer {
   public static void trasform(
     Iterator<File> datasets,
     FHIRAdapter converter,
-    Ontology mapping,
+    RMLMapping mapping,
     String blazeAddr
   ) {
     while (datasets.hasNext()) {
@@ -90,7 +90,7 @@ public class RDFizer {
   public static void trasform(
     File dataset,
     FHIRAdapter converter,
-    Ontology mapping,
+    RMLMapping mapping,
     OutputStore store
   ) {
     String fhirFilename = generateUniqueFilename("output", "fhir.json");

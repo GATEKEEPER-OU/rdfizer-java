@@ -8,9 +8,9 @@ import be.ugent.rml.store.QuadStoreFactory;
 import be.ugent.rml.store.RDF4JStore;
 import be.ugent.rml.term.NamedNode;
 import org.apache.commons.io.FileUtils;
-import org.ou.gatekeeper.rdf.ontologies.Ontology;
+import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.rdf.stores.OutputStore;
-import org.ou.gatekeeper.utils.ResourceUtils;
+import org.commons.ResourceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class RDFMapper {
    * @todo description
    */
   public static void map(
-    Ontology mapping,
+    RMLMapping mapping,
     OutputStore store
   ) {
     String rmlRules = mapping.getRML();
@@ -48,7 +48,7 @@ public class RDFMapper {
       }
 
     } catch (IOException e) {
-      LOGGER.error("---> @todo TO THIS WAY", e); // @todo
+      LOGGER.error("---> @todo TO THIS WAY 1", e); // @todo
       e.printStackTrace();
     }
   }
@@ -68,7 +68,7 @@ public class RDFMapper {
       rmlStore = QuadStoreFactory.read(mappingStream);
 
     } catch (Exception e) {
-      LOGGER.error("---> @todo TO THIS WAY", e); // @todo
+      LOGGER.error("---> @todo TO THIS WAY 2", e); // @todo
       e.printStackTrace();
     }
 
@@ -87,7 +87,7 @@ public class RDFMapper {
       );
 
     } catch (Exception e) {
-      LOGGER.error("---> @todo TO THIS WAY", e); // @todo
+      LOGGER.error("---> @todo TO THIS WAY 3", e); // @todo
       e.printStackTrace();
     }
 
@@ -99,7 +99,7 @@ public class RDFMapper {
       }
 
     } catch (Exception e) {
-      LOGGER.error("---> @todo TO THIS WAY", e); // @todo
+      LOGGER.error("---> @todo TO THIS WAY 4", e); // @todo
       e.printStackTrace();
     }
 
