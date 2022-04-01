@@ -31,13 +31,13 @@
     <dependency>
       <groupId>be.ugent.rml</groupId>
       <artifactId>rmlmapper</artifactId>
-      <version>4.15.0</version>
+      <version>5.0.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.json/json -->
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
-      <version>20211205</version>
+      <version>20220320</version>
       <scope>compile</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.ibm.fhir/fhir-model -->
