@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
+import org.commons.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,11 +46,12 @@ class FHIRAdapterTest {
 //    "xxx, datasets/puglia/json/dataset-ChronicKidneyDisease.json",
 //    "xxx, datasets/puglia/json/dataset-IschemicHeartDisease.json",
 
-//    "xxx, datasets/puglia/json/00-dataset-complete.json"
+    // Complete dataset
+//    "31d1dac57cc6e24d8adea296f7d5ee1ee1b31b0ab884b31388e74f80522a9a72, datasets/puglia/json/00-dataset-complete.json"
   })
   void test_transform_JSONtoFHIR(String expectedDigest, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
-    File outputFile = TestUtils.createOutputFile("output", "json");
+    File outputFile = TestUtils.createOutputFile("output", "fhir.json");
 
     FHIRAdapter converter = new FHIRPugliaAdapter();
     converter.transform(datasetFile, outputFile);
@@ -62,7 +64,7 @@ class FHIRAdapterTest {
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-  //      ResourceUtils.clean(outputFile);
+        ResourceUtils.clean(outputFile);
     }
   }
 

@@ -1,15 +1,15 @@
 package org.ou.gatekeeper;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRSamsungHealthAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
-import org.ou.gatekeeper.rdf.ontologies.HelifitOntology;
-import org.ou.gatekeeper.rdf.ontologies.Ontology;
+import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
+import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
-import org.ou.gatekeeper.utils.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,9 +57,8 @@ class RDFizerPugliaTest {
 
     FHIRAdapter converter = FHIRSamsungHealthAdapter.create();
     String[] partsToInclude = modules.split(",");
-    Ontology mapping = HelifitOntology.create(
+    RMLMapping mapping = HelifitMapping.create(
       OutputFormat.NTRIPLES,
-      datasetFile.getAbsolutePath(),
       partsToInclude,
       true
     );
