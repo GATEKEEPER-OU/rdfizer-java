@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DeseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -65,7 +65,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DeseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -100,7 +100,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:HP5realizes;
     rr:objectMap [
-      rr:parentTriplesMap <#HepaticSteatosisDesease>;
+      rr:parentTriplesMap <#HepaticSteatosisDisease>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -110,7 +110,7 @@
 .
 
 # DOID_9452 Hepatic Steatosis
-<#HepaticSteatosisDesease> a rr:TriplesMap;
+<#HepaticSteatosisDisease> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
