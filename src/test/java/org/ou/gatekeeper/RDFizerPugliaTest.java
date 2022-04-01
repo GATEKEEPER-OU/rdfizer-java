@@ -44,12 +44,12 @@ class RDFizerPugliaTest {
     "60b5852add024595c535122b27d12e1c923bdddc3cd9e312ac6cc372a7d82f34, '000,001,004,054', datasets/puglia/fhir/dataset-Nitrites.json",
     // Conditions
     "f0b9327fff5fc7fe206942d39bb651afa28831d05852b428548ed51962ec7725, '000,005',     datasets/puglia/fhir/00-dataset-complete.json", // ConditionTimeSpan
-    "598abc16bc077722dfa365ee4f0d5bc4232820d4647bb9da48feaa39cb6d9796, '000,001,005,201', datasets/puglia/fhir/dataset-HepaticSteatosis.json",
-    "aca2b0b93d49b16f931e0d7238da52550bc34021126e00d403fbe7479c4ccc00, '000,001,005,202', datasets/puglia/fhir/dataset-Hypertension.json",
-    "3c651506f8f4b7f509887a26477da94c2468cc177dd16b9b8029d4cc10096237, '000,001,005,203', datasets/puglia/fhir/dataset-HeartFailure.json",
-    "759251027521069e17ac489e4bfbfa61469442f0ce35cc3ec9ba3ccefa57f37b, '000,001,005,204', datasets/puglia/fhir/dataset-BPCO.json",
-    "5d08f0643e9f61b29b7afa44302c016a4d20480911299294ce1466c690284d98, '000,001,005,205', datasets/puglia/fhir/dataset-ChronicKidneyDisease.json",
-    "becd6910da1c1e949b8d06aebd6e172a86abf2d78decea2bdedaf782a28a5c3f, '000,001,005,206', datasets/puglia/fhir/dataset-IschemicHeartDisease.json",
+    "4d363d7f6aa1c37bf1d072d1237e355e962d0f06ce2c0d665490fa89da71f15f, '000,001,005,201', datasets/puglia/fhir/dataset-HepaticSteatosis.json",
+    "c8f904b3b9667b8afeb0b528b5ee635b56ed0dc5c024bec803edeeb79b8085bf, '000,001,005,202', datasets/puglia/fhir/dataset-Hypertension.json",
+    "cb0bfbc48040b1b874840aa8d878dde3e8e4230350cb1390d49653df11d55963, '000,001,005,203', datasets/puglia/fhir/dataset-HeartFailure.json",
+    "4d6e7b12d87f02c72f101a1cdf49fbadd01775f76916498f121868932a8ba166, '000,001,005,204', datasets/puglia/fhir/dataset-BPCO.json",
+    "ed15f4e4fd1f6ae58f0fcdda45fbf1114f66655302da467ca9a9b217f2cd97a3, '000,001,005,205', datasets/puglia/fhir/dataset-ChronicKidneyDisease.json",
+    "0e4739214d5e8037156250b0753ffd078ff22e61ae147c06a9f6293dfb2b496f, '000,001,005,206', datasets/puglia/fhir/dataset-IschemicHeartDisease.json",
   })
   void test_transform_FHIRtoRDF(String expectedDigest, String modules, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
