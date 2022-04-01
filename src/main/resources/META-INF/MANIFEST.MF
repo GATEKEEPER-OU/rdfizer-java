@@ -1,71 +1,73 @@
 Manifest-Version: 1.0
 Main-Class: 
-Class-Path: commons-digester-2.1.jar jetty-client-8.1.22.v20160922.jar r
- df4j-queryresultio-api-2.5.5.jar jackson-annotations-2.12.1.jar xz-1.6.
- jar jena-rdfconnection-3.9.0.jar rdf4j-queryresultio-sparqlxml-2.5.5.ja
- r guava-18.0.jar rdf4j-sail-lucene-2.5.5.jar rdf4j-sail-federation-2.5.
- 5.jar httpclient-4.5.13.jar rdf4j-rio-ntriples-2.5.5.jar poi-4.1.0.jar 
- lucene-queryparser-6.6.1.jar rdf4j-sail-elasticsearch-2.5.5.jar rdf4j-s
- pin-2.5.5.jar xmlbeans-3.1.0.jar rdf4j-queryresultio-sparqljson-2.5.5.j
- ar httpcore-4.4.13.jar rdf4j-queryalgebra-model-2.5.5.jar jline-3.6.2.j
- ar rdf4j-sail-lucene-api-2.5.5.jar jcl-over-slf4j-1.7.26.jar commons-va
- lidator-1.7.jar commons-csv-1.7.jar lucene-queries-6.6.1.jar jena-dboe-
- base-3.9.0.jar jena-fuseki1-3.9.0.jar lucene-analyzers-common-6.6.1.jar
-  logback-classic-1.2.3.jar jetty-security-8.1.22.v20160922.jar rdf4j-re
- pository-api-2.5.5.jar jsonld-java-0.12.3.jar commons-beanutils-1.9.4.j
- ar json-path-2.6.0.jar commons-cli-1.4.jar rdf4j-rio-rdfxml-2.5.5.jar r
- df4j-rio-datatypes-2.5.5.jar rdf4j-client-2.5.5.jar jetty-util-8.1.22.v
- 20160922.jar rdf4j-sail-spin-2.5.5.jar lucene-memory-6.6.1.jar rdf4j-ri
- o-trig-2.5.5.jar rdf4j-queryresultio-text-2.5.5.jar jetty-http-8.1.22.v
- 20160922.jar rdf4j-repository-event-2.5.5.jar commons-logging-1.2.jar z
- ookeeper-3.4.10.jar spring-expression-4.3.21.RELEASE.jar lucene-join-6.
- 6.1.jar velocity-1.7.jar slugify-2.5.jar rdf4j-util-2.5.5.jar lucene-co
- re-6.6.1.jar jaxp-api-1.4.5.jar rdf4j-rio-nquads-2.5.5.jar slf4j-api-1.
- 7.25.jar jena-iri-3.13.1.jar icu4j-64.2.jar rdf4j-repository-contextawa
- re-2.5.5.jar opencsv-5.5.2.jar hdt-java-core-v2.1.2.jar jetty-servlet-8
- .1.22.v20160922.jar stax2-api-3.1.4.jar commons-collections4-4.4.jar js
- oup-1.14.2.jar hdt-jena-v2.1.2.jar rdf4j-runtime-2.5.5.jar rdf4j-storag
- e-2.5.5.jar jackson-core-2.12.1.jar jena-shaded-guava-3.13.1.jar rdf4j-
- repository-dataset-2.5.5.jar rdf4j-rio-n3-2.5.5.jar rdf4j-lucene-spin-2
- .5.5.jar lucene-spatial3d-6.6.1.jar JLargeArrays-1.6.jar rdf4j-config-2
- .5.5.jar xercesImpl-2.9.1.jar jena-dboe-trans-data-3.9.0.jar rdf4j-quer
- yalgebra-geosparql-2.5.5.jar noggit-0.6.jar jena-text-3.9.0.jar rdf4j-q
- ueryresultio-binary-2.5.5.jar commons-lang-2.6.jar jena-dboe-index-3.9.
- 0.jar rdf4j-sail-api-2.5.5.jar jetty-xml-8.1.22.v20160922.jar httpclien
- t-cache-4.5.6.jar javax.servlet-3.0.0.v201112011016.jar lucene-sandbox-
- 6.6.1.jar lucene-spatial-extras-6.6.1.jar logback-core-1.2.3.jar spatia
- l4j-0.7.jar rdf4j-http-protocol-2.5.5.jar rmlmapper-4.15.0.jar rdf4j-sa
- il-memory-2.5.5.jar rdf4j-queryparser-sparql-2.5.5.jar commons-codec-1.
- 11.jar standard-1.1.2.jar commons-math3-3.5.jar jena-spatial-3.9.0.jar 
- lucene-misc-6.6.1.jar spring-aop-4.3.21.RELEASE.jar jena-base-3.13.1.ja
- r jetty-io-8.1.22.v20160922.jar spring-web-4.3.21.RELEASE.jar protobuf-
- java-3.11.4.jar accessors-smart-2.4.7.jar jetty-servlets-8.1.22.v201609
- 22.jar rdf4j-queryparser-serql-2.5.5.jar jetty-server-8.1.22.v20160922.
- jar mapdb-1.0.8.jar rdf4j-rio-turtle-2.5.5.jar lucene-spatial-6.4.1.jar
-  slf4j-log4j12-1.7.25.jar java-rdfa-0.4.2.jar asm-9.1.jar rdf4j-sail-ba
- se-2.5.5.jar rdf4j-queryrender-2.5.5.jar json-smart-2.4.7.jar rdf4j-sai
- l-model-2.5.5.jar jena-dboe-transaction-3.9.0.jar rdf4j-repository-http
- -2.5.5.jar odfdom-java-0.8.11-incubating.jar taglets-0.8.11-incubating.
- jar rdf4j-model-2.5.5.jar jena-tdb-3.13.1.jar xml-apis-1.3.04.jar commo
- ns-lang3-3.12.0.jar jena-core-3.13.1.jar hdt-api-v2.1.2.jar rdf4j-sail-
- nativerdf-2.5.5.jar rdf4j-repository-sail-2.5.5.jar poi-ooxml-4.1.0.jar
-  spring-webmvc-4.3.21.RELEASE.jar rdf4j-rio-jsonld-2.5.5.jar httpmime-4
- .5.6.jar rdf4j-http-server-spring-2.5.5.jar rdf4j-console-2.5.5.jar spr
- ing-core-4.3.21.RELEASE.jar curvesapi-1.06.jar rdf4j-queryalgebra-evalu
- ation-2.5.5.jar jena-tdb2-3.9.0.jar hdt-java-cli-v2.1.2.jar solr-solrj-
- 6.6.1.jar hdt-fuseki-v2.1.2.jar rdf4j-http-client-2.5.5.jar rdf4j-rio-r
- dfjson-2.5.5.jar rdf4j-queryparser-api-2.5.5.jar rdf4j-rio-trix-2.5.5.j
- ar rdf4j-rio-languages-2.5.5.jar spring-beans-4.3.21.RELEASE.jar rdf4j-
- repository-manager-2.5.5.jar jts-core-1.15.1.jar rdf4j-rio-api-2.5.5.ja
- r rdf4j-query-2.5.5.jar commons-compress-1.18.jar rdf4j-repository-spar
- ql-2.5.5.jar collection-0.7.jar jcommander-1.78.jar log4j-1.2.17.jar je
- na-cmds-3.9.0.jar jetty-continuation-8.1.22.v20160922.jar commons-text-
- 1.9.jar woodstox-core-asl-4.4.1.jar jstl-1.2.jar libthrift-0.12.0.jar l
- ucene-highlighter-6.6.1.jar mysql-connector-java-8.0.26.jar postgresql-
- 9.1-901-1.jdbc4.jar jena-arq-3.13.1.jar hdt-java-v2.1.2.jar grel-functi
- ons-java-v0.7.1.jar rdf4j-rio-binary-2.5.5.jar simple-odf-0.8.2-incubat
- ing.jar rdf4j-sail-solr-2.5.5.jar commons-fileupload-1.3.3.jar commons-
- collections-3.2.2.jar jackson-databind-2.12.1.jar spring-context-4.3.21
- .RELEASE.jar poi-ooxml-schemas-4.1.0.jar commons-io-2.11.0.jar rdf4j-sa
- il-inferencer-2.5.5.jar
+Class-Path: jena-tdb2-3.9.0.jar lucene-memory-6.6.1.jar commons-fileuplo
+ ad-1.3.3.jar logback-core-1.2.3.jar rdf4j-queryparser-api-2.5.5.jar jci
+ p-annotations-1.0-1.jar lucene-analyzers-common-6.6.1.jar commons-io-2.
+ 11.0.jar jts-core-1.15.1.jar xercesImpl-2.9.1.jar rdf4j-runtime-2.5.5.j
+ ar jakarta.annotation-api-1.3.5.jar jena-arq-3.13.1.jar guava-18.0.jar 
+ rdf4j-queryalgebra-evaluation-2.5.5.jar rdf4j-rio-jsonld-2.5.5.jar jett
+ y-security-8.1.22.v20160922.jar odfdom-java-0.8.11-incubating.jar slugi
+ fy-2.5.jar libthrift-0.12.0.jar encoder-1.2.3.jar lucene-spatial-extras
+ -6.6.1.jar spring-context-4.3.21.RELEASE.jar httpclient-cache-4.5.6.jar
+  rdf4j-sail-solr-2.5.5.jar jena-base-3.13.1.jar jena-spatial-3.9.0.jar 
+ spring-expression-4.3.21.RELEASE.jar jaxp-api-1.4.5.jar rdf4j-queryresu
+ ltio-sparqlxml-2.5.5.jar spring-webmvc-4.3.21.RELEASE.jar mapdb-1.0.8.j
+ ar spring-beans-4.3.21.RELEASE.jar xmlbeans-3.1.0.jar spring-aop-4.3.21
+ .RELEASE.jar jena-fuseki1-3.9.0.jar jstl-1.2.jar jsoup-1.14.2.jar xml-a
+ pis-1.3.04.jar lucene-misc-6.6.1.jar rdf4j-rio-languages-2.5.5.jar luce
+ ne-queries-6.6.1.jar httpclient-4.5.13.jar poi-ooxml-4.1.0.jar opencsv-
+ 5.5.2.jar woodstox-core-asl-4.4.1.jar commons-lang3-3.12.0.jar poi-ooxm
+ l-schemas-4.1.0.jar JLargeArrays-1.6.jar rdf4j-queryresultio-sparqljson
+ -2.5.5.jar jetty-io-8.1.22.v20160922.jar rdf4j-sail-spin-2.5.5.jar rdf4
+ j-rio-nquads-2.5.5.jar rdf4j-queryresultio-text-2.5.5.jar jena-tdb-3.13
+ .1.jar rdf4j-http-protocol-2.5.5.jar poi-4.1.0.jar collection-0.7.jar j
+ ena-rdfconnection-3.9.0.jar lucene-spatial-6.4.1.jar java-rdfa-0.4.2.ja
+ r lucene-core-6.6.1.jar jcl-over-slf4j-1.7.26.jar hdt-fuseki-v2.1.2.jar
+  rdf4j-queryparser-sparql-2.5.5.jar jetty-http-8.1.22.v20160922.jar rdf
+ 4j-rio-trix-2.5.5.jar jetty-servlet-8.1.22.v20160922.jar jetty-servlets
+ -8.1.22.v20160922.jar commons-compress-1.18.jar rdf4j-queryrender-2.5.5
+ .jar rdf4j-config-2.5.5.jar lucene-highlighter-6.6.1.jar lucene-querypa
+ rser-6.6.1.jar mysql-connector-java-8.0.26.jar rdf4j-rio-turtle-2.5.5.j
+ ar rdf4j-query-2.5.5.jar rdf4j-sail-memory-2.5.5.jar accessors-smart-2.
+ 4.7.jar commons-csv-1.7.jar logback-classic-1.2.3.jar rdf4j-sail-lucene
+ -2.5.5.jar commons-cli-1.4.jar jena-cmds-3.9.0.jar icu4j-64.2.jar stand
+ ard-1.1.2.jar jackson-annotations-2.12.1.jar jetty-server-8.1.22.v20160
+ 922.jar lucene-spatial3d-6.6.1.jar rdf4j-rio-n3-2.5.5.jar rdf4j-queryre
+ sultio-api-2.5.5.jar javax.servlet-3.0.0.v201112011016.jar spatial4j-0.
+ 7.jar hdt-api-v2.1.2.jar commons-codec-1.11.jar jcommander-1.78.jar hdt
+ -jena-v2.1.2.jar rdf4j-rio-api-2.5.5.jar curvesapi-1.06.jar json-202112
+ 05.jar jetty-continuation-8.1.22.v20160922.jar fhir-model-4.10.2.jar je
+ na-iri-3.13.1.jar lucene-sandbox-6.6.1.jar jena-dboe-transaction-3.9.0.
+ jar rdf4j-repository-api-2.5.5.jar noggit-0.6.jar rdf4j-queryalgebra-mo
+ del-2.5.5.jar rdf4j-sail-federation-2.5.5.jar commons-math3-3.5.jar rdf
+ 4j-repository-manager-2.5.5.jar rdf4j-repository-http-2.5.5.jar stax2-a
+ pi-3.1.4.jar rdf4j-sail-elasticsearch-2.5.5.jar rdf4j-rio-datatypes-2.5
+ .5.jar slf4j-api-1.7.25.jar json-path-2.6.0.jar jsonld-java-0.12.3.jar 
+ log4j-1.2.17.jar rdf4j-lucene-spin-2.5.5.jar rdf4j-queryalgebra-geospar
+ ql-2.5.5.jar commons-collections-3.2.2.jar rdf4j-console-2.5.5.jar jett
+ y-util-8.1.22.v20160922.jar jackson-core-2.12.1.jar rdf4j-storage-2.5.5
+ .jar jetty-client-8.1.22.v20160922.jar fhir-core-4.10.2.jar rdf4j-rio-b
+ inary-2.5.5.jar jena-dboe-index-3.9.0.jar asm-9.1.jar slf4j-log4j12-1.7
+ .25.jar rdf4j-rio-trig-2.5.5.jar hdt-java-core-v2.1.2.jar jena-text-3.9
+ .0.jar taglets-0.8.11-incubating.jar jetty-xml-8.1.22.v20160922.jar rdf
+ 4j-repository-sail-2.5.5.jar rdf4j-spin-2.5.5.jar lucene-join-6.6.1.jar
+  jackson-databind-2.12.1.jar httpcore-4.4.13.jar commons-lang-2.6.jar r
+ df4j-http-client-2.5.5.jar jena-core-3.13.1.jar rdf4j-http-server-sprin
+ g-2.5.5.jar rdf4j-model-2.5.5.jar commons-digester-2.1.jar jena-shaded-
+ guava-3.13.1.jar grel-functions-java-v0.7.1.jar spring-core-4.3.21.RELE
+ ASE.jar hdt-java-v2.1.2.jar commons-collections4-4.4.jar simple-odf-0.8
+ .2-incubating.jar commons-text-1.9.jar httpmime-4.5.6.jar rdf4j-reposit
+ ory-dataset-2.5.5.jar jena-dboe-base-3.9.0.jar rdf4j-sail-nativerdf-2.5
+ .5.jar json-smart-2.4.7.jar jline-3.6.2.jar rdf4j-rio-rdfxml-2.5.5.jar 
+ rmlmapper-4.15.0.jar commons-logging-1.2.jar rdf4j-sail-inferencer-2.5.
+ 5.jar rdf4j-client-2.5.5.jar spring-web-4.3.21.RELEASE.jar jakarta.json
+ -1.0.0.jar rdf4j-queryparser-serql-2.5.5.jar rdf4j-sail-base-2.5.5.jar 
+ commons-validator-1.7.jar protobuf-java-3.11.4.jar solr-solrj-6.6.1.jar
+  antlr4-runtime-4.9.3.jar zookeeper-3.4.10.jar velocity-1.7.jar rdf4j-s
+ ail-model-2.5.5.jar jena-dboe-trans-data-3.9.0.jar rdf4j-queryresultio-
+ binary-2.5.5.jar commons-beanutils-1.9.4.jar xz-1.6.jar rdf4j-rio-rdfjs
+ on-2.5.5.jar postgresql-9.1-901-1.jdbc4.jar rdf4j-util-2.5.5.jar rdf4j-
+ repository-sparql-2.5.5.jar hdt-java-cli-v2.1.2.jar rdf4j-repository-ev
+ ent-2.5.5.jar rdf4j-repository-contextaware-2.5.5.jar rdf4j-sail-api-2.
+ 5.5.jar rdf4j-rio-ntriples-2.5.5.jar rdf4j-sail-lucene-api-2.5.5.jar
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="rdfizer" default="bundle" basedir=".">
+
+  <target name="bundle-helifit">
+    <java classname="org.apache.ant.scripts.BundleGenerator" failonerror="yes">
+      <arg line="helifit" />
+      <classpath>
+        <pathelement path="target/classes" />
+      </classpath>
+    </java>
+  </target>
+
+  <target name="bundle" depends="bundle-helifit"></target>
+
+</project>
