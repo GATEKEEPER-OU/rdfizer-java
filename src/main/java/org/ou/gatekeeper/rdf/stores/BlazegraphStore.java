@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -41,6 +42,7 @@ public class BlazegraphStore implements OutputStore {
    */
   public boolean save(File content) throws IOException {
     makePost(postUrl, content);
+    Files.delete(content.toPath());
     return true; // @todo improve this
   }
 
