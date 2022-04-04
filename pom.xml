@@ -38,7 +38,6 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20220320</version>
-      <scope>compile</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.ibm.fhir/fhir-model -->
     <dependency>
