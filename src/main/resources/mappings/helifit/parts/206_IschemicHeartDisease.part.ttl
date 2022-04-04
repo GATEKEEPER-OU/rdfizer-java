@@ -54,6 +54,16 @@
       ];
     ];
   ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
+  ];
 .
 
 # DOID_3393 Ischemic Heart Disease
@@ -120,16 +130,6 @@
   rr:subjectMap [
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_9452;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
   ];
 .
 
