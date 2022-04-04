@@ -37,12 +37,12 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/ObservationTimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/TimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:HLFPP04effectivedatatime;
+    rr:predicate ho:HLFP04effectivedatatime;
     rr:objectMap [
       rml:reference "resource.effectiveDateTime";
       rr:datatype xsd:dataTime
@@ -80,12 +80,12 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/ConditionTimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/TimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:HLFPP04effectivedatatime;
+    rr:predicate ho:HLFP04effectivedatatime;
     rr:objectMap [
       rml:reference "resource.recordedDate";
       rr:datatype xsd:dataTime
@@ -2908,6 +2908,16 @@
       ];
     ];
   ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
+  ];
 .
 
 # DOID_9452 Hepatic Steatosis
@@ -2975,16 +2985,6 @@
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_9452;
   ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
-  ];
 .
 
 # /HepaticSteatosis
@@ -3044,6 +3044,16 @@
         rr:parent "fullUrl";
       ];
     ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
   ];
 .
 
@@ -3112,16 +3122,6 @@
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_10825;
   ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
-  ];
 .
 
 # /Hypertension
@@ -3181,6 +3181,16 @@
         rr:parent "fullUrl";
       ];
     ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
   ];
 .
 
@@ -3249,16 +3259,6 @@
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_6000;
   ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
-  ];
 .
 
 # /HeartFailure
@@ -3318,6 +3318,16 @@
         rr:parent "fullUrl";
       ];
     ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
   ];
 .
 
@@ -3386,16 +3396,6 @@
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_3083;
   ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
-  ];
 .
 
 # /Bpco
@@ -3455,6 +3455,16 @@
         rr:parent "fullUrl";
       ];
     ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
   ];
 .
 
@@ -3523,16 +3533,6 @@
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_784;
   ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
-  ];
 .
 
 # /ChronicKidneyDisease
@@ -3592,6 +3592,16 @@
         rr:parent "fullUrl";
       ];
     ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:HLFP05assignedPresence;
+    rr:objectMap [
+      rml:reference "resource.code.text";
+    ]
   ];
 .
 
@@ -3659,16 +3669,6 @@
   rr:subjectMap [
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
     rr:class doid:DOID_9452;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.code.text";
-    ]
   ];
 .
 
