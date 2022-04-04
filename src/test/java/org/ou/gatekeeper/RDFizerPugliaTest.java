@@ -1,7 +1,6 @@
 package org.ou.gatekeeper;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
@@ -27,7 +26,7 @@ class RDFizerPugliaTest {
     // Patient
     "b81eff1f7ce54b94535dfde2307faea55e33752a29c220b61d35d4a65db04db0, '000,001',         datasets/puglia/fhir/dataset-Patient.json",
     // Observations
-    "e57cd58c9550fd991ccd3cd7bf69e4499b1709230c33c84fed061b250411c1b6, '000,004',     datasets/puglia/fhir/00-dataset-complete.json", // ObservationTimeSpan
+    "e57cd58c9550fd991ccd3cd7bf69e4499b1709230c33c84fed061b250411c1b6, '000,004',         datasets/puglia/fhir/00-dataset-complete.json", // ObservationTimeSpan
     "298c60e77fd6dfdd640cb76e1af707092d778a15fe774451be8d3ceb409adb2e, '000,001,004,013', datasets/puglia/fhir/dataset-BodyHeight.json",
     "e4b3b531c8ed4cabe68d2deafbbdbbdd956a38bee17b7a322a1da202c208ef7e, '000,001,004,014', datasets/puglia/fhir/dataset-BodyWeight.json",
     "afceff2351cb1ba9cf3b6363fba1d35a24934c4d5e5aa1af0f79074dec51450c, '000,001,004,040', datasets/puglia/fhir/dataset-BloodPressure.json",
@@ -64,13 +63,13 @@ class RDFizerPugliaTest {
     );
 
     RDFizer.trasform(datasetFile, converter, mapping, outputFile);
-
+System.out.println("---> " + outputFile);
     try {
       String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-      ResourceUtils.clean(outputFile);
+//      ResourceUtils.clean(outputFile);
     }
   }
 
