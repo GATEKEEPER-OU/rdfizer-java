@@ -60,8 +60,8 @@ public class ResourceUtils {
   /**
    * @todo description
    */
-  public static InputStream getResourceAsStream(Path path) {
-    return classLoader.getResourceAsStream(path.toString());
+  public static InputStream getResourceAsStream(String path) {
+    return classLoader.getResourceAsStream(path);
   }
 
   /**

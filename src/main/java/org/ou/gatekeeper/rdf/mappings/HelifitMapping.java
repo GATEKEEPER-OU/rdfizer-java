@@ -26,13 +26,6 @@ public class HelifitMapping implements RMLMapping {
   /**
    * @todo description
    */
-  public static final Path TEMPLATE_PATH = Path.of(
-    "mappings", "helifit", "helifit.template.ttl"
-  );
-
-  /**
-   * @todo description
-   */
   public static RMLMapping create() {
     return new HelifitMapping(
       null,
@@ -160,6 +153,12 @@ public class HelifitMapping implements RMLMapping {
    * @todo description
    */
   private boolean mappingDirtyBit;
+
+  /**
+   * @todo description
+   */
+  private static final String TEMPLATE_PATH = "mappings/helifit/helifit.template.ttl"; // @note DO NOT use Path.of()
+                                                                                       //
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HelifitMapping.class);
 
