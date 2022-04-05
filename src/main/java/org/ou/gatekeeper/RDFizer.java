@@ -1,6 +1,7 @@
 package org.ou.gatekeeper;
 
 import org.apache.commons.io.FileUtils;
+import org.commons.FilenameUtils;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
 import org.ou.gatekeeper.rdf.RDFMapper;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -42,11 +43,14 @@ public class RDFizer {
     Iterator<File> datasets,
     FHIRAdapter converter,
     RMLMapping mapping,
-    File outputFolder
+    File outputFolder,
+    String newExtension // @todo workround
   ) {
     while (datasets.hasNext()) {
       File dataset = datasets.next();
-      String outputFilename = "output-" + dataset.getName();
+//      String outputFilename = "output-" + dataset.getName();
+      String outputFilename = "output-" + FilenameUtils
+        .changeExtention(dataset.getName(), newExtension);
       File output = new File(outputFolder, outputFilename);
       OutputStore store = FileStore.create(output);
       trasform(dataset, converter, mapping, store);

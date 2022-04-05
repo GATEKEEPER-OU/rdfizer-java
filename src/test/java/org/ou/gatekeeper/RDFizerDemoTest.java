@@ -52,7 +52,8 @@ class RDFizerDemoTest {
       datasets,
       converter,
       mapping,
-      outputFolder
+      outputFolder,
+      "nt"
     );
   }
 
