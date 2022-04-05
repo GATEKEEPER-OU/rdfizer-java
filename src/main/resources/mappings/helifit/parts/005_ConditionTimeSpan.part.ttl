@@ -10,7 +10,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/TimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 

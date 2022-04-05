@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF505/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF505SerumCreatinineAss;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF305/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF305SerumCreatinineMeas;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF405/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF405SerumCreatinineDim;
   ];
 

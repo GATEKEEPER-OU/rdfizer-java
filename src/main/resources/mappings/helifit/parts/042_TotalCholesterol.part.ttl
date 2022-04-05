@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF501/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF501TotalCholesterolAss;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF301/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF301TotalCholesterolMeas;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF401/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF401TotalCholesterolDim;
   ];
 

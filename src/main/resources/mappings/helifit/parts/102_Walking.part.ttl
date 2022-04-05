@@ -12,7 +12,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF101Walking;
   ];
 
@@ -76,7 +76,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF188/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF188DurationMeas;
   ];
 
@@ -129,7 +129,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF4/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF4DurationDim;
   ];
 
@@ -160,7 +160,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF171/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF171EnergyMeas;
   ];
 
@@ -213,7 +213,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF15/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF15EnergyExpenditureDim;
   ];
 

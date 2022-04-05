@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF157/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF157BloodPressureAss;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF197/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF197BloodPressureMeas;
   ];
 
@@ -128,7 +128,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF12SystolicPressureDim;
   ];
 
@@ -159,7 +159,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "http://www.samsung.com/health/data/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF12DiastolicPressureDim;
   ];
 

@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF509EstimatedGlomerularFiltrationRateAss;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeas;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF409EstimatedGlomerularFiltrationRateDim;
   ];
 

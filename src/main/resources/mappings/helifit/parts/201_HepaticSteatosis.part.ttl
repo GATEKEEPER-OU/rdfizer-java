@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -75,7 +75,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
