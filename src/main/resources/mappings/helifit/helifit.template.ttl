@@ -37,7 +37,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/TimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
@@ -50,7 +50,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:FWP02Starts;
+    rr:predicate ho:HLFP02Starts;
     rr:objectMap [
       rml:reference "resource.valuePeriod.start";
       rr:datatype xsd:dataTime
@@ -58,7 +58,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:FWP03Ends;
+    rr:predicate ho:HLFP03Ends;
     rr:objectMap [
       rml:reference "resource.valuePeriod.end";
       rr:datatype xsd:dataTime
@@ -80,7 +80,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/TimeSpan/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
@@ -108,8 +108,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE153HeightAss;
+    rr:template "http://www.samsung.com/health/data/type/HLF153/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF153HeightAss;
   ];
 
   #
@@ -161,8 +161,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE173HeightMeas;
+    rr:template "http://www.samsung.com/health/data/type/HLF173/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF173HeightMeas;
   ];
 
   #
@@ -214,8 +214,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE19HeightDim;
+    rr:template "http://www.samsung.com/health/data/type/HLF19/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF19HeightDim;
   ];
 
   #
@@ -251,7 +251,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF156/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF156WeightAss;
   ];
 
@@ -304,7 +304,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF191/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF191WeightMeas;
   ];
 
@@ -357,7 +357,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF41/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF41WeightDim;
   ];
 
@@ -394,8 +394,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FW157BloodPressureAssignment;
+    rr:template "http://www.samsung.com/health/data/type/HLF157/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF157BloodPressureAss;
   ];
 
   #
@@ -447,8 +447,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE197BloodPressureMeasurement;
+    rr:template "http://www.samsung.com/health/data/type/HLF197/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF197BloodPressureMeas;
   ];
 
   #
@@ -511,8 +511,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE12SystolicPressureDimension;
+    rr:template "http://www.samsung.com/health/data/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF12SystolicPressureDim;
   ];
 
   #
@@ -542,8 +542,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE12DiastolicPressureDimension;
+    rr:template "http://www.samsung.com/health/data/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF12DiastolicPressureDim;
   ];
 
   #
@@ -579,7 +579,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF500/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF500GlycosilatedEmoglobinAss;
   ];
 
@@ -632,7 +632,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF300/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF300GlycosilatedEmoglobinMeas;
   ];
 
@@ -685,7 +685,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF400/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF400GlycosilatedEmoglobinDim;
   ];
 
@@ -722,7 +722,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF501/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF501TotalCholesterolAss;
   ];
 
@@ -775,7 +775,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF301/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF301TotalCholesterolMeas;
   ];
 
@@ -828,7 +828,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF401/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF401TotalCholesterolDim;
   ];
 
@@ -866,7 +866,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF502HighDensityLipoproteinAss;
   ];
 
@@ -919,7 +919,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF302HighDensityLipoproteinMeas;
   ];
 
@@ -972,7 +972,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF402HighDensityLipoproteinDim;
   ];
 
@@ -1009,7 +1009,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF503/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF503LowDensityLipoproteinAss;
   ];
 
@@ -1062,7 +1062,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF303/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF303LowDensityLipoproteinMeas;
   ];
 
@@ -1115,7 +1115,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF403/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF403LowDensityLipoproteinDim;
   ];
 
@@ -1152,7 +1152,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF504/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF504TriglyceridesAss;
   ];
 
@@ -1205,7 +1205,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF304/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF304TriglyceridesMeas;
   ];
 
@@ -1258,7 +1258,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF404/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF404TriglyceridesDim;
   ];
 
@@ -1295,7 +1295,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF505/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF505SerumCreatinineAss;
   ];
 
@@ -1348,7 +1348,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF305/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF305SerumCreatinineMeas;
   ];
 
@@ -1401,7 +1401,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF405/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF405SerumCreatinineDim;
   ];
 
@@ -1438,7 +1438,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF506/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF506AlbuminuriaCreatininuriaRatioAss;
   ];
 
@@ -1491,7 +1491,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF306/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF306AlbuminuriaCreatininuriaRatioMeas;
   ];
 
@@ -1544,7 +1544,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF406/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF406AlbuminuriaCreatininuriaRatioDim;
   ];
 
@@ -1581,7 +1581,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF507/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF507AlkalinePhosphataseAss;
   ];
 
@@ -1634,7 +1634,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF307/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF307AlkalinePhosphataseALPMeas;
   ];
 
@@ -1687,7 +1687,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF407/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF407AlkalinePhosphataseDim;
   ];
 
@@ -1724,7 +1724,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF508UricAcidAss;
   ];
 
@@ -1777,7 +1777,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF308UricAcidMeas;
   ];
 
@@ -1830,7 +1830,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF408UricAcidDim;
   ];
 
@@ -1867,7 +1867,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF509EstimatedGlomerularFiltrationRateAss;
   ];
 
@@ -1920,7 +1920,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeas;
   ];
 
@@ -1973,7 +1973,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF409EstimatedGlomerularFiltrationRateDim;
   ];
 
@@ -2010,7 +2010,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF510/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF510NitritesAss;
   ];
 
@@ -2063,7 +2063,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF310/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF310NitritesMeas;
   ];
 
@@ -2116,7 +2116,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF410/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF410NitritesDim;
   ];
 
@@ -2147,8 +2147,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE160CardiovascularAssignment;
+    rr:template "http://www.samsung.com/health/data/type/HLF160/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF160CardiovascularAss;
   ];
 
   #
@@ -2200,8 +2200,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE168CardiovascularMeasurement;
+    rr:template "http://www.samsung.com/health/data/type/HLF168/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF168CardiovascularMeas;
   ];
 
   #
@@ -2253,8 +2253,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE18HeartRateReservesDimension;
+    rr:template "http://www.samsung.com/health/data/type/HLF18/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF18HeartRateReservesDim;
   ];
 
   #
@@ -2290,8 +2290,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE166RespirationAssignment;
+    rr:template "http://www.samsung.com/health/data/type/HLF166/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF166RespirationAss;
   ];
 
   #
@@ -2343,8 +2343,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE179RespirationMeasurement;
+    rr:template "http://www.samsung.com/health/data/type/HLF179/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF179RespirationMeas;
   ];
 
   #
@@ -2396,8 +2396,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE27SpO2Dim;
+    rr:template "http://www.samsung.com/health/data/type/HLF27/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF27SpO2Dim;
   ];
 
   #
@@ -2433,8 +2433,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE43SleepingActivity;
+    rr:template "http://www.samsung.com/health/data/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF43SleepingActivity;
   ];
 
   #
@@ -2481,8 +2481,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE43SleepingActivity;
+    rr:template "http://www.samsung.com/health/data/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF43SleepingActivity;
   ];
 
   #
@@ -2536,7 +2536,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Process/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF20/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF20SleepCycle;
   ];
 
@@ -2566,7 +2566,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Stage/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF10/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF10SleepStage;
   ];
 
@@ -2596,7 +2596,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Type/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HL30/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HL30SleepStageType;
   ];
 
@@ -2627,8 +2627,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE101Walking;
+    rr:template "http://www.samsung.com/health/data/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF101Walking;
   ];
 
   #
@@ -2691,8 +2691,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE188DurationMeasurement;
+    rr:template "http://www.samsung.com/health/data/type/HLF188/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF188DurationMeas;
   ];
 
   #
@@ -2744,8 +2744,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE4DurationDimension;
+    rr:template "http://www.samsung.com/health/data/type/HLF4/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF4DurationDim;
   ];
 
   #
@@ -2775,8 +2775,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Measurement/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE171EnergyMeasurement;
+    rr:template "http://www.samsung.com/health/data/type/HLF171/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF171EnergyMeas;
   ];
 
   #
@@ -2828,8 +2828,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/Dimension/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:FWE15EnergyExpenditureDimension;
+    rr:template "http://www.samsung.com/health/data/type/HLF15/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF15EnergyExpenditureDim;
   ];
 
   #
@@ -2865,7 +2865,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -2929,7 +2929,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -3002,7 +3002,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -3066,7 +3066,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -3139,7 +3139,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -3203,7 +3203,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -3276,7 +3276,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -3340,7 +3340,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -3413,7 +3413,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -3477,7 +3477,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -3550,7 +3550,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseAssignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF600DiseaseAss;
   ];
 
@@ -3614,7 +3614,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/DiseaseCourse/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
