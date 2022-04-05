@@ -12,7 +12,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE160CardiovascularAssignment;
+    rr:class ho:HLF160CardiovascularAss;
   ];
 
   #
@@ -65,7 +65,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE168CardiovascularMeasurement;
+    rr:class ho:HLF168CardiovascularMeas;
   ];
 
   #
@@ -118,7 +118,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE18HeartRateReservesDimension;
+    rr:class ho:HLF18HeartRateReservesDim;
   ];
 
   #

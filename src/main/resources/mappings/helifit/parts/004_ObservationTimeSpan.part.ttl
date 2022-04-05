@@ -23,7 +23,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:FWP02Starts;
+    rr:predicate ho:HLFP02Starts;
     rr:objectMap [
       rml:reference "resource.valuePeriod.start";
       rr:datatype xsd:dataTime
@@ -31,7 +31,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:FWP03Ends;
+    rr:predicate ho:HLFP03Ends;
     rr:objectMap [
       rml:reference "resource.valuePeriod.end";
       rr:datatype xsd:dataTime

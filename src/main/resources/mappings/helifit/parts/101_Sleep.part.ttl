@@ -12,7 +12,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE43SleepingActivity;
+    rr:class ho:HLF43SleepingActivity;
   ];
 
   #
@@ -60,7 +60,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Activity/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE43SleepingActivity;
+    rr:class ho:HLF43SleepingActivity;
   ];
 
   #

@@ -12,7 +12,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE153HeightAss;
+    rr:class ho:HLF153HeightAss;
   ];
 
   #
@@ -65,7 +65,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE173HeightMeas;
+    rr:class ho:HLF173HeightMeas;
   ];
 
   #
@@ -118,7 +118,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE19HeightDim;
+    rr:class ho:HLF19HeightDim;
   ];
 
   #

@@ -12,7 +12,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Assignment/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE166RespirationAssignment;
+    rr:class ho:HLF166RespirationAss;
   ];
 
   #
@@ -65,7 +65,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Measurement/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE179RespirationMeasurement;
+    rr:class ho:HLF179RespirationMeas;
   ];
 
   #
@@ -118,7 +118,7 @@
 
   rr:subjectMap [
     rr:template "http://www.samsung.com/health/data/type/Dimension/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:FWE27SpO2Dim;
+    rr:class ho:HLF27SpO2Dim;
   ];
 
   #
