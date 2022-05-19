@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF166/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF166/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF166RespirationAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF179/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF179/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF179RespirationMeasurement;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF27/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF27/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF27SpO2Dimension;
   ];
 

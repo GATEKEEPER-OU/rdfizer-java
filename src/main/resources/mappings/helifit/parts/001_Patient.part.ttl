@@ -10,8 +10,8 @@
   ];
 
   rr:subjectMap [
-    #rr:template "http://www.samsung.com/data/health/id/{fullUrl}";
-    rr:template "http://www.samsung.com/data/health/id/{resource.identifier[0].value}";
+    #rr:template "https://opensource.samsung.com/projects/helifit/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/id/{resource.identifier[0].value}";
     rr:class ho:E21Person;
   ];
 

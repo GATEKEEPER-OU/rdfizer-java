@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF509EstimatedGlomerularFiltrationRateAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeasurement;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF409EstimatedGlomerularFiltrationRateDimension;
   ];
 

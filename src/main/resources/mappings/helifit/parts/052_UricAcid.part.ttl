@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF508UricAcidAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF308UricAcidMeasurement;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF408UricAcidDimension;
   ];
 

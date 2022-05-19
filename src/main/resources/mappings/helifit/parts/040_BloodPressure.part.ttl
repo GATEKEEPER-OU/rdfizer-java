@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF157/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF157/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF157BloodPressureAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF197/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF197/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF197BloodPressureMeasurement;
   ];
 
@@ -128,7 +128,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF12SystolicPressureDimension;
   ];
 
@@ -159,7 +159,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF12DiastolicPressureDimension;
   ];
 

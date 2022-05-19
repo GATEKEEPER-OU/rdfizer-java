@@ -10,7 +10,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/E42/code/{resource.code.coding[0].code}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/code/{resource.code.coding[0].code}";
     rr:class ho:E42Identifier;
   ];
 
@@ -49,7 +49,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/org/{resource.code.coding[0].systemOrg}";
+    rr:template "https://opensource.samsung.com/projects/helifit/org/{resource.code.coding[0].systemOrg}";
     rr:class ho:HLF209IdentifierType;
   ];
 

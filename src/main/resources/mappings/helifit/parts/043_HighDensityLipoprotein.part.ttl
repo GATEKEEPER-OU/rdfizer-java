@@ -12,7 +12,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF502HighDensityLipoproteinAssignment;
   ];
 
@@ -65,7 +65,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF302HighDensityLipoproteinMeasurement;
   ];
 
@@ -118,7 +118,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF402HighDensityLipoproteinDimension;
   ];
 

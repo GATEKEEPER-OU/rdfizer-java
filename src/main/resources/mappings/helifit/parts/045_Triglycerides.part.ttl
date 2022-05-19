@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF504/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF504/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF504TriglyceridesAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF304/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF304/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF304TriglyceridesMeasurement;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF404/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF404/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF404TriglyceridesDimension;
   ];
 

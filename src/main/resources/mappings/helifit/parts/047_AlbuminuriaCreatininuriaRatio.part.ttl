@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF506/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF506/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF506AlbuminuriaCreatininuriaRatioAssignment;
   ];
 
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF306/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF306/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF306AlbuminuriaCreatininuriaRatioMeasurement;
   ];
 
@@ -117,7 +117,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF406/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF406/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF406AlbuminuriaCreatininuriaRatioDimension;
   ];
 

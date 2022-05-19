@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF153/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF153/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF153HeightAssignment;
   ];
 
@@ -75,7 +75,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF173/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF173/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF173HeightMeasurement;
   ];
 
@@ -139,7 +139,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF19/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF19/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF19HeightDimension;
   ];
 

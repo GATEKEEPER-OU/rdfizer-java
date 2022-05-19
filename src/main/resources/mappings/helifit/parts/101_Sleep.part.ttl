@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF43SleepingActivity;
   ];
 
@@ -59,7 +59,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF43SleepingActivity;
   ];
 
@@ -114,7 +114,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF20/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF20/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF20SleepCycle;
   ];
 
@@ -144,7 +144,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HLF10/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF10/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF10SleepStage;
   ];
 
@@ -174,7 +174,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/data/health/type/HL30/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HL30/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HL30SleepStageType;
   ];
 
