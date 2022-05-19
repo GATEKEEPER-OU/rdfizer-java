@@ -12,15 +12,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF502HighDensityLipoproteinAss;
+    rr:template "http://www.samsung.com/data/health/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF502HighDensityLipoproteinAssignment;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -31,7 +31,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -45,7 +45,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
+    rr:predicate ho:P141assigned;
     rr:objectMap [
       rr:parentTriplesMap <#HighDensityLipoproteinMeasurement>;
       rr:joinCondition [
@@ -65,15 +65,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF302HighDensityLipoproteinMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF302HighDensityLipoproteinMeasurement;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -84,7 +84,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -118,8 +118,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF402HighDensityLipoproteinDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF402HighDensityLipoproteinDimension;
   ];
 
   #

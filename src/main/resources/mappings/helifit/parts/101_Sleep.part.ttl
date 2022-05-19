@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF43SleepingActivity;
   ];
 
@@ -19,7 +19,7 @@
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -30,7 +30,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -59,7 +59,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF43/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF43SleepingActivity;
   ];
 
@@ -67,7 +67,7 @@
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -78,7 +78,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -92,7 +92,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:HP1initiates;
+    rr:predicate ho:EP2initiates;
     rr:objectMap [
       rr:parentTriplesMap <#SleepCycle>;
       rr:joinCondition [
@@ -114,7 +114,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF20/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF20/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF20SleepCycle;
   ];
 
@@ -122,7 +122,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:HP3maintains;
+    rr:predicate ho:EP3maintains;
     rr:objectMap [
       rr:parentTriplesMap <#SleepStage>;
       rr:joinCondition [
@@ -144,7 +144,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF10/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF10/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF10SleepStage;
   ];
 
@@ -174,7 +174,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HL30/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HL30/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HL30SleepStageType;
   ];
 

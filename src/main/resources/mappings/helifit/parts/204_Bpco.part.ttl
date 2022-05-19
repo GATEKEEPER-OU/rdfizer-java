@@ -11,15 +11,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF600DiseaseAss;
+    rr:template "http://www.samsung.com/data/health/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF600DiseaseAssignment;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -30,7 +30,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
@@ -44,8 +44,8 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    #rr:predicate ho:P141Assigned;
-    rr:predicate ho:P140AssignedAttributeTo;
+    #rr:predicate ho:P141assigned;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#BpcoCourse>;
       rr:joinCondition [
@@ -59,7 +59,7 @@
   # Data
   #
   rr:predicateObjectMap [
-    rr:predicate ho:HLFP05assignedPresence;
+    rr:predicate ho:EP10assignedPresence;
     rr:objectMap [
       rml:reference "resource.code.text";
     ]
@@ -75,7 +75,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -83,7 +83,7 @@
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -94,7 +94,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
@@ -108,7 +108,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:HP5realizes;
+    rr:predicate ho:EP6realizes;
     rr:objectMap [
       rr:parentTriplesMap <#BpcoDisease>;
       rr:joinCondition [

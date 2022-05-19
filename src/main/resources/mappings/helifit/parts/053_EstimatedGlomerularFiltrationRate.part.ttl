@@ -11,15 +11,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF509EstimatedGlomerularFiltrationRateAss;
+    rr:template "http://www.samsung.com/data/health/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF509EstimatedGlomerularFiltrationRateAssignment;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -30,7 +30,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -44,7 +44,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
+    rr:predicate ho:P141assigned;
     rr:objectMap [
       rr:parentTriplesMap <#EstimatedGlomerularFiltrationRateMeasurement>;
       rr:joinCondition [
@@ -64,15 +64,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeasurement;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -83,7 +83,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -117,8 +117,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF409EstimatedGlomerularFiltrationRateDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF409EstimatedGlomerularFiltrationRateDimension;
   ];
 
   #

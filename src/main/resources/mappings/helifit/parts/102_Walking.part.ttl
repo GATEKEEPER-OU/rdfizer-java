@@ -12,7 +12,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:HLF101Walking;
   ];
 
@@ -20,7 +20,7 @@
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -31,7 +31,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -45,7 +45,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P117OccursDuring;
+    rr:predicate ho:P117occursDuring;
     rr:objectMap [
       rr:parentTriplesMap <#DurationMeasurement>;
       rr:joinCondition [
@@ -56,7 +56,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P117OccursDuring;
+    rr:predicate ho:P117occursDuring;
     rr:objectMap [
       rr:parentTriplesMap <#EnergyMeasurement>;
       rr:joinCondition [
@@ -76,15 +76,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF188/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF188DurationMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF188/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF188DurationMeasurement;
   ];
 
   #
   # Metadata
   #
   #rr:predicateObjectMap [
-  #  rr:predicate ho:P140AssignedAttributeTo;
+  #  rr:predicate ho:P140assignedAttributeTo;
   #  rr:objectMap [
   #    rr:parentTriplesMap <#Patient>;
   #    rr:joinCondition [
@@ -95,7 +95,7 @@
   #];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -129,8 +129,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF4/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF4DurationDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF4/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF4DurationDimension;
   ];
 
   #
@@ -160,15 +160,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF171/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF171EnergyMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF171/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF171EnergyMeasurement;
   ];
 
   #
   # Metadata
   #
   #rr:predicateObjectMap [
-  #  rr:predicate ho:P140AssignedAttributeTo;
+  #  rr:predicate ho:P140assignedAttributeTo;
   #  rr:objectMap [
   #    rr:parentTriplesMap <#Patient>;
   #    rr:joinCondition [
@@ -179,7 +179,7 @@
   #];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -213,8 +213,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF15/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF15EnergyExpenditureDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF15/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF15EnergyExpenditureDimension;
   ];
 
   #

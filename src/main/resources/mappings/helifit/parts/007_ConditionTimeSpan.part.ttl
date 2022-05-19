@@ -10,12 +10,12 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:HLFP04effectivedatatime;
+    rr:predicate ho:EP9effectiveDatatime;
     rr:objectMap [
       rml:reference "resource.recordedDate";
       rr:datatype xsd:dataTime

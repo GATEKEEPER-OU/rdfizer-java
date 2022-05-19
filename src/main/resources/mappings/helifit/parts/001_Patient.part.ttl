@@ -10,9 +10,23 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/id/{resource.identifier[0].value}";
+    #rr:template "http://www.samsung.com/data/health/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/id/{resource.identifier[0].value}";
     rr:class ho:E21Person;
   ];
+
+  # rr:predicateObjectMap [
+  #   rr:predicate ho:P1isIdentifiedBy;
+  #   rr:objectMap [
+  #     rr:parentTriplesMap <#PatientIdentifier>;
+  #     rr:joinCondition [
+  #       #rr:child "fullUrl";
+  #       #rr:parent "fullUrl";
+  #       rr:child "resource.identifier[0].value";
+  #       rr:parent "resource.identifier[0].value";
+  #     ];
+  #   ];
+  # ];
 .
 
 # /Patient

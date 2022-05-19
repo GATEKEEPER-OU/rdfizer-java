@@ -11,15 +11,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF160/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF160CardiovascularAss;
+    rr:template "http://www.samsung.com/data/health/type/HLF160/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF160CardiovascularAssignment;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -30,7 +30,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -44,7 +44,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
+    rr:predicate ho:P141assigned;
     rr:objectMap [
       rr:parentTriplesMap <#CardiovascularMeasurement>;
       rr:joinCondition [
@@ -64,15 +64,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF168/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF168CardiovascularMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF168/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF168CardiovascularMeasurement;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -83,7 +83,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -117,8 +117,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF18/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF18HeartRateReservesDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF18/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF18HeartRateReservesDimension;
   ];
 
   #

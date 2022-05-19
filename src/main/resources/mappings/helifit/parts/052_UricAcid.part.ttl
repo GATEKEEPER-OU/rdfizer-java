@@ -11,15 +11,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF508UricAcidAss;
+    rr:template "http://www.samsung.com/data/health/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF508UricAcidAssignment;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -30,7 +30,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -44,7 +44,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P141Assigned;
+    rr:predicate ho:P141assigned;
     rr:objectMap [
       rr:parentTriplesMap <#UricAcidMeasurement>;
       rr:joinCondition [
@@ -64,15 +64,15 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF308UricAcidMeas;
+    rr:template "http://www.samsung.com/data/health/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF308UricAcidMeasurement;
   ];
 
   #
   # Metadata
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P140AssignedAttributeTo;
+    rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -83,7 +83,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P4HasTimeSpan;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
@@ -117,8 +117,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF408UricAcidDim;
+    rr:template "http://www.samsung.com/data/health/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF408UricAcidDimension;
   ];
 
   #

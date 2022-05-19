@@ -1,29 +1,21 @@
 # ############################################################################ #
-#                                  ObservationTimeSpan
+#                                  TimeSpan
 # ############################################################################ #
 
-<#ObservationTimeSpan> a rr:TriplesMap;
+<#TimeSpan> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' || @.resource.resourceType == 'Condition')]"
   ];
 
   rr:subjectMap [
-    rr:template "http://www.samsung.com/health/data/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "http://www.samsung.com/data/health/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:HLFP04effectivedatatime;
-    rr:objectMap [
-      rml:reference "resource.effectiveDateTime";
-      rr:datatype xsd:dataTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:HLFP02Starts;
+    rr:predicate ho:EP7starts;
     rr:objectMap [
       rml:reference "resource.valuePeriod.start";
       rr:datatype xsd:dataTime
@@ -31,7 +23,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:HLFP03Ends;
+    rr:predicate ho:EP8ends;
     rr:objectMap [
       rml:reference "resource.valuePeriod.end";
       rr:datatype xsd:dataTime
@@ -39,4 +31,4 @@
   ];
 .
 
-# /ObservationTimeSpan
+# /TimeSpan

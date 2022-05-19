@@ -1,0 +1,65 @@
+# ############################################################################ #
+#                           ComponentIdentifier
+# ############################################################################ #
+
+# @todo fix this
+
+<#ComponentIdentifier> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' || @.resource.resourceType == 'Condition')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "http://www.samsung.com/data/health/type/E42/code/{resource.code.coding[0].code}";
+    rr:class ho:E42Identifier;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P2hasType;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityAppellationType>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "resource.code.coding[0].code";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "resource.code.coding[0].display";
+    ]
+  ];
+.
+
+<#TemportalEntityAppellationType> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' || @.resource.resourceType == 'Condition')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "{resource.code.coding[0].system}";
+    rr:class ho:HLF208AppellationType;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "resource.code.coding[0].system";
+    ]
+  ];
+.
+
+# /ComponentIdentifier

@@ -2,6 +2,6 @@
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
-@prefix ho: <http://www.samsung.com/health/ontology#>.
 @prefix doid: <http://purl.obolibrary.org/obo/>.
-@base <http://www.samsung.com/health>.
+@prefix ho: <https://opensource.samsung.com/projects/helifit/>.
+@base <https://opensource.samsung.com/projects/helifit>.
