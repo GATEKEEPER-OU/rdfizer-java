@@ -1,0 +1,363 @@
+{
+  "entry": [
+    {
+      "request": {
+        "method": "POST",
+        "ifNoneExist": "identifier=http://hl7.eu/fhir/ig/gk/identifier/puglia/patient|user73@puglia.gatekeeper.com",
+        "url": "Patient"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "identifier=http://hl7.eu/fhir/ig/gk/identifier/puglia/patient",
+            "value": "user73@puglia.gatekeeper.com"
+          }
+        ],
+        "resourceType": "Patient"
+      },
+      "fullUrl": "urn:uuid:96486b9c-729f-11ec-83fd-066ef983f2ff"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "code": [
+          {
+            "code": "floor-climbed",
+            "system": "http://hl7.eu/fhir/ig/gk/CodeSystem/gatekeeper",
+            "display": "Floors climbed"
+          }
+        ],
+        "effectiveDateTime": "2022-05-11T16:43:20+0100",
+        "subject": {
+          "reference": "urn:uuid:1a1f6e26-6b8d-11ec-9f08-066ef983f2ff",
+          "display": "user73@puglia.gatekeeper.com"
+        },
+        "valuePeriod": {
+          "start": "2022-01-03T00:00:00+0000",
+          "end": "2022-01-10T00:00:00+0000"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "floors",
+                "system": "{floor}",
+                "display": "http://unitisofmeasure.org/"
+              }
+            ],
+            "text": 1
+          }
+        ],
+        "status": "preliminary",
+        "valueQuantity": [
+          {
+            "value": 1.125
+          }
+        ]
+      },
+      "fullUrl": "urn:uuid:1a2237c8-6b8d-11ec-9f08-066ef983f2ff"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "code": [
+          {
+            "code": "8867-4",
+            "system": "http://loinc.org",
+            "display": "Heart rate"
+          }
+        ],
+        "effectiveDateTime": "2022-05-11T16:43:20+0100",
+        "subject": {
+          "reference": "urn:uuid:1a1f6e26-6b8d-11ec-9f08-066ef983f2ff",
+          "display": "user73@puglia.gatekeeper.com"
+        },
+        "valuePeriod": {
+          "start": "2022-01-10T00:00:00+0000",
+          "end": "2022-01-17T00:00:00+0000"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "beats/minute",
+                "system": "/min",
+                "display": "http://unitsofmeasure.org"
+              }
+            ],
+            "text": 77
+          }
+        ],
+        "status": "preliminary",
+        "valueQuantity": [
+          {
+            "unit": "vital-signs",
+            "code": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "system": "Vital Signs",
+            "value": 64.28571428571429
+          },
+          {
+            "unit": "vital-signs",
+            "code": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "system": "Vital Signs",
+            "value": 64.28571428571429
+          }
+        ]
+      },
+      "fullUrl": "urn:uuid:1a2259f6-6b8d-11ec-9f08-066ef983f2ff"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "code": [
+          {
+            "code": "8867-4",
+            "system": "http://loinc.org",
+            "display": "Heart rate"
+          }
+        ],
+        "effectiveDateTime": "2022-05-11T16:43:20+0100",
+        "subject": {
+          "reference": "urn:uuid:1a1f6e26-6b8d-11ec-9f08-066ef983f2ff",
+          "display": "user73@puglia.gatekeeper.com"
+        },
+        "valuePeriod": {
+          "start": "2022-01-03T00:00:00+0000",
+          "end": "2022-01-10T00:00:00+0000"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "beats/minute",
+                "system": "/min",
+                "display": "http://unitsofmeasure.org"
+              }
+            ],
+            "text": 67
+          }
+        ],
+        "status": "preliminary",
+        "valueQuantity": [
+          {
+            "unit": "vital-signs",
+            "code": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "system": "Vital Signs",
+            "value": 70.65517241379308
+          },
+          {
+            "unit": "vital-signs",
+            "code": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "system": "Vital Signs",
+            "value": 70.65517241379308
+          }
+        ]
+      },
+      "fullUrl": "urn:uuid:1a227b84-6b8d-11ec-9f08-066ef983f2ff"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41950-7",
+                  "system": "http://loinc.org",
+                  "display": "Number of steps in 24 hour Measured"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "Step",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 1159
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41957-2",
+                  "system": "http://loinc.org",
+                  "display": "Walking speed 24 hour mean Calculated"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "m/s",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 1.1828496
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41953-1",
+                  "system": "http://loinc.org",
+                  "display": "Walking distance 24 hour Calculated"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "km/(24.h)",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 0.825245
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41981-2",
+                  "system": "http://loinc.org",
+                  "display": "Calories burned"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "kcal",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 39.539
+            }
+          }
+        ],
+        "code": [
+          {
+            "code": "41950-7",
+            "system": "https://loinc.org/",
+            "display": "Number of steps in 24 hour Measured"
+          }
+        ],
+        "effectiveDateTime": "2022-05-11T16:43:20+0100",
+        "subject": {
+          "reference": "urn:uuid:1a1f6e26-6b8d-11ec-9f08-066ef983f2ff",
+          "display": "user73@puglia.gatekeeper.com"
+        },
+        "valuePeriod": {
+          "start": "2022-01-10T00:00:00+0000",
+          "end": "2022-01-17T00:00:00+0000"
+        },
+        "status": "preliminary"
+      },
+      "fullUrl": "urn:uuid:1a2af354-6b8d-11ec-9f08-066ef983f2ff"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41950-7",
+                  "system": "http://loinc.org",
+                  "display": "Number of steps in 24 hour Measured"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "Step",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 6522.5
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41957-2",
+                  "system": "http://loinc.org",
+                  "display": "Walking speed 24 hour mean Calculated"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "m/s",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 1.2901506
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41953-1",
+                  "system": "http://loinc.org",
+                  "display": "Walking distance 24 hour Calculated"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "km/(24.h)",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 4.7529665
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "41981-2",
+                  "system": "http://loinc.org",
+                  "display": "Calories burned"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "unit": "kcal",
+              "code": "km/(24.h)",
+              "system": "http://unitsofmeasure.org",
+              "value": 212.398
+            }
+          }
+        ],
+        "code": [
+          {
+            "code": "41950-7",
+            "system": "https://loinc.org/",
+            "display": "Number of steps in 24 hour Measured"
+          }
+        ],
+        "effectiveDateTime": "2022-05-11T16:43:20+0100",
+        "subject": {
+          "reference": "urn:uuid:973fad5a-6de8-11ec-a641-066ef983f2ff",
+          "display": "user73@puglia.gatekeeper.com"
+        },
+        "valuePeriod": {
+          "start": "2022-01-03T00:00:00+0000",
+          "end": "2022-01-10T00:00:00+0000"
+        },
+        "status": "preliminary"
+      },
+      "fullUrl": "urn:uuid:974a1d9e-6de8-11ec-a641-066ef983f2ff"
+    }
+  ],
+  "type": "transaction",
+  "resourceType": "Bundle",
+  "timestamp": "2022-05-11T16:43:20+0100"
+}

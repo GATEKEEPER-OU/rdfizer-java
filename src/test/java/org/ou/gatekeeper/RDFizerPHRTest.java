@@ -9,7 +9,6 @@ import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
-import org.commons.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,20 +19,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  */
-class RDFizerSaxonyTest {
+class RDFizerPHRTest {
 
   @ParameterizedTest
   @CsvSource({
-    "a6925b5772779ae25a5d151998c83569980370cd8f16a6dd9aa1e0a2cf8a57f5, '000,001',         datasets/saxony/fhir/dataset-Patient.json",
-    "33d46e48e91c439863de3085e11190a02971d6821db4cb260de62c610273c22b, '000,001,004',     datasets/saxony/fhir/01-dataset-complete.json",
-    "c6a47e838736ef4479bc854b43d2215a0c206f7b5b5f31f4726061155dec97ca, '000,001,004,013', datasets/saxony/fhir/dataset-BodyHeight.json",
-    "4859a4534df8ce6ea07c2fb7c7119d3a8bb4adc5378e92b71dca33cd2ec3ba2b, '000,001,004,040', datasets/saxony/fhir/dataset-BloodPressure.json",
-    "e3b6bd1f01c44a203faa17887b07f7722820d6fdaab3fe3617fa48f0100a3629, '000,001,004,040', datasets/saxony/fhir/dataset-BloodPressure-multiple.json",
-    "3957970f90bfb94db8db133860adfedcd870e62253a8dc796fb75d26b74e80d1, '000,001,004,060', datasets/saxony/fhir/dataset-Cardiovascular.json",
-    "71685f66381dc42ca96475b6e07cb1c9fff86edd6138fd9bec6469f8f4a8cafe, '000,001,004,060', datasets/saxony/fhir/dataset-Cardiovascular-multiple.json",
-    "e1dfea4d870be89663585cbe38f4cd1473ec825e70e62972c7a63f6ba8c8df6a, '000,001,004,070', datasets/saxony/fhir/dataset-Respiration.json",
-    "ab154f87d37a6acac6ecc251c3cefdb019a03a9174672178cbb9db1e233027c2, '000,001,004,101', datasets/saxony/fhir/dataset-Sleep.json",
-    "415f6bf235865579131a27116d439b9bb3aeeb5a7eb120df9d2cf627a96b2b9b, '000,001,004,102', datasets/saxony/fhir/dataset-Walking.json"
+    // Patient
+//    "da67f2fd35e4bb3533fa7c95a6fd7bfe9a5d0ac945e0fe77a4e1d9c90c597f84, '000,001,002',         datasets/saxony/phr/dataset-Patient.json",
+    // Observations
+//    "xxx, '000,001,002,006',     datasets/saxony/phr/01-dataset-complete.json", // ObservationTimeSpan
+//    "039715a93d34f1ce55d9f3cc69a04aeda942e6d65075d54585fab1473be85a90, '000,001,002,003,006,013', datasets/saxony/phr/dataset-BodyHeight.json",
+    "xxx, '000,001,002,003,006,040', datasets/saxony/phr/dataset-BloodPressure.json",
+//    "xxx, '000,001,002,003,006,040', datasets/saxony/phr/dataset-BloodPressure-multiple.json",
+//    "xxx, '000,001,002,003,006,060', datasets/saxony/phr/dataset-Cardiovascular.json",
+//    "xxx, '000,001,002,003,006,060', datasets/saxony/phr/dataset-Cardiovascular-multiple.json",
+//    "xxx, '000,001,002,003,006,070', datasets/saxony/phr/dataset-Respiration.json",
+//    "xxx, '000,001,002,003,006,101', datasets/saxony/phr/dataset-Sleep.json",
+//    "xxx, '000,001,002,003,006,102', datasets/saxony/phr/dataset-Walking.json"
   })
   void test_transform_FHIRtoRDF(String expectedDigest, String modules, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
@@ -54,7 +55,7 @@ class RDFizerSaxonyTest {
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-      ResourceUtils.clean(outputFile);
+//      ResourceUtils.clean(outputFile); // @todo uncomment this when tests completed
     }
   }
 
