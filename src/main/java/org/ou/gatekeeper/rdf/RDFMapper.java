@@ -31,6 +31,7 @@ public class RDFMapper {
     OutputStore store
   ) {
     String rmlRules = mapping.getRML();
+//    System.out.println(rmlRules); // DEBUG
     try (
       InputStream mappingStream = new ByteArrayInputStream(rmlRules.getBytes());
     ){
