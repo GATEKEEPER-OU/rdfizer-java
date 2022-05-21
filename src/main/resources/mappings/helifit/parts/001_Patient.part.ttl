@@ -10,23 +10,20 @@
   ];
 
   rr:subjectMap [
-    #rr:template "https://opensource.samsung.com/projects/helifit/id/{fullUrl}";
     rr:template "https://opensource.samsung.com/projects/helifit/id/{resource.identifier[0].value}";
     rr:class ho:E21Person;
   ];
 
-  # rr:predicateObjectMap [
-  #   rr:predicate ho:P1isIdentifiedBy;
-  #   rr:objectMap [
-  #     rr:parentTriplesMap <#PatientIdentifier>;
-  #     rr:joinCondition [
-  #       #rr:child "fullUrl";
-  #       #rr:parent "fullUrl";
-  #       rr:child "resource.identifier[0].value";
-  #       rr:parent "resource.identifier[0].value";
-  #     ];
-  #   ];
-  # ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#PatientIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.identifier[0].value";
+        rr:parent "resource.identifier[0].value";
+      ];
+    ];
+  ];
 .
 
 # /Patient

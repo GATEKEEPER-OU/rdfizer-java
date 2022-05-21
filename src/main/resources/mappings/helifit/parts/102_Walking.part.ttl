@@ -20,6 +20,17 @@
   # Metadata
   #
   rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
@@ -83,16 +94,27 @@
   #
   # Metadata
   #
-  #rr:predicateObjectMap [
-  #  rr:predicate ho:P140assignedAttributeTo;
-  #  rr:objectMap [
-  #    rr:parentTriplesMap <#Patient>;
-  #    rr:joinCondition [
-  #      rr:child "resource.subject.reference";
-  #      rr:parent "fullUrl";
-  #    ];
-  #  ];
-  #];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
@@ -167,16 +189,27 @@
   #
   # Metadata
   #
-  #rr:predicateObjectMap [
-  #  rr:predicate ho:P140assignedAttributeTo;
-  #  rr:objectMap [
-  #    rr:parentTriplesMap <#Patient>;
-  #    rr:joinCondition [
-  #      rr:child "resource.subject.reference";
-  #      rr:parent "fullUrl";
-  #    ];
-  #  ];
-  #];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;

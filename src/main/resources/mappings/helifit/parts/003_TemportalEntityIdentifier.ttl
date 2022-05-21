@@ -49,7 +49,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/org/{resource.code.coding[0].systemOrg}";
+    rr:template "https://opensource.samsung.com/projects/helifit/sdn/{resource.code.coding[0].systemDomainName}";
     rr:class ho:HLF209IdentifierType;
   ];
 

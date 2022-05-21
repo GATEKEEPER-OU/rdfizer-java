@@ -14,13 +14,13 @@
     rr:class ho:E52TimeSpan;
   ];
 
-  # rr:predicateObjectMap [
-  #   rr:predicate ho:EP9effectiveDatatime;
-  #   rr:objectMap [
-  #     rml:reference "resource.effectiveDateTime";
-  #     rr:datatype xsd:dataTime
-  #   ]
-  # ];
+  rr:predicateObjectMap [
+    rr:predicate ho:EP9effectiveDatatime;
+    rr:objectMap [
+      rml:reference "resource.effectiveDateTime";
+      rr:datatype xsd:dataTime
+    ]
+  ];
 
   rr:predicateObjectMap [
     rr:predicate ho:EP7starts;

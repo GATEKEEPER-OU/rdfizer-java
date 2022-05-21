@@ -3,7 +3,6 @@
 # ############################################################################ #
 
 # 2085-9 High Density Lipoprotein
-# @todo Assignment
 <#HighDensityLipoproteinAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
@@ -19,6 +18,17 @@
   #
   # Metadata
   #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
@@ -72,6 +82,17 @@
   #
   # Metadata
   #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [

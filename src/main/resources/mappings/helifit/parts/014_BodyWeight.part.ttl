@@ -17,7 +17,7 @@
 
   #
   # Metadata
-  #s
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P1isIdentifiedBy;
     rr:objectMap [

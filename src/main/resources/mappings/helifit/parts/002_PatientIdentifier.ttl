@@ -19,9 +19,6 @@
     rr:objectMap [
       rr:parentTriplesMap <#PatientIdentifierType>;
       rr:joinCondition [
-        # @todo ask about use fullUrl instead user email as foreing key between classes
-        #rr:child "fullUrl";
-        #rr:parent "fullUrl";
         rr:child "resource.identifier[0].value";
         rr:parent "resource.identifier[0].value";
       ];
@@ -44,7 +41,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit?system=\"{resource.identifier[0].system}\"";
+    rr:template "https://opensource.samsung.com/projects/helifit/sdn/{resource.identifier[0].systemDomainName}";
     rr:class ho:HLF209IdentifierType;
   ];
 
