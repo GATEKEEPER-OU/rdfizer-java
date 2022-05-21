@@ -14,7 +14,7 @@ This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health 
 
 
 ## What is it based on?
-1. HeLiFit ontology V1.4.1 - containing all the classes and properties used for transforming EMR (T2D Lab Tests) and PHR (Samsung Health data) into HeLiFit
+1. HeLiFit ontology V1.5.1 - containing all the classes and properties used for transforming EMR (T2D Lab Tests) and PHR (Samsung Health data) into HeLiFit
 2. helifit.template.ttl - containing all the RML mapping rules that support the transformation into HeLiFit. You can find the spec of the mapping under rdfizer --> src --> resources --> mappings.helifit
 
 
