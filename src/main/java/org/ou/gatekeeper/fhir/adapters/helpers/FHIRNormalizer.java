@@ -1,5 +1,6 @@
 package org.ou.gatekeeper.fhir.adapters.helpers;
 
+import org.commons.UrlUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -50,20 +51,56 @@ public class FHIRNormalizer {
     for (int i = 0; i < entries.length(); ++i) {
       JSONObject entry = entries.getJSONObject(i);
       JSONObject resource = entry.getJSONObject("resource");
+
+      // add systemDM to identifier.system or code.system
+      if (resource.has("identifier")) {
+        JSONArray identifiers = resource.getJSONArray("identifier");
+        appendDomainName(identifiers);
+      }
+      if (resource.has("code")) {
+        JSONArray codes = resource
+          .getJSONObject("code")
+          .getJSONArray("coding");
+        appendDomainName(codes);
+      }
+      // ---
+
+      // connect resource to components
       if (resource.getString("resourceType").equals("Observation")) {
         String resourceId = entry.getString("fullUrl");
         if (resource.has("component")) {
           JSONArray components = resource.getJSONArray("component");
-          siftComponents(components, resourceId);
+          connectResourceToComponents(components, resourceId);
         }
       }
+      // ---
+    }
+  }
+
+  /**
+   * @todo description
+   * @param collection of identifiers or codes
+   */
+  private static void appendDomainName(JSONArray collection) {
+    for (int i = 0; i < collection.length(); ++i) {
+      JSONObject item = collection.getJSONObject(i);
+      String system = item.getString("system");
+      // --- workround
+      if (system.startsWith("identifier=")) {
+        system = system.replace("identifier=", "");
+      }
+      // ---
+      String domainName = UrlUtils
+        .getHost(system)
+        .replace(".", "_");
+      item.put("systemDomainName", domainName);
     }
   }
 
   /**
    * @todo description
    */
-  private static void siftComponents(JSONArray components, String resourceId) {
+  private static void connectResourceToComponents(JSONArray components, String resourceId) {
     for (int i = 0; i < components.length(); ++i) {
       JSONObject component = components.getJSONObject(i);
       component.put("resourceId", resourceId);
