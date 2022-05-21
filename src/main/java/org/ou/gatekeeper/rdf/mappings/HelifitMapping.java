@@ -91,7 +91,13 @@ public class HelifitMapping implements RMLMapping {
     if (mappingDirtyBit) {
       mapping = getTemplate().replace("__RML_SRC__", localSource);
       if (trimBaseUrl) {
-        mapping = mapping.replace("www.samsung.com/health", "_");
+//        mapping = mapping.replace("semweb.mmlab.be/ns/rml", "__rml");
+//        mapping = mapping.replace("www.w3.org/ns/r2rml", "__rr");
+//        mapping = mapping.replace("semweb.mmlab.be/ns/ql", "__ql");
+        mapping = mapping.replace("www.w3.org/2001/XMLSchema", "__xsd");
+        mapping = mapping.replace("purl.obolibrary.org/obo", "__doid");
+//        mapping = mapping.replace("", "__ho");
+        mapping = mapping.replace("opensource.samsung.com/projects/helifit", "__base");
       }
       mappingDirtyBit = false;
     }
