@@ -53,7 +53,7 @@ class FHIRAdapterTest {
     File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "fhir.json");
 
-    FHIRAdapter converter = new FHIRPugliaAdapter();
+    FHIRAdapter converter = new EMRAdapter();
     converter.transform(datasetFile, outputFile);
 
     try {

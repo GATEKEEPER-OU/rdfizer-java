@@ -26,13 +26,13 @@ import static org.commons.ResourceUtils.generateUniqueFilename;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRPugliaAdapter implements FHIRAdapter {
+public class EMRAdapter implements FHIRAdapter {
 
   /**
    * @todo description
    */
   public static FHIRAdapter create() {
-    return new FHIRPugliaAdapter();
+    return new EMRAdapter();
   }
 
   /**
@@ -101,7 +101,7 @@ public class FHIRPugliaAdapter implements FHIRAdapter {
   /**
    * @todo description
    */
-  protected FHIRPugliaAdapter() {}
+  protected EMRAdapter() {}
 
   /**
    * @todo description

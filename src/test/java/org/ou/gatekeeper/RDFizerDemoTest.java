@@ -3,7 +3,7 @@ package org.ou.gatekeeper;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.FHIRPugliaAdapter;
+import org.ou.gatekeeper.fhir.adapters.EMRAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -25,7 +25,7 @@ class RDFizerDemoTest {
     File datasetFile = loadResource(datasetFilename);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = FHIRPugliaAdapter.create();
+    FHIRAdapter converter = EMRAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(
@@ -43,7 +43,7 @@ class RDFizerDemoTest {
     Iterator<File> datasets = FileUtils.iterateFiles(batch01, exts, false);
     File outputFolder = FileUtils.getTempDirectory();
 
-    FHIRAdapter converter = FHIRPugliaAdapter.create();
+    FHIRAdapter converter = EMRAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(
@@ -61,7 +61,7 @@ class RDFizerDemoTest {
     File datasetFile = loadResource(datasetFilename);
     String endpoint = "localhost:9999";
 
-    FHIRAdapter converter = FHIRPugliaAdapter.create();
+    FHIRAdapter converter = EMRAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(
@@ -79,7 +79,7 @@ class RDFizerDemoTest {
     Iterator<File> datasets = FileUtils.iterateFiles(batch01, exts, false);
     String endpoint = "localhost:9999";
 
-    FHIRAdapter converter = FHIRPugliaAdapter.create();
+    FHIRAdapter converter = EMRAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(

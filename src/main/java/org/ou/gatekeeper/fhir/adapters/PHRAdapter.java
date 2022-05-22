@@ -8,13 +8,13 @@ import java.io.File;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRSamsungHealthAdapter implements FHIRAdapter {
+public class PHRAdapter implements FHIRAdapter {
 
   /**
    * @todo description
    */
   public static FHIRAdapter create() {
-    return new FHIRSamsungHealthAdapter();
+    return new PHRAdapter();
   }
 
   /**
@@ -40,6 +40,6 @@ public class FHIRSamsungHealthAdapter implements FHIRAdapter {
   /**
    * @todo description
    */
-  protected FHIRSamsungHealthAdapter() {}
+  protected PHRAdapter() {}
 
 }

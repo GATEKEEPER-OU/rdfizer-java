@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.FHIRSamsungHealthAdapter;
+import org.ou.gatekeeper.fhir.adapters.PHRAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -54,7 +54,7 @@ class RDFizerEMRTest {
     File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = FHIRSamsungHealthAdapter.create();
+    FHIRAdapter converter = PHRAdapter.create();
     String[] partsToInclude = modules.split(",");
     RMLMapping mapping = HelifitMapping.create(
       OutputFormat.NTRIPLES,
