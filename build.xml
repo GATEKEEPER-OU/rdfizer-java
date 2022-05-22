@@ -10,6 +10,6 @@
     </java>
   </target>
 
-  <target name="bundle" depends="bundle-helifit"></target>
+  <target name="bundle" depends="bundle-helifit" />
 
 </project>
