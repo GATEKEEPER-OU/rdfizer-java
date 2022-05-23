@@ -52,8 +52,8 @@ public class FHIRNormalizer {
       JSONObject entry = entries.getJSONObject(i);
       JSONObject resource = entry.getJSONObject("resource");
 
-      // add systemDM to identifier.system or code.system
-      if (resource.has("identifier")) {
+      // add systemDomainName to identifier.system or code.system
+      if (resource.getString("resourceType").equals("Patient")) {
         JSONArray identifiers = resource.getJSONArray("identifier");
         appendDomainName(identifiers);
       }
