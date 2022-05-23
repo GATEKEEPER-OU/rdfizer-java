@@ -2,13 +2,13 @@ package org.ou.gatekeeper;
 
 import org.apache.commons.io.FileUtils;
 import org.commons.FilenameUtils;
+import org.commons.ResourceUtils;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
 import org.ou.gatekeeper.rdf.RDFMapper;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.rdf.stores.BlazegraphStore;
 import org.ou.gatekeeper.rdf.stores.FileStore;
 import org.ou.gatekeeper.rdf.stores.OutputStore;
-import org.commons.ResourceUtils;
 
 import java.io.File;
 import java.util.Iterator;
