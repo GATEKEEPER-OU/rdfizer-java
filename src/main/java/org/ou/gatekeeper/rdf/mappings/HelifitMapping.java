@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -227,7 +226,8 @@ public class HelifitMapping implements RMLMapping {
    */
   private List<File> collectTemplateParts() {
     String[] exts = {"ttl"};
-    Path ontologyPartsPath = Path.of("mappings", "helifit", "parts");
+    String ontologyPartsPath = "mappings/helifit/parts"; // @todo to define in a constant
+//    Path ontologyPartsPath = Path.of("mappings", "helifit", "parts");
     Collection<File> parts = ResourceUtils.getResourceFiles(ontologyPartsPath, exts);
     List<File> ttls = new ArrayList<>(parts);
     ttls.sort(Comparator.comparing(File::getName));
