@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
-import static org.ou.gatekeeper.fhir.adapters.builders.FHIRPuglia.*;
+import static org.ou.gatekeeper.fhir.adapters.builders.FHIREMRBuilder.*;
 import static org.commons.ResourceUtils.generateUniqueFilename;
 
 /**

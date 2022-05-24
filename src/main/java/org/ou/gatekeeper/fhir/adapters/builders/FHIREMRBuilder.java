@@ -18,7 +18,7 @@ import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRPuglia extends FHIRBase {
+public class FHIREMRBuilder extends FHIRBase {
 
   public static final String LOINC_SYSTEM = "http://loinc.org";
   public static final String DOID_SYSTEM = "http://purl.obolibrary.org/obo/";
@@ -951,7 +951,7 @@ public class FHIRPuglia extends FHIRBase {
   /**
    * @todo description
    */
-  private FHIRPuglia() {
+  private FHIREMRBuilder() {
     super();
   }
 

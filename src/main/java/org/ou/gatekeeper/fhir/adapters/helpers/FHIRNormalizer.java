@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
+import java.util.UUID;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -52,18 +53,32 @@ public class FHIRNormalizer {
       JSONObject entry = entries.getJSONObject(i);
       JSONObject resource = entry.getJSONObject("resource");
 
+      //
       // add systemDomainName to identifier.system or code.system
+      // --- fix Patient
       if (resource.getString("resourceType").equals("Patient")) {
         JSONArray identifiers = resource.getJSONArray("identifier");
         appendDomainName(identifiers);
       }
+      // --- fix resource
       if (resource.has("code")) {
         JSONArray codes = resource
           .getJSONObject("code")
           .getJSONArray("coding");
         appendDomainName(codes);
       }
+      // --- fix resource components
+      if (resource.has("component")) {
+        JSONArray components = resource.getJSONArray("component");
+        for (int j=0; j < components.length(); j++) {
+          JSONArray codes = components.getJSONObject(j)
+            .getJSONObject("code")
+            .getJSONArray("coding");
+          appendDomainName(codes);
+        }
+      }
       // ---
+      //
 
       // connect resource to components
       if (resource.getString("resourceType").equals("Observation")) {
@@ -101,9 +116,12 @@ public class FHIRNormalizer {
    * @todo description
    */
   private static void connectResourceToComponents(JSONArray components, String resourceId) {
+    // @todo design again this method (better if whole class)
     for (int i = 0; i < components.length(); ++i) {
       JSONObject component = components.getJSONObject(i);
-      component.put("resourceId", resourceId);
+                                                                 // @todo rename method needed
+      component.put("fullUrl", "urn:uuid:" + UUID.randomUUID()); // append own uuid
+      component.put("resourceId", resourceId);                   // append parent resourceId
     }
   }
 
