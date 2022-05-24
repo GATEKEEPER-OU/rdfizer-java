@@ -1,6 +1,8 @@
 package org.commons;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,7 +79,8 @@ public class ResourceUtils {
 
     } catch (IOException e) {
       // @todo Message
-      e.printStackTrace();
+      LOGGER.error(e.getMessage());
+//      e.printStackTrace(); // DEBUG
     }
   }
 
@@ -87,6 +90,8 @@ public class ResourceUtils {
 
   private static Random random = new Random();
   private static ClassLoader classLoader = ResourceUtils.class.getClassLoader();
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(ResourceUtils.class);
 
   /**
    * @todo description
