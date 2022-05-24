@@ -6,7 +6,6 @@
 @prefix ho: <https://opensource.samsung.com/projects/helifit/>.
 @base <https://opensource.samsung.com/projects/helifit>.
 
-
 # ############################################################################ #
 #                                  Patient
 # ############################################################################ #
@@ -163,24 +162,22 @@
 #                           ComponentIdentifier
 # ############################################################################ #
 
-# @todo fix this
-
 <#ComponentIdentifier> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' || @.resource.resourceType == 'Condition')]"
+    rml:iterator "$.entry[*].resource.component[*]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/code/{resource.code.coding[0].code}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/code/{code.coding[0].code}";
     rr:class ho:E42Identifier;
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P2hasType;
     rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityAppellationType>;
+      rr:parentTriplesMap <#ComponentIdentifierType>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -191,40 +188,40 @@
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
-      rml:reference "resource.code.coding[0].code";
+      rml:reference "code.coding[0].code";
     ]
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ho:P3hasNote;
-    rr:objectMap [
-      rml:reference "resource.code.coding[0].display";
-    ]
-  ];
+  # @todo to map in the next release
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P3hasNote;
+  #  rr:objectMap [
+  #    rml:reference "code.coding[0].display";
+  #  ]
+  #];
 .
 
-<#TemportalEntityAppellationType> a rr:TriplesMap;
+<#ComponentIdentifierType> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' || @.resource.resourceType == 'Condition')]"
+    rml:iterator "$.entry[*].resource.component[*]"
   ];
 
   rr:subjectMap [
-    rr:template "{resource.code.coding[0].system}";
-    rr:class ho:HLF208AppellationType;
+    rr:template "https://opensource.samsung.com/projects/helifit/sdn/{code.coding[0].systemDomainName}";
+    rr:class ho:HLF209IdentifierType;
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
-      rml:reference "resource.code.coding[0].system";
+      rml:reference "code.coding[0].system";
     ]
   ];
 .
 
 # /ComponentIdentifier
-
 
 # ############################################################################ #
 #                                  ObservationTimeSpan
@@ -785,6 +782,20 @@
   ];
 
   #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  #
   # Data
   #
   rr:predicateObjectMap [
@@ -813,6 +824,20 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF12DiastolicPressureDimension;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   #
@@ -3287,7 +3312,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P1isIdentifiedBy;
     rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:parentTriplesMap <#ComponentIdentifier>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -3295,16 +3320,18 @@
     ];
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
+  # @todo missing property inside the component
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P140assignedAttributeTo;
+  #  rr:objectMap [
+  #    rr:parentTriplesMap <#Patient>;
+  #    rr:joinCondition [
+  #      rr:child "subject.reference";
+  #      #rr:child "resource.subject.reference";
+  #      rr:parent "fullUrl";
+  #    ];
+  #  ];
+  #];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
@@ -3382,7 +3409,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P1isIdentifiedBy;
     rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:parentTriplesMap <#ComponentIdentifier>;
       rr:joinCondition [
         rr:child "fullUrl";
         rr:parent "fullUrl";
@@ -3390,16 +3417,18 @@
     ];
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
+  # @todo missing property inside the component
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P140assignedAttributeTo;
+  #  rr:objectMap [
+  #    rr:parentTriplesMap <#Patient>;
+  #    rr:joinCondition [
+  #      rr:child "subject.reference";
+  #      #rr:child "resource.subject.reference";
+  #      rr:parent "fullUrl";
+  #    ];
+  #  ];
+  #];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
