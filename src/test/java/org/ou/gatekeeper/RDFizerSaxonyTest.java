@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  */
-class RDFizerPHRTest {
+class RDFizerSaxonyTest {
 
   @ParameterizedTest
   @CsvSource({
     // Patient
-    "da67f2fd35e4bb3533fa7c95a6fd7bfe9a5d0ac945e0fe77a4e1d9c90c597f84, '000,001,002',         datasets/saxony/phr/dataset-Patient.json",
+    "da67f2fd35e4bb3533fa7c95a6fd7bfe9a5d0ac945e0fe77a4e1d9c90c597f84, '000,001,002', datasets/saxony/phr/dataset-Patient.json",
     // Observations
 //    "xxx, '000,001,002,006',     datasets/saxony/phr/01-dataset-complete.json", // ObservationTimeSpan
     "039715a93d34f1ce55d9f3cc69a04aeda942e6d65075d54585fab1473be85a90, '000,001,002,003,006,013',     datasets/saxony/phr/dataset-BodyHeight.json",
@@ -37,7 +37,7 @@ class RDFizerPHRTest {
     "59bc9411703d40e591ad243e4bb1bb45e64e02978d8cb5164df996dd1a292796, '000,001,002,003,006,101',     datasets/saxony/phr/dataset-Sleep.json",
     "9f14a45566de1c6117b228768b7f288d4824096f32bb05f255b9ea76f7a4e381, '000,001,002,003,004,006,102', datasets/saxony/phr/dataset-Walking.json"
   })
-  void test_transform_FHIRtoRDF(String expectedDigest, String modules, String dataset) {
+  void test_transform_PHRtoRDF(String expectedDigest, String modules, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
