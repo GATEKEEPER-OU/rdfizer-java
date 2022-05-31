@@ -18,7 +18,7 @@
     rr:predicate ho:EP9effectiveDatatime;
     rr:objectMap [
       rml:reference "resource.recordedDate";
-      rr:datatype xsd:dataTime
+      rr:datatype xsd:dateTime
     ]
   ];
 .

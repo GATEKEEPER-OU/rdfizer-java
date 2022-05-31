@@ -18,7 +18,7 @@
     rr:predicate ho:EP9effectiveDatatime;
     rr:objectMap [
       rml:reference "resource.effectiveDateTime";
-      rr:datatype xsd:dataTime
+      rr:datatype xsd:dateTime
     ]
   ];
 
@@ -26,7 +26,7 @@
     rr:predicate ho:EP7starts;
     rr:objectMap [
       rml:reference "resource.valuePeriod.start";
-      rr:datatype xsd:dataTime
+      rr:datatype xsd:dateTime
     ]
   ];
 
@@ -34,7 +34,7 @@
     rr:predicate ho:EP8ends;
     rr:objectMap [
       rml:reference "resource.valuePeriod.end";
-      rr:datatype xsd:dataTime
+      rr:datatype xsd:dateTime
     ]
   ];
 .
