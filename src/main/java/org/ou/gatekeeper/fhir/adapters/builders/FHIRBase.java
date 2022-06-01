@@ -7,6 +7,7 @@ import com.ibm.fhir.model.resource.Resource;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.HTTPVerb;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.commons.DateTimeUtils;
 
 import java.lang.Integer;
 import java.lang.String;
@@ -216,7 +217,11 @@ public class FHIRBase {
 //        .onset(
 //          Age.builder().value(age).build()
 //        )
-        .recordedDate(DateTime.of(date))
+        .recordedDate(
+          DateTime.of(
+            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
+          )
+        )
         .subject(
           Reference.builder()
             .reference(
@@ -261,7 +266,9 @@ public class FHIRBase {
       .extension(extensions)
       .effective(
         DateTime.builder()
-          .value(date)
+          .value(
+            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
+          )
           .build()
       )
       .subject(

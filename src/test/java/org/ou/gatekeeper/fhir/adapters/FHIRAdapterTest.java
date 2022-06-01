@@ -4,7 +4,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
-import org.commons.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class FHIRAdapterTest {
 
+  // @todo update all tests to work with the new datasets
+
   @ParameterizedTest
   @CsvSource({
     // Patient
@@ -25,8 +26,8 @@ class FHIRAdapterTest {
 //    "xxx, datasets/puglia/json/dataset-BodyWeight.json",
 
     // Observations
-//    "9ba90282ea2fb8eaf011499267d5719599058df7dc7f0a7613c39c53803fab3a, datasets/puglia/json/dataset-GlycosilatedEmoglobin.json",
-//    "23e5f03321134105d7065a681c4f5190a20a7719c7109efbbc86c33e0b978822, datasets/puglia/json/dataset-TotalCholesterol.json",
+    "b8d94083b1587f68f81825aa12333c808a449b16535fed43617726e5767208d8, datasets/puglia/emr/dataset-GlycosilatedEmoglobin.json",
+//    "23e5f03321134105d7065a681c4f5190a20a7719c7109efbbc86c33e0b978822, datasets/puglia/emr/dataset-TotalCholesterol.json",
 //    "xxx, datasets/puglia/json/dataset-HighDensityLipoprotein.json",
 //    "xxx, datasets/puglia/json/dataset-LowDensityLipoprotein.json",
 //    "xxx, datasets/puglia/json/dataset-Triglycerides.json",
@@ -64,7 +65,7 @@ class FHIRAdapterTest {
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-        ResourceUtils.clean(outputFile);
+//      ResourceUtils.clean(outputFile);
     }
   }
 
