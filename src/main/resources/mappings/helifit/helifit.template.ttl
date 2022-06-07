@@ -52,6 +52,9 @@
     rr:class ho:E42Identifier;
   ];
 
+  #
+  # Link(s)
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P2hasType;
     rr:objectMap [
@@ -63,6 +66,9 @@
     ];
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
@@ -83,6 +89,9 @@
     rr:class ho:HLF209IdentifierType;
   ];
 
+  #
+  # Data
+  #
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
