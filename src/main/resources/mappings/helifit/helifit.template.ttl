@@ -3729,17 +3729,17 @@
 #                                  Walking
 # ############################################################################ #
 
-#   73985-4 Exercise activity
+# 73985-4 Exercise activity
 # LA11834-1 Walking
 <#WalkingActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '73985-4')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '73985-4' && @.resource.code.coding[1].code == 'LA11834-1')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF101/code/{resource.code.coding[1].code}/id/{fullUrl}";
     rr:class ho:HLF101Walking;
   ];
 
@@ -3758,7 +3758,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
+    rr:predicate ho:P14carriedOutBy;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -3783,7 +3783,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P117occursDuring;
+    rr:predicate ho:P117includes;
     rr:objectMap [
       rr:parentTriplesMap <#DurationMeasurement>;
       rr:joinCondition [
@@ -3794,7 +3794,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P117occursDuring;
+    rr:predicate ho:P117includes;
     rr:objectMap [
       rr:parentTriplesMap <#EnergyMeasurement>;
       rr:joinCondition [
@@ -3858,9 +3858,9 @@
 
   #
   # Link(s)
-  #
+  #f
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#DurationDimension>;
       rr:joinCondition [
@@ -3957,7 +3957,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#EnergyExpenditureDimension>;
       rr:joinCondition [

@@ -8,7 +8,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '73985-4' && @.resource.code.coding[1].code == 'LA11834-1') ]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '73985-4' && @.resource.code.coding[1].code == 'LA11834-1')]"
   ];
 
   rr:subjectMap [
@@ -56,7 +56,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P117occursDuring;
+    rr:predicate ho:P117includes;
     rr:objectMap [
       rr:parentTriplesMap <#DurationMeasurement>;
       rr:joinCondition [
@@ -67,7 +67,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P117occursDuring;
+    rr:predicate ho:P117includes;
     rr:objectMap [
       rr:parentTriplesMap <#EnergyMeasurement>;
       rr:joinCondition [
@@ -131,9 +131,9 @@
 
   #
   # Link(s)
-  #
+  #f
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#DurationDimension>;
       rr:joinCondition [
@@ -230,7 +230,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#EnergyExpenditureDimension>;
       rr:joinCondition [
