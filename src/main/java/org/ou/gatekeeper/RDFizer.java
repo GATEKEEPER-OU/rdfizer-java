@@ -48,9 +48,9 @@ public class RDFizer {
   ) {
     while (datasets.hasNext()) {
       File dataset = datasets.next();
-//      String outputFilename = "output-" + dataset.getName();
+      String trimmedDatasetName = FilenameUtils.trim2LvlExtension(dataset.getName());
       String outputFilename = "output-" + FilenameUtils
-        .changeExtention(dataset.getName(), newExtension);
+        .changeExtension(trimmedDatasetName, newExtension);
       File output = new File(outputFolder, outputFilename);
       OutputStore store = FileStore.create(output);
       trasform(dataset, converter, mapping, store);

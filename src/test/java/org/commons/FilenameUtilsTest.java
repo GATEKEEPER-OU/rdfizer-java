@@ -14,7 +14,7 @@ class FilenameUtilsTest {
     String filename = "afilename.old";
     String newExtension = "new";
     String renamedFilename = FilenameUtils
-      .changeExtention(filename, newExtension);
+      .changeExtension(filename, newExtension);
     assertEquals("afilename.new", renamedFilename);
   }
 

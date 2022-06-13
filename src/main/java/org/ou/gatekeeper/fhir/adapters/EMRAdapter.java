@@ -57,8 +57,8 @@ public class EMRAdapter implements FHIRAdapter {
       InputStream datasetInputStream = new FileInputStream(dataset)
     ) {
       // Parse JSON dataset
-      JSONTokener tokener = new JSONTokener(datasetInputStream);
-      JSONObject json = new JSONObject(tokener);
+      JSONTokener tokenizer = new JSONTokener(datasetInputStream);
+      JSONObject json = new JSONObject(tokenizer);
 
       // Collect all entries
       Collection<Bundle.Entry> entries = new LinkedList<>();
