@@ -1,5 +1,6 @@
 package org.ou.gatekeeper.fhir.adapters.helpers;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.commons.UrlUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,9 +21,7 @@ public class FHIRNormalizer {
    * @param dataset dataset to normalize
    */
   public static void normalize(File dataset, File output) {
-    try (
-      InputStream datasetInputStream = new FileInputStream(dataset)
-    ) {
+    try (InputStream datasetInputStream = new FileInputStream(dataset)) {
       JSONTokener tokener = new JSONTokener(datasetInputStream);
       JSONObject json = new JSONObject(tokener);
       JSONArray entries = json.getJSONArray("entry");
@@ -32,6 +31,7 @@ public class FHIRNormalizer {
     } catch (FileNotFoundException e) {
       // @todo Message ?
       e.printStackTrace();
+
     } catch (IOException e) {
       // @todo Message ?
       e.printStackTrace();
@@ -65,6 +65,13 @@ public class FHIRNormalizer {
         JSONArray codes = resource
           .getJSONObject("code")
           .getJSONArray("coding");
+        if (codes.length() > 1) {
+          String[] codesToRemove = { // @todo refactory this: put in a constant
+            "73985-4" // Exercise activity
+            // @note add HERE codes to remove
+          };
+          removeGenericCodes(codes, codesToRemove);
+        }
         appendDomainName(codes);
       }
       // --- fix resource components
@@ -89,6 +96,22 @@ public class FHIRNormalizer {
         }
       }
       // ---
+    }
+  }
+
+  /**
+   * @todo description
+   * */
+  private static void removeGenericCodes(JSONArray collection, String[] toRemove) {
+    for (int i = 0; i < collection.length(); ++i) {
+      JSONObject item = collection.getJSONObject(i);
+      String code = item.getString("code");
+      if (ArrayUtils.contains(toRemove, code)) {
+        collection.remove(i);
+      } else {
+        // @todo use logger
+        System.out.printf("WARNING: %s not handled yet. It should be removed\n", code);
+      }
     }
   }
 
@@ -131,9 +154,7 @@ public class FHIRNormalizer {
    * @param output the file where save the object
    */
   private static void save(JSONObject json, File output) {
-    try (
-      FileWriter file = new FileWriter(output)
-    ) {
+    try (FileWriter file = new FileWriter(output)) {
       file.write(json.toString());
 
     } catch (IOException e) {
