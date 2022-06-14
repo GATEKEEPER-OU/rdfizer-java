@@ -20,7 +20,8 @@ public class FilenameUtils {
   public static String trim2LvlExtension(String filename) {
     String[] parts = filename.split(Pattern.quote(EXT_SEP));
     int nParts = parts.length;
-    if (nParts < 3) throw new IllegalArgumentException("The given filename doesn't contain a 2 lvl extension.");
+    if(nParts == 2 ) return filename; // @todo review this code
+    if (nParts < 2) throw new IllegalArgumentException("The given filename doesn't contain a 2 lvl extension.");
     parts[nParts - 2] = null;
     return Arrays.stream(parts)
       .filter(Objects::nonNull)
