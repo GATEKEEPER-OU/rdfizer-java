@@ -119,7 +119,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinDimension>;
       rr:joinCondition [

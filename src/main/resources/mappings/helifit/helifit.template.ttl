@@ -432,7 +432,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#BodyHeightDimension>;
       rr:joinCondition [
@@ -598,7 +598,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#BodyWeightDimension>;
       rr:joinCondition [
@@ -763,7 +763,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#SystolicPressureDimension>;
       rr:joinCondition [
@@ -774,7 +774,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#DiastolicPressureDimension>;
       rr:joinCondition [
@@ -998,7 +998,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinDimension>;
       rr:joinCondition [
@@ -1163,7 +1163,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#TotalCholesterolDimension>;
       rr:joinCondition [
@@ -1328,7 +1328,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#HighDensityLipoproteinDimension>;
       rr:joinCondition [
@@ -1493,7 +1493,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#LowDensityLipoproteinDimension>;
       rr:joinCondition [
@@ -1658,7 +1658,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#TriglyceridesDimension>;
       rr:joinCondition [
@@ -1823,7 +1823,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#SerumCreatinineDimension>;
       rr:joinCondition [
@@ -1988,7 +1988,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#AlbuminuriaCreatininuriaRatioDimension>;
       rr:joinCondition [
@@ -2153,7 +2153,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#AlanineAminoTransferaseDimension>;
       rr:joinCondition [
@@ -2318,7 +2318,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#AspartateAminoTransferaseDimension>;
       rr:joinCondition [
@@ -2483,7 +2483,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#GlutamylTransferaseDimension>;
       rr:joinCondition [
@@ -2648,7 +2648,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#AlkalinePhosphataseDimension>;
       rr:joinCondition [
@@ -2813,7 +2813,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#UricAcidDimension>;
       rr:joinCondition [
@@ -2978,7 +2978,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#EstimatedGlomerularFiltrationRateDimension>;
       rr:joinCondition [
@@ -3143,7 +3143,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#NitritesDimension>;
       rr:joinCondition [
@@ -3301,7 +3301,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#HeartRateReservesDimension>;
       rr:joinCondition [
@@ -3466,7 +3466,7 @@
   # Link(s)
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P40ObservedDimension;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
       rr:parentTriplesMap <#OxygenSaturationDimension>;
       rr:joinCondition [
