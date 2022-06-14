@@ -79,6 +79,7 @@
 .
 
 # 55411-3 Exercise duration
+# LA11834-1 Walking
 <#DurationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
