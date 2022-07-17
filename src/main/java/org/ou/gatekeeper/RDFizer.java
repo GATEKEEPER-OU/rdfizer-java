@@ -25,6 +25,7 @@ public class RDFizer {
    * Reads dataset from file and writes the result on a file.
    * @todo javadoc
    * */
+  /*
   public static void trasform(
     File dataset,
     FHIRAdapter converter,
@@ -34,11 +35,13 @@ public class RDFizer {
     OutputStore store = FileStore.create(output);
     trasform(dataset, converter, mapping, store);
   }
+   */
 
   /**
    * Reads datasets from a folder and writes the result in there.
    * @todo javadoc
    * */
+  /*
   public static void trasform(
     Iterator<File> datasets,
     FHIRAdapter converter,
@@ -56,11 +59,13 @@ public class RDFizer {
       trasform(dataset, converter, mapping, store);
     }
   }
+   */
 
   /**
    * Reads dataset from file and writes on Blazegraph endpoint.
    * @todo javadoc
    * */
+  /*
   public static void trasform(
     File dataset,
     FHIRAdapter converter,
@@ -70,11 +75,13 @@ public class RDFizer {
     OutputStore store = BlazegraphStore.create(blazeAddr);
     trasform(dataset, converter, mapping, store);
   }
+   */
 
   /**
    * Reads datasets from a folder and writes on Blazegraph endpoint.
    * @todo javadoc
    * */
+  /*
   public static void trasform(
     Iterator<File> datasets,
     FHIRAdapter converter,
@@ -87,6 +94,7 @@ public class RDFizer {
       trasform(dataset, converter, mapping, store);
     }
   }
+   */
 
   /**
    * @todo description

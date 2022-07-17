@@ -33,15 +33,16 @@ public class RDFMapper {
     String rmlRules = mapping.getRML();
 //    System.out.println(rmlRules); // DEBUG
     try (
-      InputStream mappingStream = new ByteArrayInputStream(rmlRules.getBytes());
+      InputStream mappingStream = new ByteArrayInputStream(rmlRules.getBytes())
     ){
       // Map ontology in a quad store
       QuadStore quad = map(mappingStream);
       if (quad != null) {
+        String format = mapping.getFormat().toString();
+
         // Write the result in a temporary file
         String tempOutputFilename = ResourceUtils.generateUniqueFilename("output", "dat");
         File tempOutputFile = new File(TMP_DIR, tempOutputFilename);
-        String format = mapping.getFormat().toString();
         writeOnFile(quad, format, tempOutputFile);
 
         // Save the output on a OutputStore
