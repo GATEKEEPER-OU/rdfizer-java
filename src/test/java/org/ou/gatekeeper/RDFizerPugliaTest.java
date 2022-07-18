@@ -24,7 +24,7 @@ class RDFizerPugliaTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, '000,001,002',         datasets/puglia/phr/dataset-Patient.json",
+    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, '000,001,002',         datasets/puglia/phr/dataset-Patient.json",
     // Observations
 //    "xxx, '000,004',         datasets/puglia/phr/00-dataset-complete.json", // ObservationTimeSpan
 //    "02b570df01108fa4dd3c5ad4ba508cd044e99a18d64d9eba3cb8cd8f3b874c68, '000,001,002,003,006,013', datasets/puglia/phr/dataset-BodyHeight.json",

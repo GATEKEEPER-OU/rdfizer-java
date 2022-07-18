@@ -74,39 +74,4 @@ class RDFizerDemoTest {
     );
   }
 
-  @Test
-  void transformEMRBlazegraph() {
-    String datasetFilename = "datasets/puglia/emr/00-dataset-complete.json";
-    File datasetFile = loadResource(datasetFilename);
-    String endpoint = "localhost:9999";
-
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
-
-    RDFizer.trasform(
-      datasetFile,
-      converter,
-      mapping,
-      endpoint
-    );
-  }
-
-  @Test
-  void transformEMRBlazegraphBatch() {
-    File batch01 = TestUtils.loadResource("datasets/puglia/batches/01");
-    String[] exts = {"json"};
-    Iterator<File> datasets = FileUtils.iterateFiles(batch01, exts, false);
-    String endpoint = "localhost:9999";
-
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
-
-    RDFizer.trasform(
-      datasets,
-      converter,
-      mapping,
-      endpoint
-    );
-  }
-
 }
