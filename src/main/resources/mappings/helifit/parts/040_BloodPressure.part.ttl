@@ -151,7 +151,7 @@
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF12SystolicPressureDimension;
+    rr:class ho:HLF32SystolicPressureDimension;
   ];
 
   #
