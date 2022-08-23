@@ -23,7 +23,6 @@ public class BundleGenerator {
     Path ontologyPartsPath = Path.of(ontologyPath.toString(), "parts");
 
     List<File> ttls = getResourceFiles(ontologyPartsPath, "ttl");
-    ttls.sort(Comparator.comparing(File::getName));
 
     StringBuilder helifitRml = new StringBuilder();
     for (File ttl : ttls) {
@@ -49,6 +48,7 @@ public class BundleGenerator {
     return Stream.of(Objects.requireNonNull(resourceDir.listFiles()))
       .filter(file -> !file.isDirectory())
       .filter(file -> file.getName().endsWith(ext))
+      .sorted(Comparator.comparing(File::getName))
       .toList();
   }
 
