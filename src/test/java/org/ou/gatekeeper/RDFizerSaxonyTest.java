@@ -1,6 +1,7 @@
 package org.ou.gatekeeper;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
@@ -55,8 +56,8 @@ class RDFizerSaxonyTest {
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-        System.out.println(" ---> " + outputFile); // DEBUG
-//      ResourceUtils.clean(outputFile);
+//        System.out.println(" ---> " + outputFile); // DEBUG
+      ResourceUtils.clean(outputFile);
     }
   }
 

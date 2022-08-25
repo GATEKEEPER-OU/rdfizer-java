@@ -76,9 +76,9 @@ public class RDFMapper {
       executor = new Executor(
         rmlStore,
         factory,
+        null,
         outputStore,
-        Utils.getBaseDirectiveTurtle(mappingStream),
-        null
+        Utils.getBaseDirectiveTurtle(mappingStream)
       );
 
     } catch (Exception e) {
@@ -91,7 +91,7 @@ public class RDFMapper {
     try {
       if (executor != null) {
         result = executor
-          .execute(null)
+          .executeV5(null)
           .get(new NamedNode("rmlmapper://default.store"));
       }
 
