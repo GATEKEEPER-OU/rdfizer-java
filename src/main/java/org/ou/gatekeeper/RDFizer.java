@@ -26,6 +26,7 @@ public class RDFizer {
    * @param outputFolder folder where save the RDF output files
    * @param newExtension extension of output files {@link org.ou.gatekeeper.rdf.enums.OutputFormat}
    * */
+  @Deprecated
   public static void trasform(
     Iterator<File> datasets,
     FHIRAdapter converter,
