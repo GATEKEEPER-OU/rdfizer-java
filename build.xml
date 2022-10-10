@@ -33,4 +33,8 @@
     <delete dir="out" />
   </target>
 
+  <target name="clean-artifacts">
+    <delete dir="out/artifacts" />
+  </target>
+
 </project>
