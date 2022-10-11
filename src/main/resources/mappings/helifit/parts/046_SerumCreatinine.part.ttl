@@ -140,7 +140,8 @@
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF405/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF405SerumCreatinineDimension;
+    #rr:class ho:HLF405SerumCreatinineDimension;
+    rr:class ho:HLF423SerumCreatinineDimension;
   ];
 
   #

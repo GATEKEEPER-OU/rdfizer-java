@@ -3,6 +3,7 @@
 This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health data) to HeLiFit ontology through the use of the RML Mapper.
 
 
+
 ## Build and Create RDFizer.jar with IntelliJ IDEA as development environment
 
 1. git clone https://github.ecodesamsung.com/Health-Innovation/rdfizer.git
@@ -12,6 +13,19 @@ This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health 
 5. create JAR. Build --> Build Artefact --> Rebuild
 6. rdfizer.jar is created and will appear under the project folder: out --> artifacts --> rdfizer_jar
 
+7. In case of ISSUE (e.g.; in case the rdfizer.jar is not generated, especially when the pom is modified when installing the dependencies)
+8. Run clean from ant menu (this delete the out, target, the aggregated rml file mappings folder)
+9. Delete META-INF folder from resources/META-INF
+10. Run bundle from ant menu (this create the out, target, the aggregated rml file mappings)
+11. Go to File--> Project Structure --> Artefacts --> delete all the jar  you find in there (by clicking on the minus symbol) then APPLY. 
+12. Go to File--> Project Structure --> Artefacts --> by clicking on the plus symbol -> JAR --> From Modules All Dependencies --> Copy to the output directory and link via manifest --> OK --> APPLY
+13. Go to File--> Project Structure --> Artefacts --> Select RDFizer.java -> Pre-Processing --> tick the box "Run Ant Target" --> click on ... --> selct "Bundle" --> APPLY
+14. Go to Step 4. and execute 4. + 5. + 6.
+15. Check the folder out/artifacts/<project_name_jar>/ for the file <project_name>.jar (e.g.; rdfizer.jar)
+
+## if case of extending or editing the RML mappings files, Perform the bundle-helifit operation for merging all the set of RML rules
+1. run bundle from ant menu
+2. in case of issue, run clean from ant menu
 
 ## What is it based on?
 1. HeLiFit ontology V1.5.1 - containing all the classes and properties used for transforming EMR (T2D Lab Tests) and PHR (Samsung Health data) into HeLiFit

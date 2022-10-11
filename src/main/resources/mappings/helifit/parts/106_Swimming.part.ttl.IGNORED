@@ -1,19 +1,19 @@
 # ############################################################################ #
-#                                  Walking
+#                                  Swimming 
 # ############################################################################ #
 
 # 73985-4 Exercise activity
-# LA11834-1 Walking
-<#WalkingActivity> a rr:TriplesMap;
+# LA11838-2 Swimming
+<#SwimmingActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'LA11834-1')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'LA11838-2')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF101/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF101Walking;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF66/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF66Swimming;
   ];
 
   #
@@ -272,4 +272,4 @@
   ];
 .
 
-# /WalkingActivity
+# /SwimmingActivity

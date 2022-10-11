@@ -795,7 +795,7 @@
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF12/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF12SystolicPressureDimension;
+    rr:class ho:HLF32SystolicPressureDimension;
   ];
 
   #
@@ -1844,7 +1844,8 @@
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF405/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF405SerumCreatinineDimension;
+    #rr:class ho:HLF405SerumCreatinineDimension;
+    rr:class ho:HLF423SerumCreatinineDimension;
   ];
 
   #
@@ -3648,7 +3649,6 @@
 .
 
 # 55411-3 Exercise duration
-# LA11834-1 Walking
 <#DurationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";

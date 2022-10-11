@@ -9,8 +9,6 @@ import be.ugent.rml.store.RDF4JStore;
 import be.ugent.rml.term.NamedNode;
 import org.apache.commons.io.FileUtils;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
-import org.ou.gatekeeper.rdf.stores.OutputStore;
-import org.commons.ResourceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,28 +22,24 @@ import java.io.*;
 public class RDFMapper {
 
   /**
-   * @todo description
+   * Apply RML mapping rules contained in the mapping file
+   * @param mapping RML mapping file which contains data source and mapping rules
+   * @param output RDF output file
    */
   public static void map(
     RMLMapping mapping,
-    OutputStore store
+    File output
   ) {
     String rmlRules = mapping.getRML();
 //    System.out.println(rmlRules); // DEBUG
     try (
-      InputStream mappingStream = new ByteArrayInputStream(rmlRules.getBytes());
+      InputStream mappingStream = new ByteArrayInputStream(rmlRules.getBytes())
     ){
       // Map ontology in a quad store
       QuadStore quad = map(mappingStream);
       if (quad != null) {
-        // Write the result in a temporary file
-        String tempOutputFilename = ResourceUtils.generateUniqueFilename("output", "dat");
-        File tempOutputFile = new File(TMP_DIR, tempOutputFilename);
         String format = mapping.getFormat().toString();
-        writeOnFile(quad, format, tempOutputFile);
-
-        // Save the output on a OutputStore
-        store.save(tempOutputFile);
+        writeOnFile(quad, format, output);
       }
 
     } catch (IOException e) {
@@ -96,7 +90,9 @@ public class RDFMapper {
     QuadStore result = null;
     try {
       if (executor != null) {
-        result = executor.executeV5(null).get(new NamedNode("rmlmapper://default.store"));
+        result = executor
+          .executeV5(null)
+          .get(new NamedNode("rmlmapper://default.store"));
       }
 
     } catch (Exception e) {

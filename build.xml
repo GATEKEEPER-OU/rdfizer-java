@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="rdfizer" default="bundle" basedir=".">
 
-  <target name="bundle-helifit">
+  <property name="src" value="src/main/java" />
+  <property name="src_resources" value="src/main/resources" />
+
+  <property name="ant_scripts"       value="${src}/org/apache/ant/scripts" />
+  <property name="ontology_template" value="${src_resources}/mappings/helifit/helifit.template.ttl" />
+  <property name="target_classes"    value="target/classes" />
+
+  <target name="bundle" depends="bundle-helifit" />
+
+  <target name="bundle-compilescripts">
+    <mkdir dir="${target_classes}" />
+    <javac srcdir="${ant_scripts}" destdir="${target_classes}" />
+  </target>
+
+  <target name="bundle-helifit" depends="bundle-compilescripts">
     <java classname="org.apache.ant.scripts.BundleGenerator" failonerror="yes">
       <arg line="helifit" />
       <classpath>
-        <pathelement path="target/classes" />
+        <pathelement path="${target_classes}" />
       </classpath>
     </java>
   </target>
 
-  <target name="bundle" depends="bundle-helifit" />
+  <target name="bundle-clean">
+    <delete file="${ontology_template}" />
+  </target>
+
+  <target name="clean" depends="bundle-clean">
+    <delete dir="target" />
+    <delete dir="out" />
+  </target>
+
+  <target name="clean-artifacts">
+    <delete dir="out/artifacts" />
+  </target>
 
 </project>

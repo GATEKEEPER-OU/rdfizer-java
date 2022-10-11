@@ -1,6 +1,5 @@
 package org.ou.gatekeeper;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.ou.gatekeeper.fhir.adapters.EMRAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
@@ -11,7 +10,6 @@ import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 import org.ou.gatekeeper.tlib.helpers.TestUtils;
 
 import java.io.File;
-import java.util.Iterator;
 
 import static org.ou.gatekeeper.tlib.helpers.TestUtils.loadResource;
 
@@ -51,61 +49,6 @@ class RDFizerDemoTest {
       converter,
       mapping,
       outputFile
-    );
-  }
-
-  @Test
-  void transformEMRFolderToFolder() {
-    File batch01 = TestUtils.loadResource("datasets/puglia/batches/01");
-    String[] exts = {"json"};
-    Iterator<File> datasets = FileUtils.iterateFiles(batch01, exts, false);
-    File outputFolder = FileUtils.getTempDirectory();
-    String outputExt = "nt";
-
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
-
-    RDFizer.trasform(
-      datasets,
-      converter,
-      mapping,
-      outputFolder,
-      outputExt
-    );
-  }
-
-  @Test
-  void transformEMRBlazegraph() {
-    String datasetFilename = "datasets/puglia/emr/00-dataset-complete.json";
-    File datasetFile = loadResource(datasetFilename);
-    String endpoint = "localhost:9999";
-
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
-
-    RDFizer.trasform(
-      datasetFile,
-      converter,
-      mapping,
-      endpoint
-    );
-  }
-
-  @Test
-  void transformEMRBlazegraphBatch() {
-    File batch01 = TestUtils.loadResource("datasets/puglia/batches/01");
-    String[] exts = {"json"};
-    Iterator<File> datasets = FileUtils.iterateFiles(batch01, exts, false);
-    String endpoint = "localhost:9999";
-
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
-
-    RDFizer.trasform(
-      datasets,
-      converter,
-      mapping,
-      endpoint
     );
   }
 

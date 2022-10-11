@@ -12,12 +12,19 @@ public enum OutputFormat {
   TRIG("trig"),
   TRIX("trix");
 
+  /** @todo */
   private String value;
 
+  /**
+   * @todo
+   * */
   OutputFormat(String s) {
     value = s;
   }
 
+  /**
+   * @todo
+   * */
   @Override
   public String toString() {
     return value;

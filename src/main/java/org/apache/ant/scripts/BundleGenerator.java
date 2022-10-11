@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -24,14 +23,13 @@ public class BundleGenerator {
     Path ontologyPartsPath = Path.of(ontologyPath.toString(), "parts");
 
     List<File> ttls = getResourceFiles(ontologyPartsPath, "ttl");
-    ttls.sort(Comparator.comparing(File::getName));
 
     StringBuilder helifitRml = new StringBuilder();
-    Iterator<File> ttlIterator = ttls.listIterator();
-    while (ttlIterator.hasNext()) {
-      File ttl = ttlIterator.next();
+    for (File ttl : ttls) {
       String ttlContent = readFileToString(ttl);
-      helifitRml.append(ttlContent + "\n\n");
+      helifitRml
+        .append(ttlContent)
+        .append("\n\n");
     }
 
     File ontologyFile = new File(ontologyPath.toFile(), "helifit.template.ttl");
@@ -47,10 +45,11 @@ public class BundleGenerator {
 
   private static List<File> getResourceFiles(Path path, String ext) {
     File resourceDir = new File(path.toUri());
-    return Stream.of(resourceDir.listFiles())
+    return Stream.of(Objects.requireNonNull(resourceDir.listFiles()))
       .filter(file -> !file.isDirectory())
       .filter(file -> file.getName().endsWith(ext))
-      .collect(Collectors.toList());
+      .sorted(Comparator.comparing(File::getName))
+      .toList();
   }
 
   public static String readFileToString(File file) {
