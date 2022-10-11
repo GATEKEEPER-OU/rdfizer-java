@@ -29,7 +29,8 @@ public class RDFizer {
     RMLMapping mapping,
     File output
   ) {
-    String fhirFilename = generateUniqueFilename("output", "fhir.json");
+    String fhirFilename = generateUniqueFilename("output", "json");
+//    String fhirFilename = generateUniqueFilename("output", "fhir.json");
     File tempFhirFile = new File(TMP_DIR, fhirFilename);
     converter.transform(input, tempFhirFile, true);
     mapping.setLocalSource(tempFhirFile.getAbsolutePath());
