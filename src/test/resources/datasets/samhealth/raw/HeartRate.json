@@ -1,0 +1,51 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+      "update_time": "1623967379260",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "heartRate",
+      "data_uuid": "647848493030303030",
+      "values": [
+        {
+          "heart_rate_max": "89.0",
+          "heart_rate_min": "69.0",
+          "heart_beat_count": "145",
+          "heart_rate": "74.0",
+          "start_time": "1623963600000",
+          "end_time": "1623967199999",
+          "time_offset": "UTC+0200"
+        }
+      ],
+      "binning_data": [
+        {
+          "heart_rate": "80",
+          "heart_rate_max": "86",
+          "heart_rate_min": "76",
+          "start_time": "1623970800000",
+          "end_time": "1623970859000"
+        },
+        {
+          "heart_rate": "78",
+          "heart_rate_max": "81",
+          "heart_rate_min": "77",
+          "start_time": "1623970860000",
+          "end_time": "1623970919000"
+        },
+        {
+          "heart_rate": "72",
+          "heart_rate_max": "73",
+          "heart_rate_min": "72",
+          "start_time": "1623974340000",
+          "end_time": "1623974399000"
+        }
+      ]
+    }
+  ]
+}

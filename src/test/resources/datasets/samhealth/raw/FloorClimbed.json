@@ -1,0 +1,25 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+      "update_time": "1623989623494",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "floorsClimbed",
+      "data_uuid":"7685965849034eeeeee89",
+      "values": [
+        {
+          "floor": "1.0",
+          "start_time": "1623989575980",
+          "end_time": "1623989594443",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    }
+  ]
+}
