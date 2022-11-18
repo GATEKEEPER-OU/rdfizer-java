@@ -1,0 +1,64 @@
+# ############################################################################ #
+#                           ComponentIdentifier
+# ############################################################################ #
+
+<#ComponentIdentifier> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[*]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/code/{code.coding[0].code}";
+    rr:class ho:E42Identifier;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P2hasType;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifierType>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "code.coding[0].code";
+    ]
+  ];
+
+  # @todo to map in the next release
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P3hasNote;
+  #  rr:objectMap [
+  #    rml:reference "code.coding[0].display";
+  #  ]
+  #];
+.
+
+<#ComponentIdentifierType> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[*]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/sdn/{code.coding[0].systemDomainName}";
+    rr:class ho:HLF209IdentifierType;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "code.coding[0].system";
+    ]
+  ];
+.
+
+# /ComponentIdentifier
