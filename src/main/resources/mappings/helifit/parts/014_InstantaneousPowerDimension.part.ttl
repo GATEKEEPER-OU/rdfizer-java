@@ -1,0 +1,31 @@
+#
+# live_data_power
+<#InstantaneousPowerDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_power')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF474/code/{code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF474InstantaneousPowerDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.

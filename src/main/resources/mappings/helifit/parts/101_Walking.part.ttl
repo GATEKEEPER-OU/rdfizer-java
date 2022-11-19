@@ -952,21 +952,26 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#InstantaneousSpeedDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .
 
@@ -1274,21 +1279,26 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#StreamHeartRateDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .
 
@@ -1768,21 +1778,26 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#AccumulatedDistanceDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .
 
@@ -1993,21 +2008,26 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#InstantaneousPowerDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .
 
@@ -2304,21 +2324,26 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#AccumulatedStepCountDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .
 
@@ -2871,20 +2896,25 @@
     rr:class ho:HLF321StreamObservation;
   ];
 
-  #
-  # Data
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
+    rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
+    rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
+      rr:parentTriplesMap <#InstantaneousCadenceDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
   ];
 .

@@ -1,0 +1,689 @@
+<#StepDailyTrendAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'step_daily_trend')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF250/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF250StepDailyTrendAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#PatientIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  #
+  # Includes
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendStepsCountMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendBurnedCaloriesMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendDistancePerformedMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendAverageSpeedMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#StepDailyTrendAverageSpeedMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'speed')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF811/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF811AverageSpeedMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#DailyAverageSpeedDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendSpeedStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+#
+# speed
+<#DailyAverageSpeedDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'speed')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF320/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF320AverageSpeedDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_distance
+<#StepDailyTrendSpeedStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_speed')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#InstantaneousSpeedDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+<#StepDailyTrendDistancePerformedMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'distance')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF806/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF806DistancePerformedMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendDailyTotalDailyDistanceDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#DistanceStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+#
+# distance
+<#StepDailyTrendDailyTotalDailyDistanceDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'distance')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF319/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF319TotalDistanceDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_distance
+<#DistanceStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_distance')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#AccumulatedDistanceDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+<#StepDailyTrendBurnedCaloriesMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'calorie')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF346/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF346BurnedCaloriesMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendDailyBurnedCaloriesDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#CalorieStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+#
+# calorie
+<#StepDailyTrendDailyBurnedCaloriesDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'calorie')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF318/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF318TotalBurnedCaloriesDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_calorie
+<#CalorieStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_calorie')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StreamBurnedCaloriesDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+<#StepDailyTrendStepsCountMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF810/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF810StepsCountMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+  
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepDailyTrendDailyStepsCountDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepsStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+#
+# count
+<#StepDailyTrendDailyStepsCountDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF28/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF28StepsCountDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_count
+<#StepsStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#AccumulatedStepCountDimension>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
