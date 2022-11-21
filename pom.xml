@@ -50,7 +50,7 @@
     <dependency>
       <groupId>com.ibm.fhir</groupId>
       <artifactId>fhir-model</artifactId>
-      <version>4.11.0</version>
+      <version>4.11.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
     <dependency>

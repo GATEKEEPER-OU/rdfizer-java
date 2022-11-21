@@ -17,28 +17,28 @@
           "exercise_type": "1001",
           "exercise_description": "Walking",
 
-          "altitude_gain":"xxx",
-          "altitude_loss": "yyy",
+          "altitude_gain":"1234",
+          "altitude_loss": "7345",
           "max_altitude": "6543",
           "min_altitude": "6432",
 
           "mean_cadence": "65432",
-          "max_cadence": "erefdf",
+          "max_cadence": "89723",
 
           "calorie": "71.0",
-          "max_caloricburn_rate": "24t2394t",
-          "mean_caloricburn_rate": "34875fuhej",
+          "max_caloricburn_rate": "089234",
+          "mean_caloricburn_rate": "098234",
 
-          "count": "zzz",
-          "count_type": "yyy",
+          "count": "985789",
+          "count_type": "0",
 
           "distance": "250",
-          "incline_distance": "43r343",
-          "decline_distance": "76543",
+          "incline_distance": "8924378",
+          "decline_distance": "8936785",
 
           "duration": "930720",
 
-          "max_heart_rate": "54r4234",
+          "max_heart_rate": "544234",
           "mean_heart_rate": "53432",
           "min_heart_rate": "4332",
 
@@ -48,8 +48,8 @@
           "mean_rpm": "87654",
           "max_rpm": "98765",
 
-          "max_speed": "fds",
-          "mean_speed": "fds",
+          "max_speed": "983478",
+          "mean_speed": "76887",
 
           "vo2_max": "654",
 
@@ -60,7 +60,7 @@
       ],
       "live_data": [
         {
-          "cadence": "95.84712",
+          "cadence": "94.00000",
           "count": "83",
           "distance": "250",
           "heart_rate": "147.48181",
@@ -72,7 +72,7 @@
         {
           "start_time": "1623999780000",
           "heart_rate": "147.48181",
-          "cadence": "95.84712",
+          "cadence": "95.00001",
           "count": "85",
           "power": "99.50436",
           "speed": "11.061617",

@@ -11,12 +11,12 @@ import java.util.UUID;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
- * @todo description
+ * TODO description
  */
 public class FHIRNormalizer {
 
   /**
-   * @todo description
+   * TODO description
    * explain with a json example, the result with the resourceId
    * @param dataset dataset to normalize
    */
@@ -29,11 +29,11 @@ public class FHIRNormalizer {
       save(json, output);
 
     } catch (FileNotFoundException e) {
-      // @todo Message ?
+      // TODO Message ?
       e.printStackTrace();
 
     } catch (IOException e) {
-      // @todo Message ?
+      // TODO Message ?
       e.printStackTrace();
     }
   }
@@ -44,7 +44,7 @@ public class FHIRNormalizer {
 
   /**
    * Loop a
-   * ...@todo put the reference to FHIR entries array definition
+   * ...TODO put the reference to FHIR entries array definition
    * array looking for resources that contain component.
    * @param entries to sift
    */
@@ -66,7 +66,7 @@ public class FHIRNormalizer {
           .getJSONObject("code")
           .getJSONArray("coding");
         if (codes.length() > 1) {
-          String[] codesToRemove = { // @todo refactory this: put in a constant
+          String[] codesToRemove = { // TODO refactory this: put in a constant
             "73985-4" // Exercise activity
             // @note add HERE codes to remove
           };
@@ -100,7 +100,7 @@ public class FHIRNormalizer {
   }
 
   /**
-   * @todo description
+   * TODO description
    * */
   private static void removeGenericCodes(JSONArray collection, String[] toRemove) {
     for (int i = 0; i < collection.length(); ++i) {
@@ -109,14 +109,14 @@ public class FHIRNormalizer {
       if (ArrayUtils.contains(toRemove, code)) {
         collection.remove(i);
       } else {
-        // @todo use logger
+        // TODO use logger
         System.out.printf("WARNING: %s not handled yet. It should be removed\n", code);
       }
     }
   }
 
   /**
-   * @todo description
+   * TODO description
    * @param collection of identifiers or codes
    */
   private static void appendDomainName(JSONArray collection) {
@@ -136,13 +136,13 @@ public class FHIRNormalizer {
   }
 
   /**
-   * @todo description
+   * TODO description
    */
   private static void connectResourceToComponents(JSONArray components, String resourceId) {
-    // @todo design again this method (better if whole class)
+    // TODO design again this method (better if whole class)
     for (int i = 0; i < components.length(); ++i) {
       JSONObject component = components.getJSONObject(i);
-                                                                 // @todo rename method needed
+                                                                 // TODO rename method needed
       component.put("fullUrl", "urn:uuid:" + UUID.randomUUID()); // append own uuid
       component.put("resourceId", resourceId);                   // append parent resourceId
     }
@@ -158,13 +158,13 @@ public class FHIRNormalizer {
       file.write(json.toString());
 
     } catch (IOException e) {
-      // @todo Message ?
+      // TODO Message ?
       e.printStackTrace();
     }
   }
 
   /**
-   * @todo description
+   * TODO description
    */
   private FHIRNormalizer() {
   }

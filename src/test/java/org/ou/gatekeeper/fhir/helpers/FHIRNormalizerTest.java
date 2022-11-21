@@ -19,8 +19,8 @@ class FHIRNormalizerTest {
 
   @ParameterizedTest
   @CsvSource({
-    "7f3e11e4b2d1a852e49b3814ebfdd98f89cc7c543d1d7b531efde27945a8d71f, datasets/saxony/fhir/01-dataset-complete.json",
-    "a23ea70bec8b24211101d65f88a275be5d5a839f5128c97b7aa066c6be999795, datasets/saxony/fhir/04-dataset-complete.json"
+    "7f3e11e4b2d1a852e49b3814ebfdd98f89cc7c543d1d7b531efde27945a8d71f, datasets/saxony/phr/01-dataset-complete.json",
+    "a23ea70bec8b24211101d65f88a275be5d5a839f5128c97b7aa066c6be999795, datasets/saxony/phr/04-dataset-complete.json"
   })
   void testNormalizeFHIR(String expectedDigest, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
@@ -33,7 +33,7 @@ class FHIRNormalizerTest {
       assertEquals(expectedDigest, outputDigest);
     } catch (IOException e) {
     } finally {
-      outputFile.delete();
+//      outputFile.delete();
     }
   }
 

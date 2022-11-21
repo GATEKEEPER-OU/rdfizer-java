@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  */
-class FHIRAdapterTest {
+class EMRAdapterTest {
 
   // @todo update all tests to work with the new datasets
 

@@ -1,9 +1,6 @@
 package org.ou.gatekeeper.fhir.adapters.builders;
 
-import com.ibm.fhir.model.resource.Bundle;
-import com.ibm.fhir.model.resource.Condition;
-import com.ibm.fhir.model.resource.Observation;
-import com.ibm.fhir.model.resource.Resource;
+import com.ibm.fhir.model.resource.*;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.HTTPVerb;
 import com.ibm.fhir.model.type.code.ObservationStatus;
@@ -23,14 +20,65 @@ public class FHIRBase {
    * @todo description
    */
   public static Uri buildFullUrl() {
-    return Uri.uri("urn:uuid:" + UUID.randomUUID());
+    return buildFullUrl("urn:uuid:" + UUID.randomUUID());
+  }
+
+  /**
+   * @todo description
+   */
+  public static Uri buildFullUrl(String uri) {
+    return Uri.uri(uri);
   }
 
   /**
    * @todo description
    */
   public static Bundle.Entry buildEntry(Resource resource, String requestUrl) {
-    return buildEntry(resource, requestUrl, null);
+    return buildEntry(resource, requestUrl, null, buildFullUrl());
+  }
+
+  /**
+   * @todo description
+   */
+  public static Bundle.Entry buildEntry(Resource resource, String requestUrl, String requestIdentifier) {
+    return buildEntry(resource, requestUrl, requestIdentifier, buildFullUrl());
+  }
+
+  /**
+   * @todo description
+   */
+  public static Bundle.Entry buildEntry(
+    Resource resource,
+    String requestUrl,
+    String requestIdentifier,
+    Uri fullUrl
+  ) {
+    Bundle.Entry.Request.Builder request = Bundle.Entry.Request.builder()
+      .method(HTTPVerb.POST)
+      .url(Uri.uri(requestUrl));
+
+    if (requestIdentifier != null) {
+      request = request.ifNoneExist(requestIdentifier);
+    }
+
+    return Bundle.Entry.builder()
+      .fullUrl(fullUrl)
+      .request(request.build())
+      .resource(resource)
+      .build();
+  }
+
+  public static Identifier buildIdentifier(String system, String value) {
+    return Identifier.builder()
+      .system(Uri.uri(system))
+      .value(value)
+      .build();
+  }
+
+  public static Device buildDevice(Identifier identifier) {
+    return Device.builder()
+      .identifier(identifier)
+      .build();
   }
 
   // @todo refactory buildCodeableConcept split and optimize implementing buildCoding()
@@ -96,6 +144,23 @@ public class FHIRBase {
   /**
    * @todo description
    */
+  public static Period buildPeriod(
+    String start,
+    String end,
+    String zoneOffset
+  ) {
+    // TODO fix this
+    return Period.builder()
+      .start(DateTime.now())
+      .end(DateTime.now())
+//      .start(DateTime.of(start)) // <---
+//      .end(DateTime.of(end))     // <---
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
   public static Quantity buildQuantity(
     Decimal value,
     String unit,
@@ -113,23 +178,21 @@ public class FHIRBase {
   /**
    * @todo description
    */
-  public static Bundle.Entry buildEntry(
-    Resource resource,
-    String requestUrl,
-    String requestIdentifier
-  ) {
-    Bundle.Entry.Request.Builder request = Bundle.Entry.Request.builder()
-      .method(HTTPVerb.POST)
-      .url(Uri.uri(requestUrl));
+  public static Reference buildReference(Identifier identifier) {
+    return Reference.builder()
+      .identifier(identifier)
+      .build();
+  }
 
-    if (requestIdentifier != null) {
-      request = request.ifNoneExist(requestIdentifier);
-    }
-
-    return Bundle.Entry.builder()
-      .fullUrl(buildFullUrl())
-      .resource(resource)
-      .request(request.build())
+  /**
+   * @todo description
+   */
+  public static Reference buildReference(Bundle.Entry entry) {
+    return Reference.builder()
+      .reference(
+        entry.getFullUrl().getValue()
+      )
+      .display(entry.getResource().getId())
       .build();
   }
 
@@ -223,6 +286,7 @@ public class FHIRBase {
           )
         )
         .subject(
+          // TODO use buildReference
           Reference.builder()
             .reference(
               patientEntry.getFullUrl().getValue()
@@ -272,6 +336,7 @@ public class FHIRBase {
           .build()
       )
       .subject(
+        // TODO use buildReference
         Reference.builder()
           .reference(
             patientEntry.getFullUrl().getValue()

@@ -393,9 +393,9 @@ public class FHIREMRBuilder extends FHIRBase {
         ),
         buildQuantity(
           Decimal.of(examination.getBigDecimal("GOT_AST")),
-          "enzyme unit per liter",
+          examination.getString("GOT_AST_unit"),
           LOINC_SYSTEM,
-          examination.getString("GOT_AST_unit")
+          "enzyme unit per liter"
         ),
         patientEntry,
         buildPatientAgeExtention(
