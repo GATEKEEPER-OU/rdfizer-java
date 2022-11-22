@@ -535,7 +535,7 @@
       rr:parentTriplesMap <#DurationDimension>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resourceId";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -547,11 +547,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'duration')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'duration')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF4/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF4/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF4DurationDimension;
   ];
 
@@ -561,14 +561,14 @@
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
-      rml:reference "valueQuantity.unit";
+      rml:reference "resource.valueQuantity.unit";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P90hasValue;
     rr:objectMap [
-      rml:reference "valueQuantity.value";
+      rml:reference "resource.valueQuantity.value";
     ]
   ];
 .
@@ -2122,7 +2122,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'rpm')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'power')]"
   ];
 
   rr:subjectMap [
@@ -2353,7 +2353,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2_max')]"
   ];
 
   rr:subjectMap [
@@ -2395,8 +2395,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#OxygenSaturationDimension>;
       rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resourceId";
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
       ];
     ];
   ];
@@ -2408,11 +2408,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'vo2_max')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2_max')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF27/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF27/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF27OxygenSaturationDimension;
   ];
 
@@ -2422,14 +2422,14 @@
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
-      rml:reference "valueQuantity.unit";
+      rml:reference "resource.valueQuantity.unit";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P90hasValue;
     rr:objectMap [
-      rml:reference "valueQuantity.value";
+      rml:reference "resource.valueQuantity.value";
     ]
   ];
 .
@@ -2439,7 +2439,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [
@@ -2524,7 +2524,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [
@@ -2609,7 +2609,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [

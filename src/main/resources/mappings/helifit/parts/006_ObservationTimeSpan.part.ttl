@@ -10,7 +10,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{resource.code.coding[0].code}/id/{fullUrl}";
     rr:class ho:E52TimeSpan;
   ];
 
@@ -25,7 +25,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:EP7starts;
     rr:objectMap [
-      rml:reference "resource.effectivePeriod.start";
+      rml:reference "resource.valuePeriod.start";
       rr:datatype xsd:dateTime
     ]
   ];
@@ -33,7 +33,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:EP8ends;
     rr:objectMap [
-      rml:reference "resource.effectivePeriod.end";
+      rml:reference "resource.valuePeriod.end";
       rr:datatype xsd:dateTime
     ]
   ];

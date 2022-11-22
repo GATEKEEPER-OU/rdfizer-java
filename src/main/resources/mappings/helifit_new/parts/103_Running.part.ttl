@@ -1,21 +1,17 @@
-
-
 # ############################################################################ #
-#                                  Cycling
+#                                  Running
 # ############################################################################ #
 
-# 73985-4 Exercise activity
-# LA11834-1 Cycling
-<#CyclingActivity> a rr:TriplesMap;
+<#RunningActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'cycling')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'running')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF82/code/{resource.code.coding[1].code}/id/{resource.id}";
-    rr:class ho:HLF82Cycling;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF60/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:class ho:HLF60Running;
   ];
 
   #
@@ -143,6 +139,17 @@
     rr:predicate ho:P117includes;
     rr:objectMap [
       rr:parentTriplesMap <#OxygenSaturationMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepsCountMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.derivedFrom[0].display";
@@ -368,6 +375,113 @@
         rr:parent "resource.derivedFrom[0].display";
       ];
     ];
+  ];
+.
+
+<#ExerciseRevolutionMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF348/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF348ExerciseRevolutionMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P2hasType;
+    rr:objectMap [
+      rr:parentTriplesMap <#ExerciseRevolutionType>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#ExerciseRevolutionDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepsStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+#
+# steps
+<#ExerciseRevolutionDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF453/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF453ExerciseRevolutionDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
   ];
 .
 
@@ -2088,7 +2202,7 @@
 .
 
 # steps
-<#ExerciseRevolutionMeasurement> a rr:TriplesMap;
+<#StepsCountMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -2096,8 +2210,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF348/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF348ExerciseRevolutionMeasurement;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF810/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF810StepsCountMeasurement;
   ];
 
   #
@@ -2143,7 +2257,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#ExerciseRevolutionDimension>;
+      rr:parentTriplesMap <#StepsCountDimension>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resourceId";
@@ -2165,7 +2279,7 @@
 
 #
 # steps
-<#ExerciseRevolutionDimension> a rr:TriplesMap;
+<#StepsCountDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -2173,8 +2287,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF453/code/{code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF453ExerciseRevolutionDimension;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF907StepsCountDimension;
   ];
 
   #
@@ -2323,7 +2437,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [
@@ -2408,7 +2522,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [
@@ -2493,7 +2607,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [

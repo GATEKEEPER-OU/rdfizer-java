@@ -1,0 +1,42 @@
+# ############################################################################ #
+#                                  ObservationTimeSpan
+# ############################################################################ #
+
+<#ObservationTimeSpan> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:E52TimeSpan;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:EP9effectiveDatatime;
+    rr:objectMap [
+      rml:reference "resource.effectiveDateTime";
+      rr:datatype xsd:dateTime
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:EP7starts;
+    rr:objectMap [
+      rml:reference "resource.effectivePeriod.start";
+      rr:datatype xsd:dateTime
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:EP8ends;
+    rr:objectMap [
+      rml:reference "resource.effectivePeriod.end";
+      rr:datatype xsd:dateTime
+    ]
+  ];
+.
+
+# /ObservationTimeSpan
