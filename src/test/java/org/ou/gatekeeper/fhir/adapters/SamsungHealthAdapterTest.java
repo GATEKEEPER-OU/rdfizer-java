@@ -20,8 +20,7 @@ class SamsungHealthAdapterTest {
 //    "xxx, datasets/samhealth/raw/FloorClimbed.json",
 //    "xxx, datasets/samhealth/raw/StepDailyTrend.json",
 //    "xxx, datasets/samhealth/raw/HeartRate.json",
-//    "xxx, datasets/samhealth/raw/Walking.json",
-//    "xxx, datasets/samhealth/raw/Running.json",
+    "xxx, datasets/samhealth/raw/Walking.json",
 //    "xxx, datasets/samhealth/raw/Swimming.json",
 //    "xxx, datasets/samhealth/raw/Sleep.json",
 

@@ -6,6 +6,7 @@ import com.ibm.fhir.model.generator.exception.FHIRGeneratorException;
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.type.Decimal;
+import com.ibm.fhir.model.type.Quantity;
 import com.ibm.fhir.model.type.code.BundleType;
 import com.ibm.fhir.model.visitor.Visitable;
 import org.apache.commons.io.FileUtils;
@@ -13,7 +14,7 @@ import org.commons.ResourceUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer;
+import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer2;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -68,7 +69,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
 
       // Normalize FHIR bundles, if requested
       if (normalize) {
-        FHIRNormalizer.normalize(tempOutputFile, output);
+        FHIRNormalizer2.normalize(tempOutputFile, output);
         ResourceUtils.clean(tempOutputFile);
       } else {
         Files.move(tempOutputFile.toPath(), output.toPath());
@@ -151,65 +152,44 @@ public class SamsungHealthAdapter implements FHIRAdapter {
     JSONObject dataElement,
     Bundle.Entry patientEntry
   ) {
-    Collection<Bundle.Entry> members = new LinkedList<>();
-    addIgnoreNull(members,
-      collectFloor(entries, dataElement, patientEntry));
-    //
-    addIgnoreNull(members,
-      collectCalories(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectCount(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectDistance(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectSpeed(entries, dataElement, patientEntry));
-    //
-    addIgnoreNull(members,
-      collectHeartRate(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectHeartRateMin(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectHeartRateMax(entries, dataElement, patientEntry));
-    addIgnoreNull(members,
-      collectHeartBeatCount(entries, dataElement, patientEntry));
+    Bundle.Entry mainObservation = buildMainObservation(dataElement, patientEntry);
+    entries.add(mainObservation);
 
-    // ...
+    collectFloor(entries, dataElement, mainObservation, patientEntry);
 
-    addIgnoreNull(members,
-      collectCadence(entries, dataElement, patientEntry));
-    // ...
+    collectCalorie(entries, dataElement, mainObservation, patientEntry);
+    collectCount(entries, dataElement, mainObservation, patientEntry);
+    collectDistance(entries, dataElement, mainObservation, patientEntry);
+    collectSpeed(entries, dataElement, mainObservation, patientEntry);
 
-    Bundle.Entry obs = buildMainObservation(dataElement, members, patientEntry);
-    entries.add(obs);
+    collectHeartRate(entries, dataElement, mainObservation, patientEntry);
+    collectHeartRateMin(entries, dataElement, mainObservation, patientEntry);
+    collectHeartRateMax(entries, dataElement, mainObservation, patientEntry);
+    collectHeartBeatCount(entries, dataElement, mainObservation, patientEntry);
+
+    collectCadence(entries, dataElement, mainObservation, patientEntry);
+//    collectCount(entries, dataElement, mainObservation, patientEntry);
+//    collectDistance(entries, dataElement, mainObservation, patientEntry);
+//    collectHeartRate(entries, dataElement, mainObservation, patientEntry);
+    collectPower(entries, dataElement, mainObservation, patientEntry);
+//    collectSpeed(entries, dataElement, mainObservation, patientEntry);
+    collectAltitude(entries, dataElement, mainObservation, patientEntry);
+    collectDuration(entries, dataElement, mainObservation, patientEntry);
+    collectRpm(entries, dataElement, mainObservation, patientEntry);
+    collectVo2Max(entries, dataElement, mainObservation, patientEntry);
   }
 
   private static Bundle.Entry collectFloor(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("floor")) {
       String uuid = dataElement.getString("data_uuid");
 
-      Collection<Bundle.Entry> members = new LinkedList<>();
       Collection<Observation.Component> components = new LinkedList<>();
-      //
-      // floor
-      Observation.Component floorComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "floor",
-          "Floor"
-        )),
-        buildQuantity(
-          Decimal.of(values.getString("floor")),
-          "...", // TODO missing
-          UNITSOFM_SYSTEM,
-          "..." // TODO missing
-        )
-      );
-      components.add(floorComponent);
 
       //
       // aggregated observation
@@ -223,7 +203,13 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Floor"
         )),
         components,
-        members,
+        buildQuantity(
+          Decimal.of(values.getString("floor")),
+          "...", // TODO missing
+          UNITSOFM_SYSTEM,
+          "..." // TODO missing
+        ),
+        parentEntry,
         patientEntry
       );
       entries.add(obs);
@@ -232,83 +218,120 @@ public class SamsungHealthAdapter implements FHIRAdapter {
     return null;
   }
 
-  private static Bundle.Entry collectCalories(
+  private static Bundle.Entry collectCalorie(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("calories")) {
+    if (values.has("calorie")) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-calories-%d", uuid, i);
-        String value = liveElement.getString("calories");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_calories",
-            "Live data calories"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "kcal/s",
-            UNITSOFM_SYSTEM,
-            "kcal/s"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
-      // Calories
-      Observation.Component caloriesComponent = buildObservationComponent(
+      // Calorie
+      Observation.Component calorieComponent = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "calories",
-          "Calories"
+          "calorie",
+          "Calorie"
         )),
         buildQuantity(
-          Decimal.of(values.getString("calories")),
+          Decimal.of(values.getString("calorie")),
           "kcal/s",
           UNITSOFM_SYSTEM,
           "kcal/s"
         )
       );
-      components.add(caloriesComponent);
-
-      // TODO collect others components, if exist
-      // max_caloricburn_rate
+      components.add(calorieComponent);
+      //
       // mean_caloricburn_rate
+      if (values.has("mean_caloricburn_rate")) {
+        Observation.Component meanComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "mean_caloricburn_rate",
+            "Mean caloric burn rate"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("mean_caloricburn_rate")),
+            "kcal/s",
+            UNITSOFM_SYSTEM,
+            "kcal/s"
+          )
+        );
+        components.add(meanComponent);
+      }
+      //
+      // maxc_caloricburn_rate
+      if (values.has("max_caloricburn_rate")) {
+        Observation.Component maxComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "max_caloricburn_rate",
+            "Max caloric burn rate"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("mean_caloricburn_rate")),
+            "kcal/s",
+            UNITSOFM_SYSTEM,
+            "kcal/s"
+          )
+        );
+        components.add(maxComponent);
+      }
 
       //
       // aggregated observation
-      String aggregatedId = String.format("%s-calories", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      String aggregatedId = String.format("%s-calorie", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "calories",
-          "Calories"
+          "calorie",
+          "Calorie"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("calorie")) {
+          // Collect live_data values
+          String liveId = String.format("%s-calorie-%d", uuid, i);
+          String value = liveElement.getString("calorie");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_calorie",
+              "Live data calorie"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "kcal/s",
+              UNITSOFM_SYSTEM,
+              "kcal/s"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
@@ -316,44 +339,16 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectCount(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("count")) {
       String uuid = dataElement.getString("data_uuid");
 
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-count-%d", uuid, i);
-        String value = liveElement.getString("count");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_count",
-            "Live data count"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "...",
-            UNITSOFM_SYSTEM,
-            "..."
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
-
       Collection<Observation.Component> components = new LinkedList<>();
       //
-      // Calories
+      // count
       Observation.Component countComponent = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
@@ -368,14 +363,27 @@ public class SamsungHealthAdapter implements FHIRAdapter {
         )
       );
       components.add(countComponent);
-
-      // TODO collect others components, if exist
-      // type???
+      //
+      // count_type
+      if (values.has("count_type")) {
+        String value = values.getString("count_type");
+        Observation.Component meanComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "count_type",
+            "Count type"
+          )),
+          Quantity.builder()
+            .value(Decimal.of(value))
+            .build()
+        );
+        components.add(meanComponent);
+      }
 
       //
       // aggregated observation
       String aggregatedId = String.format("%s-count", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -384,23 +392,11 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Count"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
-    }
-    return null;
-  }
-
-  private static Bundle.Entry collectDistance(
-    Collection<Bundle.Entry> entries,
-    JSONObject dataElement,
-    Bundle.Entry patientEntry
-  ) {
-    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("distance")) {
-      String uuid = dataElement.getString("data_uuid");
+      entries.add(aggregatedObservation);
 
       //
       // collect live data
@@ -408,28 +404,46 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-distance-%d", uuid, i);
-        String value = liveElement.getString("distance");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_distance",
-            "Live data distance"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "m",
-            UNITSOFM_SYSTEM,
-            "m"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
+        if (liveElement.has("count")) {
+          // Collect live_data values
+          String liveId = String.format("%s-count-%d", uuid, i);
+          String value = liveElement.getString("count");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_count",
+              "Live data count"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "...",
+              UNITSOFM_SYSTEM,
+              "..."
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
       }
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectDistance(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if (values.has("distance")) {
+      String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -448,15 +462,47 @@ public class SamsungHealthAdapter implements FHIRAdapter {
         )
       );
       components.add(distanceComponent);
-
-      // TODO collect others components, if exist
+      //
       // incline_distance
+      if (values.has("incline_distance")) {
+        Observation.Component inclineComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "incline_distance",
+            "Incline distance"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("incline_distance")),
+            "m",
+            UNITSOFM_SYSTEM,
+            "m"
+          )
+        );
+        components.add(inclineComponent);
+      }
+      //
       // decline_distance
+      if (values.has("decline_distance")) {
+        Observation.Component inclineComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "decline_distance",
+            "Decline distance"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("decline_distance")),
+            "m",
+            UNITSOFM_SYSTEM,
+            "m"
+          )
+        );
+        components.add(inclineComponent);
+      }
 
       //
       // aggregated observation
       String aggregatedId = String.format("%s-distance", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -465,23 +511,11 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Distance"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
-    }
-    return null;
-  }
-
-  private static Bundle.Entry collectSpeed(
-    Collection<Bundle.Entry> entries,
-    JSONObject dataElement,
-    Bundle.Entry patientEntry
-  ) {
-    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("speed")) {
-      String uuid = dataElement.getString("data_uuid");
+      entries.add(aggregatedObservation);
 
       //
       // collect live data
@@ -489,28 +523,46 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-speed-%d", uuid, i);
-        String value = liveElement.getString("calories");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_speed",
-            "Live data speed"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "m/s",
-            UNITSOFM_SYSTEM,
-            "m/s"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
+        if (liveElement.has("distance")) {
+          // Collect live_data values
+          String liveId = String.format("%s-distance-%d", uuid, i);
+          String value = liveElement.getString("distance");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_distance",
+              "Live data distance"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "m",
+              UNITSOFM_SYSTEM,
+              "m"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
       }
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectSpeed(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if (values.has("speed")) {
+      String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -529,15 +581,47 @@ public class SamsungHealthAdapter implements FHIRAdapter {
         )
       );
       components.add(speedComponent);
-
-      // TODO collect others components, if exist
-      // max_speed
+      //
       // mean_speed
+      if (values.has("mean_speed")) {
+        Observation.Component meanComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "mean_speed",
+            "Mean speed"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("mean_speed")),
+            "m/s",
+            UNITSOFM_SYSTEM,
+            "m/s"
+          )
+        );
+        components.add(meanComponent);
+      }
+      //
+      // max_speed
+      if (values.has("max_speed")) {
+        Observation.Component meanComponent = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "max_speed",
+            "Max speed"
+          )),
+          buildQuantity(
+            Decimal.of(values.getString("max_speed")),
+            "m/s",
+            UNITSOFM_SYSTEM,
+            "m/s"
+          )
+        );
+        components.add(meanComponent);
+      }
 
       //
       // aggregated observation
       String aggregatedId = String.format("%s-speed", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -546,11 +630,44 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Speed"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("speed")) {
+          // Collect live_data values
+          String liveId = String.format("%s-speed-%d", uuid, i);
+          String value = liveElement.getString("speed");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_speed",
+              "Live data speed"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "m/s",
+              UNITSOFM_SYSTEM,
+              "m/s"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
@@ -558,40 +675,13 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectHeartRate(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    // TODO think it again, because heart_rate_main against execise.heart_rate
     if (values.has("heart_rate")) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-heart-rate-%d", uuid, i);
-        String value = liveElement.getString("heart_rate");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_heart_rate",
-            "Live data heart rate"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "beats/min",
-            UNITSOFM_SYSTEM,
-            "{Beats}/min"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -612,11 +702,14 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       components.add(hrComponent);
 
       // TODO collect others components, if exist
+//      "max_heart_rate": "54r4234",
+//        "mean_heart_rate": "53432",
+//        "min_heart_rate": "4332",
 
       //
       // aggregated observation
       String aggregatedId = String.format("%s-heart-rate", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -625,11 +718,44 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Heart Rate"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("heart-rate")) {
+          // Collect live_data values
+          String liveId = String.format("%s-heart-rate-%d", uuid, i);
+          String value = liveElement.getString("heart_rate");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_heart_rate",
+              "Live data heart rate"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "beats/min",
+              UNITSOFM_SYSTEM,
+              "{Beats}/min"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
@@ -637,40 +763,12 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectHeartRateMin(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("heart_rate_min")) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-heart-rate-min-%d", uuid, i);
-        String value = liveElement.getString("heart_rate_min");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_heart_rate_min",
-            "Live data min heart rate"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "beats/min",
-            UNITSOFM_SYSTEM,
-            "{Beats}/min"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -695,7 +793,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       //
       // aggregated observation
       String aggregatedId = String.format("%s-heart-rate-min", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -704,11 +802,44 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Min Heart Rate"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("heart-rate-min")) {
+          // Collect live_data values
+          String liveId = String.format("%s-heart-rate-min-%d", uuid, i);
+          String value = liveElement.getString("heart_rate_min");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_heart_rate_min",
+              "Live data min heart rate"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "beats/min",
+              UNITSOFM_SYSTEM,
+              "{Beats}/min"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
@@ -716,40 +847,12 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectHeartRateMax(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("heart_rate_max")) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-heart-rate-max-%d", uuid, i);
-        String value = liveElement.getString("heart_rate_max");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_heart_rate_max",
-            "Live data max heart rate"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "beats/min",
-            UNITSOFM_SYSTEM,
-            "{Beats}/min"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -774,7 +877,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       //
       // aggregated observation
       String aggregatedId = String.format("%s-heart-rate-max", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -783,11 +886,44 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Max Heart Rate"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("heart-rate-max")) {
+          // Collect live_data values
+          String liveId = String.format("%s-heart-rate-max-%d", uuid, i);
+          String value = liveElement.getString("heart_rate_max");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_heart_rate_max",
+              "Live data max heart rate"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "beats/min",
+              UNITSOFM_SYSTEM,
+              "{Beats}/min"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
@@ -795,40 +931,12 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectHeartBeatCount(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("heart_beat_count")) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-heart-beat-count-%d", uuid, i);
-        String value = liveElement.getString("heart_beat_count");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_heart_beat_count",
-            "Live data heart beat count"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "beats/min",
-            UNITSOFM_SYSTEM,
-            "{Beats}/min"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -853,7 +961,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       //
       // aggregated observation
       String aggregatedId = String.format("%s-heart-beat-count", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -862,11 +970,12 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Heart Beat Count"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+      return aggregatedObservation;
     }
     return null;
   }
@@ -879,6 +988,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   private static Bundle.Entry collectCadence(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
@@ -886,35 +996,6 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       && values.has("max_cadence")
     ) {
       String uuid = dataElement.getString("data_uuid");
-
-      //
-      // collect live data
-      Collection<Bundle.Entry> members = new LinkedList<>();
-      JSONArray liveData = getLiveData(dataElement);
-      for (int i = 0; i < liveData.length(); ++i) {
-        JSONObject liveElement = liveData.getJSONObject(i);
-        // Collect live_data values
-        String liveId = String.format("%s-cadence-%d", uuid, i);
-        String value = liveElement.getString("cadence");
-        Bundle.Entry liveObs = buildLiveObservation(
-          liveId,
-          liveElement,
-          dataElement,
-          buildCodeableConcept(buildCoding(
-            SAMSUNG_LIVE_SYSTEM,
-            "live_data_cadence",
-            "Live data cadence"
-          )),
-          buildQuantity(
-            Decimal.of(value),
-            "m/s",
-            UNITSOFM_SYSTEM,
-            "m/s"
-          )
-        );
-        members.add(liveObs);
-        entries.add(liveObs);
-      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -954,7 +1035,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
       //
       // aggregated observation
       String aggregatedId = String.format("%s-cadence", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
@@ -963,16 +1044,400 @@ public class SamsungHealthAdapter implements FHIRAdapter {
           "Cadence"
         )),
         components,
-        members,
+        null,
+        parentEntry,
         patientEntry
       );
-      entries.add(obs);
-      return obs;
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("cadence")) {
+          // Collect live_data values
+          String liveId = String.format("%s-cadence-%d", uuid, i);
+          String value = liveElement.getString("cadence");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_cadence",
+              "Live data cadence"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "m/s",
+              UNITSOFM_SYSTEM,
+              "m/s"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
     }
     return null;
   }
 
+  private static Bundle.Entry collectPower(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if ( values.has("mean_power")
+      && values.has("max_power")
+    ) {
+      String uuid = dataElement.getString("data_uuid");
 
+      Collection<Observation.Component> components = new LinkedList<>();
+      //
+      // mean_power
+      Observation.Component meanComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "mean_power",
+          "Mean Power"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("mean_power")),
+          "watt",
+          UNITSOFM_SYSTEM,
+          "W"
+        )
+      );
+      components.add(meanComponent);
+
+      //
+      // max_power
+      Observation.Component maxComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "max_power",
+          "Max Power"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("max_power")),
+          "watt",
+          UNITSOFM_SYSTEM,
+          "W"
+        )
+      );
+      components.add(maxComponent);
+
+      //
+      // aggregated observation
+      String aggregatedId = String.format("%s-power", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
+        aggregatedId,
+        dataElement,
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "power",
+          "Power"
+        )),
+        components,
+        null,
+        parentEntry,
+        patientEntry
+      );
+      entries.add(aggregatedObservation);
+
+      //
+      // collect live data
+      JSONArray liveData = getLiveData(dataElement);
+      for (int i = 0; i < liveData.length(); ++i) {
+        JSONObject liveElement = liveData.getJSONObject(i);
+        if (liveElement.has("power")) {
+          // Collect live_data values
+          String liveId = String.format("%s-power-%d", uuid, i);
+          String value = liveElement.getString("power");
+          Bundle.Entry liveObs = buildLiveObservation(
+            liveId,
+            liveElement,
+            dataElement,
+            buildCodeableConcept(buildCoding(
+              SAMSUNG_LIVE_SYSTEM,
+              "live_data_power",
+              "Live data power"
+            )),
+            buildQuantity(
+              Decimal.of(value),
+              "watt",
+              UNITSOFM_SYSTEM,
+              "W"
+            ),
+            aggregatedObservation,
+            patientEntry
+          );
+          entries.add(liveObs);
+        }
+      }
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectAltitude(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if ( values.has("altitude_gain")
+      && values.has("altitude_loss")
+      && values.has("min_altitude")
+      && values.has("max_altitude")
+    ) {
+      String uuid = dataElement.getString("data_uuid");
+
+      Collection<Observation.Component> components = new LinkedList<>();
+      //
+      // altitude_gain
+      Observation.Component gainComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "altitude_gain",
+          "Altitude gain"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("altitude_gain")),
+          "m",
+          UNITSOFM_SYSTEM,
+          "m"
+        )
+      );
+      components.add(gainComponent);
+      //
+      // altitude_loss
+      Observation.Component lossComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "altitude_loss",
+          "Altitude loss"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("altitude_loss")),
+          "m",
+          UNITSOFM_SYSTEM,
+          "m"
+        )
+      );
+      components.add(lossComponent);
+      //
+      // min_altitude
+      Observation.Component minComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "min_altitude",
+          "Min altitude"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("min_altitude")),
+          "m",
+          UNITSOFM_SYSTEM,
+          "m"
+        )
+      );
+      components.add(minComponent);
+      //
+      // max_altitude
+      Observation.Component maxComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "max_altitude",
+          "Max Altitude"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("max_altitude")),
+          "m",
+          UNITSOFM_SYSTEM,
+          "m"
+        )
+      );
+      components.add(maxComponent);
+
+      //
+      // aggregated observation
+      String aggregatedId = String.format("%s-altitude", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
+        aggregatedId,
+        dataElement,
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "power",
+          "Power"
+        )),
+        components,
+        null,
+        parentEntry,
+        patientEntry
+      );
+      entries.add(aggregatedObservation);
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectDuration(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if (values.has("duration")) {
+      String uuid = dataElement.getString("data_uuid");
+
+      Collection<Observation.Component> components = new LinkedList<>();
+
+      //
+      // aggregated observation
+      String aggregatedId = String.format("%s-duration", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
+        aggregatedId,
+        dataElement,
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "duration",
+          "Duration"
+        )),
+        components,
+        buildQuantity(
+          Decimal.of(values.getString("duration")),
+          "s",
+          UNITSOFM_SYSTEM,
+          "s"
+        ),
+        parentEntry,
+        patientEntry
+      );
+      entries.add(aggregatedObservation);
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectRpm(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if ( values.has("mean_rpm")
+      && values.has("max_rpm")
+    ) {
+      String uuid = dataElement.getString("data_uuid");
+
+      Collection<Observation.Component> components = new LinkedList<>();
+      //
+      // mean_rpm
+      Observation.Component meanComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "mean_rpm",
+          "Mean rpm"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("mean_rpm")),
+          "Hz",
+          UNITSOFM_SYSTEM,
+          "hZ"
+        )
+      );
+      components.add(meanComponent);
+      //
+      // max_rpm
+      Observation.Component maxComponent = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "max_rpm",
+          "Max rpm"
+        )),
+        buildQuantity(
+          Decimal.of(values.getString("max_rpm")),
+          "Hz",
+          UNITSOFM_SYSTEM,
+          "hZ"
+        )
+      );
+      components.add(maxComponent);
+
+      //
+      // aggregated observation
+      String aggregatedId = String.format("%s-altitude", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
+        aggregatedId,
+        dataElement,
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "power",
+          "Power"
+        )),
+        components,
+        null,
+        parentEntry,
+        patientEntry
+      );
+      entries.add(aggregatedObservation);
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
+
+  private static Bundle.Entry collectVo2Max(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
+    if (values.has("vo2_max")) {
+      String uuid = dataElement.getString("data_uuid");
+
+      Collection<Observation.Component> components = new LinkedList<>();
+
+      //
+      // aggregated observation
+      String aggregatedId = String.format("%s-vo2-max", uuid);
+      Bundle.Entry aggregatedObservation = buildAggregatedObservation(
+        aggregatedId,
+        dataElement,
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "vo2_max",
+          "Vo2_max"
+        )),
+        components,
+        buildQuantity(
+          Decimal.of(values.getString("vo2_max")),
+          "mL/kg/min",
+          UNITSOFM_SYSTEM,
+          "mL/kg/min"
+        ),
+        parentEntry,
+        patientEntry
+      );
+      entries.add(aggregatedObservation);
+
+      return aggregatedObservation;
+    }
+    return null;
+  }
 
 
 

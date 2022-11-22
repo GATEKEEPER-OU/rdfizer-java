@@ -52,7 +52,7 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
    */
   public static Bundle.Entry buildMainObservation(
     JSONObject dataElement,
-    Collection<Bundle.Entry> members,
+//    Collection<Bundle.Entry> members,
     Bundle.Entry patientEntry
   ) {
     String       uuid = dataElement.getString("data_uuid");
@@ -74,7 +74,7 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
         .code(
           getCodes(dataElement)
         )
-        .hasMember(getReferences(members))
+//        .hasMember(getReferences(members))
         .effective(
           // TODO fix just one timestamp (not startTime, endTime)
           buildPeriod(startTime, endTime, zoneOffset)
@@ -99,7 +99,8 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
     JSONObject dataElement,
     CodeableConcept codes,
     Collection<Observation.Component> components,
-    Collection<Bundle.Entry> members,
+    Quantity quantity,
+    Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
     String   deviceId = dataElement.getString("device_id");
@@ -115,7 +116,7 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
         ))
         .code(codes)
         .component(components)
-        .hasMember(getReferences(members))
+        .value(quantity)
         .effective(
           buildPeriod(startTime, endTime, zoneOffset)
         )
@@ -123,6 +124,9 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
           buildReference(buildIdentifier(
             BASE_URL + "/device", deviceId
           ))
+        )
+        .derivedFrom(
+          buildReference(parentEntry)
         )
         .subject(
           buildReference(patientEntry)
@@ -139,8 +143,9 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
     JSONObject liveElement,
     JSONObject dataElement,
     CodeableConcept codes,
-    Quantity quantity
-//    , Bundle.Entry patientEntry
+    Quantity quantity,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
   ) {
     String  startTime = liveElement.getString("start_time");
     String    endTime = liveElement.getString("end_time");
@@ -157,96 +162,18 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
         .effective(
           buildPeriod(startTime, endTime, zoneOffset)
         )
+        .derivedFrom(
+          buildReference(parentEntry)
+        )
+        .subject(
+          buildReference(patientEntry)
+        )
         .build(),
       "Observation",
       null,
       buildFullUrl(BASE_URL + "/observation/" + id)
     );
   }
-
-
-  /**
-   * @todo description
-   */
-//  public static Bundle.Entry buildLiveObservation(
-//    String id,
-//    CodeableConcept code,
-//    Period period,
-//    Quantity quantity,
-//    Bundle.Entry patientEntry
-//  ) {
-//    // TODO use build entry
-//    return Bundle.Entry.builder()
-//      .fullUrl(buildFullUrl(BASE_URL + "/observation/" + id))
-////      .request(request.build()) // TODO
-//      .resource(
-//        Observation.builder()
-//          .id(id)
-//          .status(ObservationStatus.FINAL)
-//          .code(code)
-//          .identifier(
-//            buildIdentifier(
-//              BASE_URL + "/identifier",
-//              "Observation/" + id
-//            )
-//          )
-//          .effective(period)
-//          .value(quantity)
-//          .subject(
-//            buildReference(patientEntry)
-//          )
-//          .build()
-//      )
-//      .build();
-//  }
-
-//  /**
-//   * @todo description
-//   */
-//  public static List<Bundle.Entry> buildCadence(JSONObject dataElement, Bundle.Entry patientEntry) {
-//    return null;
-//  }
-//  public static List<Bundle.Entry> buildCadence(JSONArray liveData, JSONObject dataElement, Bundle.Entry patientEntry) {
-//    String uuid = dataElement.getString("data_uuid");
-//    String zoneOffset = getValue(dataElement, "time_offset");
-//    List<Bundle.Entry> observations = new LinkedList();
-//    // For each live_data
-//    for (int i = 0; i < liveData.length(); ++i) {
-//      JSONObject liveElement = liveData.getJSONObject(i);
-//      // Collect live_data values
-//      String  streamId = String.format("%s-cadence-%d", uuid, i);
-//      String startTime = liveElement.getString("start_time");
-//      String   endTime = liveElement.getString("end_time");
-//      String   cadence = liveElement.getString("cadence");
-//      // Build live observation
-//      Bundle.Entry liveObservation = buildLiveObservation(
-//        streamId,
-//        buildCodeableConcept(
-//          buildCoding(
-//            SAMSUNG_LIVE_SYSTEM,
-//            "live_data_cadence",
-//            "Live data cadence"
-//          )
-//        ),
-//        buildPeriod(startTime, endTime, zoneOffset),
-//        buildQuantity(
-//          Decimal.of(cadence),
-//          "m/s",
-//          UNITSOFM_SYSTEM,
-//          "m/s"
-//        ),
-//        patientEntry
-//      );
-//      // Append live data
-//      observations.add(liveObservation);
-//    }
-//
-//    // Build aggregated observation
-//    // connect live observation to aggregated one
-//    // prepend aggregated observation
-//
-//    return observations;
-//  }
 
   //--------------------------------------------------------------------------//
   // Class definition
@@ -310,8 +237,8 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
           .coding(
             buildCoding(
               LOINC_SYSTEM,
-              "heart_rate", // TODO fix this
-              "HeartRate"
+              "heart_rate_main",
+              "Heart Rate Main"
             )
           )
           .build();
