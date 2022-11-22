@@ -16,7 +16,7 @@
         {
           "exercise_type": "14001",
           "duration": "671880",
-          "calorie": "44.0",
+
           "exercise_description": "Swimming",
           "start_time": "1624030075900",
           "end_time": "1624030747780",
@@ -28,6 +28,7 @@
           "count_type": "yyy",
           "max_speed": "fds",
           "mean_speed": "fds",
+          "calorie": "44.0",
           "max_caloricburn_rate": "24t2394t",
           "mean_caloricburn_rate": "34875fuhej",
           "max_cadence": "erefdf",

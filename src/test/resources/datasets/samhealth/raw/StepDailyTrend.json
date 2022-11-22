@@ -17,7 +17,7 @@
           "count": "6739",
           "speed": "1.293332",
           "distance": "5017.739",
-          "calories": "245.5",
+          "calorie": "245.5",
           "start_time": "1623888000000",
           "end_time": "1623974399000",
           "time_offset": "UTC+0200"
@@ -25,7 +25,7 @@
       ],
       "binning_data": [
         {
-          "calories": "0",
+          "calorie": "0",
           "count": "0",
           "distance": "0",
           "speed": "0",
@@ -33,7 +33,7 @@
           "end_time": "1623888599000"
         },
         {
-          "calories": "0",
+          "calorie": "0",
           "count": "0",
           "distance": "0",
           "speed": "0",
@@ -41,7 +41,7 @@
           "end_time": "1623889199000"
         },
         {
-          "calories": "0.25999999046325684",
+          "calorie": "0.25999999046325684",
           "count": "7",
           "distance": "4.920000076293945",
           "speed": "3.200000047683716",
