@@ -2,11 +2,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'step_daily_trend')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'step_daily_trend')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF250/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF250/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF250StepDailyTrendAssignment;
   ];
 
@@ -29,7 +29,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#PatientIdentifier>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];
@@ -44,7 +44,7 @@
       rr:parentTriplesMap <#StepDailyTrendStepsCountMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
       ];
     ];
   ];
@@ -54,7 +54,7 @@
       rr:parentTriplesMap <#StepDailyTrendBurnedCaloriesMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
       ];
     ];
   ];
@@ -64,7 +64,7 @@
       rr:parentTriplesMap <#StepDailyTrendDistancePerformedMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
       ];
     ];
   ];
@@ -74,7 +74,7 @@
       rr:parentTriplesMap <#StepDailyTrendAverageSpeedMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
       ];
     ];
   ];
@@ -84,11 +84,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'speed')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'speed')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF811/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF811/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF811AverageSpeedMeasurement;
   ];
 
@@ -100,7 +100,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];
@@ -236,11 +236,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'distance')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'distance')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF806/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF806/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF806DistancePerformedMeasurement;
   ];
 
@@ -252,7 +252,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];
@@ -388,11 +388,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'calorie')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calories')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF346/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF346/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF346BurnedCaloriesMeasurement;
   ];
 
@@ -404,7 +404,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];
@@ -474,7 +474,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'calorie')]"
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'calories')]"
   ];
 
   rr:subjectMap [
@@ -500,12 +500,12 @@
   ];
 .
 
-# # live_data_calorie
+# # live_data_calories
 <#CalorieStreamObservation> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_calorie')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_calories')]"
   ];
 
   rr:subjectMap [
@@ -540,11 +540,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == 'count')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'count')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF810/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF810/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF810StepsCountMeasurement;
   ];
 
@@ -556,7 +556,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];

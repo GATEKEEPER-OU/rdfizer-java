@@ -24,7 +24,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];
@@ -95,7 +95,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#PatientIdentifier>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
       ];
     ];

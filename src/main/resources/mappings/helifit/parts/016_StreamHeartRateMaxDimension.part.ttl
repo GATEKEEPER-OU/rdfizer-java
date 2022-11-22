@@ -8,7 +8,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF434/code/{code.coding[0].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF434/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF434HeartRateMaxDimension;
   ];
 
