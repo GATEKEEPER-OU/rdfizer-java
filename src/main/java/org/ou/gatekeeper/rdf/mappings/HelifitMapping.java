@@ -22,6 +22,9 @@ import java.util.List;
  */
 public class HelifitMapping implements RMLMapping {
 
+  public static final String RML_MAPPING_PARTS = "mappings/helifit/parts";
+  public static final String[] RML_MAPPING_PARTS_EXTS = new String[]{ "ttl" };
+
   /**
    * @todo description
    */
@@ -225,10 +228,11 @@ public class HelifitMapping implements RMLMapping {
    * @todo description
    */
   private List<File> collectTemplateParts() {
-    String[] exts = {"ttl"};
-    String ontologyPartsPath = "mappings/helifit/parts"; // @todo to define in a constant
-//    Path ontologyPartsPath = Path.of("mappings", "helifit", "parts");
-    Collection<File> parts = ResourceUtils.getResourceFiles(ontologyPartsPath, exts);
+    Collection<File> parts = ResourceUtils.getResourceFiles(
+      RML_MAPPING_PARTS,
+      RML_MAPPING_PARTS_EXTS,
+      true
+    );
     List<File> ttls = new ArrayList<>(parts);
     ttls.sort(Comparator.comparing(File::getName));
     return ttls;
