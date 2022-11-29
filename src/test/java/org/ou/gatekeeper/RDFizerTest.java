@@ -1,0 +1,164 @@
+package org.ou.gatekeeper;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.commons.ResourceUtils;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
+import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
+import org.ou.gatekeeper.rdf.enums.OutputFormat;
+import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
+import org.ou.gatekeeper.rdf.mappings.RMLMapping;
+import org.ou.gatekeeper.tlib.helpers.TestUtils;
+
+import java.io.File;
+import java.io.IOException;
+
+import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ */
+class RDFizerTest {
+
+  @ParameterizedTest
+  @CsvSource({
+    // Patient
+//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, '0000,0001,0002', datasets/phr/fhir/Patient.json",
+
+    // Samsung Health
+    "xxx, keep, all, datasets/phr/fhir/FloorClimbed.fhir.json",
+//    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,2001', datasets/phr/fhir/FloorClimbed.fhir.json",
+//    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,...', datasets/phr/fhir/FloorClimbed.fhir.json",
+
+
+    // CSS
+//    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,2001', datasets/emr/fhir/GlycosilatedEmoglobin.fhir.json",
+    // ...
+
+    // Complete datasets
+//    "xxx, keep, 'all', datasets/emr/fhir/00-dataset.fhir.json",
+    // ...
+
+  })
+  /*
+   * NOTES
+   *   @param modules can be a list of prefixes separated by commas, or the label 'all'
+   *   RECOMMENDATION:
+   *   - use 'all' label is discoraged into selective tests, because it will produce many false-positive warnings...
+   *    ... rendendo difficoltoso il debugging
+   * */
+  void test_transform_FHIRtoRDF(String expectedDigest, String policy, String modules, String dataset) {
+    File datasetFile = TestUtils.loadResource(dataset);
+//    OutputFormat outputFormat = OutputFormat.NTRIPLES;
+//    File outputFile = TestUtils.createOutputFile("output", "nt");
+    OutputFormat outputFormat = OutputFormat.TURTLE;
+    File outputFile = TestUtils.createOutputFile("output", "turtle");
+
+    FHIRAdapter converter = CSSAdapter.create();
+    String[] partsToInclude = !modules.equals("all") ? modules.split(",") : null;
+    RMLMapping mapping = HelifitMapping.create(outputFormat, partsToInclude, true);
+    RDFizer.trasform(datasetFile, converter, mapping, outputFile);
+
+    try {
+      String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
+      assertEquals(expectedDigest, outputDigest);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    } finally {
+      if (policy.equals("keep")) {
+        System.out.println("outputFile >>> " + outputFile);
+      } else { // policy: clean
+        ResourceUtils.clean(outputFile);
+      }
+    }
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+    // Patient
+//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, '0000,0001,0002', datasets/phr/raw/Patient.json",
+
+    // PHR
+//    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,2001', datasets/phr/raw/FloorClimbed.json",
+//    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,...', datasets/phr/raw/___.json",
+
+    // Complete datasets
+//    "xxx, keep, 'all', datasets/phr/raw/00-dataset.json",
+    // ...
+
+  })
+  void test_transform_PHRtoRDF(String expectedDigest, String policy, String modules, String dataset) {
+    File datasetFile = TestUtils.loadResource(dataset);
+//    OutputFormat outputFormat = OutputFormat.NTRIPLES;
+//    File outputFile = TestUtils.createOutputFile("output", "nt");
+    OutputFormat outputFormat = OutputFormat.TURTLE;
+    File outputFile = TestUtils.createOutputFile("output", "turtle");
+
+    FHIRAdapter converter = CSSAdapter.create();
+    String[] partsToInclude = !modules.equals("all") ? modules.split(",") : null;
+    RMLMapping mapping = HelifitMapping.create(outputFormat, partsToInclude, true);
+    RDFizer.trasform(datasetFile, converter, mapping, outputFile);
+
+    try {
+      String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
+      assertEquals(expectedDigest, outputDigest);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    } finally {
+      if (policy.equals("keep")) {
+        System.out.println("outputFile >>> " + outputFile);
+      } else { // policy: clean
+        ResourceUtils.clean(outputFile);
+      }
+    }
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+    // Patient
+//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, '0000,0001,0002', datasets/emr/raw/Patient.json",
+
+    // EMR
+    "xxx, keep, '0000,0001,0002,0010,0011,0012,0030,0031,2001', datasets/emr/raw/GlycosilatedEmoglobin.json",
+    // ...
+
+    // Complete datasets
+//    "xxx, keep, 'all', datasets/emr/raw/00-dataset.json",
+    // ...
+
+  })
+  void test_transform_EMRtoRDF(String expectedDigest, String policy, String modules, String dataset) {
+    File datasetFile = TestUtils.loadResource(dataset);
+//    OutputFormat outputFormat = OutputFormat.NTRIPLES;
+//    File outputFile = TestUtils.createOutputFile("output", "nt");
+    OutputFormat outputFormat = OutputFormat.TURTLE;
+    File outputFile = TestUtils.createOutputFile("output", "turtle");
+
+    FHIRAdapter converter = CSSAdapter.create();
+    String[] partsToInclude = !modules.equals("all") ? modules.split(",") : null;
+    RMLMapping mapping = HelifitMapping.create(outputFormat, partsToInclude, true);
+    RDFizer.trasform(datasetFile, converter, mapping, outputFile);
+
+    try {
+      String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
+      assertEquals(expectedDigest, outputDigest);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    } finally {
+      if (policy.equals("keep")) {
+        System.out.println("outputFile >>> " + outputFile);
+      } else { // policy: clean
+        ResourceUtils.clean(outputFile);
+      }
+    }
+  }
+
+}

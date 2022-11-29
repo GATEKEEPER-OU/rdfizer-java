@@ -4,8 +4,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.PHRAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -58,7 +58,7 @@ class RDFizerPugliaTest {
     File datasetFile = TestUtils.loadResource(dataset);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = PHRAdapter.create();
+    FHIRAdapter converter = CSSAdapter.create();
     String[] partsToInclude = modules.split(",");
     RMLMapping mapping = HelifitMapping.create(
       OutputFormat.NTRIPLES,

@@ -1,9 +1,9 @@
 package org.ou.gatekeeper;
 
 import org.junit.jupiter.api.Test;
-import org.ou.gatekeeper.fhir.adapters.EMRAdapter;
+import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.PHRAdapter;
+import org.ou.gatekeeper.fhir.adapters.SamsungHealthAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -24,7 +24,7 @@ class RDFizerDemoTest {
     File datasetFile = loadResource(datasetFilename);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = PHRAdapter.create();
+    FHIRAdapter converter = SamsungHealthAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(
@@ -39,10 +39,12 @@ class RDFizerDemoTest {
   void transformEMRFileToFile() {
     String datasetFilename = "datasets/puglia/emr/00-dataset-complete.json";
     File datasetFile = loadResource(datasetFilename);
-    File outputFile = TestUtils.createOutputFile("output", "nt");
+//    File outputFile = TestUtils.createOutputFile("output", "nt");
+    File outputFile = TestUtils.createOutputFile("output", "turtle");
 
-    FHIRAdapter converter = EMRAdapter.create();
-    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
+    FHIRAdapter converter = CSSAdapter.create();
+//    RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
+    RMLMapping mapping = HelifitMapping.create(OutputFormat.TURTLE);
 
     RDFizer.trasform(
       datasetFile,
