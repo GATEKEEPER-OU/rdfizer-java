@@ -1,0 +1,125 @@
+{
+  "entry": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "https://opensource.samsung.com/projects/helifit/identifier",
+            "systemDomainName": "opensource_samsung_com",
+            "value": "user12@puglia.gatekeeper.com"
+          },
+          {
+            "system": "https://opensource.samsung.com/projects/helifit/identifier",
+            "systemDomainName": "opensource_samsung_com",
+            "value": "60b36ccc05f8c40fc9428105"
+          }
+        ],
+        "id": "60b36ccc05f8c40fc9428105",
+        "resourceType": "Patient"
+      },
+      "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "https://opensource.samsung.com/projects/helifit/identifier",
+            "value": "Observation/7685965849034eeeeee89"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "floors_climbed",
+              "systemDomainName": "loinc_org",
+              "display": "FloorsClimbed"
+            }
+          ]
+        },
+        "effectivePeriod": {
+          "start": "2022-11-23T17:36:54.902002+01:00",
+          "end": "2022-11-23T17:36:54.902166+01:00"
+        },
+        "subject": {
+          "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+          "display": "60b36ccc05f8c40fc9428105"
+        },
+        "id": "7685965849034eeeeee89",
+        "device": {
+          "identifier": {
+            "system": "https://opensource.samsung.com/projects/helifit/device",
+            "value": "XaIq54it7a"
+          }
+        },
+        "resourceType": "Observation",
+        "status": "final"
+      },
+      "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89"
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      },
+      "resource": {
+        "identifier": [
+          {
+            "system": "https://opensource.samsung.com/projects/helifit/identifier",
+            "value": "7685965849034eeeeee89-floor"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://local-system",
+              "code": "floor",
+              "systemDomainName": "local-system",
+              "display": "Floor"
+            }
+          ]
+        },
+        "effectivePeriod": {
+          "start": "2022-11-23T17:36:54.902367+01:00",
+          "end": "2022-11-23T17:36:54.902393+01:00"
+        },
+        "subject": {
+          "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+          "display": "60b36ccc05f8c40fc9428105"
+        },
+        "derivedFrom": [
+          {
+            "reference": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89",
+            "display": "7685965849034eeeeee89"
+          }
+        ],
+        "id": "7685965849034eeeeee89-floor",
+        "device": {
+          "identifier": {
+            "system": "https://opensource.samsung.com/projects/helifit/device",
+            "value": "XaIq54it7a"
+          }
+        },
+        "resourceType": "Observation",
+        "status": "final",
+        "valueQuantity": {
+          "unit": "...",
+          "system": "http://unitsofmeasure.org",
+          "code": "...",
+          "value": 1
+        }
+      },
+      "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89-floor"
+    }
+  ],
+  "type": "transaction",
+  "resourceType": "Bundle"
+}

@@ -1,0 +1,121 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user12@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "7685965849034eeeeee89",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "Observation/7685965849034eeeeee89"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "floors_climbed",
+                            "display": "FloorsClimbed"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-23T17:36:53.648584+01:00",
+                    "end": "2022-11-23T17:36:54.595397+01:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89-floor",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "7685965849034eeeeee89-floor",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "7685965849034eeeeee89-floor"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "floor",
+                            "display": "Floor"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-23T17:36:54.596313+01:00",
+                    "end": "2022-11-23T17:36:54.596337+01:00"
+                },
+                "valueQuantity": {
+                    "value": 1.0,
+                    "unit": "...",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "..."
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/7685965849034eeeeee89",
+                        "display": "7685965849034eeeeee89"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}
