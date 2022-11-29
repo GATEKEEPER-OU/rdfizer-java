@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters.builders;
+package org.ou.gatekeeper.fhir.adapters;
 
 import com.ibm.fhir.model.resource.*;
 import com.ibm.fhir.model.type.*;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIRBase {
+class FHIRBaseBuilder {
 
   /**
    * @todo description
@@ -312,7 +312,7 @@ public class FHIRBase {
   /**
    * @todo description
    */
-  protected FHIRBase() {
+  protected FHIRBaseBuilder() {
   }
 
   @Deprecated // @todo use the function toBuilder ?

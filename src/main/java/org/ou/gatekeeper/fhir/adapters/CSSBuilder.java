@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters.builders;
+package org.ou.gatekeeper.fhir.adapters;
 
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
@@ -18,7 +18,7 @@ import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class FHIREMRBuilder extends FHIRBase {
+class CSSBuilder extends FHIRBaseBuilder {
 
   public static final String LOINC_SYSTEM = "http://loinc.org";
   public static final String DOID_SYSTEM = "http://purl.obolibrary.org/obo/";
@@ -951,7 +951,7 @@ public class FHIREMRBuilder extends FHIRBase {
   /**
    * @todo description
    */
-  private FHIREMRBuilder() {
+  private CSSBuilder() {
     super();
   }
 

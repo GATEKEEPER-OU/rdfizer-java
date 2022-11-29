@@ -14,7 +14,7 @@ import org.commons.ResourceUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer2;
+import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -23,7 +23,7 @@ import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
 import static org.commons.ResourceUtils.generateUniqueFilename;
-import static org.ou.gatekeeper.fhir.adapters.builders.FHIRSamsungHealthBuilder.*;
+import static org.ou.gatekeeper.fhir.adapters.SamsungHealthBuilder.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -69,7 +69,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
 
       // Normalize FHIR bundles, if requested
       if (normalize) {
-        FHIRNormalizer2.normalize(tempOutputFile, output);
+        FHIRNormalizer.normalize(tempOutputFile, output);
         ResourceUtils.clean(tempOutputFile);
       } else {
         Files.move(tempOutputFile.toPath(), output.toPath());

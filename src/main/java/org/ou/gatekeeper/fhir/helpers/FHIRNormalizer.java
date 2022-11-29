@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters.helpers;
+package org.ou.gatekeeper.fhir.helpers;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.commons.UrlUtils;
@@ -89,7 +89,8 @@ public class FHIRNormalizer {
 
       // connect resource to components
       if (resource.getString("resourceType").equals("Observation")) {
-        String resourceId = entry.getString("fullUrl");
+//        String resourceId = entry.getString("fullUrl");
+        String resourceId = resource.getString("id");
         if (resource.has("component")) {
           JSONArray components = resource.getJSONArray("component");
           connectResourceToComponents(components, resourceId);

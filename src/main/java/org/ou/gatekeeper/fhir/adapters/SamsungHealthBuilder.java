@@ -1,18 +1,20 @@
-package org.ou.gatekeeper.fhir.adapters.builders;
+package org.ou.gatekeeper.fhir.adapters;
 
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
-import com.ibm.fhir.model.type.*;
+import com.ibm.fhir.model.type.CodeableConcept;
+import com.ibm.fhir.model.type.Coding;
+import com.ibm.fhir.model.type.Quantity;
+import com.ibm.fhir.model.type.Reference;
 import com.ibm.fhir.model.type.code.ObservationStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.String;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class FHIRSamsungHealthBuilder extends FHIRBase {
+class SamsungHealthBuilder extends FHIRBaseBuilder {
 
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
@@ -182,7 +184,7 @@ public class FHIRSamsungHealthBuilder extends FHIRBase {
   /**
    * @todo description
    */
-  private FHIRSamsungHealthBuilder() {
+  private SamsungHealthBuilder() {
     super();
   }
 

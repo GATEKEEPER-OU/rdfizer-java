@@ -10,7 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.ou.gatekeeper.fhir.adapters.helpers.FHIRNormalizer;
+import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 import org.commons.ResourceUtils;
 
 import java.io.*;
@@ -19,20 +19,20 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
-import static org.ou.gatekeeper.fhir.adapters.builders.FHIREMRBuilder.*;
+import static org.ou.gatekeeper.fhir.adapters.CSSBuilder.*;
 import static org.commons.ResourceUtils.generateUniqueFilename;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-public class EMRAdapter implements FHIRAdapter {
+public class CSSAdapter implements FHIRAdapter {
 
   /**
    * @todo description
    */
   public static FHIRAdapter create() {
-    return new EMRAdapter();
+    return new CSSAdapter();
   }
 
   /**
@@ -101,7 +101,7 @@ public class EMRAdapter implements FHIRAdapter {
   /**
    * @todo description
    */
-  protected EMRAdapter() {}
+  protected CSSAdapter() {}
 
   /**
    * @todo description
