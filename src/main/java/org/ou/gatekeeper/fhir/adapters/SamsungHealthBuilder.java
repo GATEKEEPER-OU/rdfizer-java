@@ -3,14 +3,12 @@ package org.ou.gatekeeper.fhir.adapters;
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
-import com.ibm.fhir.model.type.CodeableConcept;
-import com.ibm.fhir.model.type.Coding;
-import com.ibm.fhir.model.type.Quantity;
-import com.ibm.fhir.model.type.Reference;
+import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.String;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -54,7 +52,6 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
    */
   public static Bundle.Entry buildMainObservation(
     JSONObject dataElement,
-//    Collection<Bundle.Entry> members,
     Bundle.Entry patientEntry
   ) {
     String       uuid = dataElement.getString("data_uuid");
@@ -76,11 +73,11 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
         .code(
           getCodes(dataElement)
         )
-//        .hasMember(getReferences(members))
         .effective(
           // TODO fix just one timestamp (not startTime, endTime)
           buildPeriod(startTime, endTime, zoneOffset)
         )
+        .value(getMainValue(dataElement))
         .device(
           buildReference(buildIdentifier(
             BASE_URL + "/device", deviceId
@@ -333,6 +330,21 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
           LOINC_SYSTEM,
           "swimming", // TODO fix this
           typeId
+        );
+      default:
+        return null; // TODO exception non mapped
+    }
+  }
+
+  private static Quantity getMainValue(JSONObject dataElement) {
+    String typeId = dataElement.getString("type_id");
+    switch (typeId) {
+      case "floorsClimbed":
+        return buildQuantity(
+          Decimal.of(getValue(dataElement, "floor")),
+          "...", // TODO
+          UNITSOFM_SYSTEM,
+          "..." // TODO
         );
       default:
         return null; // TODO exception non mapped

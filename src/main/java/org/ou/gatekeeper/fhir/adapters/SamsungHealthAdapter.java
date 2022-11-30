@@ -152,16 +152,10 @@ public class SamsungHealthAdapter implements FHIRAdapter {
     JSONObject dataElement,
     Bundle.Entry patientEntry
   ) {
-    /*
-      TODO: as
-      Main observation might have value
-      - FloorClimbed
-      - HeartRate
-     */
     Bundle.Entry mainObservation = buildMainObservation(dataElement, patientEntry);
     entries.add(mainObservation);
 
-    collectFloor(entries, dataElement, mainObservation, patientEntry);
+    // NOTE 'floor' collected inside buildMainObservation
 
     collectCalorie(entries, dataElement, mainObservation, patientEntry);
     collectCount(entries, dataElement, mainObservation, patientEntry);
@@ -174,56 +168,17 @@ public class SamsungHealthAdapter implements FHIRAdapter {
     collectHeartBeatCount(entries, dataElement, mainObservation, patientEntry);
 
     collectCadence(entries, dataElement, mainObservation, patientEntry);
-//    collectCount(entries, dataElement, mainObservation, patientEntry);
-//    collectDistance(entries, dataElement, mainObservation, patientEntry);
-//    collectHeartRate(entries, dataElement, mainObservation, patientEntry);
+//    collectCount(entries, dataElement, mainObservation, patientEntry);     // NOTE already collected above
+//    collectDistance(entries, dataElement, mainObservation, patientEntry);  // NOTE already collected above
+//    collectHeartRate(entries, dataElement, mainObservation, patientEntry); // NOTE already collected above
     collectPower(entries, dataElement, mainObservation, patientEntry);
-//    collectSpeed(entries, dataElement, mainObservation, patientEntry);
+//    collectSpeed(entries, dataElement, mainObservation, patientEntry);     // NOTE already collected above
     collectAltitude(entries, dataElement, mainObservation, patientEntry);
     collectDuration(entries, dataElement, mainObservation, patientEntry);
     collectHeartRate(entries, dataElement, mainObservation, patientEntry);
     collectRpm(entries, dataElement, mainObservation, patientEntry);
     collectVo2Max(entries, dataElement, mainObservation, patientEntry);
     collectLocation(entries, dataElement, mainObservation, patientEntry);
-  }
-
-  private static Bundle.Entry collectFloor(
-    Collection<Bundle.Entry> entries,
-    JSONObject dataElement,
-    Bundle.Entry parentEntry,
-    Bundle.Entry patientEntry
-  ) {
-    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("floor")) {
-      String uuid = dataElement.getString("data_uuid");
-
-      Collection<Observation.Component> components = new LinkedList<>();
-
-      //
-      // aggregated observation
-      String aggregatedId = String.format("%s-floor", uuid);
-      Bundle.Entry obs = buildAggregatedObservation(
-        aggregatedId,
-        dataElement,
-        buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "floor",
-          "Floor"
-        )),
-        components,
-        buildQuantity(
-          Decimal.of(values.getString("floor")),
-          "...", // TODO missing
-          UNITSOFM_SYSTEM,
-          "..." // TODO missing
-        ),
-        parentEntry,
-        patientEntry
-      );
-      entries.add(obs);
-      return obs;
-    }
-    return null;
   }
 
   private static Bundle.Entry collectCalorie(

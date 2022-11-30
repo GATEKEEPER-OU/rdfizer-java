@@ -23,10 +23,10 @@ class SamsungHealthAdapterTest {
 //    "xxx, keep, datasets/samhealth/raw/Patient.json",
 
     // Observations
-//    "xxx, keep, datasets/samhealth/raw/FloorClimbed.json",
+    "xxx, keep, datasets/samhealth/raw/FloorClimbed.json",
 //    "xxx, keep, datasets/samhealth/raw/StepDailyTrend.json",
 //    "xxx, keep, datasets/samhealth/raw/HeartRate.json",
-    "xxx, keep, datasets/samhealth/raw/Walking.json",
+//    "xxx, keep, datasets/samhealth/raw/Walking.json",
 //    "xxx, keep, datasets/samhealth/raw/Swimming.json",
 //    "xxx, keep, datasets/samhealth/raw/Sleep.json",
 
@@ -34,8 +34,8 @@ class SamsungHealthAdapterTest {
 //    "xxx, datasets/phr/raw/00-dataset-complete.json"
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String dataset) {
-    File    datasetFile = TestUtils.loadResource(dataset);
-    File     outputFile = TestUtils.createOutputFile("output", "fhir.json");
+    File datasetFile = TestUtils.loadResource(dataset);
+    File  outputFile = TestUtils.createOutputFile("output", "fhir.json");
 
     FHIRAdapter converter = SamsungHealthAdapter.create();
     converter.transform(datasetFile, outputFile);
