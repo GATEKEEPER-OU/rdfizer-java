@@ -12,7 +12,7 @@
 
   <target name="bundle-compilescripts">
     <mkdir dir="${target_classes}" />
-    <javac srcdir="${ant_scripts}" destdir="${target_classes}" />
+    <javac srcdir="${ant_scripts}" destdir="${target_classes}" includeantruntime="false" />
   </target>
 
   <target name="bundle-helifit" depends="bundle-compilescripts">

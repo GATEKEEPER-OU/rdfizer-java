@@ -1,15 +1,10 @@
 package org.apache.ant.scripts;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -49,10 +44,37 @@ public class BundleGenerator {
   private static List<File> getResourceFiles(Path path, String ext) {
     File resourceDir = new File(path.toUri());
     String[] exts = new String[]{ ext };
-    Collection<File> parts = FileUtils.listFiles(resourceDir, exts, true);
+    // Collection<File> parts = FileUtils.listFiles(resourceDir, exts, true); // NOTE at this stage maven dependencies can't be used here
+    Collection<File> parts = listFiles(resourceDir, exts);
     return parts.stream()
       .sorted(Comparator.comparing(File::getName))
       .toList();
+  }
+
+  private static Collection<File> listFiles(File rootDir, String[] exts) {
+    List<File> files = new LinkedList<>();
+    File[] dirContent = rootDir.listFiles();
+    for(File file : dirContent) {
+      if (file.isDirectory()) {
+        Collection<File> subdirContent = listFiles(file, exts);
+        files.addAll(subdirContent);
+      } else {
+        String filename = file.getName();
+        String ext = getExtension(filename);
+        if (Arrays.asList(exts).contains(ext)) {
+          files.add(file);
+        }
+      }
+    }
+    return files;
+  }
+
+  private static String getExtension(String filename) {
+    int lastIndexOf = filename.lastIndexOf(".");
+    if (lastIndexOf == -1) {
+      return ""; // empty extension
+    }
+    return filename.substring(lastIndexOf);
   }
 
   private static void checkerUniquePrefix(List<File> files) {
