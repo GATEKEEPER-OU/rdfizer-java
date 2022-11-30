@@ -149,6 +149,7 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
     Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
+    String   deviceId = dataElement.getString("device_id");
     String  startTime = liveElement.getString("start_time");
     String    endTime = liveElement.getString("end_time");
     String zoneOffset = getValue(dataElement, "time_offset");
@@ -163,6 +164,11 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
         .value(quantity)
         .effective(
           buildPeriod(startTime, endTime, zoneOffset)
+        )
+        .device(
+          buildReference(buildIdentifier(
+            BASE_URL + "/device", deviceId
+          ))
         )
         .derivedFrom(
           buildReference(parentEntry)
