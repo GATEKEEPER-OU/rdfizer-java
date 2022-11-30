@@ -1,0 +1,703 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user12@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "Observation/647848493030303030"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "heart_rate_sampling",
+                            "display": "Heart Rate Sampling"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:05.588756Z",
+                    "end": "2022-11-29T23:54:06.320944Z"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "heart_rate_instantaneous",
+                            "display": "Heart Rate Instantaneous"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.321881Z",
+                    "end": "2022-11-29T23:54:06.321917Z"
+                },
+                "valueQuantity": {
+                    "value": 74.0,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030",
+                        "display": "647848493030303030"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_instantaneous",
+                            "display": "Live data heart rate instantaneous"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.327565Z",
+                    "end": "2022-11-29T23:54:06.327615Z"
+                },
+                "valueQuantity": {
+                    "value": 80,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate",
+                        "display": "647848493030303030-heart-rate"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_instantaneous",
+                            "display": "Live data heart rate instantaneous"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.327829Z",
+                    "end": "2022-11-29T23:54:06.327849Z"
+                },
+                "valueQuantity": {
+                    "value": 78,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate",
+                        "display": "647848493030303030-heart-rate"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-2",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-2",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_instantaneous",
+                            "display": "Live data heart rate instantaneous"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.328011Z",
+                    "end": "2022-11-29T23:54:06.328031Z"
+                },
+                "valueQuantity": {
+                    "value": 72,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate",
+                        "display": "647848493030303030-heart-rate"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-min",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-min"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "heart_rate_min",
+                            "display": "Min Heart Rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.328179Z",
+                    "end": "2022-11-29T23:54:06.328197Z"
+                },
+                "valueQuantity": {
+                    "value": 69.0,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030",
+                        "display": "647848493030303030"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-min-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-min-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_min",
+                            "display": "Live data min heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.328558Z",
+                    "end": "2022-11-29T23:54:06.328578Z"
+                },
+                "valueQuantity": {
+                    "value": 76,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min",
+                        "display": "647848493030303030-heart-rate-min"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-min-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-min-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_min",
+                            "display": "Live data min heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.328748Z",
+                    "end": "2022-11-29T23:54:06.328767Z"
+                },
+                "valueQuantity": {
+                    "value": 77,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min",
+                        "display": "647848493030303030-heart-rate-min"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min-2",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-min-2",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-min-2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_min",
+                            "display": "Live data min heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.328912Z",
+                    "end": "2022-11-29T23:54:06.328933Z"
+                },
+                "valueQuantity": {
+                    "value": 72,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-min",
+                        "display": "647848493030303030-heart-rate-min"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-max",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-max"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "heart_rate_max",
+                            "display": "Max Heart Rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.329058Z",
+                    "end": "2022-11-29T23:54:06.329078Z"
+                },
+                "valueQuantity": {
+                    "value": 89.0,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030",
+                        "display": "647848493030303030"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-max-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-max-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_max",
+                            "display": "Live data max heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.329234Z",
+                    "end": "2022-11-29T23:54:06.329257Z"
+                },
+                "valueQuantity": {
+                    "value": 86,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max",
+                        "display": "647848493030303030-heart-rate-max"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-max-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-max-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_max",
+                            "display": "Live data max heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.329401Z",
+                    "end": "2022-11-29T23:54:06.32942Z"
+                },
+                "valueQuantity": {
+                    "value": 81,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max",
+                        "display": "647848493030303030-heart-rate-max"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max-2",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-rate-max-2",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-rate-max-2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate_max",
+                            "display": "Live data max heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.329594Z",
+                    "end": "2022-11-29T23:54:06.329612Z"
+                },
+                "valueQuantity": {
+                    "value": 73,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-rate-max",
+                        "display": "647848493030303030-heart-rate-max"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030-heart-beat-count",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "647848493030303030-heart-beat-count",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "647848493030303030-heart-beat-count"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "heart_beat_count",
+                            "display": "Heart Beat Count"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2022-11-29T23:54:06.329737Z",
+                    "end": "2022-11-29T23:54:06.329755Z"
+                },
+                "valueQuantity": {
+                    "value": 145,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "beats/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/647848493030303030",
+                        "display": "647848493030303030"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}

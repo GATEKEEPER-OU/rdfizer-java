@@ -67,7 +67,8 @@ public class FHIRNormalizer {
           .getJSONArray("coding");
         if (codes.length() > 1) {
           String[] codesToRemove = { // TODO refactory this: put in a constant
-            "73985-4" // Exercise activity
+            "LA11834-1", // Exercise
+            "73985-4"  // Exercise activity
             // @note add HERE codes to remove
           };
           removeGenericCodes(codes, codesToRemove);
@@ -111,7 +112,7 @@ public class FHIRNormalizer {
         collection.remove(i);
       } else {
         // TODO use logger
-        System.out.printf("WARNING: %s not handled yet. It should be removed\n", code);
+        System.out.printf("(FHIRNormalizer) WARNING: %s not handled yet. It should be removed\n", code);
       }
     }
   }

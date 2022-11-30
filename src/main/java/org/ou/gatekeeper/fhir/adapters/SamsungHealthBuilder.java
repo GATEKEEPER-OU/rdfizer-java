@@ -177,6 +177,46 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
     );
   }
 
+  public static Bundle.Entry buildLocation(
+    String id,
+    JSONObject locationElement,
+    JSONObject dataElement,
+    Collection<Observation.Component> components,
+    Bundle.Entry parentEntry,
+    Bundle.Entry patientEntry
+  ) {
+    String  startTime = locationElement.getString("start_time");
+    String    endTime = locationElement.getString("end_time");
+    String zoneOffset = getValue(dataElement, "time_offset");
+    return buildEntry(
+      Observation.builder()
+        .id(id)
+        .status(ObservationStatus.FINAL)
+        .identifier(buildIdentifier(
+          BASE_URL + "/identifier", id
+        ))
+        .code(buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "location",
+          "Location"
+        )))
+        .component(components)
+        .effective(
+          buildPeriod(startTime, endTime, zoneOffset)
+        )
+        .derivedFrom(
+          buildReference(parentEntry)
+        )
+        .subject(
+          buildReference(patientEntry)
+        )
+        .build(),
+      "Observation",
+      null,
+      buildFullUrl(BASE_URL + "/observation/" + id)
+    );
+  }
+
   //--------------------------------------------------------------------------//
   // Class definition
   //--------------------------------------------------------------------------//
@@ -239,8 +279,8 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
           .coding(
             buildCoding(
               LOINC_SYSTEM,
-              "heart_rate_main",
-              "Heart Rate Main"
+              "heart_rate_sampling",
+              "Heart Rate Sampling"
             )
           )
           .build();

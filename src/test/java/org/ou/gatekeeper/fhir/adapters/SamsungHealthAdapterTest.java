@@ -23,10 +23,10 @@ class SamsungHealthAdapterTest {
 //    "xxx, keep, datasets/samhealth/raw/Patient.json",
 
     // Observations
-    "xxx, keep, datasets/samhealth/raw/FloorClimbed.json",
+//    "xxx, keep, datasets/samhealth/raw/FloorClimbed.json",
 //    "xxx, keep, datasets/samhealth/raw/StepDailyTrend.json",
 //    "xxx, keep, datasets/samhealth/raw/HeartRate.json",
-//    "xxx, keep, datasets/samhealth/raw/Walking.json",
+    "xxx, keep, datasets/samhealth/raw/Walking.json",
 //    "xxx, keep, datasets/samhealth/raw/Swimming.json",
 //    "xxx, keep, datasets/samhealth/raw/Sleep.json",
 
@@ -46,7 +46,7 @@ class SamsungHealthAdapterTest {
     try {
       // Before evalutate, it must be eliminated outo-generated values (uuids, etc...)
       // because they will change each run
-      // TODO id
+      // TODO resource_id
 //      TestUtils.removeAllLinesFromFile(outputFile, "fullUrl");
 //      TestUtils.removeAllLinesFromFile(outputFile, "reference");
 //      TestUtils.removeAllLinesFromFile(outputFile, "valueString");

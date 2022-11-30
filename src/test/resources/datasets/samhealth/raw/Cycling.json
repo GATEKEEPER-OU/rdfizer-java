@@ -15,7 +15,7 @@
       "values": [
         {
           "exercise_type": "1001",
-          "exercise_description": "Walking",
+          "exercise_description": "Cycling",
 
           "altitude_gain":"1234",
           "altitude_loss": "7345",
