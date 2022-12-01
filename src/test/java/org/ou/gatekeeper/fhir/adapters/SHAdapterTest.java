@@ -20,27 +20,26 @@ class SHAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, datasets/sh/raw/Patient.json",
+//    "xxx, keep, Patient",
 
     // Observations
-    "xxx, keep, datasets/sh/raw/FloorsClimbed.json",
-//    "xxx, keep, datasets/sh/raw/StepDailyTrend.json",
-//    "xxx, keep, datasets/sh/raw/HeartRate.json",
-//    "xxx, keep, datasets/sh/raw/Walking.json",
-//    "xxx, keep, datasets/sh/raw/Swimming.json",
-//    "xxx, keep, datasets/sh/raw/Sleep.json",
-
-    // Complete datasets
-//    "xxx, keep, datasets/phr/raw/00-dataset-complete.json"
+    "xxx, keep, FloorsClimbed",
+//    "xxx, keep, StepDailyTrend",
+//    "xxx, keep, HeartRate",
+//    "xxx, keep, Walking",
+//    "xxx, keep, Swimming",
+//    "xxx, keep, Sleep",
   })
-  void test_transform_RawToFHIR(String expectedDigest, String policy, String dataset) {
-    File datasetFile = TestUtils.loadResource(dataset);
-    File  outputFile = TestUtils.createOutputFile("output", "fhir.json");
+  void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {
+    String sourceType = "sh";
+    String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
+    File datasetFile = TestUtils.loadResource(datasetPath);
+    File  outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
     FHIRAdapter converter = SHAdapter.create();
     converter.transform(datasetFile, outputFile);
 
-    File outputNormFile = TestUtils.createOutputFile("output", "norm.json");
+    File outputNormFile = TestUtils.createOutputFile("output-"+datasetName, "norm.json");
     converter.transform(datasetFile, outputNormFile, true);
 
     try {

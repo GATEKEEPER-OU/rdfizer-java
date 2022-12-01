@@ -20,38 +20,37 @@ class CSSAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, datasets/css/raw/Patient.json",
-//    "xxx, keep, datasets/css/raw/BodyHeight.json",
-//    "xxx, keep, datasets/css/raw/BodyWeight.json",
+//    "xxx, keep, Patient",
+//    "xxx, keep, BodyHeight",
+//    "xxx, keep, BodyWeight",
 
     // Observations
-    "xxx, keep, datasets/css/raw/GlycosilatedEmoglobin.json",
-//    "xxx, keep, datasets/css/raw/TotalCholesterol.json",
-//    "xxx, keep, datasets/css/raw/HighDensityLipoprotein.json",
-//    "xxx, keep, datasets/css/raw/LowDensityLipoprotein.json",
-//    "xxx, keep, datasets/css/raw/Triglycerides.json",
-//    "xxx, keep, datasets/css/raw/SerumCreatinine.json",
-//    "xxx, keep, datasets/css/raw/AlbuminuriaCreatininuriaRatio.json",
-//    "xxx, keep, datasets/css/raw/AlkalinePhosphatase.json",
-//    "xxx, keep, datasets/css/raw/UricAcid.json",
-//    "xxx, keep, datasets/css/raw/EstimatedGlomerularFiltrationRate.json",
-//    "xxx, keep, datasets/css/raw/Nitrites.json",
-//    "xxx, keep, datasets/css/raw/BloodPressure.json",
+    "xxx, keep, GlycosilatedEmoglobin",
+//    "xxx, keep, TotalCholesterol",
+//    "xxx, keep, HighDensityLipoprotein",
+//    "xxx, keep, LowDensityLipoprotein",
+//    "xxx, keep, Triglycerides",
+//    "xxx, keep, SerumCreatinine",
+//    "xxx, keep, AlbuminuriaCreatininuriaRatio",
+//    "xxx, keep, AlkalinePhosphatase",
+//    "xxx, keep, UricAcid",
+//    "xxx, keep, EstimatedGlomerularFiltrationRate",
+//    "xxx, keep, Nitrites",
+//    "xxx, keep, BloodPressure",
 
     // Conditions
-//    "xxx, keep, datasets/css/raw/HepaticSteatosis.json",
-//    "xxx, keep, datasets/css/raw/Hypertension.json",
-//    "xxx, keep, datasets/css/raw/HeartFailure.json",
-//    "xxx, keep, datasets/css/raw/BPCO.json",
-//    "xxx, keep, datasets/css/raw/ChronicKidneyDisease.json",
-//    "xxx, keep, datasets/css/raw/IschemicHeartDisease.json",
-
-    // Complete dataset
-//    "xxx, datasets/emr/raw/00-complete.json"
+//    "xxx, keep, HepaticSteatosis",
+//    "xxx, keep, Hypertension",
+//    "xxx, keep, HeartFailure",
+//    "xxx, keep, BPCO",
+//    "xxx, keep, ChronicKidneyDisease",
+//    "xxx, keep, IschemicHeartDisease",
   })
-  void test_transform_RawToFHIR(String expectedDigest, String policy, String dataset) {
-    File datasetFile = TestUtils.loadResource(dataset);
-    File outputFile = TestUtils.createOutputFile("output", "fhir.json");
+  void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {
+    String sourceType = "css";
+    String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
+    File datasetFile = TestUtils.loadResource(datasetPath);
+    File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
     FHIRAdapter converter = new CSSAdapter();
     converter.transform(datasetFile, outputFile);
