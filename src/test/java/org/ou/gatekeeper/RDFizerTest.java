@@ -10,7 +10,7 @@ import org.ou.gatekeeper.fhir.adapters.SamsungHealthAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
-import org.ou.gatekeeper.tlib.helpers.TestUtils;
+import lib.tests.helpers.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,14 +29,14 @@ class RDFizerTest {
 //    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, '0000,0001,0002', datasets/phr/fhir/Patient.json",
 
     // Observations
-//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,2101', datasets/samhealth/raw/FloorClimbed.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004', datasets/samhealth/raw/StepDailyTrend.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,...', datasets/samhealth/raw/HeartRate.json",
-    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002,3003,3004,3005,3006,3007', datasets/samhealth/raw/Walking.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samhealth/raw/Running.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samhealth/raw/Cycling.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samhealth/raw/Swimming.json",
-//    "xxx, keep, '0000,0001,0002,0020,0021,...', datasets/samhealth/raw/Sleep.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,2101', datasets/samsung/raw/FloorClimbed.json",
+    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004', datasets/samsung/raw/StepDailyTrend.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,...', datasets/samsung/raw/HeartRate.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002,3003,3004,3005,3006,3007', datasets/samsung/raw/Walking.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samsung/raw/Running.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samsung/raw/Cycling.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002', datasets/samsung/raw/Swimming.json",
+//    "xxx, keep, '0000,0001,0002,0020,0021,...', datasets/samsung/raw/Sleep.json",
 
   })
   /*

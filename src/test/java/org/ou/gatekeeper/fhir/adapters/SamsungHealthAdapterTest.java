@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.ou.gatekeeper.tlib.helpers.TestUtils;
+import lib.tests.helpers.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,15 +20,15 @@ class SamsungHealthAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, datasets/samhealth/raw/Patient.json",
+//    "xxx, keep, datasets/samsung/raw/Patient.json",
 
     // Observations
-    "xxx, keep, datasets/samhealth/raw/FloorClimbed.json",
-//    "xxx, keep, datasets/samhealth/raw/StepDailyTrend.json",
-//    "xxx, keep, datasets/samhealth/raw/HeartRate.json",
-//    "xxx, keep, datasets/samhealth/raw/Walking.json",
-//    "xxx, keep, datasets/samhealth/raw/Swimming.json",
-//    "xxx, keep, datasets/samhealth/raw/Sleep.json",
+    "xxx, keep, datasets/samsung/raw/FloorClimbed.json",
+//    "xxx, keep, datasets/samsung/raw/StepDailyTrend.json",
+//    "xxx, keep, datasets/samsung/raw/HeartRate.json",
+//    "xxx, keep, datasets/samsung/raw/Walking.json",
+//    "xxx, keep, datasets/samsung/raw/Swimming.json",
+//    "xxx, keep, datasets/samsung/raw/Sleep.json",
 
     // Complete datasets
 //    "xxx, datasets/phr/raw/00-dataset-complete.json"

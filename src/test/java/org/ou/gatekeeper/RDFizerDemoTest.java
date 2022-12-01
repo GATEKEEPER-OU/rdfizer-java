@@ -7,11 +7,11 @@ import org.ou.gatekeeper.fhir.adapters.SamsungHealthAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
-import org.ou.gatekeeper.tlib.helpers.TestUtils;
+import lib.tests.helpers.TestUtils;
 
 import java.io.File;
 
-import static org.ou.gatekeeper.tlib.helpers.TestUtils.loadResource;
+import static lib.tests.helpers.TestUtils.loadResource;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)

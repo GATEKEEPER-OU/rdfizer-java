@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.tlib.helpers;
+package lib.tests.helpers;
 
 import org.apache.commons.io.FileUtils;
 

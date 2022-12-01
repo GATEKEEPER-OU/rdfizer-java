@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.ou.gatekeeper.tlib.helpers.TestUtils;
+import lib.tests.helpers.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
