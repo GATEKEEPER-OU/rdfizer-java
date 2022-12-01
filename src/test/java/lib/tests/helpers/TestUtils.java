@@ -41,12 +41,12 @@ public class TestUtils {
    */
   public static FHIRAdapter getFHIRAdapter(String sourceType) {
     switch (sourceType) {
-      case "css":
+      case "CSS":
         return CSSAdapter.create();
-      case "sh":
+      case "SH":
         return SHAdapter.create();
       default:
-        throw new IllegalArgumentException("Only 'css' or 'sh' types allowed");
+        throw new IllegalArgumentException("Only 'CSS' or 'SH' types allowed");
     }
   }
 

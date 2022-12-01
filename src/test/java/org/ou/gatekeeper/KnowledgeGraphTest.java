@@ -33,17 +33,11 @@ public class KnowledgeGraphTest {
   static final String DATASTORE_NAME = "GK-DataStore";
   static ServerConnection serverConnection = null;
 
-
   @BeforeAll
-  static void setUpClass() {
-    try {
-      RDFoxUtils.startLocalServer(TEST_ROLE, TEST_PASSWORD);
-      serverConnection = ConnectionFactory.newServerConnection(RDFOX_HOST, TEST_ROLE, TEST_PASSWORD);
-      RDFoxUtils.createDatastore(serverConnection, DATASTORE_NAME, ONTOLOGY);
-
-    } catch (JRDFoxException e) {
-      throw new RuntimeException(e);
-    }
+  static void setUpClass() throws JRDFoxException {
+    RDFoxUtils.startLocalServer(TEST_ROLE, TEST_PASSWORD);
+    serverConnection = ConnectionFactory.newServerConnection(RDFOX_HOST, TEST_ROLE, TEST_PASSWORD);
+    RDFoxUtils.createDatastore(serverConnection, DATASTORE_NAME, ONTOLOGY);
   }
 
   @BeforeEach
@@ -56,12 +50,12 @@ public class KnowledgeGraphTest {
     //
     // CSS
     // -------------------------------------------------------------------------
-//    "xxx, keep, css, GlycosilatedEmoglobin",
+//    "xxx, keep, CSS, GlycosilatedEmoglobin",
 
     //
     // Samsung Health
     // -------------------------------------------------------------------------
-    "xxx, keep, sh, FloorsClimbed",
+    "xxx, keep, SH, FloorsClimbed",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName
@@ -97,9 +91,11 @@ public class KnowledgeGraphTest {
       if (policy.equals("keep")) {
         System.out.println("triplesFile >>> " + triplesFile);
         System.out.println("outputFile >>> " + outputFile);
-      } else { // policy: clean
+      } else if (policy.equals("clean")) {
         ResourceUtils.clean(triplesFile);
         ResourceUtils.clean(outputFile);
+      } else {
+        throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }
     }
   }

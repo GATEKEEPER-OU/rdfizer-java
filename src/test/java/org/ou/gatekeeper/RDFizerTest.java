@@ -28,28 +28,28 @@ class RDFizerTest {
     // -------------------------------------------------------------------------
 
     // Patient
-//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, css, Patient, '0000,0001,0002'",
+//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, CSS, Patient, '0000,0001,0002'",
 
     // Observations
-//    "xxx, keep, css, .., all",
-//    "xxx, keep, css, GlycosilatedEmoglobin, '0000,0001,0002,0020,0021,0040,0041,...'",
+//    "xxx, keep, CSS, .., all",
+//    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0020,0021,0040,0041,...'",
 
     //
     // Samsung Health
     // -------------------------------------------------------------------------
 
     // Patient
-//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, css, Patient, '0000,0001,0002'",
+//    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, SH, Patient, '0000,0001,0002'",
 
     // Observations
-    "xxx, keep, sh, FloorsClimbed, '0000,0001,0002,0020,0021,0040,0041,2101'",
-//    "xxx, keep, sh, StepDailyTrend, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004'",
-//    "xxx, keep, sh, HeartRate, '0000,0001,0002,0020,0021,...'",
-//    "xxx, keep, sh, Walking,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002,3003,3004,3005,3006,3007'",
-//    "xxx, keep, sh, Running,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
-//    "xxx, keep, sh, Cycling,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
-//    "xxx, keep, sh, Swimming,  '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
-//    "xxx, keep, sh, Sleep,     '0000,0001,0002,0020,0021,...'",
+    "xxx, keep, SH, FloorsClimbed, '0000,0001,0002,0020,0021,0040,0041,2101'",
+//    "xxx, keep, SH, StepDailyTrend, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004'",
+//    "xxx, keep, SH, HeartRate, '0000,0001,0002,0020,0021,...'",
+//    "xxx, keep, SH, Walking,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002,3003,3004,3005,3006,3007'",
+//    "xxx, keep, SH, Running,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
+//    "xxx, keep, SH, Cycling,   '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
+//    "xxx, keep, SH, Swimming,  '0000,0001,0002,0020,0021,0040,0041,3101,0010,3001,3002'",
+//    "xxx, keep, SH, Sleep,     '0000,0001,0002,0020,0021,...'",
 
   })
   /*
@@ -82,8 +82,10 @@ class RDFizerTest {
     } finally {
       if (policy.equals("keep")) {
         System.out.println("outputFile >>> " + outputFile);
-      } else { // policy: clean
+      } else if (policy.equals("clean")) {
         ResourceUtils.clean(outputFile);
+      } else {
+        throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }
     }
   }

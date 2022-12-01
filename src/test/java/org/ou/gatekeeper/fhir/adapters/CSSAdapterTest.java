@@ -47,8 +47,7 @@ class CSSAdapterTest {
 //    "xxx, keep, IschemicHeartDisease",
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {
-    String sourceType = "css";
-    String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
+    String datasetPath = TestUtils.getDatasetPath("CSS", datasetName);
     File datasetFile = TestUtils.loadResource(datasetPath);
     File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
@@ -68,8 +67,10 @@ class CSSAdapterTest {
     } finally {
       if (policy.equals("keep")) {
         System.out.println("outputFile >>> " + outputFile);
-      } else { // policy: clean
+      } else if (policy.equals("clean")) {
         ResourceUtils.clean(outputFile);
+      } else {
+        throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }
     }
   }
