@@ -24,7 +24,6 @@ public class BundleGenerator {
 
     StringBuilder helifitRml = new StringBuilder();
     for (File ttl : ttls) {
-      System.out.println("ttl name >>> " + ttl.getName()); // DEBUG
       String ttlContent = Files.readString(ttl.toPath());
       helifitRml
         .append(ttlContent)
@@ -47,7 +46,6 @@ public class BundleGenerator {
     String[] exts = new String[]{ ext };
     // Collection<File> parts = FileUtils.listFiles(resourceDir, exts, true); // NOTE at this stage maven dependencies can't be used here
     Collection<File> parts = listFiles(resourceDir, exts);
-    System.out.println("parts.size() >>> " + parts.size()); // DEBUG
     return parts.stream()
       .sorted(Comparator.comparing(File::getName))
       .toList();
@@ -57,16 +55,13 @@ public class BundleGenerator {
     List<File> files = new LinkedList<>();
     File[] dirContent = rootDir.listFiles();
     for(File file : dirContent) {
-//      System.out.println("file name >>> " + file.getName()); // DEBUG
       if (file.isDirectory()) {
         Collection<File> subdirContent = listFiles(file, exts);
         files.addAll(subdirContent);
       } else {
         String filename = file.getName();
         String ext = getExtension(filename);
-        System.out.println("ext >>> " + ext); // DEBUG
         if (Arrays.asList(exts).contains(ext)) {
-          System.out.println("Added >>> " + file.getName()); // DEBUG
           files.add(file);
         }
       }
