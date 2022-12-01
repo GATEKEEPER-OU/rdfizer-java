@@ -170,5 +170,7 @@ Temporary Items
 
 # Custom
 .idea/artifacts/*
+lib/*
+!lib/.keep
 target
 tmp/*
