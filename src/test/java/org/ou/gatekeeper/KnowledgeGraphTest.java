@@ -53,8 +53,15 @@ public class KnowledgeGraphTest {
 
   @ParameterizedTest
   @CsvSource({
-    "xxx, keep, sh, FloorsClimbed",
+    //
+    // CSS
+    // -------------------------------------------------------------------------
 //    "xxx, keep, css, GlycosilatedEmoglobin",
+
+    //
+    // Samsung Health
+    // -------------------------------------------------------------------------
+    "xxx, keep, sh, FloorsClimbed",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName
