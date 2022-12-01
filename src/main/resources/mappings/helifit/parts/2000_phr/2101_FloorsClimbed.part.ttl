@@ -19,8 +19,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -81,8 +81,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -91,8 +91,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -102,12 +102,12 @@
     rr:objectMap [
       rr:parentTriplesMap <#Device>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
-  
+
   #
   # Data
   #
@@ -117,7 +117,7 @@
       rr:parentTriplesMap <#FloorsClimbedDimension>;
       rr:joinCondition [
          rr:child "resource.id";
-        rr:parent "resource.derivedFrom[0].display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -129,11 +129,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floor')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floors_climbed')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF426/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF426/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF426FloorsClimbedDimension;
   ];
 

@@ -6,7 +6,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF453/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF453/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF453ExerciseRevolutionDimension;
   ];
 

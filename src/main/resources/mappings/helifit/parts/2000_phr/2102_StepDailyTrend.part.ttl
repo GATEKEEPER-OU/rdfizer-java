@@ -13,13 +13,14 @@
   #
   # Metadata
   #
+
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -110,8 +111,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -120,8 +121,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -131,8 +132,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Device>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -173,7 +174,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF320/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF320/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF320AverageSpeedDimension;
   ];
 
@@ -213,8 +214,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -224,8 +225,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#InstantaneousSpeedDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -262,8 +263,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -272,8 +273,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -283,8 +284,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Device>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -325,7 +326,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF319/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF319/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF319TotalDistanceDimension;
   ];
 
@@ -365,8 +366,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -376,8 +377,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AccumulatedDistanceDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -414,8 +415,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -424,8 +425,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -435,8 +436,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Device>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -477,7 +478,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF318/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF318/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF318TotalBurnedCaloriesDimension;
   ];
 
@@ -517,8 +518,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -528,8 +529,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#StreamBurnedCaloriesDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -566,8 +567,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -576,8 +577,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -587,8 +588,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Device>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -629,7 +630,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF28/code/{code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF28/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF28StepsCountDimension;
   ];
 
@@ -669,8 +670,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -680,8 +681,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AccumulatedStepCountDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];

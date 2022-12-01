@@ -22,8 +22,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifierType>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
