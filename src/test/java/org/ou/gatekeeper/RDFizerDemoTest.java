@@ -3,7 +3,7 @@ package org.ou.gatekeeper;
 import org.junit.jupiter.api.Test;
 import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.SamsungHealthAdapter;
+import org.ou.gatekeeper.fhir.adapters.SHAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -24,7 +24,7 @@ class RDFizerDemoTest {
     File datasetFile = loadResource(datasetFilename);
     File outputFile = TestUtils.createOutputFile("output", "nt");
 
-    FHIRAdapter converter = SamsungHealthAdapter.create();
+    FHIRAdapter converter = SHAdapter.create();
     RMLMapping mapping = HelifitMapping.create(OutputFormat.NTRIPLES);
 
     RDFizer.trasform(

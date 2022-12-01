@@ -12,7 +12,7 @@ import java.lang.String;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-class SamsungHealthBuilder extends FHIRBaseBuilder {
+class SHBuilder extends FHIRBaseBuilder {
 
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
@@ -227,7 +227,7 @@ class SamsungHealthBuilder extends FHIRBaseBuilder {
   /**
    * @todo description
    */
-  private SamsungHealthBuilder() {
+  private SHBuilder() {
     super();
   }
 

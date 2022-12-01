@@ -15,20 +15,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  */
-class SamsungHealthAdapterTest {
+class SHAdapterTest {
 
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, datasets/samsung/raw/Patient.json",
+//    "xxx, keep, datasets/sh/raw/Patient.json",
 
     // Observations
-    "xxx, keep, datasets/samsung/raw/FloorClimbed.json",
-//    "xxx, keep, datasets/samsung/raw/StepDailyTrend.json",
-//    "xxx, keep, datasets/samsung/raw/HeartRate.json",
-//    "xxx, keep, datasets/samsung/raw/Walking.json",
-//    "xxx, keep, datasets/samsung/raw/Swimming.json",
-//    "xxx, keep, datasets/samsung/raw/Sleep.json",
+    "xxx, keep, datasets/sh/raw/FloorClimbed.json",
+//    "xxx, keep, datasets/sh/raw/StepDailyTrend.json",
+//    "xxx, keep, datasets/sh/raw/HeartRate.json",
+//    "xxx, keep, datasets/sh/raw/Walking.json",
+//    "xxx, keep, datasets/sh/raw/Swimming.json",
+//    "xxx, keep, datasets/sh/raw/Sleep.json",
 
     // Complete datasets
 //    "xxx, datasets/phr/raw/00-dataset-complete.json"
@@ -37,7 +37,7 @@ class SamsungHealthAdapterTest {
     File datasetFile = TestUtils.loadResource(dataset);
     File  outputFile = TestUtils.createOutputFile("output", "fhir.json");
 
-    FHIRAdapter converter = SamsungHealthAdapter.create();
+    FHIRAdapter converter = SHAdapter.create();
     converter.transform(datasetFile, outputFile);
 
     File outputNormFile = TestUtils.createOutputFile("output", "norm.json");

@@ -23,19 +23,19 @@ import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
 import static org.commons.ResourceUtils.generateUniqueFilename;
-import static org.ou.gatekeeper.fhir.adapters.SamsungHealthBuilder.*;
+import static org.ou.gatekeeper.fhir.adapters.SHBuilder.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * TODO description
  */
-public class SamsungHealthAdapter implements FHIRAdapter {
+public class SHAdapter implements FHIRAdapter {
 
   /**
    * TODO description
    */
-  public static SamsungHealthAdapter create() {
-    return new SamsungHealthAdapter();
+  public static SHAdapter create() {
+    return new SHAdapter();
   }
 
   @Override
@@ -94,7 +94,7 @@ public class SamsungHealthAdapter implements FHIRAdapter {
   /**
    * TODO description
    */
-  protected SamsungHealthAdapter() {}
+  protected SHAdapter() {}
 
   /**
    * TODO description
