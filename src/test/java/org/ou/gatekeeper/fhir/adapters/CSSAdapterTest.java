@@ -20,31 +20,31 @@ class CSSAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, datasets/css/raw/Patient.json",
-//    "xxx, datasets/css/raw/BodyHeight.json",
-//    "xxx, datasets/css/raw/BodyWeight.json",
+//    "xxx, keep, datasets/css/raw/Patient.json",
+//    "xxx, keep, datasets/css/raw/BodyHeight.json",
+//    "xxx, keep, datasets/css/raw/BodyWeight.json",
 
     // Observations
     "xxx, keep, datasets/css/raw/GlycosilatedEmoglobin.json",
-//    "xxx, datasets/css/raw/TotalCholesterol.json",
-//    "xxx, datasets/css/raw/HighDensityLipoprotein.json",
-//    "xxx, datasets/css/raw/LowDensityLipoprotein.json",
-//    "xxx, datasets/css/raw/Triglycerides.json",
-//    "xxx, datasets/css/raw/SerumCreatinine.json",
-//    "xxx, datasets/css/raw/AlbuminuriaCreatininuriaRatio.json",
-//    "xxx, datasets/css/raw/AlkalinePhosphatase.json",
-//    "xxx, datasets/css/raw/UricAcid.json",
-//    "xxx, datasets/css/raw/EstimatedGlomerularFiltrationRate.json",
-//    "xxx, datasets/css/raw/Nitrites.json",
-//    "xxx, datasets/css/raw/BloodPressure.json",
+//    "xxx, keep, datasets/css/raw/TotalCholesterol.json",
+//    "xxx, keep, datasets/css/raw/HighDensityLipoprotein.json",
+//    "xxx, keep, datasets/css/raw/LowDensityLipoprotein.json",
+//    "xxx, keep, datasets/css/raw/Triglycerides.json",
+//    "xxx, keep, datasets/css/raw/SerumCreatinine.json",
+//    "xxx, keep, datasets/css/raw/AlbuminuriaCreatininuriaRatio.json",
+//    "xxx, keep, datasets/css/raw/AlkalinePhosphatase.json",
+//    "xxx, keep, datasets/css/raw/UricAcid.json",
+//    "xxx, keep, datasets/css/raw/EstimatedGlomerularFiltrationRate.json",
+//    "xxx, keep, datasets/css/raw/Nitrites.json",
+//    "xxx, keep, datasets/css/raw/BloodPressure.json",
 
     // Conditions
-//    "xxx, datasets/css/raw/HepaticSteatosis.json",
-//    "xxx, datasets/css/raw/Hypertension.json",
-//    "xxx, datasets/css/raw/HeartFailure.json",
-//    "xxx, datasets/css/raw/BPCO.json",
-//    "xxx, datasets/css/raw/ChronicKidneyDisease.json",
-//    "xxx, datasets/css/raw/IschemicHeartDisease.json",
+//    "xxx, keep, datasets/css/raw/HepaticSteatosis.json",
+//    "xxx, keep, datasets/css/raw/Hypertension.json",
+//    "xxx, keep, datasets/css/raw/HeartFailure.json",
+//    "xxx, keep, datasets/css/raw/BPCO.json",
+//    "xxx, keep, datasets/css/raw/ChronicKidneyDisease.json",
+//    "xxx, keep, datasets/css/raw/IschemicHeartDisease.json",
 
     // Complete dataset
 //    "xxx, datasets/emr/raw/00-complete.json"

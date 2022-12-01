@@ -31,7 +31,7 @@ class SHAdapterTest {
 //    "xxx, keep, datasets/sh/raw/Sleep.json",
 
     // Complete datasets
-//    "xxx, datasets/phr/raw/00-dataset-complete.json"
+//    "xxx, keep, datasets/phr/raw/00-dataset-complete.json"
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String dataset) {
     File datasetFile = TestUtils.loadResource(dataset);
