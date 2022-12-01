@@ -23,7 +23,7 @@ class SHAdapterTest {
 //    "xxx, keep, datasets/sh/raw/Patient.json",
 
     // Observations
-    "xxx, keep, datasets/sh/raw/FloorClimbed.json",
+    "xxx, keep, datasets/sh/raw/FloorsClimbed.json",
 //    "xxx, keep, datasets/sh/raw/StepDailyTrend.json",
 //    "xxx, keep, datasets/sh/raw/HeartRate.json",
 //    "xxx, keep, datasets/sh/raw/Walking.json",
