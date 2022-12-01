@@ -99,7 +99,7 @@ public class HelifitMapping implements RMLMapping {
         mapping = mapping.replace("www.w3.org/2001/XMLSchema", "__xsd");
         mapping = mapping.replace("purl.obolibrary.org/obo", "__doid");
 //        mapping = mapping.replace("", "__ho");
-        mapping = mapping.replace("opensource.sh.com/projects/helifit", "__base");
+        mapping = mapping.replace("opensource.samsung.com/projects/helifit", "__base");
       }
       mappingDirtyBit = false;
     }
