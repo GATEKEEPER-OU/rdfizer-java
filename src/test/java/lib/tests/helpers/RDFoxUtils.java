@@ -21,19 +21,15 @@ public class RDFoxUtils {
   /**
    * @todo
    * */
-  public static void startLocalServer(String firstRoleName, String password) {
+  public static void startLocalServer(
+    String firstRoleName, String password
+  ) throws JRDFoxException {
     Map<String, String> serverParams = new HashMap<>();
     serverParams.put("license-file", LICENSE_FILE);
     serverParams.put("num-threads", "2");
-    try {
-      ConnectionFactory.startLocalServer(serverParams);
-      if (ConnectionFactory.getNumberOfLocalServerRoles() == 0) {
-        ConnectionFactory.createFirstLocalServerRole(firstRoleName, password);
-      }
-
-    } catch (JRDFoxException e) {
-      // @todo Message
-      e.printStackTrace(); // DEBUG
+    ConnectionFactory.startLocalServer(serverParams);
+    if (ConnectionFactory.getNumberOfLocalServerRoles() == 0) {
+      ConnectionFactory.createFirstLocalServerRole(firstRoleName, password);
     }
   }
 

@@ -1,6 +1,9 @@
 package lib.tests.helpers;
 
 import org.apache.commons.io.FileUtils;
+import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
+import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
+import org.ou.gatekeeper.fhir.adapters.SHAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +18,37 @@ import java.util.stream.Collectors;
  * @todo description
  */
 public class TestUtils {
+
+  public static final String DATASET_PATH_TEMPLATE = "datasets/%s/raw/%s.json";
+  public static final String QUERY_PATH_TEMPLATE = "queries/%s/%s.txt";
+
+  /**
+   * @todo description
+   */
+  public static String getDatasetPath(String sourceType, String datasetName) {
+    return String.format(DATASET_PATH_TEMPLATE, sourceType, datasetName);
+  }
+
+  /**
+   * @todo description
+   */
+  public static String getQueryPath(String sourceType, String queryFilename) {
+    return String.format(QUERY_PATH_TEMPLATE, sourceType, queryFilename);
+  }
+
+  /**
+   * @todo description
+   */
+  public static FHIRAdapter getFHIRAdapter(String sourceType) {
+    switch (sourceType) {
+      case "css":
+        return CSSAdapter.create();
+      case "sh":
+        return SHAdapter.create();
+      default:
+        throw new IllegalArgumentException("Only 'css' or 'sh' types allowed");
+    }
+  }
 
   /**
    * @todo description

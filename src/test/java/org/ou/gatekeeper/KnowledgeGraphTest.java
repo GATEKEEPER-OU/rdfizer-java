@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.SamsungHealthAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -32,14 +31,19 @@ public class KnowledgeGraphTest {
   static final String TEST_ROLE = "aRole";
   static final String TEST_PASSWORD = "aPassword";
   static final String DATASTORE_NAME = "GK-DataStore";
-  ServerConnection serverConnection = null;
+  static ServerConnection serverConnection = null;
 
 
   @BeforeAll
-  void setUpClass() throws JRDFoxException {
-    RDFoxUtils.startLocalServer(TEST_ROLE, TEST_PASSWORD);
-    serverConnection = ConnectionFactory.newServerConnection(RDFOX_HOST, TEST_ROLE, TEST_PASSWORD);
-    RDFoxUtils.createDatastore(serverConnection, DATASTORE_NAME, ONTOLOGY);
+  static void setUpClass() {
+    try {
+      RDFoxUtils.startLocalServer(TEST_ROLE, TEST_PASSWORD);
+      serverConnection = ConnectionFactory.newServerConnection(RDFOX_HOST, TEST_ROLE, TEST_PASSWORD);
+      RDFoxUtils.createDatastore(serverConnection, DATASTORE_NAME, ONTOLOGY);
+
+    } catch (JRDFoxException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @BeforeEach
@@ -49,24 +53,24 @@ public class KnowledgeGraphTest {
 
   @ParameterizedTest
   @CsvSource({
-    "xxx, keep, samsung, FloorClimbed",
+    "xxx, keep, sh, FloorsClimbed",
 //    "xxx, keep, css, GlycosilatedEmoglobin",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName
   ) throws JRDFoxException {
-    String datasetPath = getDatasetPath(sourceType, datasetName);
+    String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
     File   datasetFile = TestUtils.loadResource(datasetPath);
 
     OutputFormat tripleFormat = OutputFormat.TURTLE;
     File triplesFile = TestUtils.createOutputFile(datasetName+"-triples", "turtle");
 
-    String queryPath = getQueryPath(sourceType, datasetName);
+    String queryPath = TestUtils.getQueryPath(sourceType, datasetName);
     File   queryFile = TestUtils.loadResource(queryPath);
     String queryText = ResourceUtils.readFileToString(queryFile);
     File  outputFile = TestUtils.createOutputFile(datasetName+"-output", "turtle");
 
-    FHIRAdapter converter = SamsungHealthAdapter.create();
+    FHIRAdapter converter = TestUtils.getFHIRAdapter(sourceType);
     RMLMapping    mapping = HelifitMapping.create(tripleFormat);
     RDFizer.trasform(datasetFile, converter, mapping, triplesFile);
 
@@ -91,21 +95,6 @@ public class KnowledgeGraphTest {
         ResourceUtils.clean(outputFile);
       }
     }
-  }
-
-  //--------------------------------------------------------------------------//
-  // Class definition
-  //--------------------------------------------------------------------------//
-
-  static final String DATASET_PATH_TEMPLATE = "datasets/%s/raw/%s.json";
-  static final String QUERY_PATH_TEMPLATE = "queries/%s.txt";
-
-  private static String getDatasetPath(String sourceType, String datasetName) {
-    return String.format(DATASET_PATH_TEMPLATE, sourceType, datasetName);
-  }
-
-  private static String getQueryPath(String sourceType, String queryFilename) {
-    return String.format(QUERY_PATH_TEMPLATE, sourceType, queryFilename);
   }
 
 }
