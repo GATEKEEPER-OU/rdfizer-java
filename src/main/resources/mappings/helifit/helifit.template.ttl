@@ -321,14 +321,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:EP9effectiveDatatime;
-    rr:objectMap [
-      rml:reference "resource.effectivePeriod";
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:EP7starts;
     rr:objectMap [
       rml:reference "resource.effectivePeriod.start";
@@ -830,6 +822,80 @@
     rr:objectMap [
       rml:reference "resource.valueQuantity.value";
     ]
+  ];
+.
+
+
+# # live_data_distance
+<#DistanceStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_distance')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#AccumulatedDistanceDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+
+# # live_data_count
+<#StepsStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#AccumulatedStepCountDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
   ];
 .
 
@@ -1342,41 +1408,6 @@
   ];
 .
 
-# # live_data_distance
-<#DistanceStreamObservation> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_distance')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF321StreamObservation;
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P40observedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#AccumulatedDistanceDimension>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
 
 <#StepDailyTrendBurnedCaloriesMeasurement> a rr:TriplesMap;
   rml:logicalSource [
@@ -1646,41 +1677,6 @@
   ];
 .
 
-# # live_data_count
-<#StepsStreamObservation> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF321StreamObservation;
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P40observedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#AccumulatedStepCountDimension>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
 
 
 <#ExerciseRevolutionType> a rr:TriplesMap;
@@ -1702,38 +1698,6 @@
     rr:predicate ho:P3hasNote;
     rr:objectMap [
       rml:reference "valueQuantity.value";
-    ]
-  ];
-.
-
-#
-# live_data_speed
-<#InstantaneousSpeedDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_speed')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF471/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF471InstantaneousSpeedDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
     ]
   ];
 .
@@ -1771,38 +1735,6 @@
 .
 
 #
-# live_data_distance
-<#AccumulatedDistanceDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_distance')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF906/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF906AccumulatedDistanceDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
-  ];
-.
-
-#
 # live_data_power
 <#InstantaneousPowerDimension> a rr:TriplesMap;
   rml:logicalSource [
@@ -1814,38 +1746,6 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF474/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF474InstantaneousPowerDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
-  ];
-.
-
-#
-# live_data_count
-<#AccumulatedStepCountDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF473/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF473AccumulatedStepCountDimension;
   ];
 
   #
@@ -1942,38 +1842,6 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF433/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF433HeartRateMinDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
-  ];
-.
-
-#
-# live_data_calories
-<#StreamBurnedCaloriesDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_calorie')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF450/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF450BurnedCaloriesDimension;
   ];
 
   #
@@ -3379,42 +3247,6 @@
   ];
 .
 
-# live_data_distance
-<#DistanceStreamObservation> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_distance')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF321StreamObservation;
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P40observedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#AccumulatedDistanceDimension>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
-
 # max_power
 <#MaxPowerMeasurement> a rr:TriplesMap;
   rml:logicalSource [
@@ -3922,42 +3754,6 @@
     rr:objectMap [
       rml:reference "valueQuantity.value";
     ]
-  ];
-.
-
-# # live_data_count
-<#StepsStreamObservation> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF321StreamObservation;
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P40observedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#AccumulatedStepCountDimension>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
   ];
 .
 
