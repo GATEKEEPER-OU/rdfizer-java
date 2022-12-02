@@ -1087,7 +1087,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#PatientIdentifier>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
