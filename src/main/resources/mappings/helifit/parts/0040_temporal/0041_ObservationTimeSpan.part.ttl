@@ -15,14 +15,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ho:EP9effectiveDatatime;
-    rr:objectMap [
-      rml:reference "resource.effectivePeriod";
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:EP7starts;
     rr:objectMap [
       rml:reference "resource.effectivePeriod.start";
