@@ -20,7 +20,7 @@ public class BundleGenerator {
     Path ontologyPartsPath = Path.of(ontologyPath.toString(), "parts");
 
     List<File> ttls = getResourceFiles(ontologyPartsPath, "ttl");
-    checkerUniquePrefix(ttls);
+    uniquePrefixChecker(ttls);
 
     StringBuilder helifitRml = new StringBuilder();
     for (File ttl : ttls) {
@@ -77,7 +77,7 @@ public class BundleGenerator {
     return filename.substring(lastIndexOf + 1);
   }
 
-  private static void checkerUniquePrefix(List<File> files) {
+  private static void uniquePrefixChecker(List<File> files) {
     HashMap<String, String> prefixes = new HashMap<>();
     for (File file: files) {
       String filename = file.getName();
