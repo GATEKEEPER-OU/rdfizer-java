@@ -64,12 +64,12 @@ public class KnowledgeGraphTest {
     File   datasetFile = TestUtils.loadResource(datasetPath);
 
     OutputFormat tripleFormat = OutputFormat.TURTLE;
-    File triplesFile = TestUtils.createOutputFile(datasetName+"-triples", "turtle");
+    File triplesFile = TestUtils.createOutputFile("output-"+datasetName+".triples", "turtle");
 
     String queryPath = TestUtils.getQueryPath(sourceType, datasetName);
     File   queryFile = TestUtils.loadResource(queryPath);
     String queryText = ResourceUtils.readFileToString(queryFile);
-    File  outputFile = TestUtils.createOutputFile(datasetName+"-output", "turtle");
+    File  outputFile = TestUtils.createOutputFile("output-"+datasetName+".query", "nt");
 
     FHIRAdapter converter = TestUtils.getFHIRAdapter(sourceType);
     RMLMapping    mapping = HelifitMapping.create(tripleFormat);
