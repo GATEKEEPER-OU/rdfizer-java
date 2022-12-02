@@ -9,8 +9,8 @@ SELECT DISTINCT ?patient ?assign ?mea ?streamOb ?value ?unit ?start ?end WHERE {
     ?assign hlf:P4hasTimeSpan ?ts .
     ?ts hlf:EP7starts ?start .
     ?ts hlf:EP8ends ?end .
+
     ?assign hlf:P117includes ?mea .
-    ?mea rdf:type hlf:HLF810StepsCountMeasurement .
     ?streamOb rdf:type hlf:HLF321StreamObservation .
     ?mea hlf:EP11wasObtainFrom ?streamOb .
     ?streamOb hlf:P40observedDimension ?streamDm .
