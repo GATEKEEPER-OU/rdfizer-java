@@ -1861,39 +1861,6 @@
   ];
 .
 
-#
-# steps
-<#StepsCountDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF907StepsCountDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "valueQuantity.value";
-    ]
-  ];
-.
-
-
 # vo2_max
 <#OxygenSaturationMeasurement> a rr:TriplesMap;
   rml:logicalSource [

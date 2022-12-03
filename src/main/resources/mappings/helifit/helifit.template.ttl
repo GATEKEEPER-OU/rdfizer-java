@@ -899,6 +899,39 @@
   ];
 .
 
+
+#
+# steps
+<#StepsCountDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF907StepsCountDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
 <#FloorsClimbedAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
@@ -1625,7 +1658,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#StepDailyTrendDailyStepsCountDimension>;
+      rr:parentTriplesMap <#StepsCountDimension>;
       rr:joinCondition [
          rr:child "resource.id";
         rr:parent "resourceId";
@@ -1642,38 +1675,6 @@
         rr:parent "resource.derivedFrom[0].display";
       ];
     ];
-  ];
-.
-
-#
-# count
-<#StepDailyTrendDailyStepsCountDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF28/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF28StepsCountDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "valueQuantity.value";
-    ]
   ];
 .
 
@@ -3724,39 +3725,6 @@
     ];
   ];
 .
-
-#
-# steps
-<#StepsCountDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF907StepsCountDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "valueQuantity.value";
-    ]
-  ];
-.
-
 
 # vo2_max
 <#OxygenSaturationMeasurement> a rr:TriplesMap;
