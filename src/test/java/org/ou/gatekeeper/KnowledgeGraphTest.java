@@ -56,7 +56,8 @@ public class KnowledgeGraphTest {
     // Samsung Health
     // -------------------------------------------------------------------------
     //"xxx, keep, SH, FloorsClimbed",
-    "xxx, keep, SH, StepDailyTrend",
+    //"xxx, keep, SH, StepDailyTrend",
+    "xxx, keep, SH, HeartRate",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName

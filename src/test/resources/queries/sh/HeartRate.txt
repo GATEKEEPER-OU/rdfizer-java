@@ -1,0 +1,47 @@
+prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT
+        ?patient ?assign
+        ?heartRateMea ?heartRateValue ?heartRateUnit
+        ?heartRateMaxMea ?heartRateMaxValue ?heartRateMaxUnit
+        ?heartRateMinMea ?heartRateMinValue ?heartRateMinUnit
+        ?heartBeatCountMea ?heartBeatCountValue ?heartBeatCountUnit
+        ?start ?end
+WHERE {
+    ?patient rdf:type hlf:E21Person .
+    ?patient hlf:P1isIdentifiedBy ?identifier .
+    ?ts rdf:type hlf:E52TimeSpan .
+    ?assign rdf:type hlf:HLF160HeartRateAssignment .
+    ?assign hlf:P140assignedAttributeTo ?patient .
+    ?assign hlf:P4hasTimeSpan ?ts .
+    ?ts hlf:EP7starts ?start .
+    ?ts hlf:EP8ends ?end .
+
+    ?heartRateMea rdf:type hlf:HLF168HeartRateMeasurement .
+    ?assign hlf:P117includes ?heartRateMea .
+    ?heartRateDimension rdf:type hlf:HLF703HeartRateDimension .
+    ?heartRateMea hlf:P40observedDimension ?heartRateDimension .
+    ?heartRateDimension hlf:P90hasValue ?heartRateValue .
+    ?heartRateDimension hlf:P91hasUnit ?heartRateUnit .
+
+    ?heartRateMaxMea rdf:type hlf:HLF355HeartRateMaxMeasurement .
+    ?assign hlf:P117includes ?heartRateMaxMea .
+    ?heartRateMaxDimension rdf:type hlf:HLF434HeartRateMaxDimension .
+    ?heartRateMaxMea hlf:P40observedDimension ?heartRateMaxDimension .
+    ?heartRateMaxDimension hlf:P90hasValue ?heartRateMaxValue .
+    ?heartRateMaxDimension hlf:P91hasUnit ?heartRateMaxUnit .
+
+    ?heartRateMinMea rdf:type hlf:HLF812HeartRateMinMeasurement .
+    ?assign hlf:P117includes ?heartRateMinMea .
+    ?heartRateMinDimension rdf:type hlf:HLF433HeartRateMinDimension .
+    ?heartRateMinMea hlf:P40observedDimension ?heartRateMinDimension .
+    ?heartRateMinDimension hlf:P90hasValue ?heartRateMinValue .
+    ?heartRateMinDimension hlf:P91hasUnit ?heartRateMinUnit .
+
+    ?heartBeatCountMea rdf:type hlf:HLF813HeartBeatCountMeasurement .
+    ?assign hlf:P117includes ?heartBeatCountMea .
+    ?heartBeatCountDimension rdf:type hlf:HLF432HeartBeatCountDimension .
+    ?heartBeatCountMea hlf:P40observedDimension ?heartBeatCountDimension .
+    ?heartBeatCountDimension hlf:P90hasValue ?heartBeatCountValue .
+    ?heartBeatCountDimension hlf:P91hasUnit ?heartBeatCountUnit .
+}
