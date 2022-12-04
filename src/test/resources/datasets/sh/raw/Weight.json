@@ -1,0 +1,52 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user106@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1631923200000",
+  "data": [
+    {
+      "update_time": "1631965353421",
+      "day_time": "20210918",
+      "device_id": "NemNFgPtlB",
+      "data_uuid": "d5d9930c-e35f-4dc0-92fa-942489a5a671",
+      "type_id": "weight",
+      "values": [
+        {
+          "weight": "76.0",
+          "height": "543",
+          "body_fat": "43",
+          "body_fat_mass": "523",
+          "muscle_mass": "134",
+          "skeletal_muscle": "112",
+          "skeletal_muscle_mass": "65",
+          "basal_metabolic_rate": "12",
+          "fat_free": "78",
+          "fat_free_mass": "132",
+          "total_body_water": "87",
+          "start_time": "1631965349653",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    }
+,
+
+{
+      "update_time": "1631965353421",
+      "day_time": "20210918",
+      "device_id": "NemNFgPtlB",
+      "data_uuid": "d5d9930c-e35f-4dc0-92fa-942489a5a671",
+      "type_id": "height",
+      "values": [
+        {
+          "height": "",
+          "start_time": "1631965349653",
+          "time_offset": "UTC+0200",
+        }
+      ]
+    }
+
+
+  ]
+}
