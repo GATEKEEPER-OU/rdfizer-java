@@ -899,6 +899,39 @@
   ];
 .
 
+
+#
+# steps
+<#StepsCountDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF907StepsCountDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
 <#FloorsClimbedAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
@@ -928,7 +961,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#PatientIdentifier>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
@@ -1087,7 +1120,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
-      rr:parentTriplesMap <#PatientIdentifier>;
+      rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
         rr:parent "resource.identifier[1].value";
@@ -1625,7 +1658,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#StepDailyTrendDailyStepsCountDimension>;
+      rr:parentTriplesMap <#StepsCountDimension>;
       rr:joinCondition [
          rr:child "resource.id";
         rr:parent "resourceId";
@@ -1645,18 +1678,423 @@
   ];
 .
 
-#
-# count
-<#StepDailyTrendDailyStepsCountDimension> a rr:TriplesMap;
+
+
+<#HeartRateAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_sampling')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF28/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF28StepsCountDimension;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF160/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF160HeartRateAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  #
+  # Includes
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMaxMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMinMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartBitCountMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+<#HeartRateMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_instantaneous')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF168/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF168HeartRateMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateInstantaneousStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+<#HeartRateMaxMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_max')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF355/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF355HeartRateMaxMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMaxDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMaxStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+<#HeartRateMinMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_min')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF812/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF812HeartRateMinMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMinDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:EP11wasObtainFrom;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartRateMinStreamObservation>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
+      ];
+    ];
+  ];
+.
+
+<#HeartBitCountMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_beat_count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF813/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF813HeartBeatCountMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeartBeatCountDimension>;
+      rr:joinCondition [
+         rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#HeartBeatCountDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_beat_count')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF432/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF432HeartBeatCountDimension;
   ];
 
   #
@@ -1665,19 +2103,247 @@
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
-      rml:reference "valueQuantity.unit";
+      rml:reference "resource.valueQuantity.unit";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P90hasValue;
     rr:objectMap [
-      rml:reference "valueQuantity.value";
+      rml:reference "resource.valueQuantity.value";
     ]
   ];
 .
 
+<#HeartRateMinDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_min')]"
+  ];
 
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF433/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF433HeartRateMinDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeartRateMaxDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_max')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF434/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF434HeartRateMaxDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeartRateDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'heart_rate_instantaneous')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF703/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF703HeartRateDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_heart_rate
+<#HeartRateInstantaneousStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_instantaneous')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StreamHeartRateInstantaneousDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+#
+# live_data_distance
+<#StreamHeartRateInstantaneousDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_instantaneous')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF703/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF703HeartRateDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# # live_data_heart_rate_min
+<#HeartRateMinStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_min')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StreamHeartRateMinDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+# # live_data_heart_rate_max
+<#HeartRateMaxStreamObservation> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_max')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF321/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF321StreamObservation;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#StreamHeartRateMaxDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
 
 <#ExerciseRevolutionType> a rr:TriplesMap;
   rml:logicalSource [
@@ -3724,39 +4390,6 @@
     ];
   ];
 .
-
-#
-# steps
-<#StepsCountDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'count')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF907/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF907StepsCountDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "valueQuantity.value";
-    ]
-  ];
-.
-
 
 # vo2_max
 <#OxygenSaturationMeasurement> a rr:TriplesMap;
