@@ -18,6 +18,7 @@ import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -97,6 +98,17 @@ public class SHAdapter implements FHIRAdapter {
   protected SHAdapter() {}
 
   /**
+   * @todo description
+   */
+  private static boolean hasComponents(JSONObject dataElement) {
+    String obsType = dataElement.getString("type_id");
+    return obsType.equals("weight")
+      || obsType.equals("bloodGlucose")
+      || obsType.equals("bloodPressure")
+      || obsType.equals("oxygenSaturation");
+  }
+
+  /**
    * TODO description
    */
   private static void siftData(
@@ -107,28 +119,13 @@ public class SHAdapter implements FHIRAdapter {
     JSONArray data = json.getJSONArray("data");
     for (int i = 0; i < data.length(); ++i) {
       JSONObject element = data.getJSONObject(i);
-      collectObservations(entries, element, patientEntry);
-    }
-  }
 
-  /**
-   * TODO description
-   */
-  private static void save(Visitable bundle, File output) {
-    try (
-      Writer file = new FileWriter(output)
-    ) {
-      FHIRGenerator
-        .generator(Format.JSON, true)
-        .generate(bundle, file);
-
-    } catch (IOException e) {
-      // TODO Message
-      e.printStackTrace();
-
-    } catch (FHIRGeneratorException e) {
-      // TODO Message
-      e.printStackTrace();
+      String obsType = element.getString("type_id");
+      if (obsType.equals("sleep")) {
+        collectSleepObservations(entries, element, patientEntry, data);
+      } else {
+        collectObservations(entries, element, patientEntry);
+      }
     }
   }
 
@@ -152,10 +149,23 @@ public class SHAdapter implements FHIRAdapter {
     JSONObject dataElement,
     Bundle.Entry patientEntry
   ) {
-    Bundle.Entry mainObservation = buildMainObservation(dataElement, patientEntry);
-    entries.add(mainObservation);
+    String obsType = dataElement.getString("type_id");
 
-    // NOTE 'floor' collected inside buildMainObservation
+    // NOTE sleep collected in another way
+    if ( obsType.equals("sleep")
+      || obsType.equals("sleepStage")
+    ) return;
+
+    Bundle.Entry mainObservation;
+    Quantity value = SHBuilder.getMainValue(dataElement);
+    if (hasComponents(dataElement)) {
+      Collection<Observation.Component> components = collectMainComponents(dataElement);
+      mainObservation = buildMainObservation(dataElement, components, value, patientEntry);
+
+    } else {
+      mainObservation = buildMainObservation(dataElement, null, value, patientEntry);
+    }
+    entries.add(mainObservation);
 
     collectCalorie(entries, dataElement, mainObservation, patientEntry);
     collectCount(entries, dataElement, mainObservation, patientEntry);
@@ -179,6 +189,467 @@ public class SHAdapter implements FHIRAdapter {
     collectRpm(entries, dataElement, mainObservation, patientEntry);
     collectVo2Max(entries, dataElement, mainObservation, patientEntry);
     collectLocation(entries, dataElement, mainObservation, patientEntry);
+  }
+
+  /**
+   * @todo description
+   */
+  private static void collectSleepObservations(
+    Collection<Bundle.Entry> entries,
+    JSONObject dataElement,
+    Bundle.Entry patientEntry,
+    JSONArray bundle
+  ) {
+    Quantity value = buildQuantity(
+      Decimal.of(
+        SHBuilder.getValue(dataElement, "sleep_hours")
+      ),
+      "hour",
+      UNITSOFM_SYSTEM,
+      "h"
+    );
+    Collection<Observation.Component> stages = collectSleepStages(bundle, dataElement);
+    Bundle.Entry mainObservation = buildMainObservation(dataElement, stages, value, patientEntry);
+    entries.add(mainObservation);
+  }
+
+  private static Collection<Observation.Component> collectSleepStages(JSONArray bundle, JSONObject dataElement) {
+    Collection<Observation.Component> components = new LinkedList<>();
+    String parentId = dataElement.getString("data_uuid");
+    for (int i = 0; i < bundle.length(); ++i) {
+      JSONObject stageElement = bundle.getJSONObject(i);
+      String typeId = stageElement.getString("type_id");
+      if (typeId.equals("sleepStage")) {
+        String currentParentId = stageElement.getString("parent_data_uuid");
+        if (currentParentId.equals(parentId)) {
+          String    code = SHBuilder.getValue(stageElement, "stage");
+          String display = SHBuilder.getValue(stageElement, "stage_type");
+          String  startTime = SHBuilder.getValue(stageElement, "start_time");
+          String    endTime = SHBuilder.getValue(stageElement, "end_time");
+          String zoneOffset = SHBuilder.getValue(stageElement, "time_offset");
+
+          Observation.Component stage = buildObservationComponent(
+            buildCodeableConcept(buildCoding(
+              LOCAL_SYSTEM,
+              code,
+              display.toLowerCase()
+            )),
+            buildPeriod(
+              toTimestamp(startTime),
+              toTimestamp(endTime),
+              zoneOffset
+            )
+          );
+          components.add(stage);
+        }
+      }
+    }
+    return components;
+  }
+
+  private static Collection<Observation.Component> collectMainComponents(JSONObject dataElement) {
+    JSONObject elementValues = dataElement.getJSONArray("values").getJSONObject(0);
+    Collection<Observation.Component> components = new LinkedList<>();
+    collectWeightComponents(components, elementValues);
+    collectBloodPressureComponents(components, elementValues);
+    collectBloodGlucoseComponents(components, elementValues);
+    collectOxygenSaturationComponents(components, elementValues);
+    return components;
+  }
+
+  private static void collectWeightComponents(Collection<Observation.Component> components, JSONObject elementValues) {
+    //
+    // height
+    if (elementValues.has("height")) {
+      String value = elementValues.getString("height");
+      Observation.Component height = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "height",
+          "Height"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "centimeter",
+          UNITSOFM_SYSTEM,
+          "cm"
+        )
+      );
+      components.add(height);
+    }
+    //
+    // body_fat
+    if (elementValues.has("body_fat")) {
+      String value = elementValues.getString("body_fat");
+      Observation.Component bodyFat = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "body_fat",
+          "Body Fat"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(bodyFat);
+    }
+    //
+    // body_fat_mass
+    if (elementValues.has("body_fat_mass")) {
+      String value = elementValues.getString("body_fat_mass");
+      Observation.Component bodyFatMass = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "body_fat_mass",
+          "Body fat mass"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "kilogram",
+          UNITSOFM_SYSTEM,
+          "Kg"
+        )
+      );
+      components.add(bodyFatMass);
+    }
+    //
+    // muscle_mass
+    if (elementValues.has("muscle_mass")) {
+      String value = elementValues.getString("muscle_mass");
+      Observation.Component muscleMass = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "muscle_mass",
+          "Muscle mass"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(muscleMass);
+    }
+    //
+    // skeletal_muscle
+    if (elementValues.has("skeletal_muscle")) {
+      String value = elementValues.getString("skeletal_muscle");
+      Observation.Component skeletalMuscle = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "skeletal_muscle",
+          "Skeletal muscle"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(skeletalMuscle);
+    }
+    //
+    // skeletal_muscle_mass
+    if (elementValues.has("skeletal_muscle_mass")) {
+      String value = elementValues.getString("skeletal_muscle_mass");
+      Observation.Component skeletalMuscleMass = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "skeletal_muscle_mass",
+          "Skeletal muscle mass"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(skeletalMuscleMass);
+    }
+    //
+    // basal_metabolic_rate
+    if (elementValues.has("basal_metabolic_rate")) {
+      String value = elementValues.getString("basal_metabolic_rate");
+      Observation.Component basalMetabolicRate = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "basal_metabolic_rate",
+          "Basal metabolic rate"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "kilocalorie per day",
+          UNITSOFM_SYSTEM,
+          "kcal/d"
+        )
+      );
+      components.add(basalMetabolicRate);
+    }
+    //
+    // fat_free
+    if (elementValues.has("fat_free")) {
+      String value = elementValues.getString("fat_free");
+      Observation.Component fatFree = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "fat_free",
+          "Fat free"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(fatFree);
+    }
+    //
+    // fat_free_mass
+    if (elementValues.has("fat_free_mass")) {
+      String value = elementValues.getString("fat_free_mass");
+      Observation.Component fatFreeMass = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "fat_free_mass",
+          "Fat free mass"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "kilogram",
+          UNITSOFM_SYSTEM,
+          "Kg"
+        )
+      );
+      components.add(fatFreeMass);
+    }
+    //
+    // total_body_water
+    if (elementValues.has("total_body_water")) {
+      String value = elementValues.getString("total_body_water");
+      Observation.Component totalBodyWater = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "total_body_water",
+          "Total body water"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "liter",
+          UNITSOFM_SYSTEM,
+          "l"
+        )
+      );
+      components.add(totalBodyWater);
+    }
+  }
+
+  private static void collectBloodPressureComponents(Collection<Observation.Component> components, JSONObject elementValues) {
+    //
+    // systolic
+    if (elementValues.has("systolic")) {
+      String value = elementValues.getString("systolic");
+      Observation.Component systolic = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "8480-6",
+          "Systolic blood pressure"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "millimeter of mercury",
+          LOINC_SYSTEM,
+          "mmHg"
+        )
+      );
+      components.add(systolic);
+    }
+    //
+    // diastolic
+    if (elementValues.has("diastolic")) {
+      String value = elementValues.getString("diastolic");
+      Observation.Component diastolic = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "8462-4",
+          "Diastolic blood pressure"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "millimeter of mercury",
+          LOINC_SYSTEM,
+          "mmHg"
+        )
+      );
+      components.add(diastolic);
+    }
+    //
+    // mean
+    if (elementValues.has("mean")) {
+      String value = elementValues.getString("mean");
+      Observation.Component mean = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "mean",
+          "Mean"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "millimeter of mercury",
+          LOINC_SYSTEM,
+          "mmHg"
+        )
+      );
+      components.add(mean);
+    }
+    //
+    // pulse
+    if (elementValues.has("pulse")) {
+      String value = elementValues.getString("pulse");
+      Observation.Component pulse = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "pulse",
+          "Pulse"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "{beats}/min",
+          LOINC_SYSTEM,
+          "beats/min"
+        )
+      );
+      components.add(pulse);
+    }
+  }
+
+  private static void collectBloodGlucoseComponents(Collection<Observation.Component> components, JSONObject elementValues) {
+    //
+    // glucose
+    if (elementValues.has("glucose")) {
+      String value = elementValues.getString("glucose");
+      Observation.Component glucose = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "glucose",
+          "Glucose"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "millimoles per liter",
+          UNITSOFM_SYSTEM,
+          "mmol/L"
+        )
+      );
+      components.add(glucose);
+    }
+    //
+    // sample_source_type
+    if (elementValues.has("sample_source_type")) {
+      String value = elementValues.getString("sample_source_type");
+      Observation.Component sampleSourceType = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "sample_source_type",
+          "Sample source type"
+        )),
+        value
+      );
+      components.add(sampleSourceType);
+    }
+    //
+    // measurement_type
+    if (elementValues.has("measurement_type")) {
+      String value = elementValues.getString("measurement_type");
+      Observation.Component measurementType = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "measurement_type",
+          "Measurement type"
+        )),
+        value
+      );
+      components.add(measurementType);
+    }
+    //
+    // meal_type
+    if (elementValues.has("meal_type")) {
+      String value = elementValues.getString("meal_type");
+      Observation.Component mealType = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "meal_type",
+          "Meal type"
+        )),
+        value
+      );
+      components.add(mealType);
+    }
+    //
+    // meal_time
+    if (elementValues.has("meal_time")) {
+      String value = elementValues.getString("meal_time");
+      String zoneOffset = elementValues.getString("time_offset");
+      Observation.Component mealTime = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "meal_time",
+          "Meal time"
+        )),
+        buildDateTime(
+          new Timestamp(Long.parseLong(value)),
+          zoneOffset
+        )
+      );
+      components.add(mealTime);
+    }
+  }
+
+  private static void collectOxygenSaturationComponents(Collection<Observation.Component> components, JSONObject elementValues) {
+    //
+    // spo2
+    if (elementValues.has("spo2")) {
+      String value = elementValues.getString("spo2");
+      Observation.Component spo2 = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "spo2",
+          "Pulse Oximetry"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "percent",
+          UNITSOFM_SYSTEM,
+          "%"
+        )
+      );
+      components.add(spo2);
+    }
+    //
+    // heart_rate
+    if (elementValues.has("heart_rate")) {
+      String value = elementValues.getString("heart_rate");
+      Observation.Component heartRate = buildObservationComponent(
+        buildCodeableConcept(buildCoding(
+          LOCAL_SYSTEM,
+          "heart_rate",
+          "Heart rate"
+        )),
+        buildQuantity(
+          Decimal.of(value),
+          "{beats}/min",
+          LOINC_SYSTEM,
+          "beats/min"
+        )
+      );
+      components.add(heartRate);
+    }
   }
 
   private static Bundle.Entry collectCalorie(
@@ -903,11 +1374,6 @@ public class SHAdapter implements FHIRAdapter {
     return null;
   }
 
-
-
-
-
-
   private static Bundle.Entry collectCadence(
     Collection<Bundle.Entry> entries,
     JSONObject dataElement,
@@ -1621,6 +2087,28 @@ public class SHAdapter implements FHIRAdapter {
       return dataElement.getJSONArray("binning_data");
     }
     return new JSONArray();
+  }
+
+
+  /**
+   * TODO description
+   */
+  private static void save(Visitable bundle, File output) {
+    try (
+      Writer file = new FileWriter(output)
+    ) {
+      FHIRGenerator
+        .generator(Format.JSON, true)
+        .generate(bundle, file);
+
+    } catch (IOException e) {
+      // TODO Message
+      e.printStackTrace();
+
+    } catch (FHIRGeneratorException e) {
+      // TODO Message
+      e.printStackTrace();
+    }
   }
 
 }

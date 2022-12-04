@@ -8,6 +8,7 @@ import org.commons.DateTimeUtils;
 
 import java.lang.Integer;
 import java.lang.String;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -144,9 +145,41 @@ class FHIRBaseBuilder {
   /**
    * @todo description
    */
+  public static Timestamp toTimestamp(String dateTime) {
+    Long l = Long.parseLong(dateTime);
+    return new Timestamp(l);
+  }
+
+  /**
+   * @todo description
+   */
+  public static DateTime buildDateTime(Timestamp ts, String zoneOffset) {
+//    TimeZone asdf = TimeZone.getTimeZone(zoneOffset);
+//    System.out.println(">>> " + asdf);
+
+
+//    Date qwer = new Date(ts.getTime());
+
+
+    /*
+    DateTime.builder()
+          .value(
+            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
+          )
+          .build()
+    */
+
+    return DateTime.builder()
+      .value(DateTime.now().toString()) // TODO FIX
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
   public static Period buildPeriod(
-    String start,
-    String end,
+    Timestamp start,
+    Timestamp end,
     String zoneOffset
   ) {
     // TODO fix this
@@ -262,6 +295,51 @@ class FHIRBaseBuilder {
     return Observation.Component.builder()
       .code(code)
       .value(quantity)
+      .extension(extension)
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
+  public static Observation.Component buildObservationComponent(
+    CodeableConcept code,
+    String value,
+    Extension... extension
+  ) {
+    return Observation.Component.builder()
+      .code(code)
+      .value(value)
+      .extension(extension)
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
+  public static Observation.Component buildObservationComponent(
+    CodeableConcept code,
+    DateTime dateTime,
+    Extension... extension
+  ) {
+    return Observation.Component.builder()
+      .code(code)
+      .value(dateTime)
+      .extension(extension)
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
+  public static Observation.Component buildObservationComponent(
+    CodeableConcept code,
+    Period period,
+    Extension... extension
+  ) {
+    return Observation.Component.builder()
+      .code(code)
+      .value(period)
       .extension(extension)
       .build();
   }

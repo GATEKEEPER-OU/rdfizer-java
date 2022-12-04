@@ -1,24 +1,181 @@
 package org.ou.gatekeeper.fhir.adapters;
 
+import com.google.common.base.CaseFormat;
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
-import com.ibm.fhir.model.type.*;
+import com.ibm.fhir.model.type.CodeableConcept;
+import com.ibm.fhir.model.type.Coding;
+import com.ibm.fhir.model.type.Decimal;
+import com.ibm.fhir.model.type.Quantity;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.String;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 class SHBuilder extends FHIRBaseBuilder {
 
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
   public static final String LOCAL_SYSTEM = "http://local-system";
+
+  /**
+   * Base URL of Logical Observation Identifiers Names and Codes
+   * <a href="https://loinc.org/search">LOINC_SYSTEM</a>
+   * */
   public static final String LOINC_SYSTEM = "http://loinc.org";
+
+  /**
+   * Base URL of Unified Code for Units of Measure
+   * <a href="https://ucum.org/ucum#section-Base-Units">UNITSOFM_SYSTEM</a>
+   * */
   public static final String UNITSOFM_SYSTEM = "http://unitsofmeasure.org";
+
+  //--------------------------------------------------------------------------//
+  // Gets
+  //--------------------------------------------------------------------------//
+
+  public static boolean hasValue(JSONObject dataElement, String key) {
+    JSONArray values = dataElement.getJSONArray("values");
+    JSONObject element = values.getJSONObject(0);
+    return element.has(key);
+  }
+
+  public static String getValue(JSONObject dataElement, String key) {
+    JSONArray values = dataElement.getJSONArray("values");
+    JSONObject element = values.getJSONObject(0);
+    return element.getString(key);
+  }
+
+  public static CodeableConcept getCodes(JSONObject dataElement) {
+    String typeId = dataElement.getString("type_id");
+    switch (typeId) {
+      case "bloodPressure":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "85354-9",
+              "Blood pressure"
+            )
+          )
+          .build();
+      case "heartRate":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOCAL_SYSTEM,
+              "heart_rate_sampling",
+              "Heart Rate Sampling"
+            )
+          )
+          .build();
+      case "exercise":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "LA11834-1",
+              "Exercise"
+            ),
+            getExerciseCode(dataElement)
+          )
+          .build();
+      case "sleep":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "93832-4",
+              "Sleep"
+            )
+          )
+          .build();
+      default:
+        String display = CaseUtils.toCamelCase(typeId, true);
+        String code = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, display);
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOCAL_SYSTEM,
+              code,
+              display
+            )
+          )
+          .build();
+    }
+  }
+
+  public static Coding getExerciseCode(JSONObject dataElement) {
+    String typeId = getValue(dataElement, "exercise_description");
+    switch (typeId) {
+      case "Walking":
+        return buildCoding(
+          LOINC_SYSTEM,
+          "82948-1",
+          typeId
+        );
+      default:
+        String display = CaseUtils.toCamelCase(typeId, true);
+        String code = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, display);
+        return buildCoding(
+          LOCAL_SYSTEM,
+          code,
+          display
+        );
+    }
+  }
+
+  public static Quantity getMainValue(JSONObject dataElement) {
+    String typeId = dataElement.getString("type_id");
+    switch (typeId) {
+      case "height":
+        return buildQuantity(
+          Decimal.of(
+            SHBuilder.getValue(dataElement, "height")
+          ),
+          "centimeter",
+          UNITSOFM_SYSTEM,
+          "cm"
+        );
+      case "weight":
+        return buildQuantity(
+          Decimal.of(
+            SHBuilder.getValue(dataElement, "weight")
+          ),
+          "kilogram",
+          UNITSOFM_SYSTEM,
+          "Kg"
+        );
+      case "waterIntake":
+      case "caffeineIntake":
+        return buildQuantity(
+          Decimal.of(
+            SHBuilder.getValue(dataElement, "amount")
+          ),
+          "milliliters",
+          UNITSOFM_SYSTEM,
+          "mL"
+        );
+      case "floorsClimbed":
+        return buildQuantity(
+          Decimal.of(
+            SHBuilder.getValue(dataElement, "floor")
+          ),
+          "...", // TODO
+          UNITSOFM_SYSTEM,
+          "..." // TODO
+        );
+      default:
+        return null;
+    }
+  }
+
+  //--------------------------------------------------------------------------//
+  // Builders
+  //--------------------------------------------------------------------------//
 
   /**
    * @todo description
@@ -52,13 +209,17 @@ class SHBuilder extends FHIRBaseBuilder {
    */
   public static Bundle.Entry buildMainObservation(
     JSONObject dataElement,
+    Collection<Observation.Component> components,
+    Quantity value,
     Bundle.Entry patientEntry
   ) {
     String       uuid = dataElement.getString("data_uuid");
     String   deviceId = dataElement.getString("device_id");
-    String  startTime = getValue(dataElement, "start_time");
-    String    endTime = getValue(dataElement, "end_time");
     String zoneOffset = getValue(dataElement, "time_offset");
+    String  startTime = getValue(dataElement, "start_time");
+    String endTime = hasValue(dataElement, "end_time")
+      ? getValue(dataElement, "end_time")
+      : null;
 
     return buildEntry(
       Observation.builder()
@@ -74,10 +235,12 @@ class SHBuilder extends FHIRBaseBuilder {
           getCodes(dataElement)
         )
         .effective(
-          // TODO fix just one timestamp (not startTime, endTime)
-          buildPeriod(startTime, endTime, zoneOffset)
+          endTime != null
+            ? buildPeriod(toTimestamp(startTime), toTimestamp(endTime), zoneOffset)
+            : buildDateTime(toTimestamp(startTime), zoneOffset)
         )
-        .value(getMainValue(dataElement))
+        .component(components)
+        .value(value)
         .device(
           buildReference(buildIdentifier(
             BASE_URL + "/device", deviceId
@@ -117,7 +280,11 @@ class SHBuilder extends FHIRBaseBuilder {
         .component(components)
         .value(quantity)
         .effective(
-          buildPeriod(startTime, endTime, zoneOffset)
+          buildPeriod(
+            toTimestamp(startTime),
+            toTimestamp(endTime),
+            zoneOffset
+          )
         )
         .device(
           buildReference(buildIdentifier(
@@ -160,7 +327,11 @@ class SHBuilder extends FHIRBaseBuilder {
         .code(codes)
         .value(quantity)
         .effective(
-          buildPeriod(startTime, endTime, zoneOffset)
+          buildPeriod(
+            toTimestamp(startTime),
+            toTimestamp(endTime),
+            zoneOffset
+          )
         )
         .device(
           buildReference(buildIdentifier(
@@ -205,7 +376,11 @@ class SHBuilder extends FHIRBaseBuilder {
         )))
         .component(components)
         .effective(
-          buildPeriod(startTime, endTime, zoneOffset)
+          buildPeriod(
+            toTimestamp(startTime),
+            toTimestamp(endTime),
+            zoneOffset
+          )
         )
         .derivedFrom(
           buildReference(parentEntry)
@@ -229,126 +404,6 @@ class SHBuilder extends FHIRBaseBuilder {
    */
   private SHBuilder() {
     super();
-  }
-
-  private static String getValue(JSONObject dataElement, String key) {
-    JSONArray values = dataElement.getJSONArray("values");
-    JSONObject element = values.getJSONObject(0);
-    return element.getString(key);
-  }
-
-  private static Collection<Reference> getReferences(Collection<Bundle.Entry> entries) {
-    return entries.stream()
-      .map(entry -> buildReference(entry))
-      .collect(Collectors.toList());
-  }
-
-  private static CodeableConcept getCodes(JSONObject dataElement) {
-    String typeId = dataElement.getString("type_id");
-    switch (typeId) {
-      case "exercise":
-        return CodeableConcept.builder()
-          .coding(
-            buildCoding(
-              LOINC_SYSTEM,
-              "LA11834-1",
-              "Exercise"
-            ),
-            getExerciseCode(dataElement)
-          )
-          .build();
-      case "stepDailyTrend":
-        return CodeableConcept.builder()
-          .coding(
-            buildCoding(
-              LOINC_SYSTEM,
-              "step_daily_trend", // TODO fix this
-              "StepDailyTrend"
-            )
-          )
-          .build();
-      case "floorsClimbed":
-        return CodeableConcept.builder()
-          .coding(
-            buildCoding(
-              LOINC_SYSTEM,
-              "floors_climbed", // TODO fix this
-              "FloorsClimbed"
-            )
-          )
-          .build();
-      case "heartRate":
-        return CodeableConcept.builder()
-          .coding(
-            buildCoding(
-              LOINC_SYSTEM,
-              "heart_rate_sampling",
-              "Heart Rate Sampling"
-            )
-          )
-          .build();
-      case "sleep":
-        return CodeableConcept.builder()
-          .coding(
-            buildCoding(
-              LOINC_SYSTEM,
-              "93832-4",
-              "Sleep"
-            )
-          )
-          .build();
-      default:
-        return null; // TODO exception non mapped
-    }
-  }
-
-  // TODO temporary
-  // ask Carlo about value[exercise_type] should be loinc code?
-  private static Coding getExerciseCode(JSONObject dataElement) {
-    String typeId = getValue(dataElement, "exercise_description");
-    switch (typeId) {
-      case "Walking":
-        return buildCoding(
-          LOINC_SYSTEM,
-          "82948-1",
-          typeId
-        );
-      case "Running":
-        return buildCoding(
-          LOINC_SYSTEM,
-          "running", // TODO fix this
-          typeId
-        );
-      case "Cycling":
-        return buildCoding(
-          LOINC_SYSTEM,
-          "cycling", // TODO fix this
-          typeId
-        );
-      case "Swimming":
-        return buildCoding(
-          LOINC_SYSTEM,
-          "swimming", // TODO fix this
-          typeId
-        );
-      default:
-        return null; // TODO exception non mapped
-    }
-  }
-
-  private static Quantity getMainValue(JSONObject dataElement) {
-    String typeId = dataElement.getString("type_id");
-    switch (typeId) {
-      case "floorsClimbed":
-        return buildQuantity(
-          Decimal.of(getValue(dataElement, "floor")),
-          "...", // TODO
-          UNITSOFM_SYSTEM,
-          "..." // TODO
-        );
-      default:
-        return null; // TODO exception non mapped
-    }
   }
 
 }
