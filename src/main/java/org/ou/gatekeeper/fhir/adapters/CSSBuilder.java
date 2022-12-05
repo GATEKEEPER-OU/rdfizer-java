@@ -3,9 +3,11 @@ package org.ou.gatekeeper.fhir.adapters;
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
+import com.ibm.fhir.model.type.DateTime;
 import com.ibm.fhir.model.type.Decimal;
 import com.ibm.fhir.model.type.Identifier;
 import com.ibm.fhir.model.type.Uri;
+import org.commons.DateTimeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,7 +64,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationGlycosilatedEmoglobin(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -101,7 +105,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationTotalCholesterol(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -140,7 +146,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationHDL(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -179,7 +187,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationLDL(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -218,7 +228,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationTriglycerides(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -259,7 +271,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationSerumCreatinine(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -298,7 +312,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationAlbuminuriaCreatininuriaRatio(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -337,7 +353,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationALT(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -376,7 +394,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationAST(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -415,7 +435,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationGammaGT(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -454,7 +476,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationAlkalinePhosphatase(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -493,7 +517,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationUricAcid(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -532,7 +558,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationGFR(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -571,7 +599,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationNitrites(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -605,7 +635,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationBloodPressure(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       Bundle.Entry observationEntry = buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -695,7 +727,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationBodyWeight(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -734,7 +768,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationBodyHeight(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -773,7 +809,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildObservationYearsWithDiabetes(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildObservation(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             HL7_SYSTEM,
@@ -791,8 +829,8 @@ class CSSBuilder extends FHIRBaseBuilder {
         buildQuantity(
           Decimal.of(examination.getInt("years_with_diabetes")),
           "year",
-          LOINC_SYSTEM,
-          "a" // @todo ask if error or just to hardcode
+          UNITSOFM_SYSTEM,
+          "a_j" // TODO check here https://ucum.org/ucum#para-29
         ),
         patientEntry,
         buildPatientAgeExtention(
@@ -812,7 +850,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionHepaticSteatosis(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -835,7 +875,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionHypertension(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -858,7 +900,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionHeartFailure(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -881,7 +925,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionBPCO(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -904,7 +950,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionChronicKidneyDisease(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -927,7 +975,9 @@ class CSSBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildConditionIschemicHeartDisease(JSONObject examination, Bundle.Entry patientEntry) {
     try {
       return buildCondition(
-        examination.getString("date"),
+        buildDate(
+          examination.getString("date")
+        ),
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
@@ -942,6 +992,14 @@ class CSSBuilder extends FHIRBaseBuilder {
       // @todo just print a warning
       return null;
     }
+  }
+
+  public static DateTime buildDate(String dateTime) {
+    return DateTime.builder()
+      .value(
+        DateTimeUtils.cast(dateTime)
+      )
+      .build();
   }
 
   //--------------------------------------------------------------------------//

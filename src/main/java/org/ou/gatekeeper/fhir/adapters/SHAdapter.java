@@ -18,7 +18,6 @@ import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -158,13 +157,10 @@ public class SHAdapter implements FHIRAdapter {
 
     Bundle.Entry mainObservation;
     Quantity value = SHBuilder.getMainValue(dataElement);
-    if (hasComponents(dataElement)) {
-      Collection<Observation.Component> components = collectMainComponents(dataElement);
-      mainObservation = buildMainObservation(dataElement, components, value, patientEntry);
-
-    } else {
-      mainObservation = buildMainObservation(dataElement, null, value, patientEntry);
-    }
+    Collection<Observation.Component> components = hasComponents(dataElement)
+      ? collectMainComponents(dataElement)
+      : new LinkedList<>();
+    mainObservation = buildMainObservation(dataElement, components, value, patientEntry);
     entries.add(mainObservation);
 
     collectCalorie(entries, dataElement, mainObservation, patientEntry);
@@ -234,11 +230,7 @@ public class SHAdapter implements FHIRAdapter {
               code,
               display.toLowerCase()
             )),
-            buildPeriod(
-              toTimestamp(startTime),
-              toTimestamp(endTime),
-              zoneOffset
-            )
+            buildPeriod(startTime, endTime, zoneOffset)
           );
           components.add(stage);
         }
@@ -602,10 +594,11 @@ public class SHAdapter implements FHIRAdapter {
           "meal_time",
           "Meal time"
         )),
-        buildDateTime(
-          new Timestamp(Long.parseLong(value)),
-          zoneOffset
-        )
+        buildDateTime(value, zoneOffset)
+//        buildDateTime(
+//          new Timestamp(Long.parseLong(value)),
+//          zoneOffset
+//        )
       );
       components.add(mealTime);
     }
