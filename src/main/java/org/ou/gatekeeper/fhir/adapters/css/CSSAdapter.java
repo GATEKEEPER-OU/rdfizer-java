@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters;
+package org.ou.gatekeeper.fhir.adapters.css;
 
 import com.ibm.fhir.model.format.Format;
 import com.ibm.fhir.model.generator.FHIRGenerator;
@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
 import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 import org.commons.ResourceUtils;
 
@@ -19,7 +20,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
-import static org.ou.gatekeeper.fhir.adapters.CSSBuilder.*;
+import static org.ou.gatekeeper.fhir.adapters.css.CSSBuilder.*;
 import static org.commons.ResourceUtils.generateUniqueFilename;
 
 /**

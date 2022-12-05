@@ -5,6 +5,7 @@ import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import lib.tests.helpers.TestUtils;
+import org.ou.gatekeeper.fhir.adapters.css.CSSAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +52,7 @@ class CSSAdapterTest {
     File datasetFile = TestUtils.loadResource(datasetPath);
     File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
-    FHIRAdapter converter = new CSSAdapter();
+    FHIRAdapter converter = CSSAdapter.create();
     converter.transform(datasetFile, outputFile);
 
     try {

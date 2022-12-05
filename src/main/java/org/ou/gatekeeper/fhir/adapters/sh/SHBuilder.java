@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters;
+package org.ou.gatekeeper.fhir.adapters.sh;
 
 import com.google.common.base.CaseFormat;
 import com.ibm.fhir.model.resource.Bundle;
@@ -10,6 +10,7 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
 
 import java.lang.String;
 import java.util.Collection;

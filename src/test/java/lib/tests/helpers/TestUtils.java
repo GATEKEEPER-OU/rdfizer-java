@@ -1,9 +1,9 @@
 package lib.tests.helpers;
 
 import org.apache.commons.io.FileUtils;
-import org.ou.gatekeeper.fhir.adapters.CSSAdapter;
+import org.ou.gatekeeper.fhir.adapters.css.CSSAdapter;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.SHAdapter;
+import org.ou.gatekeeper.fhir.adapters.sh.SHAdapter;
 
 import java.io.File;
 import java.io.IOException;

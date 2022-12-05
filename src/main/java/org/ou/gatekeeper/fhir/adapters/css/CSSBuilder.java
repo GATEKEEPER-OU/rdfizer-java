@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters;
+package org.ou.gatekeeper.fhir.adapters.css;
 
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
@@ -10,6 +10,7 @@ import com.ibm.fhir.model.type.Uri;
 import org.commons.DateTimeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
 
 import java.util.Collection;
 import java.util.LinkedList;

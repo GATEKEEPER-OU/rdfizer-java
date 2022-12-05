@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @todo description
  */
-class FHIRBaseBuilder {
+public abstract class FHIRBaseBuilder {
 
   /**
    * @todo description
