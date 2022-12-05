@@ -34,8 +34,8 @@ class SHAdapterTest {
 //    "xxx, keep, StepDailyTrend",
 //    "xxx, keep, HeartRate",
 //    "xxx, keep, Walking",
-      "xxx, keep, Cycling",
-//    "xxx, keep, Swimming",
+//      "xxx, keep, Cycling",
+    "xxx, keep, Swimming",
 //    "xxx, keep, Sleep",
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {

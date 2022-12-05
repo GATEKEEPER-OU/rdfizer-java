@@ -1866,7 +1866,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2_max')]"
   ];
 
   rr:subjectMap [
@@ -1909,7 +1909,7 @@
       rr:parentTriplesMap <#OxygenSaturationDimension>;
       rr:joinCondition [
         rr:child "resource.id";
-        rr:parent "resourceId";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1921,11 +1921,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[*].resource.component[?(@.code.coding[0].code == 'vo2_max')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'vo2_max')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF27/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF27/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF27OxygenSaturationDimension;
   ];
 
@@ -1935,14 +1935,14 @@
   rr:predicateObjectMap [
     rr:predicate ho:P91hasUnit;
     rr:objectMap [
-      rml:reference "valueQuantity.unit";
+      rml:reference "resource.valueQuantity.unit";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ho:P90hasValue;
     rr:objectMap [
-      rml:reference "valueQuantity.value";
+      rml:reference "resource.valueQuantity.value";
     ]
   ];
 .
