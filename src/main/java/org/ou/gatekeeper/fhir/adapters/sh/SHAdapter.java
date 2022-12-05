@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters;
+package org.ou.gatekeeper.fhir.adapters.sh;
 
 import com.ibm.fhir.model.format.Format;
 import com.ibm.fhir.model.generator.FHIRGenerator;
@@ -14,6 +14,8 @@ import org.commons.ResourceUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
+import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
 import org.ou.gatekeeper.fhir.helpers.FHIRNormalizer;
 
 import java.io.*;
@@ -23,7 +25,7 @@ import java.util.LinkedList;
 
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
 import static org.commons.ResourceUtils.generateUniqueFilename;
-import static org.ou.gatekeeper.fhir.adapters.SHBuilder.*;
+import static org.ou.gatekeeper.fhir.adapters.sh.SHBuilder.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -196,7 +198,7 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry,
     JSONArray bundle
   ) {
-    Quantity value = buildQuantity(
+    Quantity value = FHIRBaseBuilder.buildQuantity(
       Decimal.of(
         SHBuilder.getValue(dataElement, "sleep_hours")
       ),
@@ -224,8 +226,8 @@ public class SHAdapter implements FHIRAdapter {
           String    endTime = SHBuilder.getValue(stageElement, "end_time");
           String zoneOffset = SHBuilder.getValue(stageElement, "time_offset");
 
-          Observation.Component stage = buildObservationComponent(
-            buildCodeableConcept(buildCoding(
+          Observation.Component stage = FHIRBaseBuilder.buildObservationComponent(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               LOCAL_SYSTEM,
               code,
               display.toLowerCase()
@@ -254,13 +256,13 @@ public class SHAdapter implements FHIRAdapter {
     // height
     if (elementValues.has("height")) {
       String value = elementValues.getString("height");
-      Observation.Component height = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component height = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "height",
           "Height"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "centimeter",
           UNITSOFM_SYSTEM,
@@ -273,13 +275,13 @@ public class SHAdapter implements FHIRAdapter {
     // body_fat
     if (elementValues.has("body_fat")) {
       String value = elementValues.getString("body_fat");
-      Observation.Component bodyFat = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component bodyFat = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "body_fat",
           "Body Fat"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -292,13 +294,13 @@ public class SHAdapter implements FHIRAdapter {
     // body_fat_mass
     if (elementValues.has("body_fat_mass")) {
       String value = elementValues.getString("body_fat_mass");
-      Observation.Component bodyFatMass = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component bodyFatMass = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "body_fat_mass",
           "Body fat mass"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "kilogram",
           UNITSOFM_SYSTEM,
@@ -311,13 +313,13 @@ public class SHAdapter implements FHIRAdapter {
     // muscle_mass
     if (elementValues.has("muscle_mass")) {
       String value = elementValues.getString("muscle_mass");
-      Observation.Component muscleMass = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component muscleMass = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "muscle_mass",
           "Muscle mass"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -330,13 +332,13 @@ public class SHAdapter implements FHIRAdapter {
     // skeletal_muscle
     if (elementValues.has("skeletal_muscle")) {
       String value = elementValues.getString("skeletal_muscle");
-      Observation.Component skeletalMuscle = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component skeletalMuscle = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "skeletal_muscle",
           "Skeletal muscle"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -349,13 +351,13 @@ public class SHAdapter implements FHIRAdapter {
     // skeletal_muscle_mass
     if (elementValues.has("skeletal_muscle_mass")) {
       String value = elementValues.getString("skeletal_muscle_mass");
-      Observation.Component skeletalMuscleMass = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component skeletalMuscleMass = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "skeletal_muscle_mass",
           "Skeletal muscle mass"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -368,13 +370,13 @@ public class SHAdapter implements FHIRAdapter {
     // basal_metabolic_rate
     if (elementValues.has("basal_metabolic_rate")) {
       String value = elementValues.getString("basal_metabolic_rate");
-      Observation.Component basalMetabolicRate = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component basalMetabolicRate = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "basal_metabolic_rate",
           "Basal metabolic rate"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "kilocalorie per day",
           UNITSOFM_SYSTEM,
@@ -387,13 +389,13 @@ public class SHAdapter implements FHIRAdapter {
     // fat_free
     if (elementValues.has("fat_free")) {
       String value = elementValues.getString("fat_free");
-      Observation.Component fatFree = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component fatFree = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "fat_free",
           "Fat free"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -406,13 +408,13 @@ public class SHAdapter implements FHIRAdapter {
     // fat_free_mass
     if (elementValues.has("fat_free_mass")) {
       String value = elementValues.getString("fat_free_mass");
-      Observation.Component fatFreeMass = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component fatFreeMass = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "fat_free_mass",
           "Fat free mass"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "kilogram",
           UNITSOFM_SYSTEM,
@@ -425,13 +427,13 @@ public class SHAdapter implements FHIRAdapter {
     // total_body_water
     if (elementValues.has("total_body_water")) {
       String value = elementValues.getString("total_body_water");
-      Observation.Component totalBodyWater = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component totalBodyWater = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "total_body_water",
           "Total body water"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "liter",
           UNITSOFM_SYSTEM,
@@ -447,13 +449,13 @@ public class SHAdapter implements FHIRAdapter {
     // systolic
     if (elementValues.has("systolic")) {
       String value = elementValues.getString("systolic");
-      Observation.Component systolic = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component systolic = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOINC_SYSTEM,
           "8480-6",
           "Systolic blood pressure"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "millimeter of mercury",
           LOINC_SYSTEM,
@@ -466,13 +468,13 @@ public class SHAdapter implements FHIRAdapter {
     // diastolic
     if (elementValues.has("diastolic")) {
       String value = elementValues.getString("diastolic");
-      Observation.Component diastolic = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component diastolic = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOINC_SYSTEM,
           "8462-4",
           "Diastolic blood pressure"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "millimeter of mercury",
           LOINC_SYSTEM,
@@ -485,13 +487,13 @@ public class SHAdapter implements FHIRAdapter {
     // mean
     if (elementValues.has("mean")) {
       String value = elementValues.getString("mean");
-      Observation.Component mean = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component mean = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "mean",
           "Mean"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "millimeter of mercury",
           LOINC_SYSTEM,
@@ -504,13 +506,13 @@ public class SHAdapter implements FHIRAdapter {
     // pulse
     if (elementValues.has("pulse")) {
       String value = elementValues.getString("pulse");
-      Observation.Component pulse = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component pulse = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "pulse",
           "Pulse"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "{beats}/min",
           LOINC_SYSTEM,
@@ -526,13 +528,13 @@ public class SHAdapter implements FHIRAdapter {
     // glucose
     if (elementValues.has("glucose")) {
       String value = elementValues.getString("glucose");
-      Observation.Component glucose = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component glucose = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "glucose",
           "Glucose"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "millimoles per liter",
           UNITSOFM_SYSTEM,
@@ -545,8 +547,8 @@ public class SHAdapter implements FHIRAdapter {
     // sample_source_type
     if (elementValues.has("sample_source_type")) {
       String value = elementValues.getString("sample_source_type");
-      Observation.Component sampleSourceType = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component sampleSourceType = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "sample_source_type",
           "Sample source type"
@@ -559,8 +561,8 @@ public class SHAdapter implements FHIRAdapter {
     // measurement_type
     if (elementValues.has("measurement_type")) {
       String value = elementValues.getString("measurement_type");
-      Observation.Component measurementType = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component measurementType = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "measurement_type",
           "Measurement type"
@@ -573,8 +575,8 @@ public class SHAdapter implements FHIRAdapter {
     // meal_type
     if (elementValues.has("meal_type")) {
       String value = elementValues.getString("meal_type");
-      Observation.Component mealType = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component mealType = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "meal_type",
           "Meal type"
@@ -588,8 +590,8 @@ public class SHAdapter implements FHIRAdapter {
     if (elementValues.has("meal_time")) {
       String value = elementValues.getString("meal_time");
       String zoneOffset = elementValues.getString("time_offset");
-      Observation.Component mealTime = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component mealTime = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "meal_time",
           "Meal time"
@@ -609,13 +611,13 @@ public class SHAdapter implements FHIRAdapter {
     // spo2
     if (elementValues.has("spo2")) {
       String value = elementValues.getString("spo2");
-      Observation.Component spo2 = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component spo2 = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "spo2",
           "Pulse Oximetry"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "percent",
           UNITSOFM_SYSTEM,
@@ -628,13 +630,13 @@ public class SHAdapter implements FHIRAdapter {
     // heart_rate
     if (elementValues.has("heart_rate")) {
       String value = elementValues.getString("heart_rate");
-      Observation.Component heartRate = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component heartRate = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_rate",
           "Heart rate"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(value),
           "{beats}/min",
           LOINC_SYSTEM,
@@ -661,13 +663,13 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // Calorie
-      Observation.Component calorieComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component calorieComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "calorie",
           "Calorie"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("calorie")),
           "kcal/s",
           UNITSOFM_SYSTEM,
@@ -678,13 +680,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // mean_caloricburn_rate
       if (values.has("mean_caloricburn_rate")) {
-        Observation.Component meanComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "mean_caloricburn_rate",
             "Mean caloric burn rate"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("mean_caloricburn_rate")),
             "kcal/s",
             UNITSOFM_SYSTEM,
@@ -696,13 +698,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // maxc_caloricburn_rate
       if (values.has("max_caloricburn_rate")) {
-        Observation.Component maxComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "max_caloricburn_rate",
             "Max caloric burn rate"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("mean_caloricburn_rate")),
             "kcal/s",
             UNITSOFM_SYSTEM,
@@ -718,7 +720,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "calorie",
           "Calorie"
@@ -743,12 +745,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_calorie",
               "Live data calorie"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "kcal/s",
               UNITSOFM_SYSTEM,
@@ -779,13 +781,13 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // count
-      Observation.Component countComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component countComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "count",
           "Count"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("count")),
           "...", // TODO
           UNITSOFM_SYSTEM,
@@ -797,8 +799,8 @@ public class SHAdapter implements FHIRAdapter {
       // count_type
       if (values.has("count_type")) {
         String value = values.getString("count_type");
-        Observation.Component meanComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "count_type",
             "Count type"
@@ -816,7 +818,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "count",
           "Count"
@@ -841,12 +843,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_count",
               "Live data count"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "...",
               UNITSOFM_SYSTEM,
@@ -880,30 +882,32 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // Distance
-      Observation.Component distanceComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "distance",
-          "Distance"
-        )),
-        buildQuantity(
-          Decimal.of(values.getString("distance")),
-          "m",
-          UNITSOFM_SYSTEM,
-          "m"
-        )
-      );
-      components.add(distanceComponent);
+      if (values.has("distance")) {
+        Observation.Component distanceComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
+            LOCAL_SYSTEM,
+            "distance",
+            "Distance"
+          )),
+          FHIRBaseBuilder.buildQuantity(
+            Decimal.of(values.getString("distance")),
+            "m",
+            UNITSOFM_SYSTEM,
+            "m"
+          )
+        );
+        components.add(distanceComponent);
+      }
       //
       // incline_distance
       if (values.has("incline_distance")) {
-        Observation.Component inclineComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component inclineComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "incline_distance",
             "Incline distance"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("incline_distance")),
             "m",
             UNITSOFM_SYSTEM,
@@ -915,13 +919,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // decline_distance
       if (values.has("decline_distance")) {
-        Observation.Component inclineComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component inclineComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "decline_distance",
             "Decline distance"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("decline_distance")),
             "m",
             UNITSOFM_SYSTEM,
@@ -937,7 +941,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "distance",
           "Distance"
@@ -962,12 +966,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_distance",
               "Live data distance"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "m",
               UNITSOFM_SYSTEM,
@@ -1003,13 +1007,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // Speed
       if (values.has("speed")) {
-        Observation.Component speedComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component speedComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "speed",
             "Speed"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("speed")),
             "m/s",
             UNITSOFM_SYSTEM,
@@ -1022,13 +1026,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // mean_speed
       if (values.has("mean_speed")) {
-        Observation.Component meanComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "mean_speed",
             "Mean speed"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("mean_speed")),
             "m/s",
             UNITSOFM_SYSTEM,
@@ -1041,13 +1045,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // max_speed
       if (values.has("max_speed")) {
-        Observation.Component maxComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "max_speed",
             "Max speed"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("max_speed")),
             "m/s",
             UNITSOFM_SYSTEM,
@@ -1063,7 +1067,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "speed",
           "Speed"
@@ -1088,12 +1092,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_speed",
               "Live data speed"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "m/s",
               UNITSOFM_SYSTEM,
@@ -1130,13 +1134,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_rate_instantaneous",
           "Heart Rate Instantaneous"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(aggrValue),
           "beats/min",
           UNITSOFM_SYSTEM,
@@ -1160,12 +1164,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_heart_rate_instantaneous",
               "Live data heart rate instantaneous"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "beats/min",
               UNITSOFM_SYSTEM,
@@ -1202,13 +1206,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_rate_min",
           "Min Heart Rate"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(aggrValue),
           "beats/min",
           UNITSOFM_SYSTEM,
@@ -1232,12 +1236,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_heart_rate_min",
               "Live data min heart rate"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(liveValue),
               "beats/min",
               UNITSOFM_SYSTEM,
@@ -1274,13 +1278,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_rate_max",
           "Max Heart Rate"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(aggrValue),
           "beats/min",
           UNITSOFM_SYSTEM,
@@ -1304,12 +1308,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_heart_rate_max",
               "Live data max heart rate"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(liveValue),
               "beats/min",
               UNITSOFM_SYSTEM,
@@ -1346,13 +1350,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_beat_count",
           "Heart Beat Count"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(aggrValue),
           "beats/min",
           UNITSOFM_SYSTEM,
@@ -1382,13 +1386,13 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // mean_cadence
-      Observation.Component meanComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "mean_cadence",
           "Mean Cadence"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("mean_cadence")),
           "m/s",
           UNITSOFM_SYSTEM,
@@ -1399,13 +1403,13 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // max_cadence
-      Observation.Component maxComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "max_cadence",
           "Max Cadence"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("max_cadence")),
           "m/s",
           UNITSOFM_SYSTEM,
@@ -1420,7 +1424,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "cadence",
           "Cadence"
@@ -1445,12 +1449,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_cadence",
               "Live data cadence"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "m/s",
               UNITSOFM_SYSTEM,
@@ -1483,13 +1487,13 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // mean_power
-      Observation.Component meanComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "mean_power",
           "Mean Power"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("mean_power")),
           "watt",
           UNITSOFM_SYSTEM,
@@ -1500,13 +1504,13 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // max_power
-      Observation.Component maxComponent = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
+      Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "max_power",
           "Max Power"
         )),
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("max_power")),
           "watt",
           UNITSOFM_SYSTEM,
@@ -1521,7 +1525,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "power",
           "Power"
@@ -1546,12 +1550,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_power",
               "Live data power"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "watt",
               UNITSOFM_SYSTEM,
@@ -1588,13 +1592,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // altitude_gain
       if (values.has("altitude_gain")) {
-        Observation.Component gainComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component gainComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "altitude_gain",
             "Altitude gain"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("altitude_gain")),
             "m",
             UNITSOFM_SYSTEM,
@@ -1607,13 +1611,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // altitude_loss
       if (values.has("altitude_loss")) {
-        Observation.Component lossComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component lossComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "altitude_loss",
             "Altitude loss"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("altitude_loss")),
             "m",
             UNITSOFM_SYSTEM,
@@ -1626,13 +1630,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // min_altitude
       if (values.has("min_altitude")) {
-        Observation.Component minComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component minComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "min_altitude",
             "Min altitude"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("min_altitude")),
             "m",
             UNITSOFM_SYSTEM,
@@ -1645,13 +1649,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // max_altitude
       if (values.has("max_altitude")) {
-        Observation.Component maxComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "max_altitude",
             "Max Altitude"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("max_altitude")),
             "m",
             UNITSOFM_SYSTEM,
@@ -1667,7 +1671,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "altitude",
           "Altitude"
@@ -1702,13 +1706,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "duration",
           "Duration"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("duration")),
           "s",
           UNITSOFM_SYSTEM,
@@ -1742,13 +1746,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // Heart Rate Min
       if (values.has("min_heart_rate")) {
-        Observation.Component hrMinComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component hrMinComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "min_heart_rate",
             "Heart Rate Min"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("min_heart_rate")),
             "beats/min",
             UNITSOFM_SYSTEM,
@@ -1761,13 +1765,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // Heart Rate Mean
       if (values.has("mean_heart_rate")) {
-        Observation.Component hrMeanComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component hrMeanComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "mean_heart_rate",
             "Heart Rate Mean"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("mean_heart_rate")),
             "beats/min",
             UNITSOFM_SYSTEM,
@@ -1780,13 +1784,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // Heart Rate Max
       if (values.has("max_heart_rate")) {
-        Observation.Component hrMaxComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component hrMaxComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "max_heart_rate",
             "Heart Rate Max"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("max_heart_rate")),
             "beats/min",
             UNITSOFM_SYSTEM,
@@ -1802,7 +1806,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "heart_rate",
           "Heart Rate"
@@ -1827,12 +1831,12 @@ public class SHAdapter implements FHIRAdapter {
             liveId,
             liveElement,
             dataElement,
-            buildCodeableConcept(buildCoding(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               SAMSUNG_LIVE_SYSTEM,
               "live_data_heart_rate",
               "Live data heart rate"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
               "beats/min",
               UNITSOFM_SYSTEM,
@@ -1867,13 +1871,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // mean_rpm
       if (values.has("mean_rpm")) {
-        Observation.Component meanComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "mean_rpm",
             "Mean rpm"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("mean_rpm")),
             "Hz",
             UNITSOFM_SYSTEM,
@@ -1886,13 +1890,13 @@ public class SHAdapter implements FHIRAdapter {
       //
       // max_rpm
       if (values.has("max_rpm")) {
-        Observation.Component maxComponent = buildObservationComponent(
-          buildCodeableConcept(buildCoding(
+        Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
             "max_rpm",
             "Max rpm"
           )),
-          buildQuantity(
+          FHIRBaseBuilder.buildQuantity(
             Decimal.of(values.getString("max_rpm")),
             "Hz",
             UNITSOFM_SYSTEM,
@@ -1908,7 +1912,7 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "rpm",
           "rpm"
@@ -1943,13 +1947,13 @@ public class SHAdapter implements FHIRAdapter {
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
-        buildCodeableConcept(buildCoding(
+        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "vo2_max",
           "Vo2_max"
         )),
         components,
-        buildQuantity(
+        FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("vo2_max")),
           "mL/kg/min",
           UNITSOFM_SYSTEM,
@@ -1984,13 +1988,13 @@ public class SHAdapter implements FHIRAdapter {
         //
         // Latitude
         if (locationElement.has("latitude")) {
-          Observation.Component latitudeComponent = buildObservationComponent(
-            buildCodeableConcept(buildCoding(
+          Observation.Component latitudeComponent = FHIRBaseBuilder.buildObservationComponent(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               LOCAL_SYSTEM,
               "latitude",
               "Latitude"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(locationElement.getString("latitude")),
               "...", // TODO
               UNITSOFM_SYSTEM,
@@ -2003,13 +2007,13 @@ public class SHAdapter implements FHIRAdapter {
         //
         // Longitude
         if (locationElement.has("longitude")) {
-          Observation.Component longitudeComponent = buildObservationComponent(
-            buildCodeableConcept(buildCoding(
+          Observation.Component longitudeComponent = FHIRBaseBuilder.buildObservationComponent(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               LOCAL_SYSTEM,
               "longitude",
               "Longitude"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(locationElement.getString("longitude")),
               "...", // TODO
               UNITSOFM_SYSTEM,
@@ -2022,13 +2026,13 @@ public class SHAdapter implements FHIRAdapter {
         //
         // Altitude
         if (locationElement.has("altitude")) {
-          Observation.Component altitudeComponent = buildObservationComponent(
-            buildCodeableConcept(buildCoding(
+          Observation.Component altitudeComponent = FHIRBaseBuilder.buildObservationComponent(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               LOCAL_SYSTEM,
               "altitude",
               "Altitude"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(locationElement.getString("altitude")),
               "m",
               UNITSOFM_SYSTEM,
@@ -2041,13 +2045,13 @@ public class SHAdapter implements FHIRAdapter {
         //
         // Accuracy
         if (locationElement.has("accuracy")) {
-          Observation.Component accuracyComponent = buildObservationComponent(
-            buildCodeableConcept(buildCoding(
+          Observation.Component accuracyComponent = FHIRBaseBuilder.buildObservationComponent(
+            FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
               LOCAL_SYSTEM,
               "accuracy",
               "Accuracy"
             )),
-            buildQuantity(
+            FHIRBaseBuilder.buildQuantity(
               Decimal.of(locationElement.getString("accuracy")),
               "...", // TODO
               UNITSOFM_SYSTEM,

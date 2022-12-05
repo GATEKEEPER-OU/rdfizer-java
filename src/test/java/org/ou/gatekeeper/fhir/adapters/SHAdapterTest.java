@@ -5,6 +5,7 @@ import org.commons.ResourceUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import lib.tests.helpers.TestUtils;
+import org.ou.gatekeeper.fhir.adapters.sh.SHAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ class SHAdapterTest {
 //    "xxx, keep, StepDailyTrend",
 //    "xxx, keep, HeartRate",
 //    "xxx, keep, Walking",
-//      "xxx, keep, Cycling",
+//    "xxx, keep, Cycling",
     "xxx, keep, Swimming",
 //    "xxx, keep, Sleep",
   })
