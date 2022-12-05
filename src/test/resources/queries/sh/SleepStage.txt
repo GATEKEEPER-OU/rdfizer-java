@@ -1,0 +1,31 @@
+prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix helifit: <https://opensource.samsung.com/projects/helifit/>
+
+SELECT DISTINCT  ?userID ?sleepActivity ?sleepCycle ?sleepStage ?stageTypeNote ?start ?end ?sleepDuration WHERE {
+ ?sleepActivity rdf:type helifit:HLF43SleepingActivity .
+ ?sleepActivity helifit:P140assignedAttributeTo ?ind .
+ ?ind rdf:type helifit:E21Person .
+ ?ind helifit:P1isIdentifiedBy ?userID .
+  ?sleepActivity helifit:P117includes ?assign.
+  ?assign rdf:type helifit:E13AttributeAssignment .
+  ?assign helifit:P140assignedAttributeTo ?ind .
+
+  ?mea rdf:type helifit:HLF338SleepingActivityMeasurement .
+  ?assign helifit:P117includes ?mea .
+
+  ?sleepCycle rdf:type helifit:HLF20SleepCycle .
+  ?mea helifit:EP2initiates ?sleepCycle .
+
+  ?sleepStage rdf:type helifit:HLF10SleepStage .
+  ?sleepCycle helifit:EP3maintains ?sleepStage .
+
+  ?stateType rdf:type helifit:HLF274SleepStageType .
+  ?sleepStage helifit:P2hasType ?stateType .
+  ?stateType helifit:P3hasNote ?stageTypeNote .
+
+  ?TS rdf:type helifit:E52TimeSpan .
+  ?sleepStage helifit:P4hasTimeSpan ?TS.
+  ?TS helifit:EP7starts ?start .
+  ?TS helifit:EP8ends ?end .
+  BIND(MINUTES(?end-?start) AS ?sleepDuration)
+ }
