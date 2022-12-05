@@ -21,23 +21,22 @@ class SHAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, Patient",
-
+    "5af918e5d5c9289c82c513856e59e70af3111d648d2c57821942aaa87ca0c4e7, keep, Patient",
     // Observations
-    //"xxx, keep, Height",
-//    "xxx, keep, Weight",
-//    "xxx, keep, WaterIntake",
-//    "xxx, keep, CaffeineIntake",
-//    "xxx, keep, FloorsClimbed",
-//    "xxx, keep, BloodGlucose",
-//    "xxx, keep, BloodPressure",
-//    "xxx, keep, FloorsClimbed",
-//    "xxx, keep, StepDailyTrend",
-//    "xxx, keep, HeartRate",
-//    "xxx, keep, Walking",
-//    "xxx, keep, Cycling",
-    "xxx, keep, Swimming",
-//    "xxx, keep, Sleep",
+    "xxx, clean, Height",
+    "xxx, clean, Weight",
+    "xxx, clean, WaterIntake",
+    "xxx, clean, CaffeineIntake",
+    "xxx, clean, FloorsClimbed",
+    "xxx, clean, BloodGlucose",
+    "xxx, clean, BloodPressure",
+    "xxx, clean, FloorsClimbed",
+    "xxx, clean, StepDailyTrend",
+    "xxx, clean, HeartRate",
+    "xxx, clean, Walking",
+    "xxx, clean, Cycling",
+    "xxx, clean, Swimming",
+    "xxx, clean, Sleep",
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {
     String datasetPath = TestUtils.getDatasetPath("SH", datasetName);
@@ -70,6 +69,7 @@ class SHAdapterTest {
         System.out.println("outputFile >>> " + outputFile);
       } else if (policy.equals("clean")) {
         ResourceUtils.clean(outputFile);
+        ResourceUtils.clean(outputNormFile);
       } else {
         throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }
