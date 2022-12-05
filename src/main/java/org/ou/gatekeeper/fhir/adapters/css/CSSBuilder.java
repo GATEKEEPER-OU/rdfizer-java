@@ -47,6 +47,7 @@ class CSSBuilder extends FHIRBaseBuilder {
     String patientId = patient.getString("patient_id");
     return buildEntry(
       Patient.builder()
+        .id(patientId)
         .identifier(
           Identifier.builder()
             .system(Uri.uri(baseUrl + "/patient"))
