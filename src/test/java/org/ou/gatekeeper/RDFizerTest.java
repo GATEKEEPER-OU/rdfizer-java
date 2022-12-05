@@ -28,6 +28,65 @@ class RDFizerTest {
     // -------------------------------------------------------------------------
 
     // Patient
+//    "xxx, keep, CSS, Patient",
+
+    // Observations
+//    "xxx, keep, CSS, .., all",
+//    "xxx, keep, CSS, GlycosilatedEmoglobin",
+//        "xxx, keep, CSS, GlycosilatedEmoglobin",
+
+    //
+    // Samsung Health
+    // -------------------------------------------------------------------------
+
+    // Patient
+//    "xxx, keep, SH, Patient",
+
+    // Observations
+    "xxx, keep, SH, FloorsClimbed",
+//    "xxx, keep, SH, StepDailyTrend",
+//    "xxx, keep, SH, HeartRate",
+//    "xxx, keep, SH, Walking",
+//      "xxx, keep, SH, Cycling",
+    //"xxx, keep, SH, Running",
+//      "xxx, keep, SH, Swimming",
+    //"xxx, keep, SH, Sleep",
+    //"xxx, keep, SH, SleepStage",
+
+  })
+  void test_transform_RawToFHIR(String expectedDigest, String policy, String sourceType, String datasetName) {
+    String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
+    File datasetFile = TestUtils.loadResource(datasetPath);
+    File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
+
+    FHIRAdapter converter = TestUtils.getFHIRAdapter(sourceType);
+    RDFizer.trasform(datasetFile, converter, outputFile);
+
+    try {
+      String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
+      assertEquals(expectedDigest, outputDigest);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    } finally {
+      if (policy.equals("keep")) {
+        System.out.println("outputFile >>> " + outputFile);
+      } else if (policy.equals("clean")) {
+        ResourceUtils.clean(outputFile);
+      } else {
+        throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
+      }
+    }
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+    //
+    // CSS
+    // -------------------------------------------------------------------------
+
+    // Patient
 //    "e2562d1d74cae9e2e4477cc42518f5fc76829357e7424d9de6699f522211e64d, keep, CSS, Patient, '0000,0001,0002'",
 
     // Observations
@@ -61,7 +120,7 @@ class RDFizerTest {
    *   - use 'all' label is discoraged into selective tests, because it will produce
    *     many false-positive warnings, make it hard to debug
    * */
-  void test_transform_RawtoRDF(String expectedDigest, String policy, String sourceType, String datasetName, String modules) {
+  void test_transform_RawToRDF(String expectedDigest, String policy, String sourceType, String datasetName, String modules) {
     String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
     File datasetFile = TestUtils.loadResource(datasetPath);
 //    OutputFormat outputFormat = OutputFormat.NTRIPLES;

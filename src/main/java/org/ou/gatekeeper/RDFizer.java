@@ -17,7 +17,21 @@ import static org.commons.ResourceUtils.generateUniqueFilename;
 public class RDFizer {
 
   /**
-   * Reads dataset from file and writes the result on a file.
+   * Reads dataset from file and writes the result on a file in FHIR format.
+   * @param input file to convert
+   * @param converter the adapter that understands the input dataset
+   * @param output RDF output file
+   * */
+  public static void trasform(
+    File input,
+    FHIRAdapter converter,
+    File output
+  ) {
+    converter.transform(input, output, false);
+  }
+
+  /**
+   * Reads dataset from file and writes the result on a file in RDF format.
    * @param input file to convert
    * @param converter the adapter that understands the input dataset
    * @param mapping RML mapping file which contains mapping rules
