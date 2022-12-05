@@ -882,20 +882,22 @@ public class SHAdapter implements FHIRAdapter {
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // Distance
-      Observation.Component distanceComponent = FHIRBaseBuilder.buildObservationComponent(
-        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
-          LOCAL_SYSTEM,
-          "distance",
-          "Distance"
-        )),
-        FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("distance")),
-          "m",
-          UNITSOFM_SYSTEM,
-          "m"
-        )
-      );
-      components.add(distanceComponent);
+      if (values.has("distance")) {
+        Observation.Component distanceComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
+            LOCAL_SYSTEM,
+            "distance",
+            "Distance"
+          )),
+          FHIRBaseBuilder.buildQuantity(
+            Decimal.of(values.getString("distance")),
+            "m",
+            UNITSOFM_SYSTEM,
+            "m"
+          )
+        );
+        components.add(distanceComponent);
+      }
       //
       // incline_distance
       if (values.has("incline_distance")) {
