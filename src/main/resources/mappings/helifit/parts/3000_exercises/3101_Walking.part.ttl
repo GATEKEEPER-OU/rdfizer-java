@@ -8,11 +8,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == '82948-1')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '82948-1')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF101/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF101/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF101Walking;
   ];
 
@@ -69,11 +69,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[1].code == '82948-1')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '82948-1')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E13/code/{resource.code.coding[1].code}/id/{resource.id}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E13/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:E13AttributeAssignment;
   ];
 
@@ -341,6 +341,7 @@
       rr:parentTriplesMap <#AltitudeGainMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
+        rr:parent "resource.derivedFrom[0].display";
         rr:parent "resource.derivedFrom[0].display";
       ];
     ];

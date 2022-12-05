@@ -33,7 +33,8 @@ class SHAdapterTest {
 //    "xxx, keep, FloorsClimbed",
 //    "xxx, keep, StepDailyTrend",
 //    "xxx, keep, HeartRate",
-    "xxx, keep, Walking",
+//    "xxx, keep, Walking",
+      "xxx, keep, Cycling",
 //    "xxx, keep, Swimming",
 //    "xxx, keep, Sleep",
   })
