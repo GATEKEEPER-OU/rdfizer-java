@@ -1669,8 +1669,8 @@ public class SHAdapter implements FHIRAdapter {
         dataElement,
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "power",
-          "Power"
+          "altitude",
+          "Altitude"
         )),
         components,
         null,
@@ -1904,14 +1904,14 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // aggregated observation
-      String aggregatedId = String.format("%s-altitude", uuid);
+      String aggregatedId = String.format("%s-rpm", uuid);
       Bundle.Entry aggregatedObservation = buildAggregatedObservation(
         aggregatedId,
         dataElement,
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "power",
-          "Power"
+          "rpm",
+          "rpm"
         )),
         components,
         null,
