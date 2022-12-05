@@ -1,0 +1,1627 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user12@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "Observation/665473892564789000228"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "LA11834-1",
+                            "display": "Exercise"
+                        },
+                        {
+                            "system": "http://local-system",
+                            "code": "swimming",
+                            "display": "Swimming"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-calorie",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-calorie",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-calorie"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "calorie",
+                            "display": "Calorie"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "calorie",
+                                    "display": "Calorie"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 44.0,
+                            "unit": "kcal/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "kcal/s"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_caloricburn_rate",
+                                    "display": "Mean caloric burn rate"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 8934578,
+                            "unit": "kcal/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "kcal/s"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_caloricburn_rate",
+                                    "display": "Max caloric burn rate"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 8934578,
+                            "unit": "kcal/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "kcal/s"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-count",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-count",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-count"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "count",
+                            "display": "Count"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "count",
+                                    "display": "Count"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 75645423,
+                            "unit": "...",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "..."
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "count_type",
+                                    "display": "Count type"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 1
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-count-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-count-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-count-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_count",
+                            "display": "Live data count"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 83,
+                    "unit": "...",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "..."
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-count",
+                        "display": "665473892564789000228-count"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-count-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-count-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-count-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_count",
+                            "display": "Live data count"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 85,
+                    "unit": "...",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "..."
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-count",
+                        "display": "665473892564789000228-count"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-distance",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-distance",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-distance"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "distance",
+                            "display": "Distance"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "incline_distance",
+                                    "display": "Incline distance"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 43343,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "decline_distance",
+                                    "display": "Decline distance"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 76543,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-distance-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-distance-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-distance-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_distance",
+                            "display": "Live data distance"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 250,
+                    "unit": "m",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-distance",
+                        "display": "665473892564789000228-distance"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-distance-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-distance-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-distance-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_distance",
+                            "display": "Live data distance"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 250,
+                    "unit": "m",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-distance",
+                        "display": "665473892564789000228-distance"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-speed",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-speed",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-speed"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "speed",
+                            "display": "Speed"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_speed",
+                                    "display": "Mean speed"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 243242,
+                            "unit": "m/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m/s"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_speed",
+                                    "display": "Max speed"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 75676,
+                            "unit": "m/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m/s"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-speed-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-speed-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-speed-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_speed",
+                            "display": "Live data speed"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 11.061617,
+                    "unit": "m/s",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m/s"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-speed",
+                        "display": "665473892564789000228-speed"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-speed-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-speed-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-speed-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_speed",
+                            "display": "Live data speed"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 11.061617,
+                    "unit": "m/s",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m/s"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-speed",
+                        "display": "665473892564789000228-speed"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-cadence",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-cadence",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-cadence"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "cadence",
+                            "display": "Cadence"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_cadence",
+                                    "display": "Mean Cadence"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 65432,
+                            "unit": "m/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m/s"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_cadence",
+                                    "display": "Max Cadence"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 89732,
+                            "unit": "m/s",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m/s"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-cadence-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-cadence-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-cadence-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_cadence",
+                            "display": "Live data cadence"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 95.84712,
+                    "unit": "m/s",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m/s"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-cadence",
+                        "display": "665473892564789000228-cadence"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-cadence-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-cadence-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-cadence-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_cadence",
+                            "display": "Live data cadence"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 95.84712,
+                    "unit": "m/s",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "m/s"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-cadence",
+                        "display": "665473892564789000228-cadence"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-power",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-power",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-power"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "power",
+                            "display": "Power"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_power",
+                                    "display": "Mean Power"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 7654,
+                            "unit": "watt",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "W"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_power",
+                                    "display": "Max Power"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 87654,
+                            "unit": "watt",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "W"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-power-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-power-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-power-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_power",
+                            "display": "Live data power"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 99.50436,
+                    "unit": "watt",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "W"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-power",
+                        "display": "665473892564789000228-power"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-power-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-power-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-power-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_power",
+                            "display": "Live data power"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 99.50436,
+                    "unit": "watt",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "W"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-power",
+                        "display": "665473892564789000228-power"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-altitude",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-altitude",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-altitude"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "altitude",
+                            "display": "Altitude"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "altitude_gain",
+                                    "display": "Altitude gain"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 64526,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "altitude_loss",
+                                    "display": "Altitude loss"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 2345,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "min_altitude",
+                                    "display": "Min altitude"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 6432,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_altitude",
+                                    "display": "Max Altitude"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 6543,
+                            "unit": "m",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "m"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-duration",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-duration",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-duration"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "duration",
+                            "display": "Duration"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "valueQuantity": {
+                    "value": 671880,
+                    "unit": "s",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "s"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-heart-rate",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-heart-rate",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-heart-rate"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "heart_rate",
+                            "display": "Heart Rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "min_heart_rate",
+                                    "display": "Heart Rate Min"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 4332,
+                            "unit": "beats/min",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "{Beats}/min"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_heart_rate",
+                                    "display": "Heart Rate Mean"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 53432,
+                            "unit": "beats/min",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "{Beats}/min"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_heart_rate",
+                                    "display": "Heart Rate Max"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 544234,
+                            "unit": "beats/min",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "{Beats}/min"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-heart-rate-0",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-heart-rate-0",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-heart-rate-0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate",
+                            "display": "Live data heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2015-01-28T16:58:16+02:00",
+                    "end": "2021-06-18T09:47:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 147.48181,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-heart-rate",
+                        "display": "665473892564789000228-heart-rate"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-heart-rate-1",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-heart-rate-1",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-heart-rate-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://samsung/live-data",
+                            "code": "live_data_heart_rate",
+                            "display": "Live data heart rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T10:03:00+03:00",
+                    "end": "2021-06-18T10:03:59+03:00"
+                },
+                "valueQuantity": {
+                    "value": 147.48181,
+                    "unit": "beats/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "{Beats}/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-heart-rate",
+                        "display": "665473892564789000228-heart-rate"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-rpm",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-rpm",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-rpm"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "rpm",
+                            "display": "rpm"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean_rpm",
+                                    "display": "Mean rpm"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 87654,
+                            "unit": "Hz",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "hZ"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "max_rpm",
+                                    "display": "Max rpm"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 98765,
+                            "unit": "Hz",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "hZ"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228-vo2-max",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "665473892564789000228-vo2-max",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "665473892564789000228-vo2-max"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "vo2_max",
+                            "display": "Vo2_max"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectivePeriod": {
+                    "start": "2021-06-18T18:27:55+03:00",
+                    "end": "2021-06-18T18:39:07+03:00"
+                },
+                "valueQuantity": {
+                    "value": 654,
+                    "unit": "mL/kg/min",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "mL/kg/min"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "XaIq54it7a"
+                    }
+                },
+                "derivedFrom": [
+                    {
+                        "reference": "https://opensource.samsung.com/projects/helifit/observation/665473892564789000228",
+                        "display": "665473892564789000228"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}

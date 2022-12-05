@@ -1,0 +1,27 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user12@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user12@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        }
+    ]
+}

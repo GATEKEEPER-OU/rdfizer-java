@@ -1,0 +1,71 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user106@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user106@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/a817a205-5cd1-4649-bf14-382758fbb18f",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "a817a205-5cd1-4649-bf14-382758fbb18f",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "Observation/a817a205-5cd1-4649-bf14-382758fbb18f"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://local-system",
+                            "code": "caffeineintake",
+                            "display": "Caffeineintake"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user106@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectiveDateTime": "2021-09-18T14:42:54+03:00",
+                "valueQuantity": {
+                    "value": 250.0,
+                    "unit": "milliliters",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "mL"
+                },
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "NemNFgPtlB"
+                    }
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}

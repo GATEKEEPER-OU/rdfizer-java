@@ -1,0 +1,135 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/patient/user106@puglia.gatekeeper.com",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "60b36ccc05f8c40fc9428105",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "user106@puglia.gatekeeper.com"
+                    },
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "60b36ccc05f8c40fc9428105"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "https://opensource.samsung.com/projects/helifit/observation/d5d9930c-e35f-4dc0-92fa-942489a5a671",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "d5d9930c-e35f-4dc0-92fa-942489a5a671",
+                "identifier": [
+                    {
+                        "system": "https://opensource.samsung.com/projects/helifit/identifier",
+                        "value": "Observation/d5d9930c-e35f-4dc0-92fa-942489a5a671"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "85354-9",
+                            "display": "Blood pressure"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "https://opensource.samsung.com/projects/helifit/patient/user106@puglia.gatekeeper.com",
+                    "display": "60b36ccc05f8c40fc9428105"
+                },
+                "effectiveDateTime": "2021-09-18T14:42:29+03:00",
+                "device": {
+                    "identifier": {
+                        "system": "https://opensource.samsung.com/projects/helifit/device",
+                        "value": "NemNFgPtlB"
+                    }
+                },
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://loinc.org",
+                                    "code": "8480-6",
+                                    "display": "Systolic blood pressure"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 123,
+                            "unit": "millimeter of mercury",
+                            "system": "http://loinc.org",
+                            "code": "mmHg"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://loinc.org",
+                                    "code": "8462-4",
+                                    "display": "Diastolic blood pressure"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 234,
+                            "unit": "millimeter of mercury",
+                            "system": "http://loinc.org",
+                            "code": "mmHg"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "mean",
+                                    "display": "Mean"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 345,
+                            "unit": "millimeter of mercury",
+                            "system": "http://loinc.org",
+                            "code": "mmHg"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://local-system",
+                                    "code": "pulse",
+                                    "display": "Pulse"
+                                }
+                            ]
+                        },
+                        "valueQuantity": {
+                            "value": 456,
+                            "unit": "{beats}/min",
+                            "system": "http://loinc.org",
+                            "code": "beats/min"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}
