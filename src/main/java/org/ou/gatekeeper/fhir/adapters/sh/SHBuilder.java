@@ -431,11 +431,9 @@ class SHBuilder extends FHIRBaseBuilder {
     // @see https://www.timeanddate.com/time/map/
     switch (zoneOffset) {
       case "UTC+0100":
-//        ZoneOffset.UTC.ofHours(1);
         timeZone = TimeZone.getTimeZone("Europe/Rome");
         break;
       case "UTC+0200":
-//        ZoneOffset.ofHours(2);
         timeZone = TimeZone.getTimeZone("Europe/Athens");
         break;
       default:
@@ -444,6 +442,8 @@ class SHBuilder extends FHIRBaseBuilder {
     Long lTimestamp = Long.parseLong(timestamp);
     String pattern = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern();
     String isoDateTime = DateFormatUtils.format(lTimestamp, pattern, timeZone);
+//    System.out.println("zoneOffset>>> " + zoneOffset); // DEBUG
+//    System.out.println("isoDateTime>>> " + isoDateTime); // DEBUGi wa
     return isoDateTime;
   }
 
