@@ -59,7 +59,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#WalkingActivityAssignment>;
+      rr:parentTriplesMap <#SwimmingActivityAssignment>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -67,7 +67,7 @@
     ];
   ];
 .
-<#WalkingActivityAssignment> a rr:TriplesMap;
+<#SwimmingActivityAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
