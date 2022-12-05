@@ -23,13 +23,13 @@ class SHAdapterTest {
 //    "xxx, keep, Patient",
 
     // Observations
-//    "xxx, keep, Height",
+    "xxx, keep, Height",
 //    "xxx, keep, Weight",
 //    "xxx, keep, WaterIntake",
 //    "xxx, keep, CaffeineIntake",
 //    "xxx, keep, FloorsClimbed",
 //    "xxx, keep, BloodGlucose",
-    "xxx, keep, BloodPressure",
+//    "xxx, keep, BloodPressure",
 //    "xxx, keep, FloorsClimbed",
 //    "xxx, keep, StepDailyTrend",
 //    "xxx, keep, HeartRate",

@@ -4,7 +4,6 @@ import com.ibm.fhir.model.resource.*;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.HTTPVerb;
 import com.ibm.fhir.model.type.code.ObservationStatus;
-import org.commons.DateTimeUtils;
 
 import java.lang.Integer;
 import java.lang.String;
@@ -153,47 +152,6 @@ class FHIRBaseBuilder {
   /**
    * @todo description
    */
-  public static DateTime buildDateTime(Timestamp ts, String zoneOffset) {
-//    TimeZone asdf = TimeZone.getTimeZone(zoneOffset);
-//    System.out.println(">>> " + asdf);
-
-
-//    Date qwer = new Date(ts.getTime());
-
-
-    /*
-    DateTime.builder()
-          .value(
-            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
-          )
-          .build()
-    */
-
-    return DateTime.builder()
-      .value(DateTime.now().toString()) // TODO FIX
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Period buildPeriod(
-    Timestamp start,
-    Timestamp end,
-    String zoneOffset
-  ) {
-    // TODO fix this
-    return Period.builder()
-      .start(DateTime.now())
-      .end(DateTime.now())
-//      .start(DateTime.of(start)) // <---
-//      .end(DateTime.of(end))     // <---
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
   public static Quantity buildQuantity(
     Decimal value,
     String unit,
@@ -233,14 +191,14 @@ class FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildObservation(
-    String date,
+    DateTime dateTime,
     CodeableConcept category,
     CodeableConcept code,
     Bundle.Entry patientEntry,
     Extension... extensions
   ) {
     return buildEntry(
-      getBaseObservationBuilder(date, category, code, patientEntry, extensions)
+      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
         .build(),
       FHIR_OBSERVATION_TYPE
     );
@@ -250,7 +208,7 @@ class FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildObservation(
-    String date,
+    DateTime dateTime,
     CodeableConcept category,
     CodeableConcept code,
     boolean valueBool,
@@ -258,7 +216,7 @@ class FHIRBaseBuilder {
     Extension... extensions
   ) {
     return buildEntry(
-      getBaseObservationBuilder(date, category, code, patientEntry, extensions)
+      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
         .value(valueBool)
         .build(),
       FHIR_OBSERVATION_TYPE
@@ -269,7 +227,7 @@ class FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildObservation(
-    String date,
+    DateTime dateTime,
     CodeableConcept category,
     CodeableConcept code,
     Quantity quantity,
@@ -277,7 +235,7 @@ class FHIRBaseBuilder {
     Extension... extensions
   ) {
     return buildEntry(
-      getBaseObservationBuilder(date, category, code, patientEntry, extensions)
+      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
         .value(quantity)
         .build(),
       FHIR_OBSERVATION_TYPE
@@ -348,7 +306,7 @@ class FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildCondition(
-    String date,
+    DateTime dateTime,
     CodeableConcept code,
     Bundle.Entry patientEntry
   ) {
@@ -358,11 +316,7 @@ class FHIRBaseBuilder {
 //        .onset(
 //          Age.builder().value(age).build()
 //        )
-        .recordedDate(
-          DateTime.of(
-            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
-          )
-        )
+        .recordedDate(dateTime)
         .subject(
           // TODO use buildReference
           Reference.builder()
@@ -395,7 +349,7 @@ class FHIRBaseBuilder {
 
   @Deprecated // @todo use the function toBuilder ?
   protected static Observation.Builder getBaseObservationBuilder(
-    String date,
+    DateTime dateTime,
     CodeableConcept category,
     CodeableConcept code,
     Bundle.Entry patientEntry,
@@ -406,13 +360,7 @@ class FHIRBaseBuilder {
       .category(category)
       .code(code)
       .extension(extensions)
-      .effective(
-        DateTime.builder()
-          .value(
-            DateTimeUtils.cast(date) // @note Date needs to be converted to DateTime format in case of EMR dataset
-          )
-          .build()
-      )
+      .effective(dateTime)
       .subject(
         // TODO use buildReference
         Reference.builder()

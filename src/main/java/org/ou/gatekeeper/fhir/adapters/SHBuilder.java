@@ -4,16 +4,16 @@ import com.google.common.base.CaseFormat;
 import com.ibm.fhir.model.resource.Bundle;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
-import com.ibm.fhir.model.type.CodeableConcept;
-import com.ibm.fhir.model.type.Coding;
-import com.ibm.fhir.model.type.Decimal;
-import com.ibm.fhir.model.type.Quantity;
+import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.String;
 import java.util.Collection;
+import java.util.TimeZone;
 
 class SHBuilder extends FHIRBaseBuilder {
 
@@ -236,8 +236,8 @@ class SHBuilder extends FHIRBaseBuilder {
         )
         .effective(
           endTime != null
-            ? buildPeriod(toTimestamp(startTime), toTimestamp(endTime), zoneOffset)
-            : buildDateTime(toTimestamp(startTime), zoneOffset)
+            ? buildPeriod(startTime, endTime, zoneOffset)
+            : buildDateTime(startTime, zoneOffset)
         )
         .component(components)
         .value(value)
@@ -280,11 +280,7 @@ class SHBuilder extends FHIRBaseBuilder {
         .component(components)
         .value(quantity)
         .effective(
-          buildPeriod(
-            toTimestamp(startTime),
-            toTimestamp(endTime),
-            zoneOffset
-          )
+          buildPeriod(startTime, endTime, zoneOffset)
         )
         .device(
           buildReference(buildIdentifier(
@@ -327,11 +323,7 @@ class SHBuilder extends FHIRBaseBuilder {
         .code(codes)
         .value(quantity)
         .effective(
-          buildPeriod(
-            toTimestamp(startTime),
-            toTimestamp(endTime),
-            zoneOffset
-          )
+          buildPeriod(startTime, endTime, zoneOffset)
         )
         .device(
           buildReference(buildIdentifier(
@@ -376,11 +368,7 @@ class SHBuilder extends FHIRBaseBuilder {
         )))
         .component(components)
         .effective(
-          buildPeriod(
-            toTimestamp(startTime),
-            toTimestamp(endTime),
-            zoneOffset
-          )
+          buildPeriod(startTime, endTime, zoneOffset)
         )
         .derivedFrom(
           buildReference(parentEntry)
@@ -395,6 +383,31 @@ class SHBuilder extends FHIRBaseBuilder {
     );
   }
 
+  /**
+   * @todo description
+   */
+  public static DateTime buildDateTime(String dateTime, String zoneOffset) {
+    String stdDateTime = dateTimeTranslator(dateTime, zoneOffset);
+    return DateTime.builder()
+      .value(stdDateTime)
+      .build();
+  }
+
+  /**
+   * @todo description
+   */
+  public static Period buildPeriod(
+    String start,
+    String end,
+    String zoneOffset
+  ) {
+    return Period.builder()
+      .start(DateTime.of(dateTimeTranslator(start, zoneOffset)))
+      .end(DateTime.of(dateTimeTranslator(end, zoneOffset)))
+      .build();
+  }
+
+
   //--------------------------------------------------------------------------//
   // Class definition
   //--------------------------------------------------------------------------//
@@ -404,6 +417,27 @@ class SHBuilder extends FHIRBaseBuilder {
    */
   private SHBuilder() {
     super();
+  }
+
+  private static String dateTimeTranslator(String timestamp, String zoneOffset){
+    TimeZone timeZone;
+    // @see https://www.timeanddate.com/time/map/
+    switch (zoneOffset) {
+      case "UTC+0100":
+//        ZoneOffset.UTC.ofHours(1);
+        timeZone = TimeZone.getTimeZone("Europe/Rome");
+        break;
+      case "UTC+0200":
+//        ZoneOffset.ofHours(2);
+        timeZone = TimeZone.getTimeZone("Europe/Athens");
+        break;
+      default:
+        timeZone = TimeZone.getTimeZone("UTC");
+    }
+    Long lTimestamp = Long.parseLong(timestamp);
+    String pattern = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern();
+    String isoDateTime = DateFormatUtils.format(lTimestamp, pattern, timeZone);
+    return isoDateTime;
   }
 
 }
