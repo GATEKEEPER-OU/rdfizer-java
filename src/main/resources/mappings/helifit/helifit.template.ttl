@@ -6663,14 +6663,10 @@
 .
 
 
-
-
 # ############################################################################ #
 #                                  Swimming
 # ############################################################################ #
 
-# 73985-4 Exercise activity
-# LA11834-1 Swimming
 <#SwimmingActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";

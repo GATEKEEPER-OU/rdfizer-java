@@ -4,7 +4,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?p ?pa ?dimension ?start ?end ?value ?unit WHERE {
     ?p rdf:type hlf:E21Person .
-    ?pa rdf:type hlf:HLF60Running .
+    ?pa rdf:type hlf:HLF66Swimming .
     ?pa hlf:P14carriedOutBy ?p .
 
     ?TS rdf:type hlf:E52TimeSpan .

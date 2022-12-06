@@ -1,0 +1,25 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?p ?pa ?mea ?start ?end ?value ?unit WHERE {
+    ?p rdf:type hlf:E21Person .
+    ?pa rdf:type hlf:HLF66Swimming .
+    ?pa hlf:P14carriedOutBy ?p .
+
+    ?TS rdf:type hlf:E52TimeSpan .
+    ?TS hlf:EP7starts ?start .
+    ?TS hlf:EP8ends ?end .
+    ?pa hlf:P4hasTimeSpan ?TS.
+
+    ?pa hlf:P117includes ?assign.
+    ?assign rdf:type hlf:E13AttributeAssignment .
+    ?assign hlf:P140assignedAttributeTo ?p .
+    ?assign hlf:P117includes ?mea .
+    ?mea rdf:type hlf:E16Measurement .
+    ?mea hlf:EP11wasObtainFrom ?streamOb .
+    ?streamOb rdf:type hlf:HLF321StreamObservation .
+    ?streamOb hlf:P40observedDimension ?streamDm .
+    ?streamDm hlf:P90hasValue ?value .
+    ?streamDm hlf:P91hasUnit ?unit .
+}
