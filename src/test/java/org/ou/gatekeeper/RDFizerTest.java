@@ -32,8 +32,8 @@ class RDFizerTest {
 
     // Observations
 //    "xxx, keep, CSS, .., all",
-//    "xxx, keep, CSS, GlycosilatedEmoglobin",
-//        "xxx, keep, CSS, GlycosilatedEmoglobin",
+    "xxx, keep, CSS, GlycosilatedEmoglobin",
+//        "xxx, keep, CSS, ...",
 
     //
     // Samsung Health
@@ -43,7 +43,7 @@ class RDFizerTest {
 //    "xxx, keep, SH, Patient",
 
     // Observations
- //   "xxx, keep, SH, FloorsClimbed",
+//    "xxx, keep, SH, FloorsClimbed",
 //    "xxx, keep, SH, StepDailyTrend",
 //    "xxx, keep, SH, HeartRate",
 //    "xxx, keep, SH, Walking",
@@ -114,7 +114,7 @@ class RDFizerTest {
       "xxx, keep, SH, Walking,   '0000,0001,0002,0020,0021,0040,0041,0010,3101,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
 //      "xxx, keep, SH, Cycling,   '0000,0001,0002,0020,0021,0040,0041,0010,3102,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
       //"xxx, keep, SH, Running,   '0000,0001,0002,0020,0021,0040,0041,0010,3103,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
-//      "xxx, keep, SH, Swimming.txt,   '0000,0001,0002,0020,0021,0040,0041,0010,3104,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
+//      "xxx, keep, SH, Swimming,   '0000,0001,0002,0020,0021,0040,0041,0010,3104,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
     //"xxx, keep, SH, Sleep,     '0000,0001,0002,0020,0021,0040,0041,2104'",
     //"xxx, keep, SH, SleepStage,     '0000,0001,0002,0020,0021,0040,0041,0043,2105'",
 

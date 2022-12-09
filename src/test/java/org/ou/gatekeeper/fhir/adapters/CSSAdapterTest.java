@@ -21,7 +21,7 @@ class CSSAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-//    "xxx, keep, Patient",
+    "dda29b24b638cc7eec653ea11d2fda0b8dffd9ba05678a0cf780cdc19fa9d3be, clean, Patient",
 //    "xxx, keep, BodyHeight",
 //    "xxx, keep, BodyWeight",
 
@@ -55,10 +55,17 @@ class CSSAdapterTest {
     FHIRAdapter converter = CSSAdapter.create();
     converter.transform(datasetFile, outputFile);
 
+//    File outputNormFile = TestUtils.createOutputFile("output-"+datasetName, "norm.json");
+//    converter.transform(datasetFile, outputNormFile, true);
+
     try {
+      // Before evalutate, it must be eliminated outo-generated values (uuids, etc...)
+      // because they will change each run
       TestUtils.removeAllLinesFromFile(outputFile, "fullUrl");
-      TestUtils.removeAllLinesFromFile(outputFile, "reference");
-      TestUtils.removeAllLinesFromFile(outputFile, "valueString");
+//      TestUtils.removeAllLinesFromFile(outputFile, "reference");
+//      TestUtils.removeAllLinesFromFile(outputFile, "valueString");
+
+      // Evaluation
       String outputDigest = new DigestUtils(SHA3_256).digestAsHex(outputFile);
       assertEquals(expectedDigest, outputDigest);
 
