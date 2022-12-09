@@ -1,17 +1,17 @@
 # ############################################################################ #
-#                                 BodyHeight
+#                                 WaterIntake
 # ############################################################################ #
 
-<#BodyHeightAssignment> a rr:TriplesMap;
+<#WaterIntakeAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'waterintake')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF153/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF153HeightAssignment;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF546/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF546WaterIntakeAssignment;
   ];
 
   #
@@ -56,7 +56,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#BodyHeightMeasurement>;
+      rr:parentTriplesMap <#WaterIntakeMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -65,17 +65,16 @@
   ];
 .
 
-# 8302-2 Body height
-<#BodyHeightMeasurement> a rr:TriplesMap;
+<#WaterIntakeMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'waterintake')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF173/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF173HeightMeasurement;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF344/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF344WaterIntakeMeasurement;
   ];
 
   #
@@ -120,7 +119,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#BodyHeightDimension>;
+      rr:parentTriplesMap <#WaterIntakeDimension>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -129,17 +128,16 @@
   ];
 .
 
-# 8302-2 Body Height
-<#BodyHeightDimension> a rr:TriplesMap;
+<#WaterIntakeDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'waterintake')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF19/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF19HeightDimension;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF441/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF441AtomicWaterIntakeDimension;
   ];
 
   #
