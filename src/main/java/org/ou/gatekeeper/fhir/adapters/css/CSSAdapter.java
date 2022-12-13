@@ -173,7 +173,8 @@ public class CSSAdapter implements FHIRAdapter {
       buildObservationLDL(examination, patientEntry));
     addIgnoreNull(entries,
       buildObservationTriglycerides(examination, patientEntry));
-//      // @todo TC_HDL ask
+    addIgnoreNull(entries,
+      buildObservationTotalCholesterolHDL(examination, patientEntry));
     addIgnoreNull(entries,
       buildObservationSerumCreatinine(examination, patientEntry));
     addIgnoreNull(entries,

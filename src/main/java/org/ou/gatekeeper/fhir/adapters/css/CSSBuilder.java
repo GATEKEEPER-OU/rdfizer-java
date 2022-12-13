@@ -265,7 +265,46 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  // @note TC-HDL missing
+  /**
+   * @todo description
+   */
+  public static Bundle.Entry buildObservationTotalCholesterolHDL(JSONObject examination, Bundle.Entry patientEntry) {
+    try {
+      return buildObservation(
+        buildDate(
+          examination.getString("date")
+        ),
+        buildCodeableConcept(
+          buildCoding(
+            HL7_SYSTEM,
+            LAB_CODE,
+            LAB_DISPLAY
+          )
+        ),
+        buildCodeableConcept(
+          buildCoding(
+            LOINC_SYSTEM,
+            "2095-8",
+            "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+          )
+        ),
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          MG_PER_DL_UNIT,
+          LOINC_SYSTEM,
+          examination.getString("TC_HDL_unit")
+        ),
+        patientEntry,
+        buildPatientAgeExtention(
+          HL7_PATIENT_AGE,
+          examination.getInt(PATIENT_AGE_KEY)
+        )
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
 
   /**
    * @todo description
