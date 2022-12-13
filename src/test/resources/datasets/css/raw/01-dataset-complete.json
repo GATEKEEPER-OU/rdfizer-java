@@ -3,7 +3,8 @@
     {
       "examination_id": "1234asdf",
       "patient": {
-        "patient_id": "001"
+        "patient_uuid": "xxx",
+        "patient_id": "userXXX@puglia.gatekeeper.com"
       },
       "patient_age": 29,
       "date": "2021-03-30",
@@ -17,8 +18,8 @@
       "LDL_unit": "mg/dl",
       "triglycerides": 0.20872825,
       "triglycerides_unit": "mg/dl",
-      "TC_HDL": null,
-      "TC_HDL_unit": null,
+      "TC_HDL": 162,
+      "TC_HDL_unit": "mg/dl",
       "serum_creatinine": 0.16005236,
       "serum_creatinine_unit": "mg/dl",
       "albuminuria_creatininuria_ratio": 0.70763606,
