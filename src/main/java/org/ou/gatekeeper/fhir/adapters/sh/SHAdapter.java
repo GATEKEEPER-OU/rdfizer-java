@@ -30,6 +30,8 @@ import static org.ou.gatekeeper.fhir.adapters.sh.SHBuilder.*;
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * TODO description
+ *
+ * @link https://developer.samsung.com/health/android/data/api-reference/com/samsung/android/sdk/healthdata/HealthConstants.Exercise.html
  */
 public class SHAdapter implements FHIRAdapter {
 
@@ -777,6 +779,7 @@ public class SHAdapter implements FHIRAdapter {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("count")) {
       String uuid = dataElement.getString("data_uuid");
+      String countType = getCountType(values.getString("count_type"));
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
@@ -789,28 +792,12 @@ public class SHAdapter implements FHIRAdapter {
         )),
         FHIRBaseBuilder.buildQuantity(
           Decimal.of(values.getString("count")),
-          "...", // TODO
-          UNITSOFM_SYSTEM,
-          "..." // TODO
+          countType,
+          LOCAL_SYSTEM,
+          countType
         )
       );
       components.add(countComponent);
-      //
-      // count_type
-      if (values.has("count_type")) {
-        String value = values.getString("count_type");
-        Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
-          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
-            LOCAL_SYSTEM,
-            "count_type",
-            "Count type"
-          )),
-          Quantity.builder()
-            .value(Decimal.of(value))
-            .build()
-        );
-        components.add(meanComponent);
-      }
 
       //
       // aggregated observation
@@ -850,9 +837,9 @@ public class SHAdapter implements FHIRAdapter {
             )),
             FHIRBaseBuilder.buildQuantity(
               Decimal.of(value),
-              "...",
-              UNITSOFM_SYSTEM,
-              "..."
+              countType,
+              LOCAL_SYSTEM,
+              countType
             ),
             aggregatedObservation,
             patientEntry
@@ -1995,10 +1982,11 @@ public class SHAdapter implements FHIRAdapter {
               "Latitude"
             )),
             FHIRBaseBuilder.buildQuantity(
+              // @link https://developer.samsung.com/health/android/data/api-reference/com/samsung/android/sdk/healthdata/HealthConstants.UvExposure.html#LATITUDE
               Decimal.of(locationElement.getString("latitude")),
-              "...", // TODO
+              "degree",
               UNITSOFM_SYSTEM,
-              "..." // TODO
+              "[pi].rad/360"
             )
           );
           components.add(latitudeComponent);
@@ -2014,10 +2002,11 @@ public class SHAdapter implements FHIRAdapter {
               "Longitude"
             )),
             FHIRBaseBuilder.buildQuantity(
+              // @link https://developer.samsung.com/health/android/data/api-reference/com/samsung/android/sdk/healthdata/HealthConstants.UvExposure.html#LONGITUDE
               Decimal.of(locationElement.getString("longitude")),
-              "...", // TODO
+              "degree",
               UNITSOFM_SYSTEM,
-              "..." // TODO
+              "[pi].rad/360"
             )
           );
           components.add(longitudeComponent);
@@ -2036,7 +2025,7 @@ public class SHAdapter implements FHIRAdapter {
               Decimal.of(locationElement.getString("altitude")),
               "m",
               UNITSOFM_SYSTEM,
-              "..." // TODO
+              "meter"
             )
           );
           components.add(altitudeComponent);
@@ -2052,10 +2041,11 @@ public class SHAdapter implements FHIRAdapter {
               "Accuracy"
             )),
             FHIRBaseBuilder.buildQuantity(
+              // @link https://developer.samsung.com/health/android/data/api-reference/com/samsung/android/sdk/healthdata/HealthConstants.UvExposure.html#ACCURACY
               Decimal.of(locationElement.getString("accuracy")),
-              "...", // TODO
+              "percent",
               UNITSOFM_SYSTEM,
-              "..." // TODO
+              "%"
             )
           );
           components.add(accuracyComponent);

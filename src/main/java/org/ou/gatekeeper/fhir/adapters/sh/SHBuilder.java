@@ -50,6 +50,17 @@ class SHBuilder extends FHIRBaseBuilder {
     return element.getString(key);
   }
 
+  public static String getCountType(String value) {
+    switch (value) {
+      case "30001": return "stride";
+      case "30002": return "stroke";
+      case "30003": return "swing";
+      case "30004": return "repetition";
+      default:
+        return "undefined";
+    }
+  }
+
   public static CodeableConcept getCodes(JSONObject dataElement) {
     String typeId = dataElement.getString("type_id");
     switch (typeId) {
@@ -165,9 +176,9 @@ class SHBuilder extends FHIRBaseBuilder {
           Decimal.of(
             SHBuilder.getValue(dataElement, "floor")
           ),
-          "...", // TODO
-          UNITSOFM_SYSTEM,
-          "..." // TODO
+          "floor",
+          LOCAL_SYSTEM,
+          "floor"
         );
       default:
         return null;
@@ -182,7 +193,7 @@ class SHBuilder extends FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildPatient(JSONObject patient) {
-    String patientId = patient.getString("user_uuid");
+    String patientId = getId(patient, "user_uuid");
     String patientEmail = patient.getString("user_id");
     String fullUrl = BASE_URL + "/patient/" + patientEmail;
     return buildEntry(
@@ -191,11 +202,11 @@ class SHBuilder extends FHIRBaseBuilder {
         .identifier(
           buildIdentifier(
             BASE_URL + "/identifier",
-            patientEmail
+            patientId
           ),
           buildIdentifier(
             BASE_URL + "/identifier",
-            patientId
+            patientEmail
           )
         )
         .build(),

@@ -4,6 +4,10 @@ import com.ibm.fhir.model.resource.*;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.HTTPVerb;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.Integer;
 import java.lang.String;
@@ -15,6 +19,8 @@ import java.util.UUID;
  * @todo description
  */
 public abstract class FHIRBaseBuilder {
+
+  public static final Logger LOGGER = LoggerFactory.getLogger(FHIRBaseBuilder.class);
 
   /**
    * @todo description
@@ -345,6 +351,17 @@ public abstract class FHIRBaseBuilder {
    * @todo description
    */
   protected FHIRBaseBuilder() {
+  }
+
+  protected static String getId(JSONObject resource, String key) {
+    String uuid = resource.getString(key);
+    if (StringUtils.isBlank(uuid)) {
+      uuid = UUID.randomUUID().toString();
+      String message = String.format("Property '%s' is missing, generated a random one: %s", key, uuid);
+      LOGGER.warn(message);
+      return uuid;
+    }
+    return uuid;
   }
 
   @Deprecated // @todo use the function toBuilder ?
