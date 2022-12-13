@@ -48,7 +48,8 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/id/{resource.identifier[0].value}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E42/id/{resource.id}";
+    # rr:template "https://opensource.samsung.com/projects/helifit/type/E42/id/{resource.identifier[0].value}";
     rr:class ho:E42Identifier;
   ];
 

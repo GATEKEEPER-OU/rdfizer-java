@@ -195,7 +195,8 @@ class SHBuilder extends FHIRBaseBuilder {
   public static Bundle.Entry buildPatient(JSONObject patient) {
     String patientId = getId(patient, "user_uuid");
     String patientEmail = patient.getString("user_id");
-    String fullUrl = BASE_URL + "/patient/" + patientEmail;
+    String fullUrl = BASE_URL + "/patient/" + patientId;
+//    String fullUrl = BASE_URL + "/patient/" + patientEmail;
     return buildEntry(
       Patient.builder()
         .id(patientId)

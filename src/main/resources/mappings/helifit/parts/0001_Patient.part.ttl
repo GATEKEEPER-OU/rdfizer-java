@@ -14,16 +14,16 @@
     rr:class ho:E21Person;
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#PatientIdentifier>;
-      rr:joinCondition [
-        rr:child "resource.identifier[0].value";
-        rr:parent "resource.identifier[0].value";
-      ];
-    ];
-  ];
+  # rr:predicateObjectMap [
+  #   rr:predicate ho:P1isIdentifiedBy;
+  #   rr:objectMap [
+  #     rr:parentTriplesMap <#PatientIdentifier>;
+  #     rr:joinCondition [
+  #       rr:child "resource.identifier[0].value";
+  #       rr:parent "resource.identifier[0].value";
+  #     ];
+  #   ];
+  # ];
 .
 
 # /Patient
