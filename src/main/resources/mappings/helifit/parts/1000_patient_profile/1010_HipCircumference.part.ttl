@@ -1,17 +1,17 @@
 # ############################################################################ #
-#                                 BodyTemperature
+#                                 HipCircumference
 # ############################################################################ #
 
-<#BodyTemperatureAssignment> a rr:TriplesMap;
+<#HipCircumferenceAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF524/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF524BodyTemperatureAssignment;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF143/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF143HipCircumferenceAssignment;
   ];
 
   #
@@ -56,7 +56,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#BodyTemperatureMeasurement>;
+      rr:parentTriplesMap <#HipCircumferenceMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -65,16 +65,16 @@
   ];
 .
 
-<#BodyTemperatureMeasurement> a rr:TriplesMap;
+<#HipCircumferenceMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF324/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF324BodyTemperatureMeasurement;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF335/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF335HipCircumferenceMeasurement;
   ];
 
   #
@@ -119,7 +119,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#BodyTemperatureDimension>;
+      rr:parentTriplesMap <#HipCircumferenceDimension>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -128,16 +128,16 @@
   ];
 .
 
-<#BodyTemperatureDimension> a rr:TriplesMap;
+<#HipCircumferenceDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
   ];
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF418/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF418BodyTemperatureDimension;
+    rr:class ho:HLF20HipCircumferenceDimension;
   ];
 
   #
