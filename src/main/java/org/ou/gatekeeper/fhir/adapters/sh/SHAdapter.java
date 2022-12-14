@@ -257,8 +257,8 @@ public class SHAdapter implements FHIRAdapter {
   private static void collectWeightComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
     // height
-    if (elementValues.has("height")) {
-      String value = elementValues.getString("height");
+    String weight = getLiveValue(elementValues, "weight");
+    if (!StringUtils.isBlank(weight)) {
       Observation.Component height = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -266,7 +266,7 @@ public class SHAdapter implements FHIRAdapter {
           "Height"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(weight),
           "centimeter",
           UNITSOFM_SYSTEM,
           "cm"
@@ -276,8 +276,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // body_fat
-    if (elementValues.has("body_fat")) {
-      String value = elementValues.getString("body_fat");
+    String bodyFatValue = getLiveValue(elementValues, "body_fat");
+    if (!StringUtils.isBlank(bodyFatValue)) {
       Observation.Component bodyFat = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -285,7 +285,7 @@ public class SHAdapter implements FHIRAdapter {
           "Body Fat"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(bodyFatValue),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -295,8 +295,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // body_fat_mass
-    if (elementValues.has("body_fat_mass")) {
-      String value = elementValues.getString("body_fat_mass");
+    String bodyFatMassValue = getLiveValue(elementValues, "body_fat_mass");
+    if (!StringUtils.isBlank(bodyFatMassValue)) {
       Observation.Component bodyFatMass = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -304,7 +304,7 @@ public class SHAdapter implements FHIRAdapter {
           "Body fat mass"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(bodyFatMassValue),
           "kilogram",
           UNITSOFM_SYSTEM,
           "Kg"
@@ -781,7 +781,8 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("count")) {
+    String count = getValue(dataElement, "count");
+    if (!StringUtils.isBlank(count)) {
       String uuid = dataElement.getString("data_uuid");
       String countType = "..."; // TODO change this to a proper unit
       if (values.has("count_type")) {
@@ -798,7 +799,7 @@ public class SHAdapter implements FHIRAdapter {
           "Count"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("count")),
+          Decimal.of(count),
           countType,
           LOCAL_SYSTEM,
           countType
@@ -829,10 +830,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("count")) {
+        String value = getLiveValue(liveElement, "count");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-count-%d", uuid, i);
-          String value = liveElement.getString("count");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -867,16 +868,19 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("distance")
-      || values.has("incline_distance")
-      || values.has("decline_distance")
+    String distance = getValue(dataElement, "distance");
+    String inclineDistance = getValue(dataElement, "incline_distance");
+    String declineDistance = getValue(dataElement, "decline_distance");
+    if ( !StringUtils.isBlank(distance)
+            || !StringUtils.isBlank(inclineDistance)
+            || !StringUtils.isBlank(declineDistance)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // Distance
-      if (values.has("distance")) {
+      if (!StringUtils.isBlank(distance)) {
         Observation.Component distanceComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -884,7 +888,7 @@ public class SHAdapter implements FHIRAdapter {
             "Distance"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("distance")),
+            Decimal.of(distance),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -894,7 +898,7 @@ public class SHAdapter implements FHIRAdapter {
       }
       //
       // incline_distance
-      if (values.has("incline_distance")) {
+      if (!StringUtils.isBlank(inclineDistance)) {
         Observation.Component inclineComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -902,7 +906,7 @@ public class SHAdapter implements FHIRAdapter {
             "Incline distance"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("incline_distance")),
+            Decimal.of(inclineDistance),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -912,7 +916,7 @@ public class SHAdapter implements FHIRAdapter {
       }
       //
       // decline_distance
-      if (values.has("decline_distance")) {
+      if (!StringUtils.isBlank(declineDistance)) {
         Observation.Component inclineComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -920,7 +924,7 @@ public class SHAdapter implements FHIRAdapter {
             "Decline distance"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("decline_distance")),
+            Decimal.of(declineDistance),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -952,10 +956,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("distance")) {
+        String value = getLiveValue(liveElement, "distance");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-distance-%d", uuid, i);
-          String value = liveElement.getString("distance");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -990,9 +994,12 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("speed")
-      || values.has("mean_speed")
-      || values.has("max_speed")
+    String speed = getValue(dataElement, "speed");
+    String meanSpeed = getValue(dataElement, "mean_speed");
+    String maxSpeed = getValue(dataElement, "max_speed");
+    if ( !StringUtils.isBlank(speed)
+      || !StringUtils.isBlank(meanSpeed)
+      || !StringUtils.isBlank(maxSpeed)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1000,7 +1007,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // Speed
-      if (values.has("speed")) {
+      if (!StringUtils.isBlank(speed)) {
         Observation.Component speedComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1008,7 +1015,7 @@ public class SHAdapter implements FHIRAdapter {
             "Speed"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("speed")),
+            Decimal.of(speed),
             "m/s",
             UNITSOFM_SYSTEM,
             "m/s"
@@ -1019,7 +1026,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // mean_speed
-      if (values.has("mean_speed")) {
+      if (!StringUtils.isBlank(meanSpeed)) {
         Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1027,7 +1034,7 @@ public class SHAdapter implements FHIRAdapter {
             "Mean speed"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("mean_speed")),
+            Decimal.of(meanSpeed),
             "m/s",
             UNITSOFM_SYSTEM,
             "m/s"
@@ -1038,7 +1045,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // max_speed
-      if (values.has("max_speed")) {
+      if (!StringUtils.isBlank(maxSpeed)) {
         Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1046,7 +1053,7 @@ public class SHAdapter implements FHIRAdapter {
             "Max speed"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("max_speed")),
+            Decimal.of(maxSpeed),
             "m/s",
             UNITSOFM_SYSTEM,
             "m/s"
@@ -1078,10 +1085,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("speed")) {
+        String value = getLiveValue(liveElement, "speed\")");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-speed-%d", uuid, i);
-          String value = liveElement.getString("speed");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1116,9 +1123,9 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("heart_rate")) {
+    String heartRate = getValue(dataElement, "heart_rate");
+    if (!StringUtils.isBlank(heartRate)) {
       String uuid = dataElement.getString("data_uuid");
-      String aggrValue = values.getString("heart_rate");
 
       Collection<Observation.Component> components = new LinkedList<>();
 
@@ -1135,7 +1142,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(aggrValue),
+          Decimal.of(heartRate),
           "beats/min",
           UNITSOFM_SYSTEM,
           "{Beats}/min"
@@ -1150,10 +1157,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
+        String value = getLiveValue(liveElement, "heart_rate");
         if (liveElement.has("heart_rate")) {
           // Collect live_data values
           String liveId = String.format("%s-heart-rate-%d", uuid, i);
-          String value = liveElement.getString("heart_rate");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1188,9 +1195,9 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("heart_rate_min")) {
+    String heartRateMin = getValue(dataElement, "heart_rate_min");
+    if (!StringUtils.isBlank(heartRateMin)) {
       String uuid = dataElement.getString("data_uuid");
-      String aggrValue = values.getString("heart_rate_min");
 
       Collection<Observation.Component> components = new LinkedList<>();
 
@@ -1207,7 +1214,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(aggrValue),
+          Decimal.of(heartRateMin),
           "beats/min",
           UNITSOFM_SYSTEM,
           "{Beats}/min"
@@ -1222,10 +1229,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("heart_rate_min")) {
+        String value = getLiveValue(liveElement, "heart_rate_min");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-heart-rate-min-%d", uuid, i);
-          String liveValue = liveElement.getString("heart_rate_min");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1236,7 +1243,7 @@ public class SHAdapter implements FHIRAdapter {
               "Live data min heart rate"
             )),
             FHIRBaseBuilder.buildQuantity(
-              Decimal.of(liveValue),
+              Decimal.of(value),
               "beats/min",
               UNITSOFM_SYSTEM,
               "{Beats}/min"
@@ -1260,9 +1267,9 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("heart_rate_max")) {
+    String heartRateMax = getValue(dataElement, "heart_rate_max");
+    if (!StringUtils.isBlank(heartRateMax)) {
       String uuid = dataElement.getString("data_uuid");
-      String aggrValue = values.getString("heart_rate_max");
 
       Collection<Observation.Component> components = new LinkedList<>();
 
@@ -1279,7 +1286,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(aggrValue),
+          Decimal.of(heartRateMax),
           "beats/min",
           UNITSOFM_SYSTEM,
           "{Beats}/min"
@@ -1294,10 +1301,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("heart_rate_max")) {
+        String value = getLiveValue(liveElement, "heart_rate_max");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-heart-rate-max-%d", uuid, i);
-          String liveValue = liveElement.getString("heart_rate_max");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1308,7 +1315,7 @@ public class SHAdapter implements FHIRAdapter {
               "Live data max heart rate"
             )),
             FHIRBaseBuilder.buildQuantity(
-              Decimal.of(liveValue),
+              Decimal.of(value),
               "beats/min",
               UNITSOFM_SYSTEM,
               "{Beats}/min"
@@ -1332,9 +1339,9 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("heart_beat_count")) {
+    String heartBeatCount = getValue(dataElement, "heart_beat_count");
+    if (!StringUtils.isBlank(heartBeatCount)) {
       String uuid = dataElement.getString("data_uuid");
-      String aggrValue = values.getString("heart_beat_count");
 
       Collection<Observation.Component> components = new LinkedList<>();
 
@@ -1351,7 +1358,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(aggrValue),
+          Decimal.of(heartBeatCount),
           "beats/min",
           UNITSOFM_SYSTEM,
           "beats/min"
@@ -1372,8 +1379,10 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("mean_cadence")
-      && values.has("max_cadence")
+    String meanCadence = getValue(dataElement, "mean_cadence");
+    String maxCadence = getValue(dataElement, "max_cadence");
+    if ( !StringUtils.isBlank(meanCadence)
+      && !StringUtils.isBlank(maxCadence)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1387,7 +1396,7 @@ public class SHAdapter implements FHIRAdapter {
           "Mean Cadence"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("mean_cadence")),
+          Decimal.of(meanCadence),
           "m/s",
           UNITSOFM_SYSTEM,
           "m/s"
@@ -1404,7 +1413,7 @@ public class SHAdapter implements FHIRAdapter {
           "Max Cadence"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("max_cadence")),
+          Decimal.of(maxCadence),
           "m/s",
           UNITSOFM_SYSTEM,
           "m/s"
@@ -1435,10 +1444,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("cadence")) {
+        String value = getLiveValue(liveElement, "cadence");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-cadence-%d", uuid, i);
-          String value = liveElement.getString("cadence");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1473,8 +1482,10 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("mean_power")
-      && values.has("max_power")
+    String meanPower = getValue(dataElement, "mean_power");
+    String maxPower = getValue(dataElement, "max_power");
+    if ( !StringUtils.isBlank(meanPower)
+      && !StringUtils.isBlank(maxPower)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1488,7 +1499,7 @@ public class SHAdapter implements FHIRAdapter {
           "Mean Power"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("mean_power")),
+          Decimal.of(meanPower),
           "watt",
           UNITSOFM_SYSTEM,
           "W"
@@ -1505,7 +1516,7 @@ public class SHAdapter implements FHIRAdapter {
           "Max Power"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("max_power")),
+          Decimal.of(maxPower),
           "watt",
           UNITSOFM_SYSTEM,
           "W"
@@ -1536,10 +1547,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("power")) {
+        String value = getLiveValue(liveElement, "power");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-power-%d", uuid, i);
-          String value = liveElement.getString("power");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1574,10 +1585,14 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("altitude_gain")
-      && values.has("altitude_loss")
-      && values.has("min_altitude")
-      && values.has("max_altitude")
+    String altitudeGain = getValue(dataElement, "altitude_gain");
+    String altitudeLoss = getValue(dataElement, "altitude_loss");
+    String minAltitude = getValue(dataElement, "min_altitude");
+    String maxAltitude = getValue(dataElement, "max_altitude");
+    if ( !StringUtils.isBlank(altitudeGain)
+      && !StringUtils.isBlank(altitudeLoss)
+      && !StringUtils.isBlank(minAltitude)
+      && !StringUtils.isBlank(maxAltitude)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1585,7 +1600,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // altitude_gain
-      if (values.has("altitude_gain")) {
+      if (!StringUtils.isBlank(altitudeGain)) {
         Observation.Component gainComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1593,7 +1608,7 @@ public class SHAdapter implements FHIRAdapter {
             "Altitude gain"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("altitude_gain")),
+            Decimal.of(altitudeGain),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -1604,7 +1619,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // altitude_loss
-      if (values.has("altitude_loss")) {
+      if (!StringUtils.isBlank(altitudeLoss)) {
         Observation.Component lossComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1612,7 +1627,7 @@ public class SHAdapter implements FHIRAdapter {
             "Altitude loss"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("altitude_loss")),
+            Decimal.of(altitudeLoss),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -1623,7 +1638,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // min_altitude
-      if (values.has("min_altitude")) {
+      if (!StringUtils.isBlank(minAltitude)) {
         Observation.Component minComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1631,7 +1646,7 @@ public class SHAdapter implements FHIRAdapter {
             "Min altitude"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("min_altitude")),
+            Decimal.of(minAltitude),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -1642,7 +1657,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // max_altitude
-      if (values.has("max_altitude")) {
+      if (!StringUtils.isBlank(maxAltitude)) {
         Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1650,7 +1665,7 @@ public class SHAdapter implements FHIRAdapter {
             "Max Altitude"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("max_altitude")),
+            Decimal.of(maxAltitude),
             "m",
             UNITSOFM_SYSTEM,
             "m"
@@ -1689,7 +1704,8 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("duration")) {
+    String duration = getValue(dataElement, "duration");
+    if ( !StringUtils.isBlank(duration)) {
       String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
@@ -1707,7 +1723,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("duration")),
+          Decimal.of(duration),
           "s",
           UNITSOFM_SYSTEM,
           "s"
@@ -1729,9 +1745,12 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("min_heart_rate")
-      || values.has("mean_heart_rate")
-      || values.has("max_heart_rate")
+    String minHeartRate = getValue(dataElement, "min_heart_rate");
+    String meanHeartRate = getValue(dataElement, "mean_heart_rate");
+    String maxHeartRate = getValue(dataElement, "max_heart_rate");
+    if ( !StringUtils.isBlank(minHeartRate)
+      || !StringUtils.isBlank(meanHeartRate)
+      || !StringUtils.isBlank(maxHeartRate)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1739,7 +1758,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // Heart Rate Min
-      if (values.has("min_heart_rate")) {
+      if (!StringUtils.isBlank(minHeartRate)) {
         Observation.Component hrMinComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1747,7 +1766,7 @@ public class SHAdapter implements FHIRAdapter {
             "Heart Rate Min"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("min_heart_rate")),
+            Decimal.of(minHeartRate),
             "beats/min",
             UNITSOFM_SYSTEM,
             "{Beats}/min"
@@ -1758,7 +1777,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // Heart Rate Mean
-      if (values.has("mean_heart_rate")) {
+      if (!StringUtils.isBlank(meanHeartRate)) {
         Observation.Component hrMeanComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1766,7 +1785,7 @@ public class SHAdapter implements FHIRAdapter {
             "Heart Rate Mean"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("mean_heart_rate")),
+            Decimal.of(meanHeartRate),
             "beats/min",
             UNITSOFM_SYSTEM,
             "{Beats}/min"
@@ -1777,7 +1796,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // Heart Rate Max
-      if (values.has("max_heart_rate")) {
+      if (!StringUtils.isBlank(maxHeartRate)) {
         Observation.Component hrMaxComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1785,7 +1804,7 @@ public class SHAdapter implements FHIRAdapter {
             "Heart Rate Max"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("max_heart_rate")),
+            Decimal.of(maxHeartRate),
             "beats/min",
             UNITSOFM_SYSTEM,
             "{Beats}/min"
@@ -1817,10 +1836,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("heart_rate")) {
+        String value = getLiveValue(liveElement, "heart_rate");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-heart-rate-%d", uuid, i);
-          String value = liveElement.getString("heart_rate");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -1855,8 +1874,10 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("mean_rpm")
-      && values.has("max_rpm")
+    String meanRpm = getValue(dataElement, "mean_rpm");
+    String maxRpm = getValue(dataElement, "max_rpm");
+    if ( !StringUtils.isBlank(meanRpm)
+      && !StringUtils.isBlank(maxRpm)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
@@ -1864,7 +1885,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // mean_rpm
-      if (values.has("mean_rpm")) {
+      if (!StringUtils.isBlank(meanRpm)) {
         Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1872,7 +1893,7 @@ public class SHAdapter implements FHIRAdapter {
             "Mean rpm"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("mean_rpm")),
+            Decimal.of(meanRpm),
             "Hz",
             UNITSOFM_SYSTEM,
             "hZ"
@@ -1883,7 +1904,7 @@ public class SHAdapter implements FHIRAdapter {
 
       //
       // max_rpm
-      if (values.has("max_rpm")) {
+      if (!StringUtils.isBlank(maxRpm)) {
         Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -1891,7 +1912,7 @@ public class SHAdapter implements FHIRAdapter {
             "Max rpm"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("max_rpm")),
+            Decimal.of(maxRpm),
             "Hz",
             UNITSOFM_SYSTEM,
             "hZ"
@@ -1930,7 +1951,8 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry patientEntry
   ) {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if (values.has("vo2_max")) {
+    String vo2Max = getValue(dataElement, "vo2_max");
+    if (!StringUtils.isBlank(vo2Max)) {
       String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
@@ -1948,7 +1970,7 @@ public class SHAdapter implements FHIRAdapter {
         )),
         components,
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("vo2_max")),
+          Decimal.of(vo2Max),
           "mL/kg/min",
           UNITSOFM_SYSTEM,
           "mL/kg/min"
