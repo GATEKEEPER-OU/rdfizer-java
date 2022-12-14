@@ -314,8 +314,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // muscle_mass
-    if (elementValues.has("muscle_mass")) {
-      String value = elementValues.getString("muscle_mass");
+    String muscleMassValue = getLiveValue(elementValues, "muscle_mass");
+    if (!StringUtils.isBlank(muscleMassValue)) {
       Observation.Component muscleMass = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -323,7 +323,7 @@ public class SHAdapter implements FHIRAdapter {
           "Muscle mass"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(muscleMassValue),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -333,8 +333,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // skeletal_muscle
-    if (elementValues.has("skeletal_muscle")) {
-      String value = elementValues.getString("skeletal_muscle");
+    String skeletalMuscleValue = getLiveValue(elementValues, "skeletal_muscle");
+    if (!StringUtils.isBlank(skeletalMuscleValue)) {
       Observation.Component skeletalMuscle = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -342,7 +342,7 @@ public class SHAdapter implements FHIRAdapter {
           "Skeletal muscle"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(skeletalMuscleValue),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -352,8 +352,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // skeletal_muscle_mass
-    if (elementValues.has("skeletal_muscle_mass")) {
-      String value = elementValues.getString("skeletal_muscle_mass");
+    String skeletalMuscleMassValue = getLiveValue(elementValues, "skeletal_muscle_mass");
+    if (!StringUtils.isBlank(skeletalMuscleMassValue)) {
       Observation.Component skeletalMuscleMass = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -361,7 +361,7 @@ public class SHAdapter implements FHIRAdapter {
           "Skeletal muscle mass"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(skeletalMuscleMassValue),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -371,8 +371,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // basal_metabolic_rate
-    if (elementValues.has("basal_metabolic_rate")) {
-      String value = elementValues.getString("basal_metabolic_rate");
+    String basalMetabolicRateValue = getLiveValue(elementValues, "basal_metabolic_rate");
+    if (!StringUtils.isBlank(basalMetabolicRateValue)) {
       Observation.Component basalMetabolicRate = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -380,7 +380,7 @@ public class SHAdapter implements FHIRAdapter {
           "Basal metabolic rate"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(basalMetabolicRateValue),
           "kilocalorie per day",
           UNITSOFM_SYSTEM,
           "kcal/d"
@@ -390,8 +390,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // fat_free
-    if (elementValues.has("fat_free")) {
-      String value = elementValues.getString("fat_free");
+    String fatFreeValue = getLiveValue(elementValues, "fat_free");
+    if (!StringUtils.isBlank(fatFreeValue)) {
       Observation.Component fatFree = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -399,7 +399,7 @@ public class SHAdapter implements FHIRAdapter {
           "Fat free"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(fatFreeValue),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -409,8 +409,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // fat_free_mass
-    if (elementValues.has("fat_free_mass")) {
-      String value = elementValues.getString("fat_free_mass");
+    String fatFreeMassValue = getLiveValue(elementValues, "fat_free_mass");
+    if (!StringUtils.isBlank(fatFreeMassValue)) {
       Observation.Component fatFreeMass = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -418,7 +418,7 @@ public class SHAdapter implements FHIRAdapter {
           "Fat free mass"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(fatFreeMassValue),
           "kilogram",
           UNITSOFM_SYSTEM,
           "Kg"
@@ -428,8 +428,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // total_body_water
-    if (elementValues.has("total_body_water")) {
-      String value = elementValues.getString("total_body_water");
+    String totalBodyWaterValue = getLiveValue(elementValues, "total_body_water");
+    if (!StringUtils.isBlank(totalBodyWaterValue)) {
       Observation.Component totalBodyWater = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -437,7 +437,7 @@ public class SHAdapter implements FHIRAdapter {
           "Total body water"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(totalBodyWaterValue),
           "liter",
           UNITSOFM_SYSTEM,
           "l"
@@ -450,8 +450,8 @@ public class SHAdapter implements FHIRAdapter {
   private static void collectBloodPressureComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
     // systolic
-    if (elementValues.has("systolic")) {
-      String value = elementValues.getString("systolic");
+    String systolicValue = getLiveValue(elementValues, "systolic");
+    if (!StringUtils.isBlank(systolicValue)) {
       Observation.Component systolic = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOINC_SYSTEM,
@@ -459,7 +459,7 @@ public class SHAdapter implements FHIRAdapter {
           "Systolic blood pressure"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(systolicValue),
           "millimeter of mercury",
           LOINC_SYSTEM,
           "mmHg"
@@ -469,8 +469,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // diastolic
-    if (elementValues.has("diastolic")) {
-      String value = elementValues.getString("diastolic");
+    String diastolicValue = getLiveValue(elementValues, "diastolic");
+    if (!StringUtils.isBlank(diastolicValue)) {
       Observation.Component diastolic = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOINC_SYSTEM,
@@ -478,7 +478,7 @@ public class SHAdapter implements FHIRAdapter {
           "Diastolic blood pressure"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(diastolicValue),
           "millimeter of mercury",
           LOINC_SYSTEM,
           "mmHg"
@@ -488,8 +488,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // mean
-    if (elementValues.has("mean")) {
-      String value = elementValues.getString("mean");
+    String meanValue = getLiveValue(elementValues, "mean");
+    if (!StringUtils.isBlank(meanValue)) {
       Observation.Component mean = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -497,7 +497,7 @@ public class SHAdapter implements FHIRAdapter {
           "Mean"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(meanValue),
           "millimeter of mercury",
           LOINC_SYSTEM,
           "mmHg"
@@ -507,8 +507,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // pulse
-    if (elementValues.has("pulse")) {
-      String value = elementValues.getString("pulse");
+    String pulseValue = getLiveValue(elementValues, "pulse");
+    if (!StringUtils.isBlank(pulseValue)) {
       Observation.Component pulse = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -516,7 +516,7 @@ public class SHAdapter implements FHIRAdapter {
           "Pulse"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(pulseValue),
           "{beats}/min",
           LOINC_SYSTEM,
           "beats/min"
@@ -529,8 +529,8 @@ public class SHAdapter implements FHIRAdapter {
   private static void collectBloodGlucoseComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
     // glucose
-    if (elementValues.has("glucose")) {
-      String value = elementValues.getString("glucose");
+    String glucoseValue = getLiveValue(elementValues, "glucose");
+    if (!StringUtils.isBlank(glucoseValue)) {
       Observation.Component glucose = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -538,7 +538,7 @@ public class SHAdapter implements FHIRAdapter {
           "Glucose"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(glucoseValue),
           "millimoles per liter",
           UNITSOFM_SYSTEM,
           "mmol/L"
@@ -548,58 +548,58 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // sample_source_type
-    if (elementValues.has("sample_source_type")) {
-      String value = elementValues.getString("sample_source_type");
+    String sampleSourceTypeValue = getLiveValue(elementValues, "sample_source_type");
+    if (!StringUtils.isBlank(sampleSourceTypeValue)) {
       Observation.Component sampleSourceType = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "sample_source_type",
           "Sample source type"
         )),
-        value
+        sampleSourceTypeValue
       );
       components.add(sampleSourceType);
     }
     //
     // measurement_type
-    if (elementValues.has("measurement_type")) {
-      String value = elementValues.getString("measurement_type");
+    String measurementTypeValue = getLiveValue(elementValues, "measurement_type");
+    if (!StringUtils.isBlank(measurementTypeValue)) {
       Observation.Component measurementType = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "measurement_type",
           "Measurement type"
         )),
-        value
+        measurementTypeValue
       );
       components.add(measurementType);
     }
     //
     // meal_type
-    if (elementValues.has("meal_type")) {
-      String value = elementValues.getString("meal_type");
+    String mealTypeValue = getLiveValue(elementValues, "meal_type");
+    if (!StringUtils.isBlank(mealTypeValue)) {
       Observation.Component mealType = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "meal_type",
           "Meal type"
         )),
-        value
+        mealTypeValue
       );
       components.add(mealType);
     }
     //
     // meal_time
-    if (elementValues.has("meal_time")) {
-      String value = elementValues.getString("meal_time");
-      String zoneOffset = elementValues.getString("time_offset");
+    String mealTimeValue = getLiveValue(elementValues, "meal_time");
+    String timeOffsetValue = getLiveValue(elementValues, "time_offset");
+    if (!StringUtils.isBlank(mealTimeValue) && !StringUtils.isBlank(timeOffsetValue)) {
       Observation.Component mealTime = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
           "meal_time",
           "Meal time"
         )),
-        buildDateTime(value, zoneOffset)
+        buildDateTime(mealTimeValue, timeOffsetValue)
 //        buildDateTime(
 //          new Timestamp(Long.parseLong(value)),
 //          zoneOffset
