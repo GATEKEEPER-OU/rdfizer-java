@@ -6,6 +6,7 @@ import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
@@ -47,7 +48,27 @@ class SHBuilder extends FHIRBaseBuilder {
   public static String getValue(JSONObject dataElement, String key) {
     JSONArray values = dataElement.getJSONArray("values");
     JSONObject element = values.getJSONObject(0);
-    return element.getString(key);
+    if (element.has(key)) {
+      String value = element.getString(key);
+      if (StringUtils.isBlank(value)) {
+        String message = String.format("Property '%s' is blank", key);
+        LOGGER.warn(message);
+      }
+      return value;
+    }
+    return ""; // TODO request to remove empty values
+  }
+
+  public static String getLiveValue(JSONObject dataElement, String key) {
+    if (dataElement.has(key)) {
+      String value = dataElement.getString(key);
+      if (StringUtils.isBlank(value)) {
+        String message = String.format("Property '%s' is blank", key);
+        LOGGER.warn(message);
+      }
+      return value;
+    }
+    return ""; // TODO request to remove empty values
   }
 
   public static String getCountType(String value) {
@@ -185,6 +206,13 @@ class SHBuilder extends FHIRBaseBuilder {
     }
   }
 
+  private static String getTimeOffset(JSONObject dataElement) {
+    String key = "time_offset";
+    JSONArray values = dataElement.getJSONArray("values");
+    JSONObject element = values.getJSONObject(0);
+    return element.has(key) ? element.getString(key) : "UTC+0000";
+  }
+
   //--------------------------------------------------------------------------//
   // Builders
   //--------------------------------------------------------------------------//
@@ -228,7 +256,7 @@ class SHBuilder extends FHIRBaseBuilder {
   ) {
     String       uuid = dataElement.getString("data_uuid");
     String   deviceId = dataElement.getString("device_id");
-    String zoneOffset = getValue(dataElement, "time_offset");
+    String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
     String  startTime = getValue(dataElement, "start_time");
     String endTime = hasValue(dataElement, "end_time")
       ? getValue(dataElement, "end_time")
@@ -281,7 +309,7 @@ class SHBuilder extends FHIRBaseBuilder {
     String   deviceId = dataElement.getString("device_id");
     String  startTime = getValue(dataElement, "start_time");
     String    endTime = getValue(dataElement, "end_time");
-    String zoneOffset = getValue(dataElement, "time_offset");
+    String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
     return buildEntry(
       Observation.builder()
         .id(id)
@@ -325,7 +353,7 @@ class SHBuilder extends FHIRBaseBuilder {
     String   deviceId = dataElement.getString("device_id");
     String  startTime = liveElement.getString("start_time");
     String    endTime = liveElement.getString("end_time");
-    String zoneOffset = getValue(dataElement, "time_offset");
+    String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
     return buildEntry(
       Observation.builder()
         .id(id)
@@ -367,7 +395,7 @@ class SHBuilder extends FHIRBaseBuilder {
     String   deviceId = dataElement.getString("device_id");
     String  startTime = locationElement.getString("start_time");
     String    endTime = locationElement.getString("end_time");
-    String zoneOffset = getValue(dataElement, "time_offset");
+    String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
     return buildEntry(
       Observation.builder()
         .id(id)

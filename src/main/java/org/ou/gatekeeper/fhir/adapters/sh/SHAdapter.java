@@ -10,6 +10,7 @@ import com.ibm.fhir.model.type.Quantity;
 import com.ibm.fhir.model.type.code.BundleType;
 import com.ibm.fhir.model.visitor.Visitable;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.commons.ResourceUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -655,33 +656,37 @@ public class SHAdapter implements FHIRAdapter {
     Bundle.Entry parentEntry,
     Bundle.Entry patientEntry
   ) {
-    JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
-    if ( values.has("calorie")
-      || values.has("mean_caloricburn_rate")
-      || values.has("max_caloricburn_rate")
+    String calorie = getValue(dataElement, "calorie");
+    String mean = getValue(dataElement, "mean_caloricburn_rate");
+    String max = getValue(dataElement, "max_caloricburn_rate");
+    if ( !StringUtils.isBlank(calorie)
+      || !StringUtils.isBlank(mean)
+      || !StringUtils.isBlank(max)
     ) {
       String uuid = dataElement.getString("data_uuid");
 
       Collection<Observation.Component> components = new LinkedList<>();
       //
       // Calorie
-      Observation.Component calorieComponent = FHIRBaseBuilder.buildObservationComponent(
-        FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
-          LOCAL_SYSTEM,
-          "calorie",
-          "Calorie"
-        )),
-        FHIRBaseBuilder.buildQuantity(
-          Decimal.of(values.getString("calorie")),
-          "kcal/s",
-          UNITSOFM_SYSTEM,
-          "kcal/s"
-        )
-      );
-      components.add(calorieComponent);
+      if (!StringUtils.isBlank(calorie) ) {
+        Observation.Component calorieComponent = FHIRBaseBuilder.buildObservationComponent(
+          FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
+            LOCAL_SYSTEM,
+            "calorie",
+            "Calorie"
+          )),
+          FHIRBaseBuilder.buildQuantity(
+            Decimal.of(calorie),
+            "kcal/s",
+            UNITSOFM_SYSTEM,
+            "kcal/s"
+          )
+        );
+        components.add(calorieComponent);
+      }
       //
       // mean_caloricburn_rate
-      if (values.has("mean_caloricburn_rate")) {
+      if (!StringUtils.isBlank(mean)) {
         Observation.Component meanComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -689,7 +694,7 @@ public class SHAdapter implements FHIRAdapter {
             "Mean caloric burn rate"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("mean_caloricburn_rate")),
+            Decimal.of(mean),
             "kcal/s",
             UNITSOFM_SYSTEM,
             "kcal/s"
@@ -698,8 +703,8 @@ public class SHAdapter implements FHIRAdapter {
         components.add(meanComponent);
       }
       //
-      // maxc_caloricburn_rate
-      if (values.has("max_caloricburn_rate")) {
+      // max_caloricburn_rate
+      if (!StringUtils.isBlank(max)) {
         Observation.Component maxComponent = FHIRBaseBuilder.buildObservationComponent(
           FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
             LOCAL_SYSTEM,
@@ -707,7 +712,7 @@ public class SHAdapter implements FHIRAdapter {
             "Max caloric burn rate"
           )),
           FHIRBaseBuilder.buildQuantity(
-            Decimal.of(values.getString("mean_caloricburn_rate")),
+            Decimal.of(max),
             "kcal/s",
             UNITSOFM_SYSTEM,
             "kcal/s"
@@ -739,10 +744,10 @@ public class SHAdapter implements FHIRAdapter {
       JSONArray liveData = getLiveData(dataElement);
       for (int i = 0; i < liveData.length(); ++i) {
         JSONObject liveElement = liveData.getJSONObject(i);
-        if (liveElement.has("calorie")) {
+        String value = getLiveValue(liveElement, "calorie");
+        if (!StringUtils.isBlank(value)) {
           // Collect live_data values
           String liveId = String.format("%s-calorie-%d", uuid, i);
-          String value = liveElement.getString("calorie");
           Bundle.Entry liveObs = buildLiveObservation(
             liveId,
             liveElement,
@@ -764,7 +769,6 @@ public class SHAdapter implements FHIRAdapter {
           entries.add(liveObs);
         }
       }
-
       return aggregatedObservation;
     }
     return null;
