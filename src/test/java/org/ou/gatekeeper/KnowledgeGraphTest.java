@@ -69,7 +69,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, WaterIntake",
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
-//    "xxx, keep, SH, BloodPressure",
+    "xxx, keep, SH, BloodPressure",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName

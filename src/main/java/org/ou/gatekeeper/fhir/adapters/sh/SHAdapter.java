@@ -779,7 +779,10 @@ public class SHAdapter implements FHIRAdapter {
     JSONObject values = dataElement.getJSONArray("values").getJSONObject(0);
     if (values.has("count")) {
       String uuid = dataElement.getString("data_uuid");
-      String countType = getCountType(values.getString("count_type"));
+      String countType = "..."; // TODO change this to a proper unit
+      if (values.has("count_type")) {
+        countType = getCountType(values.getString("count_type"));
+      }
 
       Collection<Observation.Component> components = new LinkedList<>();
       //

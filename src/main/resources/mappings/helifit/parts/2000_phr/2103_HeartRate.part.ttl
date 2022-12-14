@@ -30,7 +30,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -101,7 +101,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -185,7 +185,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -268,7 +268,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -351,7 +351,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];

@@ -18,19 +18,19 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/id/{resource.identifier[0].value}";
+    rr:template "https://opensource.samsung.com/projects/helifit/id/{resource.id}";
     rr:class ho:E21Person;
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#PatientIdentifier>;
-      rr:joinCondition [
-        rr:child "resource.identifier[0].value";
-        rr:parent "resource.identifier[0].value";
-      ];
-    ];
+   rr:predicateObjectMap [
+     rr:predicate ho:P1isIdentifiedBy;
+     rr:objectMap [
+       rr:parentTriplesMap <#PatientIdentifier>;
+       rr:joinCondition [
+         rr:child "resource.id";
+         rr:parent "resource.id";
+       ];
+     ];
   ];
 .
 
@@ -465,7 +465,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -529,7 +529,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -631,7 +631,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -694,7 +694,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1193,7 +1193,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1256,7 +1256,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1356,7 +1356,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1419,7 +1419,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1519,7 +1519,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1582,7 +1582,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1782,7 +1782,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -1845,7 +1845,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2025,7 +2025,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2088,7 +2088,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2292,6 +2292,495 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF419/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF419BodyMucleDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# /BodyHeight
+
+
+# ############################################################################ #
+#                                 BodyTemperature
+# ############################################################################ #
+
+<#BodyTemperatureAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF524/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF524BodyTemperatureAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#BodyTemperatureMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#BodyTemperatureMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF324/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF324BodyTemperatureMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#BodyTemperatureDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#BodyTemperatureDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'body_temperature')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF418/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF418BodyTemperatureDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# /BodyHeight
+
+
+# ############################################################################ #
+#                                 HipCircumference
+# ############################################################################ #
+
+<#HipCircumferenceAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF143/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF143HipCircumferenceAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HipCircumferenceMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#HipCircumferenceMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF335/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF335HipCircumferenceMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HipCircumferenceDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#HipCircumferenceDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'hip_circumference')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF418/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF20HipCircumferenceDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# /BodyHeight
+
+
+# ############################################################################ #
+#                                 Homocysteine
+# ############################################################################ #
+
+<#HLF538HomocysteineAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF538/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF538HomocysteineAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#HomocysteineMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#HomocysteineMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF336/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF336HomocysteineMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.identifier[1].value";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HomocysteineDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#HomocysteineDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF435/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF435HomocysteineDimension;
   ];
 
   #
@@ -2554,7 +3043,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floors_climbed')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floorsclimbed')]"
   ];
 
   rr:subjectMap [
@@ -2582,7 +3071,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2606,7 +3095,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floors_climbed')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floorsclimbed')]"
   ];
 
   rr:subjectMap [
@@ -2623,7 +3112,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2681,7 +3170,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floors_climbed')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'floorsclimbed')]"
   ];
 
   rr:subjectMap [
@@ -2711,7 +3200,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'step_daily_trend')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'stepdailytrend')]"
   ];
 
   rr:subjectMap [
@@ -2739,7 +3228,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2810,7 +3299,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -2962,7 +3451,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3079,7 +3568,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3231,7 +3720,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3328,7 +3817,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3399,7 +3888,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3483,7 +3972,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3566,7 +4055,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3649,7 +4138,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -3993,7 +4482,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -4034,7 +4523,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -4104,7 +4593,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -4155,7 +4644,7 @@
         rr:parentTriplesMap <#Patient>;
         rr:joinCondition [
           rr:child "resource.subject.display";
-          rr:parent "resource.identifier[1].value";
+          rr:parent "resource.id";
         ];
       ];
     ];
@@ -4193,7 +4682,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -4359,7 +4848,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_instantaneous')]"
   ];
 
   rr:subjectMap [
@@ -7134,7 +7623,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -7205,7 +7694,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -7520,7 +8009,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -7591,7 +8080,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -7890,7 +8379,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -7961,7 +8450,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -8271,7 +8760,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -8342,7 +8831,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.display";
-        rr:parent "resource.identifier[1].value";
+        rr:parent "resource.id";
       ];
     ];
   ];
