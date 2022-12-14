@@ -256,20 +256,20 @@ public class SHAdapter implements FHIRAdapter {
 
   private static void collectWeightComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
-    // height
+    // weight
     String weight = getLiveValue(elementValues, "weight");
     if (!StringUtils.isBlank(weight)) {
       Observation.Component height = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
-          "height",
-          "Height"
+          "weight",
+          "Weight"
         )),
         FHIRBaseBuilder.buildQuantity(
           Decimal.of(weight),
-          "centimeter",
+          "kilogram",
           UNITSOFM_SYSTEM,
-          "cm"
+          "Kg"
         )
       );
       components.add(height);
@@ -612,8 +612,8 @@ public class SHAdapter implements FHIRAdapter {
   private static void collectOxygenSaturationComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
     // spo2
-    if (elementValues.has("spo2")) {
-      String value = elementValues.getString("spo2");
+    String spo2Value = getLiveValue(elementValues, "spo2");
+    if (!StringUtils.isBlank(spo2Value)) {
       Observation.Component spo2 = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -621,7 +621,7 @@ public class SHAdapter implements FHIRAdapter {
           "Pulse Oximetry"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(spo2Value),
           "percent",
           UNITSOFM_SYSTEM,
           "%"
@@ -631,8 +631,8 @@ public class SHAdapter implements FHIRAdapter {
     }
     //
     // heart_rate
-    if (elementValues.has("heart_rate")) {
-      String value = elementValues.getString("heart_rate");
+    String heartRateValue = getLiveValue(elementValues, "heart_rate");
+    if (!StringUtils.isBlank(heartRateValue)) {
       Observation.Component heartRate = FHIRBaseBuilder.buildObservationComponent(
         FHIRBaseBuilder.buildCodeableConcept(FHIRBaseBuilder.buildCoding(
           LOCAL_SYSTEM,
@@ -640,7 +640,7 @@ public class SHAdapter implements FHIRAdapter {
           "Heart rate"
         )),
         FHIRBaseBuilder.buildQuantity(
-          Decimal.of(value),
+          Decimal.of(heartRateValue),
           "{beats}/min",
           LOINC_SYSTEM,
           "beats/min"
