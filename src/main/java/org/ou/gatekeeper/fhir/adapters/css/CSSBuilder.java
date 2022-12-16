@@ -7,6 +7,7 @@ import com.ibm.fhir.model.resource.Patient;
 import com.ibm.fhir.model.type.Boolean;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.codec.binary.Base64;
 import org.commons.DateTimeUtils;
 import org.commons.JSONObjectUtils;
 import org.json.JSONException;
@@ -30,9 +31,6 @@ class CSSBuilder extends FHIRBaseBuilder {
 //  public static final String HL7_PATIENT_AGE = "http://hl7.org/fhir/StructureDefinition/observation-patientAge";
 //  public static final String PATIENT_AGE = HL7_STRUCTURE + "/observation-patientAge";
 
-  /**
-   * @todo description
-   */
   public static DateTime buildDate(String dateTime) {
     return DateTime.builder()
       .value(
@@ -41,16 +39,18 @@ class CSSBuilder extends FHIRBaseBuilder {
       .build();
   }
 
-  /**
-   * @todo description
-   */
   public static Bundle.Entry buildPatient(JSONObject patient) {
     String patientId = JSONObjectUtils.getId(patient, "patient_id");
+    String uuid = Base64.encodeBase64URLSafeString(patientId.getBytes());
     String fullUrl = BASE_URL + "/patient/" + patientId;
     return buildEntry(
       Patient.builder()
-        .id(patientId)
+        .id(uuid)
         .identifier(
+          buildIdentifier(
+            BASE_URL + "/identifier",
+            uuid
+          ),
           buildIdentifier(
             BASE_URL + "/identifier",
             patientId
