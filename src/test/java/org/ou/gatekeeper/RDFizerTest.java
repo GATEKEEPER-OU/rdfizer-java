@@ -3,6 +3,7 @@ package org.ou.gatekeeper;
 import lib.tests.helpers.TestUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.commons.ResourceUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
@@ -58,8 +59,9 @@ class RDFizerTest {
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
 //    "xxx, keep, SH, BloodPressure",
-    "xxx, keep, SH, OxygenSaturation",
+//    "xxx, keep, SH, OxygenSaturation",
   })
+  @Disabled
   void test_transform_RawToFHIR(String expectedDigest, String policy, String sourceType, String datasetName) {
     String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
     File datasetFile = TestUtils.loadResource(datasetPath);
@@ -109,16 +111,15 @@ class RDFizerTest {
 //    "xxx, keep, SH, Patient, '0000,0001,0002'",
 
     // Observations
-//    "xxx, keep, SH, FloorsClimbed,  '0000,0001,0002,0020,0021,0040,0041,2101'",
-//    "xxx, keep, SH, StepDailyTrend, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004,2005,2006,2007'",
-//    "xxx, keep, SH, HeartRate,      '0000,0001,0002,0020,0021,0040,0041,2103,3003,3008,3009'",
-//    "xxx, keep, SH, Walking,        '0000,0001,0002,0020,0021,0040,0041,0010,3101,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
-//    "xxx, keep, SH, Cycling,        '0000,0001,0002,0020,0021,0040,0041,0010,3102,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
-//    "xxx, keep, SH, Running,        '0000,0001,0002,0020,0021,0040,0041,0010,3103,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
-//    "xxx, keep, SH, Swimming,       '0000,0001,0002,0020,0021,0040,0041,0010,3104,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
-//    "xxx, keep, SH, Sleep,          '0000,0001,0002,0020,0021,0040,0041,2104'",
-//    "xxx, keep, SH, SleepStage,     '0000,0001,0002,0020,0021,0040,0041,0043,2105'",
-
+    "xxx, keep, SH, FloorsClimbed,  '0000,0001,0002,0020,0021,0040,0041,2101'",
+    "xxx, keep, SH, StepDailyTrend, '0000,0001,0002,0020,0021,0040,0041,2102,0010,2001,2002,2003,2004,2005,2006,2007'",
+    "xxx, keep, SH, HeartRate,      '0000,0001,0002,0020,0021,0040,0041,2103,3003,3008,3009'",
+    "xxx, keep, SH, Walking,        '0000,0001,0002,0020,0021,0040,0041,0010,3101,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
+    "xxx, keep, SH, Cycling,        '0000,0001,0002,0020,0021,0040,0041,0010,3102,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
+    "xxx, keep, SH, Running,        '0000,0001,0002,0020,0021,0040,0041,0010,3103,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
+    "xxx, keep, SH, Swimming,       '0000,0001,0002,0020,0021,0040,0041,0010,3104,3011,3001,3003,3005,3007,2004,2005,2007,2006,2003,2002'",
+    "xxx, keep, SH, Sleep,          '0000,0001,0002,0020,0021,0040,0041,2104'",
+    "xxx, keep, SH, SleepStage,     '0000,0001,0002,0020,0021,0040,0041,0043,2105'",
   })
   /*
    * NOTES

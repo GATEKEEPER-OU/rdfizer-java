@@ -35,7 +35,7 @@ class CSSAdapterTest {
 //    "xxx, keep, SerumCreatinine",
 //    "xxx, keep, AlbuminuriaCreatininuriaRatio",
 //    "xxx, keep, GPTALT",
-//    "xxx, keep, GOTAST",
+    "xxx, keep, GOTAST",
 //    "xxx, keep, GammaGT",
 //    "xxx, keep, AlkalinePhosphatase",
 //    "xxx, keep, UricAcid",
