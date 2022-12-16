@@ -3,7 +3,6 @@
     {
       "examination_id": "2",
       "patient": {
-        "patient_uuid":"3871b0e4-7af7-11ed-a1eb-0242ac120002",
         "patient_id": "userXXX@puglia.gatekeeper.com"
       },
       "date": "2021-01-01",
