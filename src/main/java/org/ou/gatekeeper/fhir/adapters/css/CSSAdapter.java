@@ -54,9 +54,7 @@ public class CSSAdapter implements FHIRAdapter {
     File output,
     boolean normalize
   ) {
-    try (
-      InputStream datasetInputStream = new FileInputStream(dataset)
-    ) {
+    try (InputStream datasetInputStream = new FileInputStream(dataset)) {
       // Parse JSON dataset
       JSONTokener tokenizer = new JSONTokener(datasetInputStream);
       JSONObject json = new JSONObject(tokenizer);
@@ -117,7 +115,8 @@ public class CSSAdapter implements FHIRAdapter {
 
       // Build and collect entries from input JSON
       Bundle.Entry patientEntry = collectPatient(entries, examination);
-      collectObservations(entries, examination, patientEntry);
+      Bundle.Entry patientAgeEntry = collectPatientAge(entries, examination, patientEntry);
+      collectObservations(entries, examination, patientEntry, patientAgeEntry);
       collectConditions(entries, examination, patientEntry);
     }
   }
@@ -149,63 +148,68 @@ public class CSSAdapter implements FHIRAdapter {
     Collection<Bundle.Entry> entries,
     JSONObject examination
   ) {
-    JSONObject patientJson = examination.getJSONObject("patient");
+    JSONObject    patientJson = examination.getJSONObject("patient");
     Bundle.Entry patientEntry = buildPatient(patientJson);
     addIgnoreNull(entries, patientEntry);
     return patientEntry;
   }
 
-  /**
-   * @todo description
-   */
-  private static void collectObservations(
+  private static Bundle.Entry collectPatientAge(
     Collection<Bundle.Entry> entries,
     JSONObject examination,
     Bundle.Entry patientEntry
   ) {
-    addIgnoreNull(entries,
-      buildObservationGlycosilatedEmoglobin(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationTotalCholesterol(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationHDL(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationLDL(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationTriglycerides(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationTotalCholesterolHDL(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationSerumCreatinine(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationAlbuminuriaCreatininuriaRatio(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationALT(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationAST(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationGammaGT(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationAlkalinePhosphatase(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationUricAcid(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationGFR(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationNitrites(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationBloodPressure(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationBodyWeight(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationBodyHeight(examination, patientEntry));
-    addIgnoreNull(entries,
-      buildObservationYearsWithDiabetes(examination, patientEntry));
+    Bundle.Entry ageEntry = buildObservationAge(examination, patientEntry);
+    addIgnoreNull(entries, ageEntry);
+    return ageEntry;
   }
 
-  /**
-   * @todo description
-   */
+  private static void collectObservations(
+    Collection<Bundle.Entry> entries,
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    addIgnoreNull(entries,
+      buildObservationBodyHeight(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationBodyWeight(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationGlycosilatedEmoglobin(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationTotalCholesterol(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationHDL(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationLDL(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationTriglycerides(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationTotalCholesterolHDL(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationSerumCreatinine(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationAlbuminuriaCreatininuriaRatio(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationALT(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationAST(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationGammaGT(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationAlkalinePhosphatase(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationUricAcid(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationGFR(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationNitrites(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationBloodPressure(examination, patientEntry, patientAgeEntry));
+    addIgnoreNull(entries,
+      buildObservationYearsWithDiabetes(examination, patientEntry, patientAgeEntry));
+  }
+
   private static void collectConditions(
     Collection<Bundle.Entry> entries,
     JSONObject examination,

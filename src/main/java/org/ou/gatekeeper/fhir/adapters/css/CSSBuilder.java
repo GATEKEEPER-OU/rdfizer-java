@@ -1,21 +1,21 @@
 package org.ou.gatekeeper.fhir.adapters.css;
 
 import com.ibm.fhir.model.resource.Bundle;
+import com.ibm.fhir.model.resource.Condition;
 import com.ibm.fhir.model.resource.Observation;
 import com.ibm.fhir.model.resource.Patient;
-import com.ibm.fhir.model.type.DateTime;
-import com.ibm.fhir.model.type.Decimal;
-import com.ibm.fhir.model.type.Identifier;
-import com.ibm.fhir.model.type.Uri;
+import com.ibm.fhir.model.type.Boolean;
+import com.ibm.fhir.model.type.*;
+import com.ibm.fhir.model.type.code.ObservationStatus;
 import org.commons.DateTimeUtils;
+import org.commons.JSONObjectUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
 
+import java.lang.String;
 import java.util.Collection;
 import java.util.LinkedList;
-
-import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -23,809 +23,107 @@ import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
  */
 class CSSBuilder extends FHIRBaseBuilder {
 
-  public static final String LOINC_SYSTEM = "http://loinc.org";
-  public static final String DOID_SYSTEM = "http://purl.obolibrary.org/obo/";
-  public static final String UNITSOFM_SYSTEM = "http://unitsofmeasure.org";
-  public static final String HL7_SYSTEM = "http://terminology.hl7.org/CodeSystem/observation-category";
-  public static final String HL7_PATIENT_AGE = "http://hl7.org/fhir/StructureDefinition/observation-patientAge";
+  public static final String BASE_URL = "https://www.gatekeeper-project.eu/sid/puglia";
 
-  public static final String LAB_CODE = "laboratory";
-  public static final String LAB_DISPLAY = "Laboratory";
+//  public static final String OBSERVATION_CATEGORY_SYSTEM = HL7_SYSTEM + "/observation-category";
+//  public static final String HL7_SYSTEM = "http://terminology.hl7.org/CodeSystem/observation-category";
+//  public static final String HL7_PATIENT_AGE = "http://hl7.org/fhir/StructureDefinition/observation-patientAge";
+//  public static final String PATIENT_AGE = HL7_STRUCTURE + "/observation-patientAge";
 
-  public static final String VS_CODE = "vital-signs";
-  public static final String VS_DISPLAY = "Vital Signs";
-
-  public static final String MG_PER_DL_UNIT = "milligram per deciliter";
-
-  public static final String PATIENT_AGE_KEY = "patient_age";
+  /**
+   * @todo description
+   */
+  public static DateTime buildDate(String dateTime) {
+    return DateTime.builder()
+      .value(
+        DateTimeUtils.cast(dateTime)
+      )
+      .build();
+  }
 
   /**
    * @todo description
    */
   public static Bundle.Entry buildPatient(JSONObject patient) {
-    String baseUrl = "https://www.gatekeeper-project.eu/sid/puglia";
-    String patientId = patient.getString("patient_id");
+    String patientId = JSONObjectUtils.getId(patient, "patient_id");
+    String fullUrl = BASE_URL + "/patient/" + patientId;
     return buildEntry(
       Patient.builder()
         .id(patientId)
         .identifier(
-          Identifier.builder()
-            .system(Uri.uri(baseUrl + "/patient"))
-            .value(patientId)
-            .build()
+          buildIdentifier(
+            BASE_URL + "/identifier",
+            patientId
+          )
         )
         .build(),
       "Patient",
-      "identifier=" + baseUrl + "/patient|" + patientId
+      "identifier=" + BASE_URL + "/patient|" + patientId,
+      buildFullUrl(fullUrl)
     );
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationGlycosilatedEmoglobin(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
+  //
+  // Observations
+  //
+
+  public static Bundle.Entry buildObservationAge(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
+    String uuid = patientEntry.getResource().getId() + "-Age";
+    return buildEntry(
+      Observation.builder()
+        .id(uuid)
+        .status(ObservationStatus.FINAL)
+        .identifier(
+          buildIdentifier(
+            BASE_URL + "/identifier",
+            "Observation/" + uuid
           )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "59261-8",
-            "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("glycosilated_emoglobin")),
-          "millimole per mole",
-          UNITSOFM_SYSTEM,
-          examination.getString("glycosilated_emoglobin_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
         )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationTotalCholesterol(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2093-3",
-            "Cholesterol [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("total_cholesterol")),
-          "millimole per mole",
-          UNITSOFM_SYSTEM,
-          examination.getString("total_cholesterol_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
+        .code(
+          buildCodeableConcept(buildCoding(
+            LOCAL_SYSTEM,
+            "patient_age",
+            "Patient age"
+          ))
         )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationHDL(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2085-9",
-            "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("HDL")),
-          MG_PER_DL_UNIT,
-          UNITSOFM_SYSTEM,
-          examination.getString("HDL_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
+        .effective(
+          buildDate(examination.getString("date"))
         )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationLDL(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
+        .value(
+          buildQuantity(
+            Decimal.of(examination.getBigDecimal("patient_age")),
+            "year",
+            UNITSOFM_SYSTEM,
+            "a_j" // TODO check here https://ucum.org/ucum#para-29
           )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2089-1",
-            "Cholesterol in LDL [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("LDL")),
-          MG_PER_DL_UNIT,
-          LOINC_SYSTEM,
-          examination.getString("LDL_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
         )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationTriglycerides(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2571-8",
-            "Triglyceride [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("triglycerides")),
-          MG_PER_DL_UNIT,
-          LOINC_SYSTEM,
-          examination.getString("triglycerides_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
+        .subject(
+          buildReference(patientEntry)
         )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationTotalCholesterolHDL(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2095-8",
-            "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("TC_HDL")),
-          MG_PER_DL_UNIT,
-          LOINC_SYSTEM,
-          examination.getString("TC_HDL_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationSerumCreatinine(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2160-0",
-            "Creatinine [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("serum_creatinine")),
-          MG_PER_DL_UNIT,
-          LOINC_SYSTEM,
-          examination.getString("serum_creatinine_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationAlbuminuriaCreatininuriaRatio(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "14959-1",
-            "Microalbumin/Creatinine [Mass Ratio] in Urine"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("albuminuria_creatininuria_ratio")),
-          "milligram per gram",
-          LOINC_SYSTEM,
-          examination.getString("albuminuria_creatininuria_ratio_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationALT(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "1742-6",
-            "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("GPT_ALT")),
-          "enzyme unit per liter",
-          LOINC_SYSTEM,
-          examination.getString("GPT_ALT_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationAST(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "1920-8",
-            "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("GOT_AST")),
-          examination.getString("GOT_AST_unit"),
-          LOINC_SYSTEM,
-          "enzyme unit per liter"
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationGammaGT(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "2324-2",
-            "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("gammaGT")),
-          "international unit per liter",
-          LOINC_SYSTEM,
-          examination.getString("gammaGT_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationAlkalinePhosphatase(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "6768-6",
-            "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("alkaline_phosphatase")),
-          "international unit per liter",
-          LOINC_SYSTEM,
-          examination.getString("alkaline_phosphatase_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationUricAcid(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "3084-1",
-            "Urate [Mass/volume] in Serum or Plasma"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("uric_acid")),
-          MG_PER_DL_UNIT,
-          LOINC_SYSTEM,
-          examination.getString("uric_acid_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationGFR(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "48642-3",
-            "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getBigDecimal("eGFR")),
-          examination.getString("eGFR_unit"),
-          LOINC_SYSTEM,
-          examination.getString("eGFR_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationNitrites(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            LAB_CODE,
-            LAB_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "5802-4",
-            "Nitrite [Presence] in Urine by Test strip"
-          )
-        ),
-        examination.getBoolean("nitrites"),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationBloodPressure(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      Bundle.Entry observationEntry = buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            VS_CODE,
-            VS_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "85354-9",
-            "Blood pressure panel with all children optional"
-          )
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-
-      Collection<Observation.Component> components = new LinkedList<>();
-      addIgnoreNull(components,
-        buildComponentSystolicPressure(examination));
-      addIgnoreNull(components,
-        buildComponentDiastolicPressure(examination));
-
-      return observationEntry.toBuilder()
-        .resource(
-          observationEntry.getResource().as(Observation.class).toBuilder()
-            .component(components)
-            .build()
-        )
-        .build();
-
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildComponentSystolicPressure(JSONObject examination) {
-    return buildObservationComponent(
-      buildCodeableConcept(
-        buildCoding(
-          LOINC_SYSTEM,
-          "8480-6",
-          "Systolic blood pressure"
-        )
-      ),
-      buildQuantity(
-        Decimal.of(examination.getInt("systolic_pressure")),
-        "millimeter of mercury",
-        LOINC_SYSTEM,
-        examination.getString("systolic_pressure_unit")
-      )
+        .build(),
+      FHIR_OBSERVATION_TYPE,
+      null,
+      buildFullUrl(BASE_URL + "/observation/" + uuid)
     );
   }
 
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildComponentDiastolicPressure(JSONObject examination) {
-    return buildObservationComponent(
-      buildCodeableConcept(
-        buildCoding(
-          LOINC_SYSTEM,
-          "8462-4",
-          "Diastolic blood pressure"
-        )
-      ),
-      buildQuantity(
-        Decimal.of(examination.getInt("diastolic_pressure")),
-        "millimeter of mercury",
-        LOINC_SYSTEM,
-        examination.getString("diastolic_pressure_unit")
-      )
-    );
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationBodyWeight(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildObservationBodyHeight(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
     try {
       return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            VS_CODE,
-            VS_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "29463-7",
-            "Body weight"
-          )
-        ),
-        buildQuantity(
-          Decimal.of(examination.getInt("weight")),
-          "kilogram",
+        JSONObjectUtils.getId(examination, "examination_id") + "-BodyHeight",
+        buildCodeableConcept(buildCoding(
           LOINC_SYSTEM,
-          examination.getString("weight_unit")
-        ),
-        patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
-      );
-    } catch (JSONException e) {
-      // @todo just print a warning
-      return null;
-    }
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationBodyHeight(JSONObject examination, Bundle.Entry patientEntry) {
-    try {
-      return buildObservation(
-        buildDate(
-          examination.getString("date")
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            VS_CODE,
-            VS_DISPLAY
-          )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            LOINC_SYSTEM,
-            "8302-2",
-            "Body height"
-          )
-        ),
+          "8302-2",
+          "Body height"
+        )),
+        null,
         buildQuantity(
           Decimal.of(examination.getBigDecimal("height")),
           "meter",
@@ -833,10 +131,8 @@ class CSSBuilder extends FHIRBaseBuilder {
           examination.getString("height_unit")
         ),
         patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
+        patientAgeEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -844,29 +140,560 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservationYearsWithDiabetes(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildObservationBodyWeight(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
     try {
       return buildObservation(
-        buildDate(
-          examination.getString("date")
+        JSONObjectUtils.getId(examination, "examination_id") + "-BodyWeight",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "29463-7",
+          "Body weight"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getInt("weight")),
+          "kilogram",
+          LOINC_SYSTEM,
+          examination.getString("weight_unit")
         ),
-        buildCodeableConcept(
-          buildCoding(
-            HL7_SYSTEM,
-            VS_CODE,
-            VS_DISPLAY
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationGlycosilatedEmoglobin(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-GlycosilatedEmoglobin",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "59261-8",
+          "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("glycosilated_emoglobin")),
+          "millimole per mole",
+          UNITSOFM_SYSTEM,
+          examination.getString("glycosilated_emoglobin_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationTotalCholesterol(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-TotalCholesterol",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2095-8",
+          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("TC_HDL_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationHDL(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-HDL",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2095-8",
+          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("TC_HDL_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationLDL(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-LDL",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2089-1",
+          "Cholesterol in LDL [Mass/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("LDL")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("LDL_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationTriglycerides(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-Triglycerides",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2571-8",
+          "Triglyceride [Mass/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("triglycerides")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("triglycerides_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationTotalCholesterolHDL(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-TotalCholesterolHDL",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2095-8",
+          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("TC_HDL_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationSerumCreatinine(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-SerumCreatinine",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2160-0",
+          "Creatinine [Mass/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("serum_creatinine")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("serum_creatinine_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationAlbuminuriaCreatininuriaRatio(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-AlbuminuriaCreatininuriaRatio",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "14959-1",
+          "Microalbumin/Creatinine [Mass Ratio] in Urine"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("albuminuria_creatininuria_ratio")),
+          "milligram per gram",
+          LOINC_SYSTEM,
+          examination.getString("albuminuria_creatininuria_ratio_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationALT(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-ALT",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "1742-6",
+          "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("GPT_ALT")),
+          "enzyme unit per liter",
+          LOINC_SYSTEM,
+          examination.getString("GPT_ALT_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationAST(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-AST",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "1920-8",
+          "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("GOT_AST")),
+          "enzyme unit per liter",
+          LOINC_SYSTEM,
+          examination.getString("GOT_AST_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationGammaGT(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-GammaGT",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "2324-2",
+          "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("gammaGT")),
+          "international unit per liter",
+          LOINC_SYSTEM,
+          examination.getString("gammaGT_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationAlkalinePhosphatase(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-AlkalinePhosphatase",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "6768-6",
+          "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("alkaline_phosphatase")),
+          "international unit per liter",
+          LOINC_SYSTEM,
+          examination.getString("alkaline_phosphatase_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationUricAcid(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-UricAcid",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "3084-1",
+          "Urate [Mass/volume] in Serum or Plasma"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("uric_acid")),
+          "milligram per deciliter",
+          LOINC_SYSTEM,
+          examination.getString("uric_acid_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationGFR(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-GFR",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "48642-3",
+          "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
+        )),
+        null,
+        buildQuantity(
+          Decimal.of(examination.getBigDecimal("eGFR")),
+          examination.getString("eGFR_unit"),
+          LOINC_SYSTEM,
+          examination.getString("eGFR_unit")
+        ),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationNitrites(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-Nitrites",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "5802-4",
+          "Nitrite [Presence] in Urine by Test strip"
+        )),
+        null,
+        Boolean.builder()
+          .value(examination.getBoolean("nitrites"))
+          .build(),
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationBloodPressure(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      Collection<Observation.Component> components = new LinkedList<>();
+      //
+      // systolic_pressure
+      if (examination.has("systolic_pressure")) {
+        Observation.Component systolicPressure = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOINC_SYSTEM,
+            "8480-6",
+            "Systolic blood pressure"
+          )),
+          buildQuantity(
+            Decimal.of(examination.getInt("systolic_pressure")),
+            "millimeter of mercury",
+            LOINC_SYSTEM,
+            examination.getString("systolic_pressure_unit")
           )
-        ),
-        buildCodeableConcept(
-          buildCoding(
-            "https://www.phenxtoolkit.org/",
-            "PX070801190200",
-            "PX070801 Diabetes Mellitus Year"
+        );
+        components.add(systolicPressure);
+      }
+      //
+      // systolic_pressure
+      if (examination.has("diastolic_pressure")) {
+        Observation.Component diastolicPressure = buildObservationComponent(
+          buildCodeableConcept(buildCoding(
+            LOINC_SYSTEM,
+            "8462-4",
+            "Diastolic blood pressure"
+          )),
+          buildQuantity(
+            Decimal.of(examination.getInt("diastolic_pressure")),
+            "millimeter of mercury",
+            LOINC_SYSTEM,
+            examination.getString("diastolic_pressure_unit")
           )
-        ),
+        );
+        components.add(diastolicPressure);
+      }
+
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-BloodPressure",
+        buildCodeableConcept(buildCoding(
+          LOINC_SYSTEM,
+          "85354-9",
+          "Blood pressure panel with all children optional"
+        )),
+        components,
+        null,
+        patientEntry,
+        patientAgeEntry,
+        examination
+      );
+    } catch (JSONException e) {
+      // @todo just print a warning
+      return null;
+    }
+  }
+
+  public static Bundle.Entry buildObservationYearsWithDiabetes(
+    JSONObject examination,
+    Bundle.Entry patientEntry,
+    Bundle.Entry patientAgeEntry
+  ) {
+    try {
+      return buildObservation(
+        JSONObjectUtils.getId(examination, "examination_id") + "-YearsWithDiabetes",
+        buildCodeableConcept(buildCoding(
+          "https://www.phenxtoolkit.org/",
+          "PX070801190200",
+          "PX070801 Diabetes Mellitus Year"
+        )),
+        null,
         buildQuantity(
           Decimal.of(examination.getInt("years_with_diabetes")),
           "year",
@@ -874,10 +701,8 @@ class CSSBuilder extends FHIRBaseBuilder {
           "a_j" // TODO check here https://ucum.org/ucum#para-29
         ),
         patientEntry,
-        buildPatientAgeExtention(
-          HL7_PATIENT_AGE,
-          examination.getInt(PATIENT_AGE_KEY)
-        )
+        patientAgeEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -885,24 +710,29 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionHepaticSteatosis(JSONObject examination, Bundle.Entry patientEntry) {
+  //
+  // Conditions
+  //
+
+  public static Bundle.Entry buildConditionHepaticSteatosis(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-HepaticSteatosis",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_9452",
             "Steatosis of liver (disorder)"
           ),
-          String.valueOf(examination.getBoolean("hepatic_steatosis"))
+          String.valueOf(
+            examination.getBoolean("hepatic_steatosis")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -910,24 +740,25 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionHypertension(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildConditionHypertension(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-Hypertension",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_10825",
             "Hypertensive disorder, systemic arterial (disorder)"
           ),
-          String.valueOf(examination.getBoolean("hypertension"))
+          String.valueOf(
+            examination.getBoolean("hypertension")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -935,24 +766,25 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionHeartFailure(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildConditionHeartFailure(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-HeartFailure",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_6000",
             "Heart failure (disorder)"
           ),
-          String.valueOf(examination.getBoolean("heart_failure"))
+          String.valueOf(
+            examination.getBoolean("heart_failure")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -960,24 +792,25 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionBPCO(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildConditionBPCO(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-BPCO",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_3083",
             "Chronic obstructive lung disease (disorder)"
           ),
-          String.valueOf(examination.getBoolean("bpco"))
+          String.valueOf(
+            examination.getBoolean("bpco")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -985,24 +818,25 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionChronicKidneyDisease(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildConditionChronicKidneyDisease(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-ChronicKidneyDisease",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_784",
             "Chronic kidney disease (disorder)"
           ),
-          String.valueOf(examination.getBoolean("chronic_kidney_disease"))
+          String.valueOf(
+            examination.getBoolean("chronic_kidney_disease")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
@@ -1010,37 +844,30 @@ class CSSBuilder extends FHIRBaseBuilder {
     }
   }
 
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildConditionIschemicHeartDisease(JSONObject examination, Bundle.Entry patientEntry) {
+  public static Bundle.Entry buildConditionIschemicHeartDisease(
+    JSONObject examination,
+    Bundle.Entry patientEntry
+  ) {
     try {
       return buildCondition(
-        buildDate(
-          examination.getString("date")
-        ),
+        JSONObjectUtils.getId(examination, "examination_id") + "-IschemicHeartDisease",
         buildCodeableConcept(
           buildCoding(
             DOID_SYSTEM,
             "DOID_3393",
             "Ischemic heart disease (disorder)"
           ),
-          String.valueOf(examination.getBoolean("ischemic_heart_disease"))
+          String.valueOf(
+            examination.getBoolean("ischemic_heart_disease")
+          )
         ),
-        patientEntry
+        patientEntry,
+        examination
       );
     } catch (JSONException e) {
       // @todo just print a warning
       return null;
     }
-  }
-
-  public static DateTime buildDate(String dateTime) {
-    return DateTime.builder()
-      .value(
-        DateTimeUtils.cast(dateTime)
-      )
-      .build();
   }
 
   //--------------------------------------------------------------------------//
@@ -1052,6 +879,78 @@ class CSSBuilder extends FHIRBaseBuilder {
    */
   private CSSBuilder() {
     super();
+  }
+
+  public static Bundle.Entry buildObservation(
+    String uuid,
+    CodeableConcept code,
+    Collection<Observation.Component> components,
+    Element value,
+    Bundle.Entry subject,
+    Bundle.Entry member,
+    JSONObject examination
+  ) {
+    if (components == null) {
+      components = new LinkedList<>();
+    }
+    return buildEntry(
+      Observation.builder()
+        .id(uuid)
+        .status(ObservationStatus.FINAL)
+        .identifier(
+          buildIdentifier(
+            BASE_URL + "/identifier",
+            "Observation/" + uuid
+          )
+        )
+        .code(code)
+        .effective(
+          buildDate(examination.getString("date"))
+        )
+        .component(components)
+        .value(value)
+        .hasMember(
+          buildReference(member)
+        )
+        .subject(
+          buildReference(subject)
+        )
+        .build(),
+      FHIR_OBSERVATION_TYPE,
+      null,
+      buildFullUrl(BASE_URL + "/observation/" + uuid)
+    );
+  }
+
+  public static Observation.Component buildObservationComponent(
+    CodeableConcept code,
+    Element value
+  ) {
+    return Observation.Component.builder()
+      .code(code)
+      .value(value)
+      .build();
+  }
+
+  public static Bundle.Entry buildCondition(
+    String uuid,
+    CodeableConcept code,
+    Bundle.Entry subject,
+    JSONObject examination
+  ) {
+    return buildEntry(
+      Condition.builder()
+        .id(uuid)
+        .code(code)
+        .recordedDate(
+          buildDate(examination.getString("date"))
+        )
+        .subject(
+          buildReference(subject)
+        )
+        .build(),
+      FHIR_CONDITION_TYPE
+    );
   }
 
 }
