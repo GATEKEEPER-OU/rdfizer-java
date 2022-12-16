@@ -622,6 +622,9 @@ class CSSBuilder extends FHIRBaseBuilder {
     Bundle.Entry patientEntry,
     Bundle.Entry patientAgeEntry
   ) {
+    if ( !examination.has("systolic_pressure")
+      && !examination.has("diastolic_pressure")
+    ) return null;
     try {
       Collection<Observation.Component> components = new LinkedList<>();
       //
