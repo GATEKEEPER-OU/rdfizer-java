@@ -58,6 +58,7 @@ class RDFizerTest {
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
 //    "xxx, keep, SH, BloodPressure",
+    "xxx, keep, SH, OxygenSaturation",
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String sourceType, String datasetName) {
     String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);

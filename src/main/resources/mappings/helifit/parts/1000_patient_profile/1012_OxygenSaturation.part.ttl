@@ -1,17 +1,17 @@
 # ############################################################################ #
-#                                 Homocysteine
+#                                 OxygenSaturation
 # ############################################################################ #
 
-<#HomocysteineAssignment> a rr:TriplesMap;
+<#OxygenSaturationAssignment> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'oxygensaturation')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF538/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF538HomocysteineAssignment;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF705/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF705OxygenSaturationAssignment;
   ];
 
   #
@@ -56,7 +56,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#HomocysteineMeasurement>;
+      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -65,16 +65,16 @@
   ];
 .
 
-<#HomocysteineMeasurement> a rr:TriplesMap;
+<#OxygenSaturationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'oxygensaturation')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF336/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF336HomocysteineMeasurement;
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF805/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF805OxygenSaturationMeasurement;
   ];
 
   #
@@ -119,7 +119,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
-      rr:parentTriplesMap <#HomocysteineDimension>;
+      rr:parentTriplesMap <#CalorieDimension>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -128,11 +128,11 @@
   ];
 .
 
-<#HomocysteineDimension> a rr:TriplesMap;
+<#CalorieDimension> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'homocysteine')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
   ];
 
   rr:subjectMap [

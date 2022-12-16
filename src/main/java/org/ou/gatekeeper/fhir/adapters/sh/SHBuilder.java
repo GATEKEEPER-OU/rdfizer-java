@@ -284,7 +284,9 @@ class SHBuilder extends FHIRBaseBuilder {
   ) {
     String   deviceId = dataElement.getString("device_id");
     String  startTime = getValue(dataElement, "start_time");
-    String    endTime = getValue(dataElement, "end_time");
+    String endTime = hasValue(dataElement, "end_time")
+            ? getValue(dataElement, "end_time")
+            : null;
     String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
     return buildEntry(
       Observation.builder()
@@ -297,7 +299,9 @@ class SHBuilder extends FHIRBaseBuilder {
         .component(components)
         .value(quantity)
         .effective(
-          buildPeriod(startTime, endTime, zoneOffset)
+                endTime != null
+                        ? buildPeriod(startTime, endTime, zoneOffset)
+                        : buildDateTime(startTime, zoneOffset)
         )
         .device(
           buildReference(buildIdentifier(
