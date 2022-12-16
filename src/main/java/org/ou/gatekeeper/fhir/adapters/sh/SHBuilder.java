@@ -9,6 +9,7 @@ import com.ibm.fhir.model.type.code.ObservationStatus;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
+import org.commons.JSONObjectUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
@@ -21,19 +22,6 @@ class SHBuilder extends FHIRBaseBuilder {
 
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
-  public static final String LOCAL_SYSTEM = "http://local-system";
-
-  /**
-   * Base URL of Logical Observation Identifiers Names and Codes
-   * <a href="https://loinc.org/search">LOINC_SYSTEM</a>
-   * */
-  public static final String LOINC_SYSTEM = "http://loinc.org";
-
-  /**
-   * Base URL of Unified Code for Units of Measure
-   * <a href="https://ucum.org/ucum#section-Base-Units">UNITSOFM_SYSTEM</a>
-   * */
-  public static final String UNITSOFM_SYSTEM = "http://unitsofmeasure.org";
 
   //--------------------------------------------------------------------------//
   // Gets
@@ -50,18 +38,6 @@ class SHBuilder extends FHIRBaseBuilder {
     JSONObject element = values.getJSONObject(0);
     if (element.has(key)) {
       String value = element.getString(key);
-      if (StringUtils.isBlank(value)) {
-        String message = String.format("Property '%s' is blank", key);
-        LOGGER.warn(message);
-      }
-      return value;
-    }
-    return ""; // TODO request to remove empty values
-  }
-
-  public static String getLiveValue(JSONObject dataElement, String key) {
-    if (dataElement.has(key)) {
-      String value = dataElement.getString(key);
       if (StringUtils.isBlank(value)) {
         String message = String.format("Property '%s' is blank", key);
         LOGGER.warn(message);
@@ -221,7 +197,7 @@ class SHBuilder extends FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildPatient(JSONObject patient) {
-    String patientId = getId(patient, "user_uuid");
+    String patientId = JSONObjectUtils.getId(patient, "user_uuid");
     String patientEmail = patient.getString("user_id");
     String fullUrl = BASE_URL + "/patient/" + patientId;
 //    String fullUrl = BASE_URL + "/patient/" + patientEmail;
@@ -240,7 +216,7 @@ class SHBuilder extends FHIRBaseBuilder {
         )
         .build(),
       "Patient",
-      null,
+      "identifier=" + BASE_URL + "/patient|" + patientId,
       buildFullUrl(fullUrl)
     );
   }
@@ -382,6 +358,16 @@ class SHBuilder extends FHIRBaseBuilder {
       null,
       buildFullUrl(BASE_URL + "/observation/" + id)
     );
+  }
+
+  public static Observation.Component buildObservationComponent(
+    CodeableConcept code,
+    Element value
+  ) {
+    return Observation.Component.builder()
+      .code(code)
+      .value(value)
+      .build();
   }
 
   public static Bundle.Entry buildLocation(

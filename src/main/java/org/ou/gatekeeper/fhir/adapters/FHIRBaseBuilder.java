@@ -1,15 +1,13 @@
 package org.ou.gatekeeper.fhir.adapters;
 
-import com.ibm.fhir.model.resource.*;
+import com.ibm.fhir.model.resource.Bundle;
+import com.ibm.fhir.model.resource.Device;
+import com.ibm.fhir.model.resource.Resource;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.HTTPVerb;
-import com.ibm.fhir.model.type.code.ObservationStatus;
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.Integer;
 import java.lang.String;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -19,6 +17,25 @@ import java.util.UUID;
  * @todo description
  */
 public abstract class FHIRBaseBuilder {
+
+  public static final String LOCAL_SYSTEM = "http://local-system";
+
+  /**
+   * Base URL of Logical Observation Identifiers Names and Codes
+   * <a href="https://loinc.org/search">LOINC_SYSTEM</a>
+   * */
+  public static final String LOINC_SYSTEM = "http://loinc.org";
+
+  /**
+   * Base URL of Unified Code for Units of Measure
+   * <a href="https://ucum.org/ucum#section-Base-Units">UNITSOFM_SYSTEM</a>
+   * */
+  public static final String UNITSOFM_SYSTEM = "http://unitsofmeasure.org";
+
+  public static final String DOID_SYSTEM = "http://purl.obolibrary.org/obo/";
+
+  public static final String HL7_SYSTEM = "http://terminology.hl7.org/CodeSystem";
+  public static final String HL7_STRUCTURE = "http://hl7.org/fhir/StructureDefinition";
 
   public static final Logger LOGGER = LoggerFactory.getLogger(FHIRBaseBuilder.class);
 
@@ -102,13 +119,6 @@ public abstract class FHIRBaseBuilder {
   /**
    * @todo description
    */
-  public static CodeableConcept buildCodeableConcept(String text) {
-    return buildCodeableConcept(null, text);
-  }
-
-  /**
-   * @todo description
-   */
   public static CodeableConcept buildCodeableConcept(Coding coding) {
     return buildCodeableConcept(coding, null);
   }
@@ -125,26 +135,6 @@ public abstract class FHIRBaseBuilder {
       cc = cc.text(text);
     }
     return cc.build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Extension buildPatientAgeExtention(String url, int age) {
-    return Extension.builder()
-      .url(url)
-      .value(Integer.valueOf(age))
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Extension buildResourceReferenceExtention(String url, String resource) {
-    return Extension.builder()
-      .url(url)
-      .value(resource)
-      .build();
   }
 
   /**
@@ -196,150 +186,6 @@ public abstract class FHIRBaseBuilder {
   /**
    * @todo description
    */
-  public static Bundle.Entry buildObservation(
-    DateTime dateTime,
-    CodeableConcept category,
-    CodeableConcept code,
-    Bundle.Entry patientEntry,
-    Extension... extensions
-  ) {
-    return buildEntry(
-      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
-        .build(),
-      FHIR_OBSERVATION_TYPE
-    );
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservation(
-    DateTime dateTime,
-    CodeableConcept category,
-    CodeableConcept code,
-    boolean valueBool,
-    Bundle.Entry patientEntry,
-    Extension... extensions
-  ) {
-    return buildEntry(
-      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
-        .value(valueBool)
-        .build(),
-      FHIR_OBSERVATION_TYPE
-    );
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildObservation(
-    DateTime dateTime,
-    CodeableConcept category,
-    CodeableConcept code,
-    Quantity quantity,
-    Bundle.Entry patientEntry,
-    Extension... extensions
-  ) {
-    return buildEntry(
-      getBaseObservationBuilder(dateTime, category, code, patientEntry, extensions)
-        .value(quantity)
-        .build(),
-      FHIR_OBSERVATION_TYPE
-    );
-  }
-
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildObservationComponent(
-    CodeableConcept code,
-    Quantity quantity,
-    Extension... extension
-  ) {
-    return Observation.Component.builder()
-      .code(code)
-      .value(quantity)
-      .extension(extension)
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildObservationComponent(
-    CodeableConcept code,
-    String value,
-    Extension... extension
-  ) {
-    return Observation.Component.builder()
-      .code(code)
-      .value(value)
-      .extension(extension)
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildObservationComponent(
-    CodeableConcept code,
-    DateTime dateTime,
-    Extension... extension
-  ) {
-    return Observation.Component.builder()
-      .code(code)
-      .value(dateTime)
-      .extension(extension)
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Observation.Component buildObservationComponent(
-    CodeableConcept code,
-    Period period,
-    Extension... extension
-  ) {
-    return Observation.Component.builder()
-      .code(code)
-      .value(period)
-      .extension(extension)
-      .build();
-  }
-
-  /**
-   * @todo description
-   */
-  public static Bundle.Entry buildCondition(
-    DateTime dateTime,
-    CodeableConcept code,
-    Bundle.Entry patientEntry
-  ) {
-    return buildEntry(
-      Condition.builder()
-        .code(code)
-//        .onset(
-//          Age.builder().value(age).build()
-//        )
-        .recordedDate(dateTime)
-        .subject(
-          // TODO use buildReference
-          Reference.builder()
-            .reference(
-              patientEntry.getFullUrl().getValue()
-            )
-            .build()
-        )
-        .build(),
-      FHIR_CONDITION_TYPE
-    );
-  }
-
-
-  /**
-   * @todo description
-   */
   protected static final String FHIR_OBSERVATION_TYPE = "Observation";
 
   /**
@@ -351,41 +197,6 @@ public abstract class FHIRBaseBuilder {
    * @todo description
    */
   protected FHIRBaseBuilder() {
-  }
-
-  protected static String getId(JSONObject resource, String key) {
-    String uuid = resource.getString(key);
-    if (StringUtils.isBlank(uuid)) {
-      uuid = UUID.randomUUID().toString();
-      String message = String.format("Property '%s' is missing, generated a random one: %s", key, uuid);
-      LOGGER.warn(message);
-      return uuid;
-    }
-    return uuid;
-  }
-
-  @Deprecated // @todo use the function toBuilder ?
-  protected static Observation.Builder getBaseObservationBuilder(
-    DateTime dateTime,
-    CodeableConcept category,
-    CodeableConcept code,
-    Bundle.Entry patientEntry,
-    Extension... extensions
-  ) {
-    return Observation.builder()
-      .status(ObservationStatus.FINAL)
-      .category(category)
-      .code(code)
-      .extension(extensions)
-      .effective(dateTime)
-      .subject(
-        // TODO use buildReference
-        Reference.builder()
-          .reference(
-            patientEntry.getFullUrl().getValue()
-          )
-          .build()
-      );
   }
 
 }
