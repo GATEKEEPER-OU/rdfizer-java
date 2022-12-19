@@ -21,13 +21,13 @@ class CSSAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-    "xxx, keep, PatientWithAge",
+//    "xxx, keep, PatientWithAge",
 //    "xxx, keep, BodyHeight",
 //    "xxx, keep, BodyWeight",
 
     // Observations
 //    "xxx, keep, GlycosilatedEmoglobin",
-//    "xxx, keep, TotalCholesterol",
+    "xxx, keep, TotalCholesterol",
 //    "xxx, keep, HighDensityLipoprotein",
 //    "xxx, keep, LowDensityLipoprotein",
 //    "xxx, keep, Triglycerides",
@@ -35,7 +35,7 @@ class CSSAdapterTest {
 //    "xxx, keep, SerumCreatinine",
 //    "xxx, keep, AlbuminuriaCreatininuriaRatio",
 //    "xxx, keep, GPTALT",
-    "xxx, keep, GOTAST",
+//    "xxx, keep, GOTAST",
 //    "xxx, keep, GammaGT",
 //    "xxx, keep, AlkalinePhosphatase",
 //    "xxx, keep, UricAcid",

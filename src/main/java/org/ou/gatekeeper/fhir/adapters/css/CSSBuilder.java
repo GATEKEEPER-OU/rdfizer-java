@@ -210,15 +210,15 @@ class CSSBuilder extends FHIRBaseBuilder {
         JSONObjectUtils.getId(examination, "examination_id") + "-TotalCholesterol",
         buildCodeableConcept(buildCoding(
           LOINC_SYSTEM,
-          "2095-8",
-          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+          "2093-3",
+          "Cholesterol [Mass/volume] in Serum or Plasma"
         )),
         null,
         buildQuantity(
-          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          Decimal.of(examination.getBigDecimal("total_cholesterol")),
           "milligram per deciliter",
           LOINC_SYSTEM,
-          examination.getString("TC_HDL_unit")
+          examination.getString("total_cholesterol_unit")
         ),
         patientEntry,
         patientAgeEntry,
