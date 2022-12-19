@@ -2925,6 +2925,169 @@
   rr:predicateObjectMap [
     rr:predicate ho:P40observedDimension;
     rr:objectMap [
+      rr:parentTriplesMap <#CalorieDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#CalorieDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'calorie')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF435/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF435HomocysteineDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# /BodyHeight
+
+
+# ############################################################################ #
+#                                 OxygenSaturation
+# ############################################################################ #
+
+<#OxygenSaturationAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'oxygensaturation')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF705/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF705OxygenSaturationAssignment;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#OxygenSaturationMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'oxygensaturation')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF805/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF805OxygenSaturationMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
       rr:parentTriplesMap <#PulseOximetryDimension>;
       rr:joinCondition [
         rr:child "resource.id";
@@ -7069,7 +7232,7 @@
 .
 
 # vo2_max
-<#ExerciseOxygenSaturationMeasurement> a rr:TriplesMap;
+<#OxygenSaturationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -8327,7 +8490,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#ExerciseOxygenSaturationMeasurement>;
+      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.derivedFrom[0].display";
@@ -8697,7 +8860,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#ExerciseOxygenSaturationMeasurement>;
+      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.derivedFrom[0].display";
@@ -9078,7 +9241,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#ExerciseOxygenSaturationMeasurement>;
+      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.derivedFrom[0].display";

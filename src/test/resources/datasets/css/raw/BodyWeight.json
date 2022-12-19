@@ -3,7 +3,6 @@
     {
       "examination_id": "1234asdf",
       "patient": {
-        "patient_uuid": "xxx",
         "patient_id": "userXXX@puglia.gatekeeper.com"
       },
       "patient_age": 29,

@@ -7,8 +7,8 @@
       },
       "patient_age": 29,
       "date": "2021-03-30",
-      "height": 0.15267706,
-      "height_unit": "m"
+      "uric_acid": 4.7,
+      "uric_acid_unit": "mg/dl"
     }
   ]
 }

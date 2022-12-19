@@ -7,8 +7,7 @@
       },
       "patient_age": 29,
       "date": "2021-03-30",
-      "height": 0.15267706,
-      "height_unit": "m"
+      "chronic_kidney_disease": false
     }
   ]
 }

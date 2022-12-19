@@ -21,7 +21,7 @@ class SHAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-    "5af918e5d5c9289c82c513856e59e70af3111d648d2c57821942aaa87ca0c4e7, keep, Patient",
+    "xxx, keep, Patient",
     // Observations
 //    "xxx, keep, Height",
 //    "xxx, keep, Weight",
@@ -46,8 +46,8 @@ class SHAdapterTest {
     FHIRAdapter converter = SHAdapter.create();
     converter.transform(datasetFile, outputFile);
 
-    File outputNormFile = TestUtils.createOutputFile("output-"+datasetName, "norm.json");
-    converter.transform(datasetFile, outputNormFile, true);
+//    File outputNormFile = TestUtils.createOutputFile("output-"+datasetName, "norm.json");
+//    converter.transform(datasetFile, outputNormFile, true);
 
     try {
       // Before evalutate, it must be eliminated outo-generated values (uuids, etc...)
@@ -69,7 +69,7 @@ class SHAdapterTest {
         System.out.println("outputFile >>> " + outputFile);
       } else if (policy.equals("clean")) {
         ResourceUtils.clean(outputFile);
-        ResourceUtils.clean(outputNormFile);
+//        ResourceUtils.clean(outputNormFile);
       } else {
         throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }

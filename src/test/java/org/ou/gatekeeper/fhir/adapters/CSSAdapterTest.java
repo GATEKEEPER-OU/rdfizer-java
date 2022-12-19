@@ -21,23 +21,28 @@ class CSSAdapterTest {
   @ParameterizedTest
   @CsvSource({
     // Patient
-    "dda29b24b638cc7eec653ea11d2fda0b8dffd9ba05678a0cf780cdc19fa9d3be, clean, Patient",
+    "xxx, keep, PatientWithAge",
 //    "xxx, keep, BodyHeight",
 //    "xxx, keep, BodyWeight",
 
     // Observations
-    "xxx, keep, GlycosilatedEmoglobin",
+//    "xxx, keep, GlycosilatedEmoglobin",
 //    "xxx, keep, TotalCholesterol",
 //    "xxx, keep, HighDensityLipoprotein",
 //    "xxx, keep, LowDensityLipoprotein",
 //    "xxx, keep, Triglycerides",
+//    "xxx, keep, TotalCholesterolHDL",
 //    "xxx, keep, SerumCreatinine",
 //    "xxx, keep, AlbuminuriaCreatininuriaRatio",
+//    "xxx, keep, GPTALT",
+    "xxx, keep, GOTAST",
+//    "xxx, keep, GammaGT",
 //    "xxx, keep, AlkalinePhosphatase",
 //    "xxx, keep, UricAcid",
 //    "xxx, keep, EstimatedGlomerularFiltrationRate",
 //    "xxx, keep, Nitrites",
 //    "xxx, keep, BloodPressure",
+//    "xxx, keep, YearsWithDiabetes",
 
     // Conditions
 //    "xxx, keep, HepaticSteatosis",
@@ -49,8 +54,8 @@ class CSSAdapterTest {
   })
   void test_transform_RawToFHIR(String expectedDigest, String policy, String datasetName) {
     String datasetPath = TestUtils.getDatasetPath("CSS", datasetName);
-    File datasetFile = TestUtils.loadResource(datasetPath);
-    File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
+    File   datasetFile = TestUtils.loadResource(datasetPath);
+    File    outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
     FHIRAdapter converter = CSSAdapter.create();
     converter.transform(datasetFile, outputFile);
@@ -61,7 +66,7 @@ class CSSAdapterTest {
     try {
       // Before evalutate, it must be eliminated outo-generated values (uuids, etc...)
       // because they will change each run
-      TestUtils.removeAllLinesFromFile(outputFile, "fullUrl");
+//      TestUtils.removeAllLinesFromFile(outputFile, "fullUrl");
 //      TestUtils.removeAllLinesFromFile(outputFile, "reference");
 //      TestUtils.removeAllLinesFromFile(outputFile, "valueString");
 
@@ -77,6 +82,7 @@ class CSSAdapterTest {
         System.out.println("outputFile >>> " + outputFile);
       } else if (policy.equals("clean")) {
         ResourceUtils.clean(outputFile);
+//        ResourceUtils.clean(outputNormFile);
       } else {
         throw new IllegalArgumentException("Only 'keep' or 'clean' policies allowed");
       }

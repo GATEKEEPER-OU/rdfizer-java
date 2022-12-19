@@ -7,8 +7,8 @@
       },
       "patient_age": 29,
       "date": "2021-03-30",
-      "height": 0.15267706,
-      "height_unit": "m"
+      "albuminuria_creatininuria_ratio": 0.70763606,
+      "albuminuria_creatininuria_ratio_unit": "mg/dl"
     }
   ]
 }
