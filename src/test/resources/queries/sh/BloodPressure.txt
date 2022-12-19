@@ -1,0 +1,32 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT ?patientID ?assign ?dateTime ?mea
+        ?diastolicDimension ?diastolicValue ?diastolicUnit
+        ?systolicDimension ?systolicValue ?systolicUnit
+        ?pulseDimension ?pulseValue ?pulseUnit WHERE {
+   ?patient rdf:type hlf:E21Person .
+              ?patient hlf:P1isIdentifiedBy ?identifier .
+              ?identifier hlf:P3hasNote ?patientID .
+   ?ts rdf:type hlf:E52TimeSpan .
+   ?assign rdf:type hlf:HLF157BloodPressureAssignment .
+   ?assign hlf:P140assignedAttributeTo ?patient .
+   ?assign hlf:P4hasTimeSpan ?ts .
+   ?ts hlf:EP9effectiveDatatime ?dateTime .
+   ?assign hlf:P117includes ?mea .
+   ?mea rdf:type hlf:HLF197BloodPressureMeasurement .
+
+   ?diastolicDimension rdf:type hlf:HLF12DiastolicPressureDimension .
+   ?mea hlf:P40observedDimension ?diastolicDimension .
+   ?diastolicDimension hlf:P90hasValue ?diastolicValue .
+   ?diastolicDimension hlf:P91hasUnit ?diastolicUnit .
+
+   ?systolicDimension rdf:type hlf:HLF32SystolicPressureDimension .
+   ?mea hlf:P40observedDimension ?systolicDimension .
+   ?systolicDimension hlf:P90hasValue ?systolicValue .
+   ?systolicDimension hlf:P91hasUnit ?systolicUnit .
+
+   ?pulseDimension rdf:type hlf:HLF431PulseDimension .
+   ?mea hlf:P40observedDimension ?pulseDimension .
+   ?pulseDimension hlf:P90hasValue ?pulseValue .
+   ?pulseDimension hlf:P91hasUnit ?pulseUnit .
+}

@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.*;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -23,10 +20,11 @@ public class BundleGenerator {
     Path ontologyPartsPath = Path.of(ontologyPath.toString(), "parts");
 
     List<File> ttls = getResourceFiles(ontologyPartsPath, "ttl");
+    uniquePrefixChecker(ttls);
 
     StringBuilder helifitRml = new StringBuilder();
     for (File ttl : ttls) {
-      String ttlContent = readFileToString(ttl);
+      String ttlContent = Files.readString(ttl.toPath());
       helifitRml
         .append(ttlContent)
         .append("\n\n");
@@ -45,23 +43,55 @@ public class BundleGenerator {
 
   private static List<File> getResourceFiles(Path path, String ext) {
     File resourceDir = new File(path.toUri());
-    return Stream.of(Objects.requireNonNull(resourceDir.listFiles()))
-      .filter(file -> !file.isDirectory())
-      .filter(file -> file.getName().endsWith(ext))
+    String[] exts = new String[]{ ext };
+    // Collection<File> parts = FileUtils.listFiles(resourceDir, exts, true); // NOTE at this stage maven dependencies can't be used here
+    Collection<File> parts = listFiles(resourceDir, exts);
+    return parts.stream()
       .sorted(Comparator.comparing(File::getName))
       .toList();
   }
 
-  public static String readFileToString(File file) {
-    try {
-      return Files.readString(file.toPath());
-
-    } catch (IOException e) {
-      // @todo Message: resource not found
-      e.printStackTrace();
+  private static Collection<File> listFiles(File rootDir, String[] exts) {
+    List<File> files = new LinkedList<>();
+    File[] dirContent = rootDir.listFiles();
+    for(File file : dirContent) {
+      if (file.isDirectory()) {
+        Collection<File> subdirContent = listFiles(file, exts);
+        files.addAll(subdirContent);
+      } else {
+        String filename = file.getName();
+        String ext = getExtension(filename);
+        if (Arrays.asList(exts).contains(ext)) {
+          files.add(file);
+        }
+      }
     }
+    return files;
+  }
 
-    return null;
+  private static String getExtension(String filename) {
+    int lastIndexOf = filename.lastIndexOf(".");
+    if (lastIndexOf == -1) {
+      return ""; // empty extension
+    }
+    return filename.substring(lastIndexOf + 1);
+  }
+
+  private static void uniquePrefixChecker(List<File> files) {
+    HashMap<String, String> prefixes = new HashMap<>();
+    for (File file: files) {
+      String filename = file.getName();
+      String[] parts = filename.split("_");
+      if (parts.length < 2) {
+        throw new IllegalArgumentException("Part filename should have prefix");
+      }
+      String prefix = parts[0];
+      if (prefixes.containsKey(prefix)) {
+        String message = String.format("Prefix %s already in use for '%s'", prefix, filename);
+        throw new IllegalArgumentException(message);
+      }
+      prefixes.put(prefix, filename);
+    }
   }
 
 }

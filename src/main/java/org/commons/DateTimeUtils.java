@@ -20,8 +20,9 @@ public class DateTimeUtils {
       try {
         String pattern = "yyyy-MM-dd";
         Date parsedDate = DateUtils.parseDate(date, pattern);
-        // @todo change ISO_DATETIME_TIME_ZONE_FORMAT -> ISO_8601_EXTENDED_DATETIME_FORMAT
-        String isoDateTime = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(parsedDate);
+        // TODO change ISO_DATETIME_TIME_ZONE_FORMAT -> ISO_8601_EXTENDED_DATETIME_FORMAT
+        String isoDateTime = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT
+          .format(parsedDate);
 //        System.out.println(" date >>>> " + date); // DEBUG
 //        System.out.println(" parsedDate >>>> " + parsedDate); // DEBUG
 //        System.out.println(" isoDateTime >>>> " + isoDateTime); // DEBUG

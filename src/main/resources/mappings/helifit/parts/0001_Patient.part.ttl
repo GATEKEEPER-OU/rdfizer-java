@@ -1,0 +1,29 @@
+# ############################################################################ #
+#                                  Patient
+# ############################################################################ #
+
+<#Patient> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Patient')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/id/{resource.id}";
+    rr:class ho:E21Person;
+  ];
+
+   rr:predicateObjectMap [
+     rr:predicate ho:P1isIdentifiedBy;
+     rr:objectMap [
+       rr:parentTriplesMap <#PatientIdentifier>;
+       rr:joinCondition [
+         rr:child "resource.id";
+         rr:parent "resource.id";
+       ];
+     ];
+  ];
+.
+
+# /Patient

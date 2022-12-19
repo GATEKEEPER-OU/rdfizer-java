@@ -1,0 +1,62 @@
+prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT
+        ?patient
+        ?assign
+
+        ?calorieMea
+        ?calorieValue
+        ?calorieUnit
+
+        ?stepsCountMea
+        ?stepsCountValue
+        ?stepsCountUnit
+
+        ?distanceMea
+        ?distanceValue
+        ?distanceUnit
+
+        ?speedMea
+        ?speedValue
+        ?speedUnit
+
+        ?start
+        ?end
+WHERE {
+    ?patient rdf:type hlf:E21Person .
+    ?patient hlf:P1isIdentifiedBy ?identifier .
+    ?ts rdf:type hlf:E52TimeSpan .
+    ?assign rdf:type hlf:HLF250StepDailyTrendAssignment .
+    ?assign hlf:P140assignedAttributeTo ?patient .
+    ?assign hlf:P4hasTimeSpan ?ts .
+    ?ts hlf:EP7starts ?start .
+    ?ts hlf:EP8ends ?end .
+
+    ?calorieMea rdf:type hlf:HLF346BurnedCaloriesMeasurement .
+    ?assign hlf:P117includes ?calorieMea .
+    ?calorieDimension rdf:type hlf:HLF318TotalBurnedCaloriesDimension .
+    ?calorieMea hlf:P40observedDimension ?calorieDimension .
+    ?calorieDimension hlf:P90hasValue ?calorieValue .
+    ?calorieDimension hlf:P91hasUnit ?calorieUnit .
+
+    ?stepsCountMea rdf:type hlf:HLF810StepsCountMeasurement .
+    ?assign hlf:P117includes ?stepsCountMea .
+    ?stepsCountDimension rdf:type hlf:HLF907StepsCountDimension .
+    ?stepsCountMea hlf:P40observedDimension ?stepsCountDimension .
+    ?stepsCountDimension hlf:P90hasValue ?stepsCountValue .
+    ?stepsCountDimension hlf:P91hasUnit ?stepsCountUnit .
+
+    ?distanceMea rdf:type hlf:HLF806DistancePerformedMeasurement .
+    ?assign hlf:P117includes ?distanceMea .
+    ?distanceDimension rdf:type hlf:HLF319TotalDistanceDimension .
+    ?distanceMea hlf:P40observedDimension ?distanceDimension .
+    ?distanceDimension hlf:P90hasValue ?distanceValue .
+    ?distanceDimension hlf:P91hasUnit ?distanceUnit .
+
+    ?speedMea rdf:type hlf:HLF811AverageSpeedMeasurement .
+    ?assign hlf:P117includes ?speedMea .
+    ?speedDimension rdf:type hlf:HLF320AverageSpeedDimension .
+    ?speedMea hlf:P40observedDimension ?speedDimension .
+    ?speedDimension hlf:P90hasValue ?speedValue .
+    ?speedDimension hlf:P91hasUnit ?speedUnit .
+}

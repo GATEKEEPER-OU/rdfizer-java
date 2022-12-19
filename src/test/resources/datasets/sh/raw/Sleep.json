@@ -1,0 +1,112 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+      "update_time": "1624002329654",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "sleep",
+      "data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "sleep_hours": "7.383333333333334",
+          "start_time": "1623958080000",
+          "end_time": "1623984660000",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40002",
+          "stage_type": "STAGE_LIGHT",
+          "start_time": "1623958200000",
+          "end_time": "1623958440000",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40001",
+          "start_time": "1623958440000",
+          "end_time": "1623958560000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40002",
+          "start_time": "1623958560000",
+          "end_time": "1623960660000",
+          "stage_type": "STAGE_LIGHT",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+
+          "stage": "40001",
+          "start_time": "1623958080000",
+          "end_time": "1623958200000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329602",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40001",
+          "start_time": "1623960660000",
+          "end_time": "1623960720000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    }
+  ]
+}

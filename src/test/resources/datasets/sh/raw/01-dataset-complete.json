@@ -1,0 +1,422 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+
+      "update_time": "1623992653140",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "exercise",
+      "data_uuid":"fuisgjsdgcsdkugfsk",
+      "values": [
+        {
+
+          "exercise_type": "1001",
+          "exercise_description": "Walking",
+
+          "altitude_gain":"xxx",
+          "altitude_loss": "yyy",
+          "max_altitude": "6543",
+          "min_altitude": "6432",
+
+          "mean_cadence": "65432",
+          "max_cadence": "erefdf",
+
+          "calorie": "71.0",
+          "max_caloricburn_rate": "24t2394t",
+          "mean_caloricburn_rate": "34875fuhej",
+
+          "count": "zzz",
+          "count_type": "yyy",
+
+          "distance": "250",
+          "incline_distance": "43r343",
+          "decline_distance": "76543",
+
+          "duration": "930720",
+
+          "max_heart_rate": "54r4234",
+          "mean_heart_rate": "53432",
+          "min_heart_rate": "4332",
+
+          "max_power": "87654",
+          "mean_power": "7654",
+
+          "mean_rpm": "87654",
+          "max_rpm": "98765",
+
+          "max_speed": "fds",
+          "mean_speed": "fds",
+
+          "vo2_max": "654",
+
+          "start_time": "1623991658860",
+          "end_time": "1623992589580",
+          "time_offset": "UTC+0200"
+        }
+      ],
+      "live_data": [
+        {
+          "cadence": "95.84712",
+          "count": "83",
+          "distance": "250",
+          "heart_rate": "147.48181",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "start_time": "1422457096536",
+          "end_time": "1623998879999"
+        },
+        {
+          "start_time": "1623999780000",
+          "heart_rate": "147.48181",
+          "cadence": "95.84712",
+          "count": "85",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623999839999"
+        }
+      ],
+      "location_data": [
+        {
+          "start_time": "1422457096536",
+          "latitude": "2.7413864",
+          "longitude": "60.37224",
+          "altitude":"39.0",
+          "accuracy":"0.0",
+          "end_time": "1623999839999"
+        },
+
+        {
+          "start_time": "1422457096636",
+          "latitude": "5.7413864",
+          "longitude": "50.37224",
+          "altitude":"49.0",
+          "accuracy":"0.0",
+          "end_time": "16239998505054"
+        }
+
+      ]
+    },
+
+    {
+      "update_time": "1623988780862",
+      "day_time": "20210617",
+      "device_id": "VfS0qUERdZ",
+      "type_id": "stepDailyTrend",
+      "data_uuid": "rygfldshgflasdgfadljfgaljfgaljg",
+      "values": [
+        {
+
+          "count": "6739",
+          "speed": "1.293332",
+          "distance": "5017.739",
+          "calorie": "245.5",
+          "start_time": "1623888000000",
+          "end_time": "1623974399000"
+        }
+      ],
+      "binning_data": [
+        {
+          "calorie": "0",
+          "count": "0",
+          "distance": "0",
+          "speed": "0",
+          "start_time": "1623888000000",
+          "end_time": "1623888599000"
+        },
+        {
+          "calorie": "0",
+          "count": "0",
+          "distance": "0",
+          "speed": "0",
+          "start_time": "1623888600000",
+          "end_time": "1623889199000"
+        },
+        {
+          "calorie": "0.25999999046325684",
+          "count": "7",
+          "distance": "4.920000076293945",
+          "speed": "3.200000047683716",
+          "start_time": "1623931800000",
+          "end_time": "1623932399000"
+        }
+      ]
+    },
+
+    {
+      "update_time": "1624030811108",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "exercise",
+      "data_uuid":"665473892564789000228",
+      "values": [
+        {
+
+          "exercise_type": "14001",
+          "duration": "671880",
+          "calorie": "44.0",
+          "exercise_description": "Swimming",
+          "start_time": "1624030075900",
+          "end_time": "1624030747780",
+          "time_offset": "UTC+0200",
+
+          "altitude_gain":"xxx",
+          "altitude_loss": "yyy",
+          "count": "zzz",
+          "count_type": "yyy",
+          "max_speed": "fds",
+          "mean_speed": "fds",
+          "max_caloricburn_rate": "24t2394t",
+          "mean_caloricburn_rate": "34875fuhej",
+          "max_cadence": "erefdf",
+          "mean_cadence": "65432",
+          "max_heart_rate": "54r4234",
+          "mean_heart_rate": "53432",
+          "min_heart_rate": "4332",
+          "max_altitude": "6543",
+          "min_altitude": "6432",
+          "incline_distance": "43r343",
+          "decline_distance": "76543",
+          "max_power": "87654",
+          "mean_power": "7654",
+          "mean_rpm": "87654",
+          "max_rpm": "98765",
+          "vo2_max": "654",
+
+          "pool_length":"25",
+          "pool_length_unit":"meter",
+          "total_distance":"125",
+          "total_duration":"247000",
+          "lengths":[
+            {
+              "duration":"49000",
+              "interval":"1",
+              "stroke_count":"20",
+              "stroke_type":"Butterfly"
+            },
+            {
+              "duration":"42000",
+              "interval":"1",
+              "stroke_count":"21",
+              "stroke_type":"Backstroke"
+            },
+            {
+              "duration":"51000",
+              "interval":"1",
+              "stroke_count":"26",
+              "stroke_type":"Breaststroke"
+            },
+            {
+              "duration":"52000",
+              "interval":"2",
+              "stroke_count":"27",
+              "stroke_type":"Freestyle"
+            },
+            {
+              "duration":"53000",
+              "interval":"2",
+              "stroke_count":"29",
+              "stroke_type":"Mixed"
+            }
+          ]
+
+        }
+      ],
+      "live_data": [
+        {
+          "start_time": "1422457096536",
+          "heart_rate": "147.48181",
+          "cadence": "95.84712",
+          "count": "83",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623998879999"
+        },
+        {
+          "start_time": "1623999780000",
+          "heart_rate": "147.48181",
+          "cadence": "95.84712",
+          "count": "85",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623999839999"
+        }
+      ],
+      "location_data": []
+    },
+
+    {
+      "update_time": "1623989623494",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "floorsClimbed",
+      "data_uuid":"7685965849034eeeeee89",
+      "values": [
+        {
+
+          "floor": "1.0",
+          "start_time": "1623989575980",
+          "end_time": "1623989594443",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    
+    {
+      "update_time": "1623967379260",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "heartRate",
+      "data_uuid": "647848493030303030",
+      "values": [
+        {
+
+          "heart_rate_max": "89.0",
+          "heart_rate_min": "69.0",
+          "heart_beat_count": "145",
+          "heart_rate": "74.0",
+          "start_time": "1623963600000",
+          "end_time": "1623967199999",
+          "time_offset": "UTC+0200"
+        }
+      ],
+      "binning_data": [
+        {
+          "heart_rate": "80",
+          "heart_rate_max": "86",
+          "heart_rate_min": "76",
+          "start_time": "1623970800000",
+          "end_time": "1623970859000"
+        },
+        {
+          "heart_rate": "78",
+          "heart_rate_max": "81",
+          "heart_rate_min": "77",
+          "start_time": "1623970860000",
+          "end_time": "1623970919000"
+        },
+        {
+          "heart_rate": "72",
+          "heart_rate_max": "73",
+          "heart_rate_min": "72",
+          "start_time": "1623974340000",
+          "end_time": "1623974399000"
+        }
+      ]
+    },
+
+    {
+      "update_time": "1624002329654",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "sleep",
+      "data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+
+          "start_time": "1623958080000",
+          "end_time": "1623984660000",
+          "sleep_hours": "7.383333333333334",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+
+      "values": [
+        {
+
+          "stage": "40002",
+          "start_time": "1623958200000",
+          "end_time": "1623958440000",
+          "stage_type": "STAGE_LIGHT",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40001",
+          "start_time": "1623958440000",
+          "end_time": "1623958560000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40002",
+          "start_time": "1623958560000",
+          "end_time": "1623960660000",
+          "stage_type": "STAGE_LIGHT",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329601",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+
+          "stage": "40001",
+          "start_time": "1623958080000",
+          "end_time": "1623958200000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    },
+    {
+      "update_time": "1624002329602",
+      "day_time": "20210618",
+      "device_id": "Wal1hHem4l",
+      "type_id": "sleepStage",
+      "data_uuid":"c2c1dcd7-4d68-ac34-b5e6-386b6246c456",
+      "parent_data_uuid": "c2c1dcd7-4d68-ac34-b5e6-386b6246c528",
+      "values": [
+        {
+          "stage": "40001",
+          "start_time": "1623960660000",
+          "end_time": "1623960720000",
+          "stage_type": "STAGE_AWAKE",
+          "time_offset": "UTC+0200"
+        }
+      ]
+    }
+  ]
+}

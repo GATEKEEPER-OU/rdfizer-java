@@ -1,0 +1,257 @@
+<#SleepingStageActivity> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF43/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF43SleepingActivity;
+  ];
+
+  #
+  # Metadata
+  #
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Includes
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#SleepStageAssignment>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#SleepStageAssignment> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E13/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:E13AttributeAssignment;
+  ];
+
+  #
+    # Metadata
+    #
+    rr:predicateObjectMap [
+      rr:predicate ho:P4hasTimeSpan;
+      rr:objectMap [
+        rr:parentTriplesMap <#ObservationTimeSpan>;
+        rr:joinCondition [
+          rr:child "resource.id";
+          rr:parent "resource.id";
+        ];
+      ];
+    ];
+    rr:predicateObjectMap [
+      rr:predicate ho:P140assignedAttributeTo;
+      rr:objectMap [
+        rr:parentTriplesMap <#Patient>;
+        rr:joinCondition [
+          rr:child "resource.subject.display";
+          rr:parent "resource.id";
+        ];
+      ];
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#SleepingStageActivityMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#SleepingStageActivityMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF331/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF338SleepingActivityMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P14carriedOutBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.reference";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:L12happenedOnDevice;
+    rr:objectMap [
+      rr:parentTriplesMap <#Device>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:EP2initiates;
+    rr:objectMap [
+      rr:parentTriplesMap <#SleepingCycle>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#SleepingCycle> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF20/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF20SleepCycle;
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:EP3maintains;
+    rr:objectMap [
+      rr:parentTriplesMap <#SleepStage>;
+      rr:joinCondition [
+       rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+.
+
+<#SleepStage> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')].resource.component[*]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF10/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF10SleepStage;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentTimeSpan>;
+      rr:joinCondition [
+        rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P2hasType;
+    rr:objectMap [
+      rr:parentTriplesMap <#SleepStageType>;
+      rr:joinCondition [
+       rr:child "fullUrl";
+        rr:parent "fullUrl";
+      ];
+    ];
+  ];
+.
+
+<#SleepStageType> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')].resource.component[*]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF274/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF274SleepStageType;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "code.coding[0].display";
+    ]
+  ];
+.

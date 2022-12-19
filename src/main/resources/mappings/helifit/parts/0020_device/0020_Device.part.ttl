@@ -1,0 +1,22 @@
+<#Device> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/D8/id/{resource.device.identifier.value}";
+    rr:class ho:D8DigitalDevice;
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#DeviceIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.device.identifier.value";
+        rr:parent "resource.device.identifier.value";
+      ];
+    ];
+  ];
+.

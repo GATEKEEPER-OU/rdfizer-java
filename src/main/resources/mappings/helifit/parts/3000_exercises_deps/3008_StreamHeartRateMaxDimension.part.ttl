@@ -1,0 +1,31 @@
+#
+# live_data_distance_max
+<#StreamHeartRateMaxDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'live_data_heart_rate_max')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF434/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF434HeartRateMaxDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.

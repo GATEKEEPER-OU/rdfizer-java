@@ -1,0 +1,103 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+      "update_time": "1623992653140",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "exercise",
+      "data_uuid":"fuisgjsdgcsdkugfsk",
+      "values": [
+        {
+          "exercise_type": "1001",
+          "exercise_description": "Running",
+
+          "altitude_gain":"1234",
+          "altitude_loss": "7345",
+          "min_altitude": "6432",
+          "max_altitude": "6543",
+
+          "mean_cadence": "65432",
+          "max_cadence": "89723",
+
+          "calorie": "71.0",
+          "mean_caloricburn_rate": "098234",
+          "max_caloricburn_rate": "089234",
+
+          "count": "985789",
+          "count_type": "30001",
+
+          "distance": "250",
+          "incline_distance": "8924378",
+          "decline_distance": "8936785",
+
+          "duration": "930720",
+
+          "min_heart_rate": "4332",
+          "mean_heart_rate": "53432",
+          "max_heart_rate": "544234",
+
+          "mean_power": "7654",
+          "max_power": "87654",
+
+          "mean_rpm": "87654",
+          "max_rpm": "98765",
+
+          "mean_speed": "76887",
+          "max_speed": "983478",
+
+          "vo2_max": "654",
+
+          "start_time": "1623991658860",
+          "end_time": "1623992589580",
+          "time_offset": "UTC+0200"
+        }
+      ],
+      "live_data": [
+        {
+          "cadence": "94.00000",
+          "count": "83",
+          "distance": "250",
+          "heart_rate": "147.48181",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "start_time": "1422457096536",
+          "end_time": "1623998879999"
+        },
+        {
+          "start_time": "1623999780000",
+          "heart_rate": "147.48181",
+          "cadence": "95.00001",
+          "count": "85",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623999839999"
+        }
+      ],
+      "location_data": [
+        {
+          "latitude": "2.7413864",
+          "longitude": "60.37224",
+          "altitude":"39.0",
+          "accuracy":"0.0",
+          "start_time": "1422457096536",
+          "end_time": "1623999839999"
+        },
+        {
+          "start_time": "1422457096636",
+          "latitude": "5.7413864",
+          "longitude": "50.37224",
+          "altitude":"49.0",
+          "accuracy":"0.0",
+          "end_time": "16239998505054"
+        }
+      ]
+    }
+  ]
+}

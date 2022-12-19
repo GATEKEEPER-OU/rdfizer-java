@@ -1,0 +1,113 @@
+{
+  "data_source": "SH",
+  "frequency": "day",
+  "user_uuid": "60b36ccc05f8c40fc9428105",
+  "user_id": "user12@puglia.gatekeeper.com",
+  "pilot_id": "Puglia",
+  "timestamp": "1623974400000",
+  "data": [
+    {
+      "update_time": "1624030811108",
+      "day_time": "20210618",
+      "device_id": "XaIq54it7a",
+      "type_id": "exercise",
+      "data_uuid":"665473892564789000228",
+      "values": [
+        {
+          "exercise_type": "14001",
+          "duration": "671880",
+
+          "exercise_description": "Swimming",
+          "start_time": "1624030075900",
+          "end_time": "1624030747780",
+          "time_offset": "UTC+0200",
+
+          "altitude_gain":"64526",
+          "altitude_loss": "2345",
+          "count": "75645423",
+          "count_type": "001",
+          "max_speed": "75676",
+          "mean_speed": "243242",
+          "calorie": "44.0",
+          "max_caloricburn_rate": "9832478",
+          "mean_caloricburn_rate": "8934578",
+          "max_cadence": "89732",
+          "mean_cadence": "65432",
+          "max_heart_rate": "544234",
+          "mean_heart_rate": "53432",
+          "min_heart_rate": "4332",
+          "max_altitude": "6543",
+          "min_altitude": "6432",
+          "incline_distance": "43343",
+          "decline_distance": "76543",
+          "max_power": "87654",
+          "mean_power": "7654",
+          "mean_rpm": "87654",
+          "max_rpm": "98765",
+          "vo2_max": "654",
+
+          "pool_length":"25",
+          "pool_length_unit":"meter",
+          "total_distance":"125",
+          "total_duration":"247000",
+          "lengths":[
+            {
+              "duration":"49000",
+              "interval":"1",
+              "stroke_count":"20",
+              "stroke_type":"Butterfly"
+            },
+            {
+              "duration":"42000",
+              "interval":"1",
+              "stroke_count":"21",
+              "stroke_type":"Backstroke"
+            },
+            {
+              "duration":"51000",
+              "interval":"1",
+              "stroke_count":"26",
+              "stroke_type":"Breaststroke"
+            },
+            {
+              "duration":"52000",
+              "interval":"2",
+              "stroke_count":"27",
+              "stroke_type":"Freestyle"
+            },
+            {
+              "duration":"53000",
+              "interval":"2",
+              "stroke_count":"29",
+              "stroke_type":"Mixed"
+            }
+          ]
+
+        }
+      ],
+      "live_data": [
+        {
+          "start_time": "1422457096536",
+          "heart_rate": "147.48181",
+          "cadence": "95.84712",
+          "count": "83",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623998879999"
+        },
+        {
+          "start_time": "1623999780000",
+          "heart_rate": "147.48181",
+          "cadence": "95.84712",
+          "count": "85",
+          "power": "99.50436",
+          "speed": "11.061617",
+          "distance": "250",
+          "end_time": "1623999839999"
+        }
+      ],
+      "location_data": []
+    }
+  ]
+}

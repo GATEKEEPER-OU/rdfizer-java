@@ -1,0 +1,14 @@
+{
+  "clinical_examinations": [
+    {
+      "examination_id": "1234asdf",
+      "patient": {
+        "patient_id": "userXXX@puglia.gatekeeper.com"
+      },
+      "patient_age": 29,
+      "date": "2021-03-30",
+      "albuminuria_creatininuria_ratio": 0.70763606,
+      "albuminuria_creatininuria_ratio_unit": "mg/dl"
+    }
+  ]
+}

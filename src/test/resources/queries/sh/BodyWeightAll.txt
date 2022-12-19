@@ -1,0 +1,79 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT ?patientID ?assign ?dateTime ?mea
+        ?dimension ?value ?unit
+        ?heightDimension ?heightValue ?heightUnit
+        ?bodyFatDimension ?bodyFatValue ?bodyFatUnit
+        ?bodyFatMassDimension ?bodyFatMassValue ?bodyFatMassUnit
+        ?muscleMassDimension ?muscleMassValue ?muscleMassUnit
+        ?skeletalMassDimension ?skeletalMassValue ?skeletalMassUnit
+        ?skeletalMuscleMassDimension ?skeletalMuscleMassValue ?skeletalMuscleMassUnit
+        ?basalMetabolicRateDimension ?basalMetabolicRateValue ?basalMetabolicRateUnit
+        ?fatFreeDimension ?fatFreeValue ?fatFreeUnit
+        ?fatFreeMassDimension ?fatFreeMassValue ?fatFreeMassUnit
+        ?totalBodyWaterDimension ?totalBodyWaterValue ?totalBodyWaterUnit WHERE {
+   ?patient rdf:type hlf:E21Person .
+              ?patient hlf:P1isIdentifiedBy ?identifier .
+              ?identifier hlf:P3hasNote ?patientID .
+   ?ts rdf:type hlf:E52TimeSpan .
+   ?assign rdf:type hlf:HLF156WeightAssignment .
+   ?assign hlf:P140assignedAttributeTo ?patient .
+   ?assign hlf:P4hasTimeSpan ?ts .
+   ?ts hlf:EP9effectiveDatatime ?dateTime .
+   ?assign hlf:P117includes ?mea .
+   ?mea rdf:type hlf:HLF191WeightMeasurement .
+   ?dimension rdf:type hlf:HLF41WeightDimension .
+   ?mea hlf:P40observedDimension ?dimension .
+   ?dimension hlf:P90hasValue ?value .
+   ?dimension hlf:P91hasUnit ?unit .
+
+   ?totalBodyWaterDimension rdf:type hlf:HLF449TotalBodyWaterDimension .
+   ?mea hlf:P40observedDimension ?totalBodyWaterDimension .
+   ?totalBodyWaterDimension hlf:P90hasValue ?totalBodyWaterValue .
+   ?totalBodyWaterDimension hlf:P91hasUnit ?totalBodyWaterUnit .
+
+   ?fatFreeMassDimension rdf:type hlf:HLF447FatFreeMassDimension .
+   ?mea hlf:P40observedDimension ?fatFreeMassDimension .
+   ?fatFreeMassDimension hlf:P90hasValue ?fatFreeMassValue .
+   ?fatFreeMassDimension hlf:P91hasUnit ?fatFreeMassUnit .
+
+   ?fatFreeDimension rdf:type hlf:HLF447FatFreeDimension .
+   ?mea hlf:P40observedDimension ?fatFreeDimension .
+   ?fatFreeDimension hlf:P90hasValue ?fatFreeValue .
+   ?fatFreeDimension hlf:P91hasUnit ?fatFreeUnit .
+
+   ?heightDimension rdf:type hlf:HLF19HeightDimension .
+   ?mea hlf:P40observedDimension ?heightDimension .
+   ?heightDimension hlf:P90hasValue ?heightValue .
+   ?heightDimension hlf:P91hasUnit ?heightUnit .
+
+   ?bodyFatDimension rdf:type hlf:HLF420BodyFatADimension .
+   ?mea hlf:P40observedDimension ?bodyFatDimension .
+   ?bodyFatDimension hlf:P90hasValue ?bodyFatValue .
+   ?bodyFatDimension hlf:P91hasUnit ?bodyFatUnit .
+
+   ?bodyFatMassDimension rdf:type hlf:HLF446BodyFatMassDimension .
+   ?mea hlf:P40observedDimension ?bodyFatMassDimension .
+   ?bodyFatMassDimension hlf:P90hasValue ?bodyFatMassValue .
+   ?bodyFatMassDimension hlf:P91hasUnit ?bodyFatMassUnit .
+
+   ?muscleMassDimension rdf:type hlf:HLF444MuscleMassDimension .
+   ?mea hlf:P40observedDimension ?muscleMassDimension .
+   ?muscleMassDimension hlf:P90hasValue ?muscleMassValue .
+   ?muscleMassDimension hlf:P91hasUnit ?muscleMassUnit .
+
+   ?skeletalMassDimension rdf:type hlf:HLF443SkeletalMuscleDimension .
+   ?mea hlf:P40observedDimension ?skeletalMassDimension .
+   ?skeletalMassDimension hlf:P90hasValue ?skeletalMassValue .
+   ?skeletalMassDimension hlf:P91hasUnit ?skeletalMassUnit .
+
+   ?skeletalMuscleMassDimension rdf:type hlf:HLF448SkeletalMuscleMassDimension .
+   ?mea hlf:P40observedDimension ?skeletalMuscleMassDimension .
+   ?skeletalMuscleMassDimension hlf:P90hasValue ?skeletalMuscleMassValue .
+   ?skeletalMuscleMassDimension hlf:P91hasUnit ?skeletalMuscleMassUnit .
+
+   ?basalMetabolicRateDimension rdf:type hlf:HLF445BasalMetabolicRateDimension .
+   ?mea hlf:P40observedDimension ?basalMetabolicRateDimension .
+   ?basalMetabolicRateDimension hlf:P90hasValue ?basalMetabolicRateValue .
+   ?basalMetabolicRateDimension hlf:P91hasUnit ?basalMetabolicRateUnit .
+}
