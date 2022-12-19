@@ -1862,7 +1862,7 @@
 .
 
 # vo2_max
-<#OxygenSaturationMeasurement> a rr:TriplesMap;
+<#ExerciseOxygenSaturationMeasurement> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;

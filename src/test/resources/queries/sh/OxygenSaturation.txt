@@ -1,0 +1,26 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix hlf: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT ?patientID ?assign ?dateTime ?mea
+        ?heartRateDimension ?heartRateValue ?heartRateUnit
+        ?pulseDimension ?pulseValue ?pulseUnit WHERE {
+   ?patient rdf:type hlf:E21Person .
+              ?patient hlf:P1isIdentifiedBy ?identifier .
+              ?identifier hlf:P3hasNote ?patientID .
+   ?ts rdf:type hlf:E52TimeSpan .
+   ?assign rdf:type hlf:HLF705OxygenSaturationAssignment .
+   ?assign hlf:P140assignedAttributeTo ?patient .
+   ?assign hlf:P4hasTimeSpan ?ts .
+   ?ts hlf:EP9effectiveDatatime ?dateTime .
+   ?assign hlf:P117includes ?mea .
+   ?mea rdf:type hlf:HLF805OxygenSaturationMeasurement .
+
+   ?pulseDimension rdf:type hlf:HLF431PulseDimension .
+   ?mea hlf:P40observedDimension ?pulseDimension .
+   ?pulseDimension hlf:P90hasValue ?pulseValue .
+   ?pulseDimension hlf:P91hasUnit ?pulseUnit .
+
+   ?heartRateDimension rdf:type hlf:HLF703HeartRateDimension .
+   ?mea hlf:P40observedDimension ?heartRateDimension .
+   ?heartRateDimension hlf:P90hasValue ?heartRateValue .
+   ?heartRateDimension hlf:P91hasUnit ?heartRateUnit .
+}

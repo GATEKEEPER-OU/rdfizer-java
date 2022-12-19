@@ -142,7 +142,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P117includes;
     rr:objectMap [
-      rr:parentTriplesMap <#OxygenSaturationMeasurement>;
+      rr:parentTriplesMap <#ExerciseOxygenSaturationMeasurement>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.derivedFrom[0].display";
