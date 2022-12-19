@@ -97,8 +97,8 @@ public class RDFoxUtils {
    * */
   public static void importData(DataStoreConnection dataStoreConnection, File data, Prefixes prefixes) {
     try (InputStream inputStream = new FileInputStream(data)) {
-      dataStoreConnection.importData(UpdateType.ADDITION, prefixes, inputStream); // rdfox-v5.x
-//      dataStoreConnection.importData(UpdateType.ADDITION, inputStream); // rdfox-v6.0
+//      dataStoreConnection.importData(UpdateType.ADDITION, prefixes, inputStream); // rdfox-v5.x
+      dataStoreConnection.importData(UpdateType.ADDITION, inputStream); // rdfox-v6.0
 
     } catch (FileNotFoundException e) {
       // @todo Message
@@ -123,8 +123,8 @@ public class RDFoxUtils {
 
     List<String> rows = new ArrayList<String>();
 
-    try (Cursor cursor = dataStoreConnection.createCursor(null, prefixes, query, Collections.emptyMap())) { // rdfox-v5.x
-//    try (Cursor cursor = dataStoreConnection.createCursor(query, Collections.emptyMap())) { // rdfox-v6.0
+//    try (Cursor cursor = dataStoreConnection.createCursor(null, prefixes, query, Collections.emptyMap())) { // rdfox-v5.x
+    try (Cursor cursor = dataStoreConnection.createCursor(query, Collections.emptyMap())) { // rdfox-v6.0
       int arity = cursor.getArity();
 
       for (long multiplicity = cursor.open(); multiplicity != 0; multiplicity = cursor.advance()) {
@@ -155,8 +155,8 @@ public class RDFoxUtils {
   public static void printQueryResults(DataStoreConnection dataStoreConnection, String query) {
     Prefixes prefixes = new Prefixes();
     prefixes.declareStandardPrefixes();
-    try (Cursor cursor = dataStoreConnection.createCursor(null, prefixes, query, Collections.emptyMap())) { // rdfox-v5.x
-//    try (Cursor cursor = dataStoreConnection.createCursor(query, Collections.emptyMap())) { // rdfox-v6.0
+//    try (Cursor cursor = dataStoreConnection.createCursor(null, prefixes, query, Collections.emptyMap())) { // rdfox-v5.x
+    try (Cursor cursor = dataStoreConnection.createCursor(query, Collections.emptyMap())) { // rdfox-v6.0
 
       int numberOfRows = 0;
       System.out.println();
