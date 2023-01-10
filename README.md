@@ -9,9 +9,25 @@ This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health 
 1. git clone https://github.ecodesamsung.com/Health-Innovation/rdfizer.git
 2. open the project IntelliJ IDEA
 3. make sure you are using Java 17.0.2 with IntelliJ IDEA: File --> Project Structure --> Project --> SDK
-4. build Project. Build --> Build Project
-5. create JAR. Build --> Build Artefact --> Rebuild
-6. rdfizer.jar is created and will appear under the project folder: out --> artifacts --> rdfizer_jar
+
+## RDFox configuration for the RDFizer-Data-Test
+1. Download RDFox 6.0 from https://www.oxfordsemantic.tech/downloads
+2. Create "rdfox" folder under rdfizer/lib
+3. Copy the files JRDFox.jar, libRDFox.dll, libRDFox.lib, libRDFox-static.lib under rdfizer/lib/rdfox
+4. Copy RDFox licence rdfizer/lib
+5. Go to File --> Project Structure --> Libraries --> click on "+" --> Java --> select rdfizer/lib/rdfox/JRDFox.java --> APPLY.
+6. Build Project with "Build --> Build Project"
+
+
+## ARTEFACT configuration with IntelliJ IDEA
+1. Go to File --> Project Structure --> Artefacts --> by clicking on the plus symbol -> JAR --> From Modules All Dependencies --> click on "Copy to the output directory and link via manifest"  --> OK --> APPLY
+2. Go to File --> Project Structure --> Artefacts --> Select "rdfizer:java" -> Pre-Processing Tab --> tick the box "Run Ant Target" --> click on ... --> selct "Bundle" --> APPLY
+3. Create JAR. "Build --> Build Artefact --> Build or rebuild"
+
+## Troubleshooting (Review of the below steps)
+5. build Project. Build --> Build Project
+6. create JAR. Build --> Build Artefact --> Rebuild
+7. rdfizer.jar is created and will appear under the project folder: out --> artifacts --> rdfizer_jar
 
 7. In case of ISSUE (e.g.; in case the rdfizer.jar is not generated, especially when the pom is modified when installing the dependencies)
 8. Run clean from ant menu (this delete the out, target, the aggregated rml file mappings folder)
