@@ -7,7 +7,6 @@ import com.ibm.fhir.model.resource.Patient;
 import com.ibm.fhir.model.type.Boolean;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
-import org.apache.commons.codec.binary.Base64;
 import org.commons.DateTimeUtils;
 import org.commons.JSONObjectUtils;
 import org.json.JSONException;
@@ -41,16 +40,12 @@ class CSSBuilder extends FHIRBaseBuilder {
 
   public static Bundle.Entry buildPatient(JSONObject patient) {
     String patientId = JSONObjectUtils.getId(patient, "patient_id");
-    String uuid = Base64.encodeBase64URLSafeString(patientId.getBytes());
+    String uuid = patientId.replace("@", "-");
     String fullUrl = BASE_URL + "/patient/" + patientId;
     return buildEntry(
       Patient.builder()
         .id(uuid)
         .identifier(
-          buildIdentifier(
-            BASE_URL + "/identifier",
-            uuid
-          ),
           buildIdentifier(
             BASE_URL + "/identifier",
             patientId
