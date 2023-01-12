@@ -19,7 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
+ * @author Carlo Allocca (c.allocca@samsung.com)
  */
+
+
 class RDFizerTest {
 
   @ParameterizedTest
@@ -95,11 +98,11 @@ class RDFizerTest {
     // -------------------------------------------------------------------------
 
     // Patient
-    "xxx, keep, CSS, PatientWithAge, '0000,0001,0002'",
+//    "xxx, keep, CSS, PatientWithAge, '0000,0001,0002'",
 
     // Observations
-//    "xxx, keep, CSS, .., all",
-//    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0020,0021,0040,0041,...'",
+//   "xxx, keep, CSS, .., all",
+//    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0040,0041,0044,4001'",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0020,0021,0040,0041,...'",
 
     //
@@ -128,6 +131,9 @@ class RDFizerTest {
    *   - use 'all' label is discoraged into selective tests, because it will produce
    *     many false-positive warnings, make it hard to debug
    * */
+  /*
+  use this method to test if each rml rule is correctly written w.r.t HeLiFit ontology.
+   */
   void test_transform_RawToRDF(String expectedDigest, String policy, String sourceType, String datasetName, String modules) {
     String datasetPath = TestUtils.getDatasetPath(sourceType, datasetName);
     File datasetFile = TestUtils.loadResource(datasetPath);
