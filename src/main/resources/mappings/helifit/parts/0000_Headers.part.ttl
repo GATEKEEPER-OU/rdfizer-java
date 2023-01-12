@@ -4,4 +4,5 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix doid: <http://purl.obolibrary.org/obo/>.
 @prefix ho: <https://opensource.samsung.com/projects/helifit/>.
+@prefix helios: <https://perkapp.fbk.eu/helis/ontology/core/>.
 @base <https://opensource.samsung.com/projects/helifit>.
