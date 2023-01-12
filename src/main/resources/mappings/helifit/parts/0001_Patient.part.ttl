@@ -24,6 +24,17 @@
        ];
      ];
   ];
+
+   rr:predicateObjectMap [
+     rr:predicate ho:P140wasAttributedBy;
+     rr:objectMap [
+       rr:parentTriplesMap <#PatientAgeAssignement>;
+       rr:joinCondition [
+         rr:child "resource.id";
+         rr:parent "resource.subject.display";
+       ];
+     ];
+  ];
 .
 
 # /Patient

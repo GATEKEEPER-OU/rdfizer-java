@@ -33,6 +33,17 @@
        ];
      ];
   ];
+
+   rr:predicateObjectMap [
+     rr:predicate ho:P1isIdentifiedBy1;
+     rr:objectMap [
+       rr:parentTriplesMap <#PatientAgeAssignement>;
+       rr:joinCondition [
+         rr:child "resource.id";
+         rr:parent "resource.subject.display";
+       ];
+     ];
+  ];
 .
 
 # /Patient
@@ -103,6 +114,53 @@
 .
 
 # /PatientIdentifier
+
+# ############################################################################ #
+#                                PatientAgeAssignement
+# ############################################################################ #
+
+# PatientAgeAssignement
+<#PatientAgeAssignement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'patient_age')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF152/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:class ho:HLF152AgeAssignment;
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#PatientAgeMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#PatientAgeMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'patient_age')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF200/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF200AgeMeasurement;
+  ];
+.
+
+# /PatientAge
 
 # ############################################################################ #
 #                           ComponentIdentifier
@@ -3024,6 +3082,13 @@
     rr:class ho:HLF240MealActivity;
   ];
 
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "resource.code.coding[0].display";
+    ]
+  ];
+
   #
   # Metadata
   #
@@ -3318,6 +3383,46 @@
         rr:parent "resourceId";
       ];
     ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosTransFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+.
+
+<#HeliosTransFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'transfat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/TransFat/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:TransFat;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
   ];
 .
 
