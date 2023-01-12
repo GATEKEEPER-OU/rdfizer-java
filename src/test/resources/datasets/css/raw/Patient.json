@@ -1,0 +1,12 @@
+{
+  "clinical_examinations": [
+    {
+      "examination_id": "1234asdf",
+      "patient": {
+        "patient_id": "carloallocca@yahoo.it"
+      },
+      "patient_age": 29,
+      "date": "2021-03-30"
+    }
+  ]
+}

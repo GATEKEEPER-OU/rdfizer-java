@@ -98,8 +98,8 @@ class RDFizerTest {
     // -------------------------------------------------------------------------
 
     // Patient
-//    "xxx, keep, CSS, PatientWithAge, '0000,0001,0002'",
-
+//    "xxx, keep, CSS, Patient, '0000,0001,0002'",
+      "xxx, keep, CSS, PatientWithAge, '0000,0001,0002,...'",
     // Observations
 //   "xxx, keep, CSS, .., all",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0040,0041,0044,4001'",
