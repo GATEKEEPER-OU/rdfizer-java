@@ -105,7 +105,7 @@ public class KnowledgeGraphTest {
     } finally {
       if (policy.equals("keep")) {
         System.out.println("triplesFile >>> " + triplesFile);
-        System.out.println("outputFile >>> " + outputFile);
+        System.out.println("Query Results >>> " + outputFile);
       } else if (policy.equals("clean")) {
         ResourceUtils.clean(triplesFile);
         ResourceUtils.clean(outputFile);

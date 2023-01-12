@@ -7,7 +7,6 @@ import com.ibm.fhir.model.resource.Patient;
 import com.ibm.fhir.model.type.Boolean;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
-import org.apache.commons.codec.binary.Base64;
 import org.commons.DateTimeUtils;
 import org.commons.JSONObjectUtils;
 import org.json.JSONException;
@@ -41,16 +40,12 @@ class CSSBuilder extends FHIRBaseBuilder {
 
   public static Bundle.Entry buildPatient(JSONObject patient) {
     String patientId = JSONObjectUtils.getId(patient, "patient_id");
-    String uuid = Base64.encodeBase64URLSafeString(patientId.getBytes());
+    String uuid = patientId.replace("@", "-");
     String fullUrl = BASE_URL + "/patient/" + patientId;
     return buildEntry(
       Patient.builder()
         .id(uuid)
         .identifier(
-          buildIdentifier(
-            BASE_URL + "/identifier",
-            uuid
-          ),
           buildIdentifier(
             BASE_URL + "/identifier",
             patientId
@@ -210,15 +205,15 @@ class CSSBuilder extends FHIRBaseBuilder {
         JSONObjectUtils.getId(examination, "examination_id") + "-TotalCholesterol",
         buildCodeableConcept(buildCoding(
           LOINC_SYSTEM,
-          "2095-8",
-          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+          "2093-3",
+          "Cholesterol [Mass/volume] in Serum or Plasma"
         )),
         null,
         buildQuantity(
-          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          Decimal.of(examination.getBigDecimal("total_cholesterol")),
           "milligram per deciliter",
           LOINC_SYSTEM,
-          examination.getString("TC_HDL_unit")
+          examination.getString("total_cholesterol_unit")
         ),
         patientEntry,
         patientAgeEntry,

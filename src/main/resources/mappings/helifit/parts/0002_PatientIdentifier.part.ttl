@@ -58,7 +58,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
-      rml:reference "resource.identifier[1].value";
+      rml:reference "resource.identifier[0].systemDomainName";
     ]
   ];
 .

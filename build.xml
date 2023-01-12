@@ -7,6 +7,8 @@
   <property name="ant_scripts"       value="${src}/org/apache/ant/scripts" />
   <property name="ontology_template" value="${src_resources}/mappings/helifit/helifit.template.ttl" />
   <property name="target_classes"    value="target/classes" />
+  <property name="artifacts_dir"     value="out/artifacts" />
+  <property name="deploy_dir"        value="../matkg/lib/rdfizer" />
 
   <target name="bundle" depends="bundle-helifit" />
 
@@ -35,6 +37,14 @@
 
   <target name="clean-artifacts">
     <delete dir="out/artifacts" />
+  </target>
+
+  <target name="deploy">
+    <delete dir="${deploy_dir}" failonerror="false"/>
+    <mkdir dir="${deploy_dir}" />
+    <copy todir="${deploy_dir}">
+      <fileset dir="${artifacts_dir}/rdfizer_jar" includes="**" />
+    </copy>
   </target>
 
 </project>
