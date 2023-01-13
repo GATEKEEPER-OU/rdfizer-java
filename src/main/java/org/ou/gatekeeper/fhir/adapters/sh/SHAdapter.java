@@ -257,24 +257,24 @@ public class SHAdapter implements FHIRAdapter {
 
   private static void collectWeightComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
-    // weight
-    String weight = JSONObjectUtils.getElementValue(elementValues, "weight");
-    if (!StringUtils.isBlank(weight)) {
-      Observation.Component height = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
-          LOINC_SYSTEM,
-          "29463-7",
-          "Body weight"
-        )),
-        FHIRBaseBuilder.buildQuantity(
-          Decimal.of(weight),
-          "kilogram",
-          UNITSOFM_SYSTEM,
-          "Kg"
-        )
-      );
-      components.add(height);
-    }
+    // weight // @note We moved this to the main observation
+//    String weight = JSONObjectUtils.getElementValue(elementValues, "weight");
+//    if (!StringUtils.isBlank(weight)) {
+//      Observation.Component height = buildObservationComponent(
+//        buildCodeableConcept(buildCoding(
+//          LOINC_SYSTEM,
+//          "29463-7",
+//          "Body weight"
+//        )),
+//        FHIRBaseBuilder.buildQuantity(
+//          Decimal.of(weight),
+//          "kilogram",
+//          UNITSOFM_SYSTEM,
+//          "Kg"
+//        )
+//      );
+//      components.add(height);
+//    }
     //
     // body_fat
     String bodyFatValue = JSONObjectUtils.getElementValue(elementValues, "body_fat");

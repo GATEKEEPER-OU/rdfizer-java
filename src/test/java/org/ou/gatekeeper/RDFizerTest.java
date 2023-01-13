@@ -102,6 +102,7 @@ class RDFizerTest {
 //      "xxx, keep, CSS, PatientWithAge, '0000,0001,0002,0003,0044'",
     // Observations
 //   "xxx, keep, CSS, .., all",
+//      "xxx, keep, CSS, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
 //    "xxx, keep, CSS, Weight, '0000,0001,0002,0003,0040,0041,0044,1002'",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0003,0040,0041,0044,4001'",
 //          "xxx, keep, CSS, TotalCholesterol, '0000,0001,0002,0003,0040,0041,0044,4002'",
@@ -135,7 +136,8 @@ class RDFizerTest {
     // Patient
 //    "xxx, keep, SH, Patient, '0000,0001'",
 //    "xxx, keep, SH, Patient, '0000,0001,0002'",
-    "xxx, keep, SH, BodyWeight, '0000,0001,0002,0003,0040,0041,0044,1002'",
+      "xxx, keep, SH, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
+//    "xxx, keep, SH, BodyWeight, '0000,0001,0002,0003,0040,0041,0044,1002'",
 
 
     // Observations

@@ -61,6 +61,26 @@ class SHBuilder extends FHIRBaseBuilder {
   public static CodeableConcept getCodes(JSONObject dataElement) {
     String typeId = dataElement.getString("type_id");
     switch (typeId) {
+      case "height":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "8302-2",
+              "Body height"
+            )
+          )
+          .build();
+      case "weight":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "29463-7",
+              "Body weight"
+            )
+          )
+          .build();
       case "bloodPressure":
         return CodeableConcept.builder()
           .coding(
