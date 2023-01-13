@@ -2,8 +2,7 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix hlf: <https://opensource.samsung.com/projects/helifit/>
 SELECT DISTINCT ?patientID ?assign ?dateTime ?mea
         ?diastolicDimension ?diastolicValue ?diastolicUnit ?diastolicCodeValue
-        ?systolicDimension ?systolicValue ?systolicUnit ?systolicCodeValue
-        ?pulseDimension ?pulseValue ?pulseUnit WHERE {
+        ?systolicDimension ?systolicValue ?systolicUnit ?systolicCodeValue WHERE {
    ?patient rdf:type hlf:E21Person .
               ?patient hlf:P1isIdentifiedBy ?identifier .
               ?identifier hlf:P3hasNote ?patientID .
@@ -32,10 +31,5 @@ SELECT DISTINCT ?patientID ?assign ?dateTime ?mea
    ?systolicCodeIdentifier rdf:type hlf:E42Identifier .
    ?systolicDimension hlf:P1isIdentifiedBy ?systolicCodeIdentifier .
    ?systolicCodeIdentifier hlf:P3hasNote ?systolicCodeValue .
-
-   ?pulseDimension rdf:type hlf:HLF431PulseDimension .
-   ?mea hlf:P40observedDimension ?pulseDimension .
-   ?pulseDimension hlf:P90hasValue ?pulseValue .
-   ?pulseDimension hlf:P91hasUnit ?pulseUnit .
 
 }

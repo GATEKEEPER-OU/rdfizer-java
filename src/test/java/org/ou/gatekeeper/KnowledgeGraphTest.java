@@ -52,6 +52,8 @@ public class KnowledgeGraphTest {
     // -------------------------------------------------------------------------
 //    "xxx, keep, CSS, GlycosilatedEmoglobin",
 //    "xxx, keep, CSS, BloodPressure",
+//    "xxx, keep, CSS, BodyWeight",
+    "xxx, keep, CSS, GlycosilatedEmoglobin",
 
     //
     // Samsung Health
@@ -70,7 +72,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, WaterIntake",
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
-    "xxx, keep, SH, BloodPressure",
+//    "xxx, keep, SH, BloodPressure",
 //    "xxx, keep, SH, OxygenSaturation",
   })
   void test_knowledgeGraph(
