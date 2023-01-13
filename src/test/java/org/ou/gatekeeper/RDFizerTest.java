@@ -119,12 +119,15 @@ class RDFizerTest {
 //          "xxx, keep, CSS, EstimatedGlomerularFiltrationRate, '0000,0001,0002,0003,0040,0041,0044,4013'",
 //          "xxx, keep, CSS, Nitrites, '0000,0001,0002,0003,0040,0041,0044,4014'",
 
-//          "xxx, keep, CSS, HepaticSteatosis, '0000,0001,0002,0003,0040,0041,0044,5001'",
-//          "xxx, keep, CSS, Hypertension, '0000,0001,0002,0003,0040,0041,0044,5002'",
-//          "xxx, keep, CSS, HeartFailure, '0000,0001,0002,0003,0040,0041,0044,5003'",
-//          "xxx, keep, CSS, BPCO, '0000,0001,0002,0003,0040,0041,0044,5004'",
-//          "xxx, keep, CSS, ChronicKidneyDisease, '0000,0001,0002,0003,0040,0041,0044,5005'",
-//          "xxx, keep, CSS, IschemicHeartDisease, '0000,0001,0002,0003,0040,0041,0044,5006'",
+//          "xxx, keep, CSS, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
+
+//          "xxx, keep, CSS, HepaticSteatosis, '0000,0001,0002,0003,0040,0042,0044,5001'",
+//          "xxx, keep, CSS, Hypertension, '0000,0001,0002,0003,0040,0042,0044,5002'",
+//          "xxx, keep, CSS, HeartFailure, '0000,0001,0002,0003,0040,0042,0044,5003'",
+//          "xxx, keep, CSS, BPCO, '0000,0001,0002,0003,0040,0042,0044,5004'",
+//          "xxx, keep, CSS, ChronicKidneyDisease, '0000,0001,0002,0003,0040,0042,0044,5005'",
+//          "xxx, keep, CSS, IschemicHeartDisease, '0000,0001,0002,0003,0040,0042,0044,5006'",
+
 
 
 
@@ -136,9 +139,9 @@ class RDFizerTest {
     // Patient
 //    "xxx, keep, SH, Patient, '0000,0001'",
 //    "xxx, keep, SH, Patient, '0000,0001,0002'",
-      "xxx, keep, SH, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
-//    "xxx, keep, SH, BodyWeight, '0000,0001,0002,0003,0040,0041,0044,1002'",
-
+//      "xxx, keep, SH, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
+//    "xxx, keep, SH, BodyWeight, '0000,0001,0002,0003,0010,0040, 0041,0044,1002'",
+          "xxx, keep, SH, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
 
     // Observations
 //    "xxx, keep, SH, FloorsClimbed,  '0000,0001,0002,0003,0020,0021,0040,0041,2101'",

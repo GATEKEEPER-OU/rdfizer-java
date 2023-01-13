@@ -51,6 +51,7 @@ public class KnowledgeGraphTest {
     // CSS
     // -------------------------------------------------------------------------
 //    "xxx, keep, CSS, GlycosilatedEmoglobin",
+    "xxx, keep, CSS, BloodPressure",
 
     //
     // Samsung Health
@@ -70,7 +71,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
 //    "xxx, keep, SH, BloodPressure",
-    "xxx, keep, SH, OxygenSaturation",
+//    "xxx, keep, SH, OxygenSaturation",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName
