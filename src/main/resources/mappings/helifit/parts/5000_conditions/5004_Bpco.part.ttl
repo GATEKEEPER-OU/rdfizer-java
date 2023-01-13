@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -23,8 +23,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -35,7 +35,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -45,8 +45,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -60,8 +60,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#BpcoCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -86,7 +86,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -98,8 +98,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -110,7 +110,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -120,8 +120,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -134,8 +134,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#BpcoDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];

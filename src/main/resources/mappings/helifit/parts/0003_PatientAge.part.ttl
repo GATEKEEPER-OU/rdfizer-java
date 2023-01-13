@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF152/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF152/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF152AgeAssignment;
   ];
 

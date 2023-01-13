@@ -262,9 +262,9 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(weight)) {
       Observation.Component height = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "weight",
-          "Weight"
+          LOINC_SYSTEM,
+          "29463-7",
+          "Body weight"
         )),
         FHIRBaseBuilder.buildQuantity(
           Decimal.of(weight),

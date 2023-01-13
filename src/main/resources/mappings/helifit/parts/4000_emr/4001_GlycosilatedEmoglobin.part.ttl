@@ -11,7 +11,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF500/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF500/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF500GlycosilatedEmoglobinAssignment;
   ];
 
@@ -23,8 +23,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -35,7 +35,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -45,8 +45,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -59,8 +59,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -75,7 +75,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF300/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF300/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF300GlycosilatedEmoglobinMeasurement;
   ];
 
@@ -87,8 +87,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -99,7 +99,7 @@
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
         rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -109,8 +109,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -123,8 +123,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -139,7 +139,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF400/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF400/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF400GlycosilatedEmoglobinDimension;
   ];
 

@@ -7,6 +7,7 @@ import com.ibm.fhir.model.resource.Patient;
 import com.ibm.fhir.model.type.Boolean;
 import com.ibm.fhir.model.type.*;
 import com.ibm.fhir.model.type.code.ObservationStatus;
+import org.apache.commons.codec.binary.Base64;
 import org.commons.DateTimeUtils;
 import org.commons.JSONObjectUtils;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
 
 import java.lang.String;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -61,49 +63,54 @@ class CSSBuilder extends FHIRBaseBuilder {
   //
   // Observations
   //
-
   public static Bundle.Entry buildObservationAge(
-    JSONObject examination,
-    Bundle.Entry patientEntry
+          JSONObject examination,
+          Bundle.Entry patientEntry
   ) {
-    String uuid = patientEntry.getResource().getId() + "-Age";
+    String patientId = patientEntry.getResource().getId();
+    String date = examination.getString("date");
+    BigDecimal age = examination.getBigDecimal("patient_age");
+    String uuid = Base64.encodeBase64URLSafeString(
+            (patientId + date + age.toString()).getBytes()
+    );
     return buildEntry(
-      Observation.builder()
-        .id(uuid)
-        .status(ObservationStatus.FINAL)
-        .identifier(
-          buildIdentifier(
-            BASE_URL + "/identifier",
-            "Observation/" + uuid
-          )
-        )
-        .code(
-          buildCodeableConcept(buildCoding(
-            LOCAL_SYSTEM,
-            "patient_age",
-            "Patient age"
-          ))
-        )
-        .effective(
-          buildDate(examination.getString("date"))
-        )
-        .value(
-          buildQuantity(
-            Decimal.of(examination.getBigDecimal("patient_age")),
-            "year",
-            UNITSOFM_SYSTEM,
-            "a_j" // TODO check here https://ucum.org/ucum#para-29
-          )
-        )
-        .subject(
-          buildReference(patientEntry)
-        )
-        .build(),
-      FHIR_OBSERVATION_TYPE,
-      null,
-      buildFullUrl(BASE_URL + "/observation/" + uuid)
+            Observation.builder()
+                    .id(uuid)
+                    .status(ObservationStatus.FINAL)
+                    .identifier(
+                            buildIdentifier(
+                                    BASE_URL + "/identifier",
+                                    "Observation/" + uuid
+                            )
+                    )
+                    .code(
+                            buildCodeableConcept(buildCoding(
+                                    LOCAL_SYSTEM,
+                                    "patient_age",
+                                    "Patient age"
+                            ))
+                    )
+                    .effective(
+                            buildDate(examination.getString("date"))
+                    )
+                    .value(
+                            buildQuantity(
+                                    Decimal.of(examination.getBigDecimal("patient_age")),
+                                    "year",
+                                    UNITSOFM_SYSTEM,
+                                    "a_j" // TODO check here https://ucum.org/ucum#para-29
+                            )
+                    )
+                    .subject(
+                            buildReference(patientEntry)
+                    )
+                    .build(),
+            FHIR_OBSERVATION_TYPE,
+            null,
+            buildFullUrl(BASE_URL + "/observation/" + uuid)
     );
   }
+
 
   public static Bundle.Entry buildObservationBodyHeight(
     JSONObject examination,
@@ -235,15 +242,15 @@ class CSSBuilder extends FHIRBaseBuilder {
         JSONObjectUtils.getId(examination, "examination_id") + "-HDL",
         buildCodeableConcept(buildCoding(
           LOINC_SYSTEM,
-          "2095-8",
-          "Cholesterol in HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+          "2085-9",
+          "Cholesterol in HDL [Mass/volume] in Serum or Plasma"
         )),
         null,
         buildQuantity(
-          Decimal.of(examination.getBigDecimal("TC_HDL")),
+          Decimal.of(examination.getBigDecimal("HDL")),
           "milligram per deciliter",
           LOINC_SYSTEM,
-          examination.getString("TC_HDL_unit")
+          examination.getString("HDL_unit")
         ),
         patientEntry,
         patientAgeEntry,
