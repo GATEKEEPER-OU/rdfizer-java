@@ -60,8 +60,9 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, CSS, Triglycerides",
 //    "xxx, keep, CSS, SerumCreatinine",
 //    "xxx, keep, CSS, AlbuminuriaCreatininuriaRatio",
-    "xxx, keep, CSS, AlanineAminoTransferase",
+//    "xxx, keep, CSS, AlanineAminoTransferase",
 //    "xxx, keep, CSS, AspartateAminoTransferase",
+    "xxx, keep, CSS, GlutamylTransferase",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
