@@ -34,7 +34,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -109,7 +109,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -151,7 +151,7 @@
 
   rr:subjectMap [
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
-    rr:class doid:DOID_9452;
+    rr:class doid:DOID_3393;
   ];
 .
 
