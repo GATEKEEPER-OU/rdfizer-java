@@ -12276,7 +12276,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -12285,7 +12285,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -12340,7 +12340,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -12349,7 +12349,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
