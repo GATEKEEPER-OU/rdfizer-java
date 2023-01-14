@@ -55,8 +55,8 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, CSS, BodyWeight",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin",
 //    "xxx, keep, CSS, TotalCholesterol",
-    "xxx, keep, CSS, HighDensityLipoprotein",
-
+//    "xxx, keep, CSS, HighDensityLipoprotein",
+    "xxx, keep, CSS, LowDensityLipoprotein",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
