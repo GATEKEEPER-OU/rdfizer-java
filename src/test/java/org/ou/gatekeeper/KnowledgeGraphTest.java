@@ -69,7 +69,8 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, CSS, Nitrites",
 //    "xxx, keep, CSS, HepaticSteatosis",
 //    "xxx, keep, CSS, Hypertension",
-    "xxx, keep, CSS, HeartFailure",
+//    "xxx, keep, CSS, HeartFailure",
+    "xxx, keep, CSS, BPCO",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
