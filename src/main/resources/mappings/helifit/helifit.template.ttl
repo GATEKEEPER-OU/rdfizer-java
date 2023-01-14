@@ -12758,7 +12758,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -12833,7 +12833,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];

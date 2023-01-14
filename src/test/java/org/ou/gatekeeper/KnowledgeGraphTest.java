@@ -67,7 +67,8 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, CSS, UricAcid",
 //    "xxx, keep, CSS, EstimatedGlomerularFiltrationRate",
 //    "xxx, keep, CSS, Nitrites",
-    "xxx, keep, CSS, HepaticSteatosis",
+//    "xxx, keep, CSS, HepaticSteatosis",
+    "xxx, keep, CSS, Hypertension",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
