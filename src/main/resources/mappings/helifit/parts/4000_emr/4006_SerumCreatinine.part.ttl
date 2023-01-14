@@ -7,7 +7,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
@@ -34,7 +34,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -43,7 +43,7 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -71,7 +71,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
@@ -98,7 +98,7 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
+        rr:child "resource.subject.display";
         rr:parent "resource.id";
       ];
     ];
@@ -135,7 +135,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
