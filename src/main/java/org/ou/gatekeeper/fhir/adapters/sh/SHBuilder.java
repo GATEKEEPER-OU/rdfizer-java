@@ -20,6 +20,8 @@ import java.util.TimeZone;
 
 class SHBuilder extends FHIRBaseBuilder {
 
+  private static String pilotId;
+
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
 
@@ -230,6 +232,7 @@ class SHBuilder extends FHIRBaseBuilder {
     Quantity value,
     Bundle.Entry patientEntry
   ) {
+    pilotId = dataElement.getString("pilot_id"); // WORKAROUND
     String       uuid = dataElement.getString("data_uuid");
     String   deviceId = dataElement.getString("device_id");
     String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
@@ -459,15 +462,38 @@ class SHBuilder extends FHIRBaseBuilder {
   private static String dateTimeTranslator(String timestamp, String zoneOffset){
     TimeZone timeZone;
     // @see https://www.timeanddate.com/time/map/
-    switch (zoneOffset) {
-      case "UTC+0100":
+//    switch (zoneOffset) {
+//      case "UTC+0100":
+//        timeZone = TimeZone.getTimeZone("Europe/Rome");
+//        break;
+//      case "UTC+0200":
+//        timeZone = TimeZone.getTimeZone("Europe/Athens");
+//        break;
+//      default:
+//        timeZone = TimeZone.getTimeZone("UTC");
+//    }
+
+    // @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    switch (pilotId) { // WORKAROUND
+      case "UK":
+        timeZone = TimeZone.getTimeZone("Europe/London");
+        break;
+      case "Spain":
+      case "SpainBC":
+        timeZone = TimeZone.getTimeZone("Europe/Madrid");
+        break;
+      case "Puglia":
         timeZone = TimeZone.getTimeZone("Europe/Rome");
         break;
-      case "UTC+0200":
+      case "Saxony":
+        timeZone = TimeZone.getTimeZone("Europe/Berlin");
+        break;
+      case "Greece":
         timeZone = TimeZone.getTimeZone("Europe/Athens");
         break;
       default:
-        timeZone = TimeZone.getTimeZone("UTC");
+        throw new IllegalArgumentException("Timezone not allowed");
+//        timeZone = TimeZone.getTimeZone("UTC");
     }
     Long lTimestamp = Long.parseLong(timestamp);
     String pattern = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern();
