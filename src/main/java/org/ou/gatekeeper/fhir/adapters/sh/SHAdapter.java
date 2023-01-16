@@ -281,7 +281,7 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(bodyFatValue)) {
       Observation.Component bodyFat = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
+          LOINC_SYSTEM,
           "41982-0",
           "Body Fat"
         )),
@@ -300,7 +300,7 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(bodyFatMassValue)) {
       Observation.Component bodyFatMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
+                LOINC_SYSTEM,
           "73708-0",
           "Body fat mass"
         )),
@@ -319,7 +319,7 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(muscleMassValue)) {
       Observation.Component muscleMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
+                LOINC_SYSTEM,
           "73964-9",
           "Muscle mass"
         )),
@@ -376,7 +376,7 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(basalMetabolicRateValue)) {
       Observation.Component basalMetabolicRate = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
+                LOINC_SYSTEM,
           "50042-1",
           "Basal metabolic rate"
         )),
@@ -433,7 +433,7 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(totalBodyWaterValue)) {
       Observation.Component totalBodyWater = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
+                LOINC_SYSTEM,
           "73706-4",
           "Total body water"
         )),
