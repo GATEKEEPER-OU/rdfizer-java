@@ -191,6 +191,20 @@
   ];
 
   #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "componentId";
+        rr:parent "componentId";
+      ];
+    ];
+  ];
+
+  #
   # Data
   #
   rr:predicateObjectMap [
@@ -218,6 +232,20 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF32/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF32SystolicPressureDimension;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "componentId";
+        rr:parent "componentId";
+      ];
+    ];
   ];
 
   #

@@ -19,8 +19,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ComponentIdentifierType>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "componentId";
+        rr:parent "componentId";
       ];
     ];
   ];

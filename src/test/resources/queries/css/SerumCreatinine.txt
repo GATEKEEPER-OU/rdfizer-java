@@ -1,0 +1,19 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix helifit: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT ?patientID ?value  ?unit ?datetime  WHERE {
+  ?patient rdf:type helifit:E21Person .
+  ?patient helifit:P1isIdentifiedBy ?identifier .
+  ?identifier helifit:P3hasNote ?patientID .
+  ?eventAss rdf:type helifit:HLF505SerumCreatinineAssignment .
+  ?eventAss helifit:P140assignedAttributeTo ?patient .
+  ?eventAss helifit:P4hasTimeSpan  ?timespan .
+  ?timespan rdf:type helifit:E52TimeSpan .
+  ?timespan helifit:EP9effectiveDatatime ?datetime .
+  ?eventAss helifit:P141assigned ?eventMeas .
+  ?eventMeas rdf:type helifit:HLF305SerumCreatinineMeasurement .
+  ?eventMeas helifit:P40observedDimension ?dim .
+  ?dim rdf:type helifit:HLF423SerumCreatinineDimension  .
+  ?dim helifit:P90hasValue ?value .
+  ?dim helifit:P91hasUnit ?unit .
+}
+ORDER BY  DESC(?datetime)

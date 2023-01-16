@@ -51,7 +51,28 @@ public class KnowledgeGraphTest {
     // CSS
     // -------------------------------------------------------------------------
 //    "xxx, keep, CSS, GlycosilatedEmoglobin",
-
+//    "xxx, keep, CSS, BloodPressure",
+//    "xxx, keep, CSS, BodyWeight",
+//    "xxx, keep, CSS, GlycosilatedEmoglobin",
+//    "xxx, keep, CSS, TotalCholesterol",
+//    "xxx, keep, CSS, HighDensityLipoprotein",
+//    "xxx, keep, CSS, LowDensityLipoprotein",
+//    "xxx, keep, CSS, Triglycerides",
+//    "xxx, keep, CSS, SerumCreatinine",
+//    "xxx, keep, CSS, AlbuminuriaCreatininuriaRatio",
+//    "xxx, keep, CSS, AlanineAminoTransferase",
+//    "xxx, keep, CSS, AspartateAminoTransferase",
+//    "xxx, keep, CSS, GlutamylTransferase",
+//    "xxx, keep, CSS, AlkalinePhosphatase",
+//    "xxx, keep, CSS, UricAcid",
+//    "xxx, keep, CSS, EstimatedGlomerularFiltrationRate",
+//    "xxx, keep, CSS, Nitrites",
+//    "xxx, keep, CSS, HepaticSteatosis",
+//    "xxx, keep, CSS, Hypertension",
+//    "xxx, keep, CSS, HeartFailure",
+//    "xxx, keep, CSS, BPCO",
+//    "xxx, keep, CSS, ChronicKidneyDisease",
+//   "xxx, keep, CSS, IschemicHeartDisease",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
@@ -59,7 +80,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, StepDailyTrend",
 //    "xxx, keep, SH, HeartRate",
 //    "xxx, keep, SH, Sleep",
-//    "xxx, keep, SH, SleepStage",
+    "xxx, keep, SH, SleepStage",
 //    "xxx, keep, SH, Walking",
 //    "xxx, keep, SH, Cycling",
 //    "xxx, keep, SH, Running",
@@ -70,7 +91,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, CaffeineIntake",
 //    "xxx, keep, SH, BloodGlucose",
 //    "xxx, keep, SH, BloodPressure",
-    "xxx, keep, SH, OxygenSaturation",
+//    "xxx, keep, SH, OxygenSaturation",
   })
   void test_knowledgeGraph(
     String expectedDigest, String policy, String sourceType, String datasetName
@@ -105,7 +126,7 @@ public class KnowledgeGraphTest {
     } finally {
       if (policy.equals("keep")) {
         System.out.println("triplesFile >>> " + triplesFile);
-        System.out.println("outputFile >>> " + outputFile);
+        System.out.println("Query Results >>> " + outputFile);
       } else if (policy.equals("clean")) {
         ResourceUtils.clean(triplesFile);
         ResourceUtils.clean(outputFile);

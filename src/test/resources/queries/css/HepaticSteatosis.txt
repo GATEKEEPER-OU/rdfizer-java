@@ -1,0 +1,22 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix helifit: <https://opensource.samsung.com/projects/helifit/>
+SELECT DISTINCT ?patientID ?disease ?datetime ?isPresent WHERE {
+
+  ?patient rdf:type helifit:E21Person .
+  ?patient helifit:P1isIdentifiedBy ?identifier .
+  ?identifier helifit:P3hasNote ?patientID .
+
+  ?eventAss rdf:type helifit:HLF600DiseaseAssignment .
+  ?eventAss helifit:P140assignedAttributeTo ?patient .
+
+  ?eventAss helifit:P4hasTimeSpan  ?timespan .
+  ?timespan rdf:type helifit:E52TimeSpan .
+  ?timespan helifit:EP9effectiveDatatime ?datetime .
+
+  ?eventAss helifit:EP10assignedPresence ?isPresent .
+  ?eventAss helifit:P140assignedAttributeTo ?diseaseCourse .
+  ?diseaseCourse rdf:type helifit:HLF50DiseaseCourse .
+
+  ?diseaseCourse helifit:EP6realizes ?disease .
+  FILTER (?disease = <http://purl.obolibrary.org/obo/DOID_9452>)
+}

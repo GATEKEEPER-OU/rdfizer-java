@@ -65,16 +65,16 @@
   #
   # Metadata
   #
-  rr:predicateObjectMap [
-    rr:predicate ho:P14carriedOutBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.display";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P14carriedOutBy;
+  #  rr:objectMap [
+  #    rr:parentTriplesMap <#Patient>;
+  #    rr:joinCondition [
+  #      rr:child "resource.subject.display";
+  #      rr:parent "resource.id";
+  #    ];
+  #  ];
+  #];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;

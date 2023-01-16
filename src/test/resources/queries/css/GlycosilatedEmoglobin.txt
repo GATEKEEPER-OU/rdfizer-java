@@ -1,0 +1,23 @@
+prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix helifit: <https://opensource.samsung.com/projects/helifit/>
+
+SELECT DISTINCT  ?patientID ?glycemoglobvalue ?unit ?datetime  WHERE {
+  ?patient rdf:type helifit:E21Person .
+  ?patient helifit:P1isIdentifiedBy ?identifier .
+  ?identifier helifit:P3hasNote ?patientID .
+
+  ?eventAss     rdf:type                    helifit:HLF500GlycosilatedEmoglobinAssignment .
+  ?eventAss helifit:P140assignedAttributeTo ?patient .
+
+  ?timespan     rdf:type                 helifit:E52TimeSpan .
+  ?eventAss helifit:P4hasTimeSpan        ?timespan .
+  ?timespan helifit:EP9effectiveDatatime ?datetime .
+
+  ?eventMeas     rdf:type                 helifit:HLF300GlycosilatedEmoglobinMeasurement .
+  ?eventAss  helifit:P141assigned         ?eventMeas .
+  ?eventMeas helifit:P40observedDimension ?dim .
+
+  ?dim           rdf:type                 helifit:HLF400GlycosilatedEmoglobinDimension .
+  ?dim       helifit:P90hasValue          ?glycemoglobvalue .
+  ?dim       helifit:P91hasUnit           ?unit .
+}

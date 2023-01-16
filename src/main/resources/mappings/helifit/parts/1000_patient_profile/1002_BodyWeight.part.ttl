@@ -7,7 +7,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [
@@ -71,7 +71,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [
@@ -233,7 +233,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'total_body_water')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73706-4')]"
   ];
 
   rr:subjectMap [
@@ -263,7 +263,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'fat_free_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'fat_free_mass')]"
   ];
 
   rr:subjectMap [
@@ -293,7 +293,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'fat_free')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'fat_free')]"
   ];
 
   rr:subjectMap [
@@ -323,7 +323,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'basal_metabolic_rate')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '50042-1')]"
   ];
 
   rr:subjectMap [
@@ -353,7 +353,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle_mass')]"
   ];
 
   rr:subjectMap [
@@ -383,7 +383,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle')]"
   ];
 
   rr:subjectMap [
@@ -413,7 +413,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'muscle_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73964-9')]"
   ];
 
   rr:subjectMap [
@@ -443,7 +443,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'body_fat')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '41982-0')]"
   ];
 
   rr:subjectMap [
@@ -473,7 +473,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'body_fat_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73708-0')]"
   ];
 
   rr:subjectMap [
@@ -503,7 +503,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'height')]"
   ];
 
   rr:subjectMap [
@@ -533,7 +533,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [

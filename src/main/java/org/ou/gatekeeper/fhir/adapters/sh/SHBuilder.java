@@ -63,6 +63,26 @@ class SHBuilder extends FHIRBaseBuilder {
   public static CodeableConcept getCodes(JSONObject dataElement) {
     String typeId = dataElement.getString("type_id");
     switch (typeId) {
+      case "height":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "8302-2",
+              "Body height"
+            )
+          )
+          .build();
+      case "weight":
+        return CodeableConcept.builder()
+          .coding(
+            buildCoding(
+              LOINC_SYSTEM,
+              "29463-7",
+              "Body weight"
+            )
+          )
+          .build();
       case "bloodPressure":
         return CodeableConcept.builder()
           .coding(
@@ -199,18 +219,19 @@ class SHBuilder extends FHIRBaseBuilder {
    * @todo description
    */
   public static Bundle.Entry buildPatient(JSONObject patient) {
-    String patientId = JSONObjectUtils.getId(patient, "user_uuid");
+//    String patientId = JSONObjectUtils.getId(patient, "user_uuid");
     String patientEmail = patient.getString("user_id");
+    String patientId = patientEmail.replace("@", "-");
     String fullUrl = BASE_URL + "/patient/" + patientId;
 //    String fullUrl = BASE_URL + "/patient/" + patientEmail;
     return buildEntry(
       Patient.builder()
         .id(patientId)
         .identifier(
-          buildIdentifier(
-            BASE_URL + "/identifier",
-            patientId
-          ),
+//          buildIdentifier(
+//            BASE_URL + "/identifier",
+//            patientId
+//          ),
           buildIdentifier(
             BASE_URL + "/identifier",
             patientEmail

@@ -10,7 +10,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{code.coding[0].code}/id/{componentId}";
     rr:class ho:E52TimeSpan;
   ];
 

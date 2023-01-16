@@ -257,32 +257,32 @@ public class SHAdapter implements FHIRAdapter {
 
   private static void collectWeightComponents(Collection<Observation.Component> components, JSONObject elementValues) {
     //
-    // weight
-    String weight = JSONObjectUtils.getElementValue(elementValues, "weight");
-    if (!StringUtils.isBlank(weight)) {
-      Observation.Component height = buildObservationComponent(
-        buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "weight",
-          "Weight"
-        )),
-        FHIRBaseBuilder.buildQuantity(
-          Decimal.of(weight),
-          "kilogram",
-          UNITSOFM_SYSTEM,
-          "Kg"
-        )
-      );
-      components.add(height);
-    }
+    // weight // @note We moved this to the main observation
+//    String weight = JSONObjectUtils.getElementValue(elementValues, "weight");
+//    if (!StringUtils.isBlank(weight)) {
+//      Observation.Component height = buildObservationComponent(
+//        buildCodeableConcept(buildCoding(
+//          LOINC_SYSTEM,
+//          "29463-7",
+//          "Body weight"
+//        )),
+//        FHIRBaseBuilder.buildQuantity(
+//          Decimal.of(weight),
+//          "kilogram",
+//          UNITSOFM_SYSTEM,
+//          "Kg"
+//        )
+//      );
+//      components.add(height);
+//    }
     //
     // body_fat
     String bodyFatValue = JSONObjectUtils.getElementValue(elementValues, "body_fat");
     if (!StringUtils.isBlank(bodyFatValue)) {
       Observation.Component bodyFat = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "body_fat",
+          LOINC_SYSTEM,
+          "41982-0",
           "Body Fat"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -300,8 +300,8 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(bodyFatMassValue)) {
       Observation.Component bodyFatMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "body_fat_mass",
+                LOINC_SYSTEM,
+          "73708-0",
           "Body fat mass"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -319,8 +319,8 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(muscleMassValue)) {
       Observation.Component muscleMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "muscle_mass",
+                LOINC_SYSTEM,
+          "73964-9",
           "Muscle mass"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -376,8 +376,8 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(basalMetabolicRateValue)) {
       Observation.Component basalMetabolicRate = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "basal_metabolic_rate",
+                LOINC_SYSTEM,
+          "50042-1",
           "Basal metabolic rate"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -433,8 +433,8 @@ public class SHAdapter implements FHIRAdapter {
     if (!StringUtils.isBlank(totalBodyWaterValue)) {
       Observation.Component totalBodyWater = buildObservationComponent(
         buildCodeableConcept(buildCoding(
-          LOCAL_SYSTEM,
-          "total_body_water",
+                LOINC_SYSTEM,
+          "73706-4",
           "Total body water"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -794,6 +794,11 @@ public class SHAdapter implements FHIRAdapter {
       String countType = "..."; // TODO change this to a proper unit
       if (values.has("count_type")) {
         countType = getCountType(values.getString("count_type"));
+      } else if (dataElement.has("type_id")) {
+        String typeId = dataElement.getString("type_id");
+        if (typeId.equals("stepDailyTrend")) {
+          countType = "steps";
+        }
       }
 
       Collection<Observation.Component> components = new LinkedList<>();

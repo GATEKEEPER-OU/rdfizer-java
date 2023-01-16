@@ -4,6 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix doid: <http://purl.obolibrary.org/obo/>.
 @prefix ho: <https://opensource.samsung.com/projects/helifit/>.
+@prefix helios: <https://perkapp.fbk.eu/helis/ontology/core/>.
 @base <https://opensource.samsung.com/projects/helifit>.
 
 # ############################################################################ #
@@ -29,6 +30,17 @@
        rr:joinCondition [
          rr:child "resource.id";
          rr:parent "resource.id";
+       ];
+     ];
+  ];
+
+   rr:predicateObjectMap [
+     rr:predicate ho:P140wasAttributedBy;
+     rr:objectMap [
+       rr:parentTriplesMap <#PatientAgeAssignement>;
+       rr:joinCondition [
+         rr:child "resource.id";
+         rr:parent "resource.subject.display";
        ];
      ];
   ];
@@ -96,12 +108,114 @@
   rr:predicateObjectMap [
     rr:predicate ho:P3hasNote;
     rr:objectMap [
-      rml:reference "resource.identifier[1].value";
+      rml:reference "resource.identifier[0].systemDomainName";
     ]
   ];
 .
 
 # /PatientIdentifier
+
+# ############################################################################ #
+#                                PatientAgeAssignement
+# ############################################################################ #
+
+# PatientAgeAssignement
+<#PatientAgeAssignement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'patient_age')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF152/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF152AgeAssignment;
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate ho:P4hasTimeSpan;
+      rr:objectMap [
+        rr:parentTriplesMap <#EffectiveDateTime>;
+        rr:joinCondition [
+          rr:child "resource.id";
+          rr:parent "resource.id";
+        ];
+      ];
+    ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#PatientAgeMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#PatientAgeMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'patient_age')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF200/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF200AgeMeasurement;
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#PatientAgeDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#PatientAgeDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'patient_age')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF37/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF37AgeDimension;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "resource.valueQuantity.value";
+    ]
+  ];
+.
+
+# /PatientAge
 
 # ############################################################################ #
 #                           ComponentIdentifier
@@ -379,7 +493,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/E52/code/{code.coding[0].code}/id/{componentId}";
     rr:class ho:E52TimeSpan;
   ];
 
@@ -437,7 +551,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
   ];
 
   rr:subjectMap [
@@ -501,7 +615,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
   ];
 
   rr:subjectMap [
@@ -565,7 +679,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8302-2')]"
   ];
 
   rr:subjectMap [
@@ -603,7 +717,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [
@@ -667,7 +781,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [
@@ -829,7 +943,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'total_body_water')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73706-4')]"
   ];
 
   rr:subjectMap [
@@ -859,7 +973,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'fat_free_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'fat_free_mass')]"
   ];
 
   rr:subjectMap [
@@ -889,7 +1003,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'fat_free')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'fat_free')]"
   ];
 
   rr:subjectMap [
@@ -919,7 +1033,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'basal_metabolic_rate')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '50042-1')]"
   ];
 
   rr:subjectMap [
@@ -949,7 +1063,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle_mass')]"
   ];
 
   rr:subjectMap [
@@ -979,7 +1093,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'skeletal_muscle')]"
   ];
 
   rr:subjectMap [
@@ -1009,7 +1123,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'muscle_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73964-9')]"
   ];
 
   rr:subjectMap [
@@ -1039,7 +1153,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'body_fat')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '41982-0')]"
   ];
 
   rr:subjectMap [
@@ -1069,7 +1183,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'body_fat_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73708-0')]"
   ];
 
   rr:subjectMap [
@@ -1099,7 +1213,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')].resource.component[?(@.code.coding[0].code == 'height')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'height')]"
   ];
 
   rr:subjectMap [
@@ -1129,7 +1243,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'weight')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')]"
   ];
 
   rr:subjectMap [
@@ -1939,6 +2053,20 @@
   ];
 
   #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "componentId";
+        rr:parent "componentId";
+      ];
+    ];
+  ];
+
+  #
   # Data
   #
   rr:predicateObjectMap [
@@ -1966,6 +2094,20 @@
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF32/code/{code.coding[0].code}/id/{resourceId}";
     rr:class ho:HLF32SystolicPressureDimension;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#ComponentIdentifier>;
+      rr:joinCondition [
+        rr:child "componentId";
+        rr:parent "componentId";
+      ];
+    ];
   ];
 
   #
@@ -3007,6 +3149,816 @@
 # /OxygenSaturation
 
 
+# ############################################################################ #
+#                                 NutritionActivity
+# ############################################################################ #
+
+<#NutritionActivity> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF240/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF240MealActivity;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P3hasNote;
+    rr:objectMap [
+      rml:reference "resource.code.coding[0].display";
+    ]
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P2hasType;
+    rr:objectMap [
+      rr:parentTriplesMap <#NutritionType>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P117includes;
+    rr:objectMap [
+      rr:parentTriplesMap <#NutritionMeasurement>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+.
+
+<#NutritionType> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'meal_type')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF277/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class ho:HLF277MealType;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueString";
+    ]
+  ];
+.
+
+<#NutritionMeasurement> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF349/code/{resource.code.coding[0].code}/id/{resource.id}";
+    rr:class ho:HLF349MealMeasurement;
+  ];
+
+  #
+  # Metadata
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P1isIdentifiedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#TemportalEntityIdentifier>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P140assignedAttributeTo;
+    rr:objectMap [
+      rr:parentTriplesMap <#Patient>;
+      rr:joinCondition [
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#EffectiveDateTime>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
+  #
+  # Link(s)
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosSaturatedFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosPolySaturatedFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosMonoSaturatedFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosCarbsDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosCarbsDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosDietaryFiberDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosProteinDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosGlucoseDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosCholesterolDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosSodiumDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosPotassiumDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosVitaminADimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosVitaminCDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosCalsiumDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosIronDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate ho:P40observedDimension;
+    rr:objectMap [
+      rr:parentTriplesMap <#HeliosTransFatDimension>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resourceId";
+      ];
+    ];
+  ];
+.
+
+<#HeliosTransFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'transfat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/TransFat/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:TransFat;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosIronDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'iron')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Iron/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Iron;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosCalsiumDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'calcium')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Calcium/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Calcium;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosVitaminCDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'vitaminc')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/VitaminC/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:VitaminC;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosVitaminADimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'vitamina')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/VitaminA/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:VitaminA;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosPotassiumDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'potassium')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Potassium/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Potassium;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosSodiumDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'sodium')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Sodium/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Sodium;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosCholesterolDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'cholesterol')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Cholesterol/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Cholesterol;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosGlucoseDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'glucose')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Glucose/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Glucose;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosProteinDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'protein')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Protein/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Protein;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosDietaryFiberDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'dietaryfiber')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/DietaryFiber/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:DietaryFiber;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosCarbsDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'carbohydrate')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Carbs/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Carbs;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosMonoSaturatedFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'mono_saturated_fat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/MonounsaturatedLipid/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:MonounsaturatedLipid;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosPolySaturatedFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'poly_saturated_fat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/PolyunsaturatedLipid/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:PolyunsaturatedLipid;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosSaturatedFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'saturated_fat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/SaturatedLipid/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:SaturatedLipid;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
+<#HeliosFatDimension> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "__RML_SRC__";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == 'meal')].resource.component[?(@.code.coding[0].code == 'fat')]"
+  ];
+
+  rr:subjectMap [
+    rr:template "https://opensource.samsung.com/projects/helifit/type/Lipid/code/{code.coding[0].code}/id/{resourceId}";
+    rr:class helios:Lipid;
+  ];
+
+  #
+  # Data
+  #
+  rr:predicateObjectMap [
+    rr:predicate ho:P91hasUnit;
+    rr:objectMap [
+      rml:reference "valueQuantity.unit";
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ho:P90hasValue;
+    rr:objectMap [
+      rml:reference "valueQuantity.value";
+    ]
+  ];
+.
+
 #
 # live_data_calories
 <#StreamBurnedCaloriesDimension> a rr:TriplesMap;
@@ -3309,16 +4261,16 @@
   #
   # Metadata
   #
-  rr:predicateObjectMap [
-    rr:predicate ho:P14carriedOutBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.display";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
+  #rr:predicateObjectMap [
+  #  rr:predicate ho:P14carriedOutBy;
+  #  rr:objectMap [
+  #    rr:parentTriplesMap <#Patient>;
+  #    rr:joinCondition [
+  #      rr:child "resource.subject.display";
+  #      rr:parent "resource.id";
+  #    ];
+  #  ];
+  #];
 
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
@@ -4653,117 +5605,6 @@
   ];
 .
 
-<#SleepingActivity> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF43/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF43SleepingActivity;
-  ];
-
-  #
-  # Metadata
-  #
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-  rr:predicateObjectMap [
-    rr:predicate ho:P14carriedOutBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.display";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  #
-  # Includes
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P117includes;
-    rr:objectMap [
-      rr:parentTriplesMap <#SleepingActivityMeasurement>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
-
-<#SleepingActivityMeasurement> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF331/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF338SleepingActivityMeasurement;
-  ];
-
-  #
-  # Metadata
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P14carriedOutBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:L12happenedOnDevice;
-    rr:objectMap [
-      rr:parentTriplesMap <#Device>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
-
 <#SleepingStageActivity> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
@@ -4791,7 +5632,7 @@
     ];
   ];
   rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
+    rr:predicate ho:P14carriedOutBy;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
@@ -4805,127 +5646,9 @@
   # Includes
   #
   rr:predicateObjectMap [
-    rr:predicate ho:P117includes;
-    rr:objectMap [
-      rr:parentTriplesMap <#SleepStageAssignment>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
-
-<#SleepStageAssignment> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/E13/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:E13AttributeAssignment;
-  ];
-
-  #
-    # Metadata
-    #
-    rr:predicateObjectMap [
-      rr:predicate ho:P4hasTimeSpan;
-      rr:objectMap [
-        rr:parentTriplesMap <#ObservationTimeSpan>;
-        rr:joinCondition [
-          rr:child "resource.id";
-          rr:parent "resource.id";
-        ];
-      ];
-    ];
-    rr:predicateObjectMap [
-      rr:predicate ho:P140assignedAttributeTo;
-      rr:objectMap [
-        rr:parentTriplesMap <#Patient>;
-        rr:joinCondition [
-          rr:child "resource.subject.display";
-          rr:parent "resource.id";
-        ];
-      ];
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P117includes;
-    rr:objectMap [
-      rr:parentTriplesMap <#SleepingStageActivityMeasurement>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-.
-
-<#SleepingStageActivityMeasurement> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '93832-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF331/code/{resource.code.coding[0].code}/id/{resource.id}";
-    rr:class ho:HLF338SleepingActivityMeasurement;
-  ];
-
-  #
-  # Metadata
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P14carriedOutBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:L12happenedOnDevice;
-    rr:objectMap [
-      rr:parentTriplesMap <#Device>;
-      rr:joinCondition [
-        rr:child "resource.id";
-        rr:parent "resource.id";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
     rr:predicate ho:EP2initiates;
     rr:objectMap [
-      rr:parentTriplesMap <#SleepingCycle>;
+      rr:parentTriplesMap <#SleepCycle>;
       rr:joinCondition [
         rr:child "resource.id";
         rr:parent "resource.id";
@@ -4934,7 +5657,7 @@
   ];
 .
 
-<#SleepingCycle> a rr:TriplesMap;
+<#SleepCycle> a rr:TriplesMap;
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
@@ -4947,14 +5670,25 @@
   ];
 
   #
-  # Link(s)
+  # Metadata
   #
+  rr:predicateObjectMap [
+    rr:predicate ho:P4hasTimeSpan;
+    rr:objectMap [
+      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:joinCondition [
+        rr:child "resource.id";
+        rr:parent "resource.id";
+      ];
+    ];
+  ];
+
   rr:predicateObjectMap [
     rr:predicate ho:EP3maintains;
     rr:objectMap [
       rr:parentTriplesMap <#SleepStage>;
       rr:joinCondition [
-       rr:child "resource.id";
+        rr:child "resource.id";
         rr:parent "resourceId";
       ];
     ];
@@ -4969,7 +5703,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF10/code/{code.coding[0].code}/id/{resourceId}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF331/code/{code.coding[0].code}/id/{componentId}";
     rr:class ho:HLF10SleepStage;
   ];
 
@@ -4978,22 +5712,19 @@
     rr:objectMap [
       rr:parentTriplesMap <#ComponentTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "componentId";
+        rr:parent "componentId";
       ];
     ];
   ];
 
-  #
-  # Link(s)
-  #
   rr:predicateObjectMap [
-    rr:predicate ho:P2hasType;
+    rr:predicate ho:P1isIdentifiedBy;
     rr:objectMap [
       rr:parentTriplesMap <#SleepStageType>;
       rr:joinCondition [
-       rr:child "fullUrl";
-        rr:parent "fullUrl";
+       rr:child "componentId";
+        rr:parent "componentId";
       ];
     ];
   ];
@@ -5008,7 +5739,7 @@
 
   rr:subjectMap [
     rr:template "https://opensource.samsung.com/projects/helifit/type/HLF274/code/{code.coding[0].code}/id/{resourceId}";
-    rr:class ho:HLF274SleepStageType;
+    rr:class ho:E42Identifier;
   ];
 
   #
@@ -9321,7 +10052,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF500/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF500/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF500GlycosilatedEmoglobinAssignment;
   ];
 
@@ -9333,19 +10064,18 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
-
   rr:predicateObjectMap [
     rr:predicate ho:P140assignedAttributeTo;
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9353,10 +10083,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9369,8 +10099,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9385,7 +10115,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF300/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF300/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF300GlycosilatedEmoglobinMeasurement;
   ];
 
@@ -9397,8 +10127,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9408,8 +10138,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9417,10 +10147,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9433,8 +10163,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlycosilatedEmoglobinDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9449,7 +10179,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF400/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF400/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF400GlycosilatedEmoglobinDimension;
   ];
 
@@ -9486,7 +10216,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF501/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF501/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF501TotalCholesterolAssignment;
   ];
 
@@ -9498,8 +10228,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9509,8 +10239,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9518,10 +10248,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9534,8 +10264,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TotalCholesterolMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9550,7 +10280,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF301/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF301/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF301TotalCholesterolMeasurement;
   ];
 
@@ -9562,8 +10292,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9573,8 +10303,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9582,10 +10312,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9598,8 +10328,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TotalCholesterolDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9614,7 +10344,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF401/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF401/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF401TotalCholesterolDimension;
   ];
 
@@ -9651,7 +10381,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF502/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF502/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF502HighDensityLipoproteinAssignment;
   ];
 
@@ -9663,8 +10393,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9674,8 +10404,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9683,10 +10413,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9699,8 +10429,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HighDensityLipoproteinMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9715,7 +10445,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF302/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF302/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF302HighDensityLipoproteinMeasurement;
   ];
 
@@ -9727,8 +10457,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9738,8 +10468,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9747,10 +10477,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9763,8 +10493,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HighDensityLipoproteinDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9779,7 +10509,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF402/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF402/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF402HighDensityLipoproteinDimension;
   ];
 
@@ -9816,7 +10546,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF503/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF503/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF503LowDensityLipoproteinAssignment;
   ];
 
@@ -9828,8 +10558,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9839,8 +10569,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9848,10 +10578,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9864,8 +10594,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#LowDensityLipoproteinMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9880,7 +10610,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF303/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF303/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF303LowDensityLipoproteinMeasurement;
   ];
 
@@ -9892,8 +10622,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9903,8 +10633,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9912,10 +10642,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9928,8 +10658,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#LowDensityLipoproteinDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -9944,7 +10674,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF403/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF403/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF403LowDensityLipoproteinDimension;
   ];
 
@@ -9981,7 +10711,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF504/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF504/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF504TriglyceridesAssignment;
   ];
 
@@ -9993,8 +10723,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10004,8 +10734,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10013,10 +10743,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10029,8 +10759,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TriglyceridesMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10045,7 +10775,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF304/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF304/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF304TriglyceridesMeasurement;
   ];
 
@@ -10057,8 +10787,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10068,8 +10798,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10077,10 +10807,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10093,8 +10823,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TriglyceridesDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10109,7 +10839,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF404/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF404/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF404TriglyceridesDimension;
   ];
 
@@ -10142,11 +10872,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF505/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF505/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF505SerumCreatinineAssignment;
   ];
 
@@ -10158,8 +10888,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10169,8 +10899,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10178,10 +10908,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10194,8 +10924,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#SerumCreatinineMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10206,11 +10936,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF305/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF305/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF305SerumCreatinineMeasurement;
   ];
 
@@ -10222,8 +10952,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10233,8 +10963,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10244,8 +10974,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ObservationTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10258,8 +10988,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#SerumCreatinineDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10270,11 +11000,11 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2093-3')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '2160-0')]"
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF405/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF405/code/{resource.code.coding[0].code}/id/{resource.id}";
     #rr:class ho:HLF405SerumCreatinineDimension;
     rr:class ho:HLF423SerumCreatinineDimension;
   ];
@@ -10312,7 +11042,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF506/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF506/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF506AlbuminuriaCreatininuriaRatioAssignment;
   ];
 
@@ -10324,8 +11054,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10335,8 +11065,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10344,10 +11074,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10360,8 +11090,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlbuminuriaCreatininuriaRatioMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10376,7 +11106,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF306/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF306/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF306AlbuminuriaCreatininuriaRatioMeasurement;
   ];
 
@@ -10388,8 +11118,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10399,8 +11129,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10408,10 +11138,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10424,8 +11154,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlbuminuriaCreatininuriaRatioDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10440,7 +11170,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF406/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF406/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF406AlbuminuriaCreatininuriaRatioDimension;
   ];
 
@@ -10477,7 +11207,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF513/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF513/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF513AlanineAminotransferaseALTAssignment;
   ];
 
@@ -10489,8 +11219,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10500,8 +11230,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10509,10 +11239,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10525,8 +11255,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlanineAminoTransferaseMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10541,7 +11271,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF313/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF313/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF313AlanineAminotransferaseALTMeasurement;
   ];
 
@@ -10553,8 +11283,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10564,8 +11294,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10573,10 +11303,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10589,8 +11319,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlanineAminoTransferaseDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10605,7 +11335,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF413/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF413/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF413AlanineAminotransferaseALTDimension;
   ];
 
@@ -10642,7 +11372,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF514/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF514/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF514AspartateAminotransferaseASTAssignment;
   ];
 
@@ -10654,8 +11384,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10665,8 +11395,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10674,10 +11404,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10690,8 +11420,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AspartateAminoTransferaseMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10706,7 +11436,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF314/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF314/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF314AspartateAminotransferaseASTMeasurement;
   ];
 
@@ -10718,8 +11448,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10729,8 +11459,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10738,10 +11468,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10754,8 +11484,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AspartateAminoTransferaseDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10770,7 +11500,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF414/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF414/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF414AspartateAminotransferaseASTDimension;
   ];
 
@@ -10807,7 +11537,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF515/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF515/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF515YGlutamyltransferaseGGTAssignment;
   ];
 
@@ -10819,8 +11549,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10830,8 +11560,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10839,10 +11569,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10855,8 +11585,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlutamylTransferaseMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10871,7 +11601,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF315/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF315/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF315YGlutamyltransferaseGGTMeasurement;
   ];
 
@@ -10883,8 +11613,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10894,8 +11624,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10903,10 +11633,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10919,8 +11649,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#GlutamylTransferaseDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10935,7 +11665,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF415/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF415/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF415YGlutamyltransferaseGGTDimension;
   ];
 
@@ -10972,7 +11702,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF507/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF507/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF507AlkalinePhosphataseAssignment;
   ];
 
@@ -10984,8 +11714,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -10995,8 +11725,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11004,10 +11734,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11020,8 +11750,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlkalinePhosphataseMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11036,7 +11766,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF307/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF307/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF307AlkalinePhosphataseALPMeasurement;
   ];
 
@@ -11048,8 +11778,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11059,8 +11789,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11068,10 +11798,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11084,8 +11814,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#AlkalinePhosphataseDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11100,7 +11830,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF407/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF407/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF407AlkalinePhosphataseDimension;
   ];
 
@@ -11137,7 +11867,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF508/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF508/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF508UricAcidAssignment;
   ];
 
@@ -11149,8 +11879,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11160,8 +11890,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11169,10 +11899,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11185,8 +11915,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#UricAcidMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11201,7 +11931,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF308/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF308/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF308UricAcidMeasurement;
   ];
 
@@ -11213,8 +11943,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11224,8 +11954,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11233,10 +11963,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11249,8 +11979,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#UricAcidDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11265,7 +11995,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF408/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF408/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF408UricAcidDimension;
   ];
 
@@ -11302,7 +12032,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF509/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF509/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF509EstimatedGlomerularFiltrationRateAssignment;
   ];
 
@@ -11314,8 +12044,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11325,8 +12055,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11334,10 +12064,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11350,8 +12080,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#EstimatedGlomerularFiltrationRateMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11366,7 +12096,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF309/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF309/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF309EstimatedGlomerularFiltrationRateMeasurement;
   ];
 
@@ -11378,8 +12108,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11389,8 +12119,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11398,10 +12128,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11414,8 +12144,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#EstimatedGlomerularFiltrationRateDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11430,7 +12160,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF409/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF409/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF409EstimatedGlomerularFiltrationRateDimension;
   ];
 
@@ -11467,7 +12197,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF510/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF510/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF510NitritesAssignment;
   ];
 
@@ -11479,8 +12209,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11490,8 +12220,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11499,10 +12229,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11515,8 +12245,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#NitritesMeasurement>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11531,7 +12261,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF310/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF310/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF310NitritesMeasurement;
   ];
 
@@ -11543,8 +12273,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11554,8 +12284,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11563,10 +12293,10 @@
   rr:predicateObjectMap [
     rr:predicate ho:P4hasTimeSpan;
     rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
+      rr:parentTriplesMap <#EffectiveDateTime>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11579,8 +12309,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#NitritesDimension>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11595,7 +12325,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF410/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF410/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF410NitritesDimension;
   ];
 
@@ -11613,171 +12343,6 @@
 # /Nitrites
 
 # ############################################################################ #
-#                               Cardiovascular
-# ############################################################################ #
-
-# 8867-4 Heart rate
-<#CardiovascularAssignment> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF160/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF160CardiovascularAssignment;
-  ];
-
-  #
-  # Metadata
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  #
-  # Link(s)
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P141assigned;
-    rr:objectMap [
-      rr:parentTriplesMap <#CardiovascularMeasurement>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-.
-
-# 8867-4 Heart rate
-<#CardiovascularMeasurement> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF168/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF168CardiovascularMeasurement;
-  ];
-
-  #
-  # Metadata
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P1isIdentifiedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#TemportalEntityIdentifier>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P140assignedAttributeTo;
-    rr:objectMap [
-      rr:parentTriplesMap <#Patient>;
-      rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P4hasTimeSpan;
-    rr:objectMap [
-      rr:parentTriplesMap <#ObservationTimeSpan>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-
-  #
-  # Link(s)
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P40observedDimension;
-    rr:objectMap [
-      rr:parentTriplesMap <#HeartRateReservesDimension>;
-      rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
-      ];
-    ];
-  ];
-.
-
-# 8867-4 Heart rate
-<#HeartRateReservesDimension> a rr:TriplesMap;
-  rml:logicalSource [
-    rml:source "__RML_SRC__";
-    rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '8867-4')]"
-  ];
-
-  rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF18/code/{resource.code.coding[0].code}/id/{fullUrl}";
-    rr:class ho:HLF18HeartRateReservesDimension;
-  ];
-
-  #
-  # Data
-  #
-  rr:predicateObjectMap [
-    rr:predicate ho:P91hasUnit;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.unit";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ho:P90hasValue;
-    rr:objectMap [
-      rml:reference "resource.valueQuantity.value";
-    ]
-  ];
-.
-
-# /Cardiovascular
-
-# ############################################################################ #
 #                                HepaticSteatosis
 # ############################################################################ #
 
@@ -11790,7 +12355,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -11802,8 +12367,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11813,8 +12378,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11824,8 +12389,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11839,8 +12404,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HepaticSteatosisCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11865,7 +12430,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -11877,8 +12442,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11888,8 +12453,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11899,8 +12464,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11913,8 +12478,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HepaticSteatosisDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11949,7 +12514,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -11961,8 +12526,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11972,8 +12537,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11983,8 +12548,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -11998,8 +12563,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HypertensionCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12024,7 +12589,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -12036,8 +12601,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12047,8 +12612,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12058,8 +12623,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12072,8 +12637,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HypertensionDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12108,7 +12673,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -12120,8 +12685,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12131,8 +12696,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12142,8 +12707,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12157,8 +12722,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HeartFailureCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12183,7 +12748,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -12195,8 +12760,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12206,8 +12771,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12217,8 +12782,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12231,8 +12796,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#HeartFailureDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12267,7 +12832,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -12279,8 +12844,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12290,8 +12855,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12301,8 +12866,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12316,8 +12881,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#BpcoCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12342,7 +12907,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -12354,8 +12919,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12365,8 +12930,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12376,8 +12941,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12390,8 +12955,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#BpcoDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12426,7 +12991,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -12438,8 +13003,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12449,8 +13014,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12460,8 +13025,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12475,8 +13040,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ChronicKidneyDiseaseCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12501,7 +13066,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -12513,8 +13078,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12524,8 +13089,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12535,8 +13100,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12549,8 +13114,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ChronicKidneyChronicKidneyDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12585,7 +13150,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF600/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF600DiseaseAssignment;
   ];
 
@@ -12597,8 +13162,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12608,8 +13173,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12619,8 +13184,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12634,8 +13199,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#IschemicHeartDiseaseCourse>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12660,7 +13225,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{fullUrl}";
+    rr:template "https://opensource.samsung.com/projects/helifit/type/HLF50/code/{resource.code.coding[0].code}/id/{resource.id}";
     rr:class ho:HLF50DiseaseCourse;
   ];
 
@@ -12672,8 +13237,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#TemportalEntityIdentifier>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12683,8 +13248,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#Patient>;
       rr:joinCondition [
-        rr:child "resource.subject.reference";
-        rr:parent "fullUrl";
+        rr:child "resource.subject.display";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12694,8 +13259,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#ConditionTimeSpan>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12708,8 +13273,8 @@
     rr:objectMap [
       rr:parentTriplesMap <#IschemicHeartDisease>;
       rr:joinCondition [
-        rr:child "fullUrl";
-        rr:parent "fullUrl";
+        rr:child "resource.id";
+        rr:parent "resource.id";
       ];
     ];
   ];
@@ -12725,7 +13290,7 @@
 
   rr:subjectMap [
     rr:template "http://purl.obolibrary.org/obo/{resource.code.coding[0].code}";
-    rr:class doid:DOID_9452;
+    rr:class doid:DOID_3393;
   ];
 .
 

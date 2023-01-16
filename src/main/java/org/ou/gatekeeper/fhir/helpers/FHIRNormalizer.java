@@ -145,7 +145,7 @@ public class FHIRNormalizer {
     for (int i = 0; i < components.length(); ++i) {
       JSONObject component = components.getJSONObject(i);
                                                                  // TODO rename method needed
-      component.put("fullUrl", "urn:uuid:" + UUID.randomUUID()); // append own uuid
+      component.put("componentId", UUID.randomUUID()); // append own uuid
       component.put("resourceId", resourceId);                   // append parent resourceId
     }
   }
