@@ -72,7 +72,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, CSS, HeartFailure",
 //    "xxx, keep, CSS, BPCO",
 //    "xxx, keep, CSS, ChronicKidneyDisease",
-   "xxx, keep, CSS, IschemicHeartDisease",
+//   "xxx, keep, CSS, IschemicHeartDisease",
     //
     // Samsung Health
     // -------------------------------------------------------------------------
@@ -80,7 +80,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, StepDailyTrend",
 //    "xxx, keep, SH, HeartRate",
 //    "xxx, keep, SH, Sleep",
-//    "xxx, keep, SH, SleepStage",
+    "xxx, keep, SH, SleepStage",
 //    "xxx, keep, SH, Walking",
 //    "xxx, keep, SH, Cycling",
 //    "xxx, keep, SH, Running",

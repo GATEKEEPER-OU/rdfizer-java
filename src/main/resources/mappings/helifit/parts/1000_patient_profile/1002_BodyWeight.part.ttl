@@ -233,7 +233,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'total_body_water')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73706-4')]"
   ];
 
   rr:subjectMap [
@@ -323,7 +323,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'basal_metabolic_rate')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '50042-1')]"
   ];
 
   rr:subjectMap [
@@ -413,7 +413,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'muscle_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73964-9')]"
   ];
 
   rr:subjectMap [
@@ -443,7 +443,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'body_fat')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '41982-0')]"
   ];
 
   rr:subjectMap [
@@ -473,7 +473,7 @@
   rml:logicalSource [
     rml:source "__RML_SRC__";
     rml:referenceFormulation ql:JSONPath;
-    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == 'body_fat_mass')]"
+    rml:iterator "$.entry[?(@.resource.resourceType == 'Observation' && @.resource.code.coding[0].code == '29463-7')].resource.component[?(@.code.coding[0].code == '73708-0')]"
   ];
 
   rr:subjectMap [

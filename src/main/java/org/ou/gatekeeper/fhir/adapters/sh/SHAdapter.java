@@ -282,7 +282,7 @@ public class SHAdapter implements FHIRAdapter {
       Observation.Component bodyFat = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "body_fat",
+          "41982-0",
           "Body Fat"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -301,7 +301,7 @@ public class SHAdapter implements FHIRAdapter {
       Observation.Component bodyFatMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "body_fat_mass",
+          "73708-0",
           "Body fat mass"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -320,7 +320,7 @@ public class SHAdapter implements FHIRAdapter {
       Observation.Component muscleMass = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "muscle_mass",
+          "73964-9",
           "Muscle mass"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -377,7 +377,7 @@ public class SHAdapter implements FHIRAdapter {
       Observation.Component basalMetabolicRate = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "basal_metabolic_rate",
+          "50042-1",
           "Basal metabolic rate"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -434,7 +434,7 @@ public class SHAdapter implements FHIRAdapter {
       Observation.Component totalBodyWater = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
-          "total_body_water",
+          "73706-4",
           "Total body water"
         )),
         FHIRBaseBuilder.buildQuantity(
@@ -794,6 +794,11 @@ public class SHAdapter implements FHIRAdapter {
       String countType = "..."; // TODO change this to a proper unit
       if (values.has("count_type")) {
         countType = getCountType(values.getString("count_type"));
+      } else if (dataElement.has("type_id")) {
+        String typeId = dataElement.getString("type_id");
+        if (typeId.equals("stepDailyTrend")) {
+          countType = "steps";
+        }
       }
 
       Collection<Observation.Component> components = new LinkedList<>();
