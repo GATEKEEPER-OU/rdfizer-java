@@ -12,7 +12,6 @@ import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
-
 import java.lang.String;
 import java.util.Collection;
 
