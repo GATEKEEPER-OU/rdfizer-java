@@ -9,7 +9,6 @@ import com.ibm.fhir.model.type.code.ObservationStatus;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
-import org.commons.JSONObjectUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
@@ -495,30 +494,32 @@ class SHBuilder extends FHIRBaseBuilder {
 //    }
 
     // @see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-    switch (pilotId) { // WORKAROUND
-      case "UK":
-        timeZone = TimeZone.getTimeZone("Europe/London");
-        break;
-      case "Spain":
-      case "SpainBC":
-        timeZone = TimeZone.getTimeZone("Europe/Madrid");
-        break;
-      case "Puglia":
-        timeZone = TimeZone.getTimeZone("Europe/Rome");
-        break;
-      case "Saxony":
-        timeZone = TimeZone.getTimeZone("Europe/Berlin");
-        break;
-      case "Greece":
-        timeZone = TimeZone.getTimeZone("Europe/Athens");
-        break;
-      default:
-        throw new IllegalArgumentException("Timezone not allowed");
-//        timeZone = TimeZone.getTimeZone("UTC");
-    }
+//    switch (pilotId) { // WORKAROUND
+//      case "UK":
+//        timeZone = TimeZone.getTimeZone("Europe/London");
+//        break;
+//      case "Spain":
+//      case "SpainBC":
+//        timeZone = TimeZone.getTimeZone("Europe/Madrid");
+//        break;
+//      case "Puglia":
+//        timeZone = TimeZone.getTimeZone("Europe/Rome");
+//        break;
+//      case "Saxony":
+//        timeZone = TimeZone.getTimeZone("Europe/Berlin");
+//        break;
+//      case "Greece":
+//        timeZone = TimeZone.getTimeZone("Europe/Athens");
+//        break;
+//      default:
+//        throw new IllegalArgumentException("Timezone not allowed");
+////        timeZone = TimeZone.getTimeZone("UTC");
+//    }
     Long lTimestamp = Long.parseLong(timestamp);
     String pattern = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern();
-    String isoDateTime = DateFormatUtils.format(lTimestamp, pattern, timeZone);
+    String isoDateTime = DateFormatUtils.format(lTimestamp, pattern);
+    // @see https://developer.samsung.com/health/android/data/api-reference/com/samsung/android/sdk/healthdata/HealthConstants.SessionMeasurement.html
+//    String isoDateTime = DateFormatUtils.format(lTimestamp, pattern, timeZone);
 //    System.out.println("zoneOffset>>> " + zoneOffset); // DEBUG
 //    System.out.println("isoDateTime>>> " + isoDateTime); // DEBUGi wa
     return isoDateTime;
