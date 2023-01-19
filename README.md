@@ -30,9 +30,9 @@ This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health 
 7. rdfizer.jar is created and will appear under the project folder: out --> artifacts --> rdfizer_jar
 
 7. In case of ISSUE (e.g.; in case the rdfizer.jar is not generated, especially when the pom is modified when installing the dependencies)
-8. Run clean from ant menu (this delete the out, target, the aggregated rml file mappings folder)
+8. Run clean from ant menu (this deletes the out, target, the aggregated rml file mappings folder)
 9. Delete META-INF folder from resources/META-INF
-10. Run bundle from ant menu (this create the out, target, the aggregated rml file mappings)
+10. Run bundle from ant menu (this creates the out, target, the aggregated rml file mappings)
 11. Go to File--> Project Structure --> Artefacts --> delete all the jar  you find in there (by clicking on the minus symbol) then APPLY. 
 12. Go to File--> Project Structure --> Artefacts --> by clicking on the plus symbol -> JAR --> From Modules All Dependencies --> Copy to the output directory and link via manifest --> OK --> APPLY
 13. Go to File--> Project Structure --> Artefacts --> Select RDFizer.java -> Pre-Processing --> tick the box "Run Ant Target" --> click on ... --> selct "Bundle" --> APPLY
