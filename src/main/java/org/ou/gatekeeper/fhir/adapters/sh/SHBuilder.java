@@ -252,7 +252,7 @@ class SHBuilder extends FHIRBaseBuilder {
     Quantity value,
     Bundle.Entry patientEntry
   ) {
-    pilotId = dataElement.getString("pilot_id"); // WORKAROUND
+//    pilotId = dataElement.getString("pilot_id"); // WORKAROUND
     String       uuid = dataElement.getString("data_uuid");
     String   deviceId = dataElement.getString("device_id");
     String zoneOffset = getTimeOffset(dataElement); // TODO re-think again in the future
