@@ -599,7 +599,7 @@ public class SHAdapter implements FHIRAdapter {
     // meal_time
     String mealTimeValue = JSONObjectUtils.getElementValue(elementValues, "meal_time");
     String timeOffsetValue = JSONObjectUtils.getElementValue(elementValues, "time_offset");
-    if (!StringUtils.isBlank(mealTimeValue) && !StringUtils.isBlank(timeOffsetValue)) {
+    if (!StringUtils.isBlank(mealTimeValue) && !mealTimeValue.equals("NaN") && !StringUtils.isBlank(timeOffsetValue)) {
       Observation.Component mealTime = buildObservationComponent(
         buildCodeableConcept(buildCoding(
           LOCAL_SYSTEM,
