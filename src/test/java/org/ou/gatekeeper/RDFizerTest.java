@@ -98,53 +98,47 @@ class RDFizerTest {
     // -------------------------------------------------------------------------
 
     // Patient
-//    "xxx, keep, CSS, Patient, '0000,0001,0002,0003,0044'",
-//      "xxx, keep, CSS, PatientWithAge, '0000,0001,0002,0003,0044'",
+    "xxx, keep, CSS, Patient, '0000,0001,0002,0003,0044'",
+//    "xxx, keep, CSS, PatientWithAge, '0000,0001,0002,0003,0044'",
     // Observations
-//   "xxx, keep, CSS, .., all",
-//      "xxx, keep, CSS, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
+//    "xxx, keep, CSS, .., all",
+//    "xxx, keep, CSS, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
 //    "xxx, keep, CSS, Weight, '0000,0001,0002,0003,0040,0041,0044,1002'",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin, '0000,0001,0002,0003,0040,0041,0044,4001'",
-//          "xxx, keep, CSS, TotalCholesterol, '0000,0001,0002,0003,0040,0041,0044,4002'",
-//          "xxx, keep, CSS, HighDensityLipoprotein, '0000,0001,0002,0003,0040,0041,0044,4003'",
-//          "xxx, keep, CSS, LowDensityLipoprotein, '0000,0001,0002,0003,0040,0041,0044,4004'",
-//          "xxx, keep, CSS, Triglycerides, '0000,0001,0002,0003,0040,0041,0044,4005'",
-//          "xxx, keep, CSS, SerumCreatinine, '0000,0001,0002,0003,0040,0041,0044,4006'",
-//          "xxx, keep, CSS, AlbuminuriaCreatininuriaRatio, '0000,0001,0002,0003,0040,0041,0044,4007'",
-//          "xxx, keep, CSS, AlanineAminoTransferase, '0000,0001,0002,0003,0040,0041,0044,4008'",
-//          "xxx, keep, CSS, AspartateAminoTransferase, '0000,0001,0002,0003,0040,0041,0044,4009'",
-//          "xxx, keep, CSS, GlutamylTransferase, '0000,0001,0002,0003,0040,0041,0044,4010'",
-//          "xxx, keep, CSS, AlkalinePhosphatase, '0000,0001,0002,0003,0040,0041,0044,4011'",
-//          "xxx, keep, CSS, UricAcid, '0000,0001,0002,0003,0040,0041,0044,4012'",
-//          "xxx, keep, CSS, EstimatedGlomerularFiltrationRate, '0000,0001,0002,0003,0040,0041,0044,4013'",
-//          "xxx, keep, CSS, Nitrites, '0000,0001,0002,0003,0040,0041,0044,4014'",
+//    "xxx, keep, CSS, TotalCholesterol, '0000,0001,0002,0003,0040,0041,0044,4002'",
+//    "xxx, keep, CSS, HighDensityLipoprotein, '0000,0001,0002,0003,0040,0041,0044,4003'",
+//    "xxx, keep, CSS, LowDensityLipoprotein, '0000,0001,0002,0003,0040,0041,0044,4004'",
+//    "xxx, keep, CSS, Triglycerides, '0000,0001,0002,0003,0040,0041,0044,4005'",
+//    "xxx, keep, CSS, SerumCreatinine, '0000,0001,0002,0003,0040,0041,0044,4006'",
+//    "xxx, keep, CSS, AlbuminuriaCreatininuriaRatio, '0000,0001,0002,0003,0040,0041,0044,4007'",
+//    "xxx, keep, CSS, AlanineAminoTransferase, '0000,0001,0002,0003,0040,0041,0044,4008'",
+//    "xxx, keep, CSS, AspartateAminoTransferase, '0000,0001,0002,0003,0040,0041,0044,4009'",
+//    "xxx, keep, CSS, GlutamylTransferase, '0000,0001,0002,0003,0040,0041,0044,4010'",
+//    "xxx, keep, CSS, AlkalinePhosphatase, '0000,0001,0002,0003,0040,0041,0044,4011'",
+//    "xxx, keep, CSS, UricAcid, '0000,0001,0002,0003,0040,0041,0044,4012'",
+//    "xxx, keep, CSS, EstimatedGlomerularFiltrationRate, '0000,0001,0002,0003,0040,0041,0044,4013'",
+//    "xxx, keep, CSS, Nitrites, '0000,0001,0002,0003,0040,0041,0044,4014'",
+//
+//    "xxx, keep, CSS, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
+//
+//    "xxx, keep, CSS, HepaticSteatosis, '0000,0001,0002,0003,0040,0042,0044,5001'",
+//    "xxx, keep, CSS, Hypertension, '0000,0001,0002,0003,0040,0042,0044,5002'",
+//    "xxx, keep, CSS, HeartFailure, '0000,0001,0002,0003,0040,0042,0044,5003'",
+//    "xxx, keep, CSS, BPCO, '0000,0001,0002,0003,0040,0042,0044,5004'",
+//    "xxx, keep, CSS, ChronicKidneyDisease, '0000,0001,0002,0003,0040,0042,0044,5005'",
+//    "xxx, keep, CSS, IschemicHeartDisease, '0000,0001,0002,0003,0040,0042,0044,5006'",
 
-//          "xxx, keep, CSS, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
-
-//          "xxx, keep, CSS, HepaticSteatosis, '0000,0001,0002,0003,0040,0042,0044,5001'",
-//          "xxx, keep, CSS, Hypertension, '0000,0001,0002,0003,0040,0042,0044,5002'",
-//          "xxx, keep, CSS, HeartFailure, '0000,0001,0002,0003,0040,0042,0044,5003'",
-//          "xxx, keep, CSS, BPCO, '0000,0001,0002,0003,0040,0042,0044,5004'",
-//          "xxx, keep, CSS, ChronicKidneyDisease, '0000,0001,0002,0003,0040,0042,0044,5005'",
-//          "xxx, keep, CSS, IschemicHeartDisease, '0000,0001,0002,0003,0040,0042,0044,5006'",
-
-
-
-
-
-          //
+    //
     // Samsung Health
     // -------------------------------------------------------------------------
 
     // Patient
 //    "xxx, keep, SH, Patient, '0000,0001,0002,0003,0044'",
-//      "xxx, keep, SH, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
+//    "xxx, keep, SH, BodyHeight, '0000,0001,0002,0003,0040,0041,0044,1001'",
 //    "xxx, keep, SH, BodyWeight, '0000,0001,0002,0003,0010,0040, 0041,0044,1002'",
-          "xxx, keep, SH, BloodGlucose, '0000,0001,0002,0003,0010,0040,0041,0044,1005'",
-//          "xxx, keep, SH, BloodGlucose_NaN, '0000,0001,0002,0003,0010,0040,0041,0044,1005'",
-//          "xxx, keep, SH, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
-
-
+//    "xxx, keep, SH, BloodGlucose, '0000,0001,0002,0003,0010,0040,0041,0044,1005'",
+//    "xxx, keep, SH, BloodGlucose_NaN, '0000,0001,0002,0003,0010,0040,0041,0044,1005'",
+//    "xxx, keep, SH, BloodPressure, '0000,0001,0002,0003,0010,0040,0041,0044,1006'",
 
     // Observations
 //    "xxx, keep, SH, FloorsClimbed,  '0000,0001,0002,0003,0020,0021,0040,0041,2101'",
