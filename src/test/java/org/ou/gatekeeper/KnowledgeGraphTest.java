@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
+import org.ou.gatekeeper.adapters.DataAdapter;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -50,7 +50,7 @@ public class KnowledgeGraphTest {
     //
     // CSS
     // -------------------------------------------------------------------------
-//    "xxx, keep, CSS, GlycosilatedEmoglobin",
+    "xxx, keep, CSS, GlycosilatedEmoglobin",
 //    "xxx, keep, CSS, BloodPressure",
 //    "xxx, keep, CSS, BodyWeight",
 //    "xxx, keep, CSS, GlycosilatedEmoglobin",
@@ -80,7 +80,7 @@ public class KnowledgeGraphTest {
 //    "xxx, keep, SH, StepDailyTrend",
 //    "xxx, keep, SH, HeartRate",
 //    "xxx, keep, SH, Sleep",
-    "xxx, keep, SH, SleepStage",
+//    "xxx, keep, SH, SleepStage",
 //    "xxx, keep, SH, Walking",
 //    "xxx, keep, SH, Cycling",
 //    "xxx, keep, SH, Running",
@@ -107,7 +107,7 @@ public class KnowledgeGraphTest {
     String queryText = ResourceUtils.readFileToString(queryFile);
     File  outputFile = TestUtils.createOutputFile("output-"+datasetName+".query", "nt");
 
-    FHIRAdapter converter = TestUtils.getFHIRAdapter(sourceType);
+    DataAdapter converter = TestUtils.getDataAdapter(sourceType);
     RMLMapping    mapping = HelifitMapping.create(tripleFormat);
     RDFizer.trasform(datasetFile, converter, mapping, triplesFile);
 

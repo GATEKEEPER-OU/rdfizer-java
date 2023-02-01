@@ -3,7 +3,7 @@ package org.ou.gatekeeper;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.commons.ResourceUtils;
-import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
+import org.ou.gatekeeper.adapters.DataAdapter;
 import org.ou.gatekeeper.rdf.RDFMapper;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 
@@ -25,10 +25,10 @@ public class RDFizer {
    * */
   public static void trasform(
     File input,
-    FHIRAdapter converter,
+    DataAdapter converter,
     File output
   ) {
-    converter.transform(input, output, false);
+    converter.toFhir(input, output);
   }
 
   /**
@@ -40,7 +40,7 @@ public class RDFizer {
    * */
   public static void trasform(
     File input,
-    FHIRAdapter converter,
+    DataAdapter converter,
     RMLMapping mapping,
     File output
   ) {
@@ -57,7 +57,7 @@ public class RDFizer {
    * */
   public static void trasform(
     File input,
-    FHIRAdapter converter,
+    DataAdapter converter,
     RMLMapping mapping,
     File output,
     boolean clean
@@ -66,7 +66,7 @@ public class RDFizer {
     String fhirFilename = generateUniqueFilename("output-"+inputName, "json");
 //    String fhirFilename = generateUniqueFilename("output", "fhir.json");
     File tempFhirFile = new File(TMP_DIR, fhirFilename);
-    converter.transform(input, tempFhirFile, true);
+    converter.toExtendedFhir(input, tempFhirFile);
     mapping.setLocalSource(tempFhirFile.getAbsolutePath());
     RDFMapper.map(mapping, output);
     if (clean) {

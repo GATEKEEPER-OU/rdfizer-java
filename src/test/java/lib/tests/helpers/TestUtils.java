@@ -1,9 +1,10 @@
 package lib.tests.helpers;
 
 import org.apache.commons.io.FileUtils;
-import org.ou.gatekeeper.fhir.adapters.css.CSSAdapter;
-import org.ou.gatekeeper.fhir.adapters.FHIRAdapter;
-import org.ou.gatekeeper.fhir.adapters.sh.SHAdapter;
+import org.ou.gatekeeper.adapters.DataAdapter;
+import org.ou.gatekeeper.adapters.css.CSSAdapter;
+import org.ou.gatekeeper.adapters.fhir.FHIRAdapter;
+import org.ou.gatekeeper.adapters.sh.SHAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,14 +40,16 @@ public class TestUtils {
   /**
    * @todo description
    */
-  public static FHIRAdapter getFHIRAdapter(String sourceType) {
+  public static DataAdapter getDataAdapter(String sourceType) {
     switch (sourceType) {
       case "CSS":
         return CSSAdapter.create();
+      case "FHIR":
+        return FHIRAdapter.create();
       case "SH":
         return SHAdapter.create();
       default:
-        throw new IllegalArgumentException("Only 'CSS' or 'SH' types allowed");
+        throw new IllegalArgumentException("Only 'CSS' / 'FHIR' / 'SH' types allowed");
     }
   }
 

@@ -1,4 +1,4 @@
-package org.ou.gatekeeper.fhir.adapters.sh;
+package org.ou.gatekeeper.adapters.sh;
 
 import com.google.common.base.CaseFormat;
 import com.ibm.fhir.model.resource.Bundle;
@@ -11,11 +11,12 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.ou.gatekeeper.fhir.adapters.FHIRBaseBuilder;
+import org.ou.gatekeeper.adapters.BaseBuilder;
+
 import java.lang.String;
 import java.util.Collection;
 
-class SHBuilder extends FHIRBaseBuilder {
+class SHBuilder extends BaseBuilder {
 
   public static final String BASE_URL = "https://opensource.samsung.com/projects/helifit";
   public static final String SAMSUNG_LIVE_SYSTEM = "http://samsung/live-data";
