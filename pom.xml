@@ -18,8 +18,10 @@
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <finalName>${project.artifactId}-${project.version}</finalName>
 
-    <plugins>  <!-- Added this one for building with all the dependencies  run the command from terminal inside IJIDEA: -mvn clean compile assembly:single . The rdfizer.jar in in Targer folder  -->
-      <plugin>
+    <plugins>
+      <plugin> <!-- Added this one for building with all the dependencies run the command from terminal inside IJ_IDEA:
+                    <code>$ mvn clean compile assembly:single</code>
+                    The rdfizer.jar in in Targer folder  -->
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <descriptorRefs>
@@ -28,7 +30,6 @@
         </configuration>
       </plugin>
     </plugins>
-
   </build>
 
   <dependencies>
