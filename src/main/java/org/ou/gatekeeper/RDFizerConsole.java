@@ -37,9 +37,9 @@ public class RDFizerConsole {
       File input = new File(cmd.getOptionValue("input"));
       // NOTE doesn't need to be check, because it a required() option
       if (input.isDirectory()) {
-        runBatch(cmd, input);
+        runBatch(input);
       } else {
-        run(cmd, input);
+        run(input);
       }
 
     } catch (ParseException e) {
@@ -74,9 +74,9 @@ public class RDFizerConsole {
         .build());
     options.addOption(
       Option.builder("t")
-        .longOpt("input-type")
-        .hasArg().argName("TYPE")
-        .desc("Type of input data. Values allowed: [ fhir, css, sh ].")
+        .longOpt("input-format")
+        .hasArg().argName("FORMAT")
+        .desc("Format of input data. Values allowed: [ fhir, css, sh ].")
         .required()
         .build());
     options.addOption(
@@ -87,7 +87,7 @@ public class RDFizerConsole {
         .required()
         .build());
     options.addOption(
-      Option.builder("x")
+      Option.builder("y")
         .longOpt("output-format")
         .hasArg().argName("FORMAT")
         .desc("Type of output data. Values allowed: [ turtle, nt ]. DEFAULT 'nt'.")
@@ -134,13 +134,13 @@ public class RDFizerConsole {
   }
 
   private static void setupAdapter(CommandLine cmd) throws MissingArgumentException {
-    final String INPUT_TYPE = "input-type";
-    if (!cmd.hasOption(INPUT_TYPE)) {
-      String message = String.format("'%s' is missing.", INPUT_TYPE);
+    final String INPUT_FORMAT = "input-format";
+    if (!cmd.hasOption(INPUT_FORMAT)) {
+      String message = String.format("'%s' is missing.", INPUT_FORMAT);
       throw new MissingArgumentException(message);
     }
-    String inputType = cmd.getOptionValue(INPUT_TYPE);
-    adapter = DataAdapters.getDataAdapter(inputType);
+    String inputFormat = cmd.getOptionValue(INPUT_FORMAT);
+    adapter = DataAdapters.getDataAdapter(inputFormat);
   }
 
   private static void setupMapping() throws MissingArgumentException {
@@ -153,9 +153,10 @@ public class RDFizerConsole {
     mapping = HelifitMapping.create(outputFormat);
   }
 
-  private static void run(CommandLine cmd, File inputFile) {
+  private static void run(File inputFile) {
     if (outputFilename == null) {
-      String trimmedDatasetName = FilenameUtils.trim2LvlExtension(inputFile.getName());
+      String inputFilename = inputFile.getName();
+      String trimmedDatasetName = FilenameUtils.trim2LvlExtension(inputFilename);
       outputFilename = FilenameUtils
         .changeExtension(trimmedDatasetName, outputFileExt);
     }
@@ -163,13 +164,13 @@ public class RDFizerConsole {
     RDFizer.trasform(inputFile, adapter, mapping, outputFile);
   }
 
-  private static void runBatch(CommandLine cmd, File inputDir) {
+  private static void runBatch(File inputDir) {
     String[] exts = {"json"};
     Iterator<File> inputDirFiles = FileUtils.iterateFiles(inputDir, exts, true);
     while (inputDirFiles.hasNext()) {
       outputFilename = null; // FORCE output filename to input filename
       File inputFile = inputDirFiles.next();
-      run(cmd, inputFile);
+      run(inputFile);
     }
   }
 

@@ -13,8 +13,8 @@ public class DataAdapters {
   /**
    * @todo description
    */
-  public static DataAdapter getDataAdapter(String sourceType) {
-    String name = sourceType.toLowerCase();
+  public static DataAdapter getDataAdapter(String sourceFormat) {
+    String name = sourceFormat.toLowerCase();
     switch (name) {
       case "css":
         return CSSAdapter.create();
