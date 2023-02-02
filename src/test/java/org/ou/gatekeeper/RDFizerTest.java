@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.ou.gatekeeper.adapters.DataAdapter;
+import org.ou.gatekeeper.adapters.DataAdapters;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
 import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
@@ -21,8 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
  * @author Carlo Allocca (c.allocca@samsung.com)
  */
-
-
 class RDFizerTest {
 
   @ParameterizedTest
@@ -90,7 +89,7 @@ class RDFizerTest {
     File datasetFile = TestUtils.loadResource(datasetPath);
     File outputFile = TestUtils.createOutputFile("output-"+datasetName, "fhir.json");
 
-    DataAdapter converter = TestUtils.getDataAdapter(sourceType);
+    DataAdapter converter = DataAdapters.getDataAdapter(sourceType);
     RDFizer.trasform(datasetFile, converter, outputFile);
 
     try {
@@ -199,7 +198,7 @@ class RDFizerTest {
     OutputFormat outputFormat = OutputFormat.TURTLE;
     File outputFile = TestUtils.createOutputFile("output-"+datasetName, "turtle");
 
-    DataAdapter converter = TestUtils.getDataAdapter(sourceType);
+    DataAdapter converter = DataAdapters.getDataAdapter(sourceType);
     String[] partsToInclude = !modules.equals("all") ? modules.split(",") : null;
     RMLMapping mapping = HelifitMapping.create(outputFormat, partsToInclude, true);
     RDFizer.trasform(datasetFile, converter, mapping, outputFile, false);

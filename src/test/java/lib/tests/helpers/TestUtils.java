@@ -1,10 +1,6 @@
 package lib.tests.helpers;
 
 import org.apache.commons.io.FileUtils;
-import org.ou.gatekeeper.adapters.DataAdapter;
-import org.ou.gatekeeper.adapters.css.CSSAdapter;
-import org.ou.gatekeeper.adapters.fhir.FHIRAdapter;
-import org.ou.gatekeeper.adapters.sh.SHAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,22 +31,6 @@ public class TestUtils {
    */
   public static String getQueryPath(String sourceType, String queryFilename) {
     return String.format(QUERY_PATH_TEMPLATE, sourceType, queryFilename);
-  }
-
-  /**
-   * @todo description
-   */
-  public static DataAdapter getDataAdapter(String sourceType) {
-    switch (sourceType) {
-      case "CSS":
-        return CSSAdapter.create();
-      case "FHIR":
-        return FHIRAdapter.create();
-      case "SH":
-        return SHAdapter.create();
-      default:
-        throw new IllegalArgumentException("Only 'CSS' / 'FHIR' / 'SH' types allowed");
-    }
   }
 
   /**
