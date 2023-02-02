@@ -46,16 +46,60 @@
     <finalName>${project.artifactId}-${project.version}</finalName>
 
     <plugins>
+
+      <plugin> <!-- Run this command
+                    <code>$ mvn clean package</code>
+                    -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/out/artifacts/${project.artifactId}/libs</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>org.ou.gatekeeper.RDFizerConsole</mainClass>
+            </manifest>
+          </archive>
+          <outputDirectory>${project.basedir}/out/artifacts/${project.artifactId}</outputDirectory>
+        </configuration>
+      </plugin>
+
       <plugin> <!-- Added this one for building with all the dependencies run the command from terminal inside IJ_IDEA:
                     <code>$ mvn clean compile assembly:single</code>
                     The rdfizer.jar in in Targer folder  -->
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.ou.gatekeeper.RDFizerConsole</mainClass>
+            </manifest>
+          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
+          <outputDirectory>${project.basedir}/out/artifacts</outputDirectory>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
@@ -102,6 +146,14 @@
       <artifactId>junit-jupiter</artifactId>
       <version>5.9.0</version>
       <scope>test</scope>
+    </dependency>
+    <!-- Local -->
+    <dependency>
+      <groupId>tech.oxfordsemantic</groupId>
+      <artifactId>jrdfox</artifactId>
+      <version>6.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/rdfox-v6.0/JRDFox.jar</systemPath>
     </dependency>
   </dependencies>
 
