@@ -1,7 +1,7 @@
 # RDFizer-java <!-- omit in toc -->
 
+RDFizer is a library used by [MatKG](https://github.com/GATEKEEPER-OU/samsung-matkg) tool.  
 This component aims at to transform EMR (T2D Lab Tests) and PHR (Samsung Health data) to HeLiFit ontology through the use of the RML Mapper.
-
 
 
 ## Build and Create RDFizer.jar with IntelliJ IDEA as development environment
