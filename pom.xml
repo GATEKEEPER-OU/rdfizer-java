@@ -160,8 +160,24 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/rdfox-v6.0/JRDFox.jar</systemPath>
     </dependency>
-    <!-- FIX - SLF4J: Class path contains multiple SLF4J bindings -->
-
+    <dependency> <!-- FIX
+                      SLF4J: Class path contains multiple SLF4J bindings
+                      @solution https://www.baeldung.com/slf4j-classpath-multiple-bindings -->
+      <groupId>org.apache.jena</groupId>
+      <artifactId>jena-text</artifactId>
+      <version>3.9.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- /FIX -->
   </dependencies>
 
 </project>
