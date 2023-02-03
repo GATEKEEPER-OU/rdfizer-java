@@ -3,6 +3,7 @@ package org.ou.gatekeeper;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.commons.FilenameUtils;
+import org.commons.ResourceUtils;
 import org.ou.gatekeeper.adapters.DataAdapter;
 import org.ou.gatekeeper.adapters.DataAdapters;
 import org.ou.gatekeeper.rdf.enums.OutputFormat;
@@ -11,7 +12,9 @@ import org.ou.gatekeeper.rdf.mappings.HelifitMapping;
 import org.ou.gatekeeper.rdf.mappings.RMLMapping;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.Properties;
 
 /**
  * @author Riccardo Pala (riccardo.pala@open.ac.uk)
@@ -19,7 +22,7 @@ import java.util.Iterator;
  */
 public class RDFizerConsole {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     try {
       CommandLine cmd = setupArguments(args);
       // TODO double-check input validation
@@ -27,6 +30,14 @@ public class RDFizerConsole {
 
       if (cmd.hasOption("help")) {
         printHelp();
+        return;
+      }
+
+      if (cmd.hasOption("version")) {
+        // TODO see how to suppress SLF4J messages
+        final Properties properties = new Properties();
+        properties.load(ResourceUtils.getResourceAsStream("project.properties"));
+        System.out.println(properties.getProperty("version"));
         return;
       }
 
@@ -73,18 +84,22 @@ public class RDFizerConsole {
         .longOpt("help")
         .build());
     options.addOption(
+      Option.builder("v")
+        .longOpt("version")
+        .build());
+    options.addOption(
       Option.builder("t")
         .longOpt("input-format")
         .hasArg().argName("FORMAT")
         .desc("Format of input data. Values allowed: [ fhir, css, sh ].")
-        .required()
+//        .required()
         .build());
     options.addOption(
       Option.builder("i")
         .longOpt("input")
         .hasArg().argName("FILE or DIR")
         .desc("The input file or directory than contains the dataset.")
-        .required()
+//        .required()
         .build());
     options.addOption(
       Option.builder("y")

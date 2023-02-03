@@ -45,8 +45,14 @@
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <finalName>${project.artifactId}-${project.version}</finalName>
 
-    <plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
 
+    <plugins>
       <plugin> <!-- Run this command
                     <code>$ mvn clean package</code>
                     -->
@@ -99,7 +105,6 @@
           <outputDirectory>${project.basedir}/out/artifacts</outputDirectory>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
@@ -155,6 +160,8 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/rdfox-v6.0/JRDFox.jar</systemPath>
     </dependency>
+    <!-- FIX - SLF4J: Class path contains multiple SLF4J bindings -->
+
   </dependencies>
 
 </project>
