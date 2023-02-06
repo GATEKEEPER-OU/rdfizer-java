@@ -91,14 +91,12 @@ public class RDFizerConsole {
         .longOpt("input-format")
         .hasArg().argName("FORMAT")
         .desc("Format of input data. Values allowed: [ fhir, css, sh ].")
-//        .required()
         .build());
     options.addOption(
       Option.builder("i")
         .longOpt("input")
         .hasArg().argName("FILE or DIR")
         .desc("The input file or directory than contains the dataset.")
-//        .required()
         .build());
     options.addOption(
       Option.builder("y")
